@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<include file="struts-default.xml" />
+	<package name="yiqin" extends="struts-default">
+		<action name="login" class="com.yiqin.web.action.LoginAction">
+			<result name="input">/jsp/login.jsp</result>
+			<result name="success">/jsp/login.html</result>
+			<result name="error">/Fail.jsp</result>
+		</action>
+	</package>
+
+</struts>
