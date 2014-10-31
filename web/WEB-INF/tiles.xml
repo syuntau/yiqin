@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="yiqin.header" template="/jsp/layout/header.jsp">
+		<put-attribute name="header.top" value="/jsp/layout/header-top.jsp" />
+		<put-attribute name="header.middle" value="/jsp/layout/header-middle.jsp" />
+		<put-attribute name="header.bottom" value="/jsp/layout/header-bottom.jsp" />
+	</definition>
+
+	<definition name="yiqin.login" template="/jsp/login.jsp">
+		<put-attribute name="include" value="/jsp/common/common.jsp" />
+		<put-attribute name="header" value="yiqin.header" />
+	</definition>
+
+<!-- 	<definition name="we3.mainHeaderMenu" template="/we3/tiles/components/header-menu.jsp" -->
+<!-- 		preparer="wisers.wisenews.we3.view.preparer.WE3HeaderMenuPreparer"> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.mainHeader" template="/we3/tiles/components/main-header.jsp" -->
+<!-- 		preparer="wisers.wisenews.we3.view.preparer.SNSMainHeaderPreparer"> -->
+<!-- 		<put-attribute name="header-menu" value="we3.mainHeaderMenu" /> -->
+<!-- 		<put-attribute name="header-showModal" value="we3.showModal" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="we3.mainHeader.blank" -->
+<!-- 		template="/we3/tiles/components/main-header-blank.jsp"> -->
+<!-- 		<put-attribute name="header-menu" value="we3.mainHeaderMenu" /> -->
+<!-- 		<put-attribute name="header-showModal" value="we3.showModal" /> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.menu" template="/we3/tiles/components/menu.jsp" -->
+<!-- 		preparer="wisers.wisenews.we3.view.preparer.WE3MenuPreparer"> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="we3.showModal" template="/we3/tiles/jsp/sns-showModal.jsp"> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.sns.body" template="/we3/tiles/layouts/twoColumnLayout.jsp"> -->
+<!-- 		<put-attribute name="title" value="" /> -->
+<!-- 		<put-attribute name="menu" value="we3.menu" /> -->
+<!-- 		<put-attribute name="tiles-css-js" -->
+<!-- 			value="/we3/tiles/jsp/tiles-css-js-all.jsp" /> -->
+<!-- 		<put-attribute name="header" value="we3.mainHeader" /> -->
+<!-- 		<put-attribute name="body" -->
+<!-- 			value="/we3/tiles/components/blankPage.jsp" /> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.sns.overview" extends="we3.sns.body"> -->
+<!-- 		<put-attribute name="body" value="we3.sns.overview.context" /> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.sns.overview.context" template="/we3/tiles/jsp/sns-overview.jsp"> -->
+<!-- 		<put-attribute name="filter" value="we3.sns.overview.filter" /> -->
+<!-- 		<put-attribute name="activities" value="we3.sns.overview.activities" /> -->
+<!-- 		<put-attribute name="posts" value="we3.sns.overview.posts" /> -->
+<!-- 		<put-attribute name="charts" value="we3.sns.overview.charts" /> -->
+<!-- 		<put-attribute name="keywords" value="we3.sns.keywords" /> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.sns.overview.filter" template="/we3/tiles/jsp/sns-overview-filter.jsp" -->
+<!-- 		preparer="wisers.wisenews.we3.view.preparer.SNSOverviewFilterPreparer"> -->
+<!-- 	</definition> -->
+
+<!-- 	<definition name="we3.sns.overview.activities" -->
+<!-- 		template="/we3/tiles/jsp/sns-overview-activities.jsp"> -->
+<!-- 		<put-attribute name="activities.donuts-all" -->
+<!-- 			value="/we3/tiles/jsp/sns-overview-activities-donuts-all.jsp" /> -->
+<!-- 		<put-attribute name="activities.donuts-other" -->
+<!-- 			value="/we3/tiles/jsp/sns-overview-activities-donuts-other.jsp" /> -->
+<!-- 		<put-attribute name="activities.highlights" -->
+<!-- 			value="/we3/tiles/jsp/sns-overview-activities-highlights.jsp" /> -->
+<!-- 		<put-attribute name="activities.topAuthors" value="we3.sns.top.author" /> -->
+<!-- 	</definition> -->
+</tiles-definitions>
