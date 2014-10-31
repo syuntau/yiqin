@@ -4,5 +4,4 @@
 <header id="header"><!--header-->
 	<tiles:insertAttribute name="header.top" />
 	<tiles:insertAttribute name="header.middle" />
-	<tiles:insertAttribute name="header.bottom" />
 </header><!--/header-->

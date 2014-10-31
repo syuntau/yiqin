@@ -274,7 +274,7 @@ a#scrollUp i{
 
 
 .shop-menu ul li a {
-  background: #FFFFFF;
+/*   background: #FFFFFF; */
   color: #696763;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -292,7 +292,7 @@ a#scrollUp i{
 
 .shop-menu ul li a:hover {
 	color:#fe980f;
-	background:#fff;
+/* 	background:#fff; */
 }
 
 
@@ -1503,8 +1503,8 @@ h2.title {
 
 #form {
   display: block;
-  margin-bottom: 185px;
-  margin-top: 185px;
+  margin-bottom: 25px;
+  margin-top: 25px;
   overflow: hidden;
 }
 

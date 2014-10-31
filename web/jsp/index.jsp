@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href='/yiqin/login.action'>hello YiQin</a><br>
+<a href='/login.action'>hello YiQin</a><br>
 </body>
 </html>
