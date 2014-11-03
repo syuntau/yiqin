@@ -8,7 +8,7 @@
 	<constant name="struts.custom.i18n.resources" value="app" />
 
 	<include file="struts-default.xml" />
-	<package name="yiqin" extends="struts-default">
+	<package name="shop" extends="struts-default">
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
@@ -17,7 +17,7 @@
 <!-- 			<result name="input">/jsp/login.jsp</result> -->
 <!-- 			<result name="success">/jsp/login.html</result> -->
 <!-- 			<result name="error">/Fail.jsp</result> <meta http-equiv="refresh" content="0" url="">-->
-			<result name="success" type="tiles">yiqin.login</result>
+			<result name="success" type="tiles">shop.login</result>
 		</action>
 	</package>
 

@@ -6,15 +6,27 @@
 
 <tiles-definitions>
 
-	<definition name="yiqin.header" template="/jsp/layout/header.jsp">
-		<put-attribute name="header.top" value="/jsp/layout/header-top.jsp" />
-		<put-attribute name="header.middle" value="/jsp/layout/header-middle.jsp" />
-		<put-attribute name="header.bottom" value="/jsp/layout/header-bottom.jsp" />
+	<definition name="shop.header" template="/jsp/shop/layout/header.jsp">
+		<put-attribute name="header.top" value="/jsp/shop/layout/header-top.jsp" />
+		<put-attribute name="header.middle" value="/jsp/shop/layout/header-middle.jsp" />
+		<put-attribute name="header.bottom" value="/jsp/shop/layout/header-bottom.jsp" />
 	</definition>
 
-	<definition name="yiqin.login" template="/jsp/login.jsp">
+	<definition name="shop.footer" template="/jsp/shop/layout/footer.jsp">
+		<put-attribute name="footer.top" value="/jsp/shop/layout/footer-top.jsp" />
+		<put-attribute name="footer.widget" value="/jsp/shop/layout/footer-widget.jsp" />
+		<put-attribute name="footer.bottom" value="/jsp/shop/layout/footer-bottom.jsp" />
+	</definition>
+
+	<definition name="shop.template" template="/jsp/shop/template.jsp">
 		<put-attribute name="include" value="/jsp/common/common.jsp" />
-		<put-attribute name="header" value="yiqin.header" />
+		<put-attribute name="header" value="shop.header" />
+		<put-attribute name="body" value="body" />
+		<put-attribute name="footer" value="shop.footer" />
+	</definition>
+
+	<definition name="shop.login" extends="shop.template">
+		<put-attribute name="body" value="/jsp/shop/login.jsp" />
 	</definition>
 
 <!-- 	<definition name="we3.mainHeaderMenu" template="/we3/tiles/components/header-menu.jsp" -->
