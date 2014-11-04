@@ -5,6 +5,7 @@
 
 <struts>
 
+<!-- 	<constant name="struts.locale" value="zh_CN" /> -->
 	<constant name="struts.custom.i18n.resources" value="app" />
 
 	<include file="struts-default.xml" />
@@ -13,7 +14,11 @@
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
-		<action name="login" class="com.yiqin.web.action.LoginAction">
+		<action name="index">
+			<result type="tiles">shop.index</result>
+		</action>
+
+		<action name="login" class="com.yiqin.shop.action.LoginAction">
 <!-- 			<result name="input">/jsp/login.jsp</result> -->
 <!-- 			<result name="success">/jsp/login.html</result> -->
 <!-- 			<result name="error">/Fail.jsp</result> <meta http-equiv="refresh" content="0" url="">-->

@@ -6,27 +6,34 @@
 
 <tiles-definitions>
 
-	<definition name="shop.header" template="/jsp/shop/layout/header.jsp">
-		<put-attribute name="header.top" value="/jsp/shop/layout/header-top.jsp" />
-		<put-attribute name="header.middle" value="/jsp/shop/layout/header-middle.jsp" />
-		<put-attribute name="header.bottom" value="/jsp/shop/layout/header-bottom.jsp" />
+	<definition name="shop.header" template="/shop/jsp/common/header.jsp">
+		<put-attribute name="header.top" value="/shop/jsp/common/header-top.jsp" />
+		<put-attribute name="header.middle" value="/shop/jsp/common/header-middle.jsp" />
+		<put-attribute name="header.bottom" value="/shop/jsp/common/header-bottom.jsp" />
 	</definition>
 
-	<definition name="shop.footer" template="/jsp/shop/layout/footer.jsp">
-		<put-attribute name="footer.top" value="/jsp/shop/layout/footer-top.jsp" />
-		<put-attribute name="footer.widget" value="/jsp/shop/layout/footer-widget.jsp" />
-		<put-attribute name="footer.bottom" value="/jsp/shop/layout/footer-bottom.jsp" />
+	<definition name="shop.footer" template="/shop/jsp/common/footer.jsp">
+		<put-attribute name="footer.top" value="/shop/jsp/common/footer-top.jsp" />
+		<put-attribute name="footer.widget" value="/shop/jsp/common/footer-widget.jsp" />
+		<put-attribute name="footer.bottom" value="/shop/jsp/common/footer-bottom.jsp" />
 	</definition>
 
-	<definition name="shop.template" template="/jsp/shop/template.jsp">
-		<put-attribute name="include" value="/jsp/common/common.jsp" />
+	<definition name="shop.template" template="/shop/jsp/template.jsp">
+		<put-attribute name="title" value="title" />
+		<put-attribute name="include" value="/shop/jsp/common/common.jsp" />
 		<put-attribute name="header" value="shop.header" />
 		<put-attribute name="body" value="body" />
 		<put-attribute name="footer" value="shop.footer" />
 	</definition>
 
+	<definition name="shop.index" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="/shop/jsp/index.jsp" />
+	</definition>
+
 	<definition name="shop.login" extends="shop.template">
-		<put-attribute name="body" value="/jsp/shop/login.jsp" />
+		<put-attribute name="title" value="shop.login.title"/>
+		<put-attribute name="body" value="/shop/jsp/login.jsp" />
 	</definition>
 
 <!-- 	<definition name="we3.mainHeaderMenu" template="/we3/tiles/components/header-menu.jsp" -->

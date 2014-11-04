@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <title>Login | YiQin</title>
+	<tiles:importAttribute name="title" />
+	<title><s:text name="%{#attr['title']}" /></title>
 	<tiles:insertAttribute name="include" />
 </head>
 <body>
