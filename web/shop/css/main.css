@@ -222,10 +222,12 @@ a#scrollUp i{
 
 .header-middle .container .row .col-sm-4{
   padding-left: 0;
+  width: 60%;
 }
 
 .header-middle .container .row .col-sm-8 {
-	padding-right:0;
+  padding-right:0;
+  width: 40%;
 }
 
 .usa {
@@ -277,7 +279,7 @@ a#scrollUp i{
 /*   background: #FFFFFF; */
   color: #696763;
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
   padding:0;
   padding-right: 0;
@@ -338,7 +340,7 @@ a#scrollUp i{
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 155px;
+  width: 400px;
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
   background-position: 130px;

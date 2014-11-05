@@ -8,9 +8,17 @@
 					<div class="logo pull-left">
 						<a href="index.html"><img src="shop/images/home/logo.png" alt="" /></a>
 					</div>
-					<div class="search_box pull-right">
-						<input type="text" placeholder="Search"/>
+					<div class="form-group input-group">
+						<input type="text" class="form-control"> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
 					</div>
+<!-- 					<div class="search_box pull-right"> -->
+<!-- 						<input type="text" placeholder="Search"/> -->
+<!-- 					</div> -->
 				</div>
 				<div class="col-sm-8">
 					<div class="mainmenu pull-right">
