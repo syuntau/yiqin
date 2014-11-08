@@ -83,7 +83,7 @@
 
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif, '\5b8b\4f53';
   background:;
   position: relative;
   font-weight:400px;
@@ -111,7 +111,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif, '\5b8b\4f53';
 }
 
 .btn:hover, 
@@ -675,8 +675,8 @@ ul.sub-menu {
 
 .item h1 {
   color: #B4B1AB;
-  font-family: abel;
-  font-size: 48px;
+/*   font-family: abel; */
+/*   font-size: 48px; */
   margin-top: 115px;
 }
 
@@ -2598,4 +2598,9 @@ h2.title {
   color: #FE980F;
 }
 
-
+.form-control:focus {
+	border-color:#ff9900;
+	outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(254,152,15,0.6);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(254,152,15,0.6)
+}

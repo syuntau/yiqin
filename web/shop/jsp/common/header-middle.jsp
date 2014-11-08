@@ -10,13 +10,16 @@
 					<div class="logo pull-left">
 						<a href="index.html"><img src="shop/images/home/logo.png" alt="" /></a>
 					</div>
-					<div class="form-group input-group">
-						<input type="text" class="form-control"> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
+					<div class="col-lg-8" style="float: right">
+						<div class="input-group">
+							<input type="text" class="form-control"> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="button">
+<!-- 									<i class="fa fa-search"></i> -->
+									搜索
+								</button>
+							</span>
+						</div>
 					</div>
 <!-- 					<div class="search_box pull-right"> -->
 <!-- 						<input type="text" placeholder="Search"/> -->
@@ -28,14 +31,21 @@
 							<li><a href=""><s:text name="shop.header.nav.home" /></a></li>
 							<li class="dropdown"><a><s:text name="shop.header.nav.product" /><i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                	<c:set var="products"><fmt:message key="shop.header.nav.products" /></c:set>
-									<c:forTokens items="consumables,paper,machines,stationery" delims="," var="product">
-										<li><a href=""><fmt:bundle basename="app"><fmt:message key="shop.header.nav.product.${product}" /></fmt:bundle></a></li>
-									</c:forTokens>
+<%--                                 	<c:set var="products"><fmt:message key="shop.header.nav.products" /></c:set> --%>
+<%-- 									<c:forTokens items="consumables,paper,machines,stationery" delims="," var="product"> --%>
+<%-- 										<li><a href=""><fmt:bundle basename="app"><fmt:message key="shop.header.nav.product.${product}" /></fmt:bundle></a></li> --%>
+<%-- 									</c:forTokens> --%>
+<%-- 									<s:iterator value="consumables,paper,machines,stationery" var="product"> --%>
+<%-- 										<li><a href=""><s:text name="shop.header.nav.product.#product" /></a></li> --%>
+<%-- 									</s:iterator> --%>
+									<li><a href=""><s:text name="shop.header.nav.product.consumables" /></a></li>
+									<li><a href=""><s:text name="shop.header.nav.product.paper" /></a></li>
+									<li><a href=""><s:text name="shop.header.nav.product.machines" /></a></li>
+									<li><a href=""><s:text name="shop.header.nav.product.stationery" /></a></li>
                                 </ul>
                             </li>
 							<li><a href=""><s:text name="shop.header.nav.sales.promotion" /></a></li>
-							<li><a href=""><s:text name="shop.header.nav.new.goods" /></a></li>
+							<li><a href=""><s:text name="shop.header.nav.new.goods" /></a></li><s:text name="" ></s:text>
 						</ul>
 					</div>
 				</div>
