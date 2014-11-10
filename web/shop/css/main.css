@@ -554,8 +554,8 @@ ul.sub-menu {
 
 .single-widget h2 {
   color: #666663;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+/*   font-family: 'Roboto', sans-serif; */
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 22px;
   text-transform: uppercase;
@@ -565,10 +565,16 @@ ul.sub-menu {
 	margin-right:15px;
 }
 
+.single-widget ul li {
+	color: #8C8C88;
+	font-size: 12px;
+	font-weight: 300;
+}
+
 .single-widget ul li a{
 	color: #8C8C88;
 	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 300;
 	padding: 5px 0;
 }
@@ -629,9 +635,9 @@ ul.sub-menu {
 
 .footer-bottom p {
   color: #363432;
-  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   margin-left: 15px;
+  font-size: 14px;
 }
 
 .footer-bottom p span a {
