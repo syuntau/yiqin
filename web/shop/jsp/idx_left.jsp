@@ -2,13 +2,10 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib uri="/struts-tags" prefix="s"%>
 
-	<tiles:insertAttribute name="ad" />	
-
-	<section>
-		<div class="container">
-			<div class="row">
-				<tiles:insertAttribute name="left" />
-				<tiles:insertAttribute name="right" />
-			</div>
+	<div class="col-sm-3">
+		<div class="left-sidebar">
+			<tiles:insertAttribute name="category" />
+			<tiles:insertAttribute name="brands" />
+			<tiles:insertAttribute name="ad" />		
 		</div>
-	</section>
+	</div>
