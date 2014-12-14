@@ -14,6 +14,9 @@
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		<interceptors>
+			<interceptor name="setNav" class="com.yiqin.shop.interceptor.ShopNavInterceptor" />
+		</interceptors>
 
 		<action name="index">
 			<result type="tiles">shop.index</result>
@@ -24,6 +27,15 @@
 <!-- 			<result name="success">/jsp/login.html</result> -->
 <!-- 			<result name="error">/Fail.jsp</result> <meta http-equiv="refresh" content="0" url="">-->
 			<result name="success" type="tiles">shop.login</result>
+		</action>
+
+		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">
+			<interceptor-ref name="setNav"></interceptor-ref>
+			<result name="top_account" type="chain">login</result>
+			<result name="top_quick_shopping" type="chain">login</result>
+			<result name="top_cart" type="chain">login</result>
+			<result name="top_login" type="chain">login</result>
+			<result name="top_home" type="chain">login</result>
 		</action>
 	</package>
 

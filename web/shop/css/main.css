@@ -330,6 +330,10 @@ a#scrollUp i{
 	color:#fdb45e;
 }
 
+.mainmenu .shop_header, .shop-menu .shop_header {
+	cursor: pointer;
+}
+
 .search_box input {
   background: #F0F0E9;
   border: medium none;

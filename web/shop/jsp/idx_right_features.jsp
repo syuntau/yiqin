@@ -21,12 +21,6 @@
 							</div>
 						</div>
 				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -46,12 +40,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.wishlist" /></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -70,12 +58,6 @@
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
 						</div>
 					</div>
-				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.wishlist" /></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -97,12 +79,6 @@
 					</div>
 					<img src="shop/images/home/new.png" class="new" alt="" />
 				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.wishlist" /></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -123,12 +99,6 @@
 					</div>
 					<img src="shop/images/home/sale.png" class="new" alt="" />
 				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.wishlist" /></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -147,12 +117,6 @@
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
 						</div>
 					</div>
-				</div>
-				<div class="choose">
-					<ul class="nav nav-pills nav-justified">
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.wishlist" /></a></li>
-						<li><a href="#"><i class="fa fa-plus-square"></i><s:text name="shop.add.to.compare" /></a></li>
-					</ul>
 				</div>
 			</div>
 		</div>

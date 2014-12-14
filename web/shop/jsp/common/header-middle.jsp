@@ -12,12 +12,9 @@
 					</div>
 					<div class="col-lg-8" style="float: right">
 						<div class="input-group">
-							<input type="text" class="form-control"> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button">
-<!-- 									<i class="fa fa-search"></i> -->
-									搜索
-								</button>
+							<input type="text" class="form-control">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><s:text name="shop.header.nav.search" /></button>
 							</span>
 						</div>
 					</div>
@@ -28,18 +25,18 @@
 				<div class="col-sm-8">
 					<div class="mainmenu pull-right">
 						<ul class="nav navbar-nav collapse navbar-collapse">
-							<li><a href=""><s:text name="shop.header.nav.home" /></a></li>
-							<li class="dropdown"><a><s:text name="shop.header.nav.product" /><i class="fa fa-angle-down"></i></a>
+							<li><a class="shop_header active" id="top_home"><s:text name="shop.header.nav.home" /></a></li>
+							<li class="dropdown"><a id="top_product"><s:text name="shop.header.nav.product" /><i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
 									<s:set var="products"><s:text name='shop.header.nav.products' /></s:set>
 									<s:generator separator="," val="#products" var="productList"></s:generator>
 									<s:iterator value="#productList" var="product">
-										<li><a href=""><s:text name="%{'shop.header.nav.product.' + #product}" /></a></li>
+										<li><a  class="shop_header" id='top_p_<s:property value="%{#product}"/>'><s:text name="%{'shop.header.nav.product.' + #product}" /></a></li>
 									</s:iterator>
                                 </ul>
                             </li>
-							<li><a href=""><s:text name="shop.header.nav.sales.promotion" /></a></li>
-							<li><a href=""><s:text name="shop.header.nav.new.goods" /></a></li><s:text name="" ></s:text>
+							<li><a  class="shop_header" id="top_sales_promotion"><s:text name="shop.header.nav.sales.promotion" /></a></li>
+							<li><a  class="shop_header" id="top_new_goods"><s:text name="shop.header.nav.new.goods" /></a></li><s:text name="" ></s:text>
 						</ul>
 					</div>
 				</div>
