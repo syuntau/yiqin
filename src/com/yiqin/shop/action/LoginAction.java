@@ -3,7 +3,6 @@ package com.yiqin.shop.action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.bean.UserForm;
 import com.yiqin.shop.service.UserManager;
-import com.yiqin.shop.serviceImpl.UserManagerImpl;
 
 public class LoginAction extends ActionSupport {
 

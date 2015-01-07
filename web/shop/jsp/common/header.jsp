@@ -18,8 +18,8 @@ var shop_header = function() {
 	var setNav = function() {
 		$('.shop_header').on('click', function() {
 			var nav = $(this).attr('id');
-			var $form = $(template.form),
-				$nav = $(template.nav);
+			var $form = $(template.form);
+			var	$nav = $(template.nav);
 			$form.attr('action', template.dispatcher).append($nav.val(nav));
 			$('#header').append($form);
 			$form.submit();

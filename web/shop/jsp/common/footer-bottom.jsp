@@ -4,7 +4,7 @@
 	<div class="footer-bottom">
 		<div class="container">
 			<div class="row">
-				<p class="pull-left"><s:text name="shop.footer.bottom.copyright" /></p>
+				<p class="pull-left"><s:text name="shop.footer.bottom.copyright" ></s:text></p>
 				<p class="pull-right">&nbsp;</p>
 			</div>
 		</div>

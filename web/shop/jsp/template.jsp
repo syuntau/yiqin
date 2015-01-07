@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<tiles:importAttribute name="title" />
+	<tiles:importAttribute name="title" ></tiles:importAttribute>
 	<title><s:text name="%{#attr['title']}" /></title>
 	<tiles:insertAttribute name="include" />
 </head>

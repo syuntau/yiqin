@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib uri="/struts-tags" prefix="s"%>
 
-	<tiles:insertAttribute name="ad" />	
+	<tiles:insertAttribute name="ad" ></tiles:insertAttribute>
 
 	<section>
 		<div class="container">
