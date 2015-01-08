@@ -1,8 +1,12 @@
 package com.yiqin.shop.service;
 
-import com.yiqin.shop.bean.UserForm;
+import com.yiqin.shop.bean.User;
 
 public interface UserManager {
 
-	public void registeUser(UserForm user);
+	public boolean registeUser(User user);
+
+	public User login(String name, String password);
+	
+	public User findUserByName(String name);
 }
