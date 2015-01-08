@@ -14,15 +14,51 @@ import com.yiqin.util.Util;
 public class RegisteredUserAction extends ActionSupport {
 
 	private static final long serialVersionUID = 7088615138788787514L;
-	private User user;
+	private String name;
+	private String password;
+	private String confirmPwd;
+	private String email;
+	private String telephone;
 	private UserManager userManager;
 
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getConfirmPwd() {
+		return confirmPwd;
+	}
+
+	public void setConfirmPwd(String confirmPwd) {
+		this.confirmPwd = confirmPwd;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public UserManager getUserManager() {
@@ -38,32 +74,35 @@ public class RegisteredUserAction extends ActionSupport {
 		String result = "1";
 		try {
 			// 参数判断
-			if (Util.isEmpty(user.getName())
-					|| Util.isEmpty(user.getPassword())
-					|| Util.isEmpty(user.getConfirmPwd())
-					|| Util.isEmpty(user.getEmail())
-					|| Util.isEmpty(user.getTelephone())) {
+			if (Util.isEmpty(name) || Util.isEmpty(password)
+					|| Util.isEmpty(confirmPwd) || Util.isEmpty(email)
+					|| Util.isEmpty(telephone)) {
 				result = "2";
 				return SUCCESS;
 			}
-			
-			//格式校验
-			
-			if(!user.getPassword().equals(user.getConfirmPwd())){
+
+			// 格式校验
+
+			if (!password.equals(confirmPwd)) {
 				result = "3";
 				return SUCCESS;
 			}
 
 			// 判断用户名是否重复
-			User existUser = userManager.findUserByName(user.getName());
+			User existUser = userManager.findUserByName(name);
 			if (existUser != null) {
 				result = "4";
 				return SUCCESS;
 			}
 
 			// 添加用户
-			user.setRegtime(new Date());
-			boolean flag = userManager.registeUser(user);
+			User tempUser = new User();
+			tempUser.setName(name);
+			tempUser.setPassword(password);
+			tempUser.setEmail(email);
+			tempUser.setTelephone(telephone);
+			tempUser.setRegtime(new Date());
+			boolean flag = userManager.registeUser(tempUser);
 			if (!flag) {
 				result = "5";
 				return SUCCESS;

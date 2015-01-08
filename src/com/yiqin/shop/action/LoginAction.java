@@ -10,15 +10,24 @@ import com.yiqin.util.Util;
 public class LoginAction extends ActionSupport {
 
 	private static final long serialVersionUID = 316466680810245739L;
-	private User user;
+	private String name;
+	private String password;
 	private UserManager userManager;
 
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public UserManager getUserManager() {
@@ -32,16 +41,14 @@ public class LoginAction extends ActionSupport {
 	public String execute() {
 		try {
 			// 参数判断
-			if (Util.isEmpty(user.getName())
-					|| Util.isEmpty(user.getPassword())) {
+			if (Util.isEmpty(name) || Util.isEmpty(password)) {
 				ServletActionContext.getRequest().setAttribute("errorType",
 						"用户名或密码不能为空");
 				return LOGIN;
 			}
 
 			// 查询信息
-			User userInfo = userManager.login(user.getName(),
-					user.getPassword());
+			User userInfo = userManager.login(name, password);
 			if (null == userInfo) {
 				ServletActionContext.getRequest().setAttribute("errorType",
 						"用户名或密码错误，请重新输入");
