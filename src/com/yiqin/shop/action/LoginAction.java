@@ -1,11 +1,14 @@
 package com.yiqin.shop.action;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.bean.User;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 public class LoginAction extends ActionSupport {
 
@@ -40,24 +43,23 @@ public class LoginAction extends ActionSupport {
 
 	public String execute() {
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
 			// 参数判断
 			if (Util.isEmpty(name) || Util.isEmpty(password)) {
-				ServletActionContext.getRequest().setAttribute("loginError",
-						"用户名或密码不能为空");
+				request.setAttribute("loginError", "用户名或密码不能为空");
 				return LOGIN;
 			}
 
 			// 查询信息
 			User userInfo = userManager.login(name, password);
 			if (null == userInfo) {
-				ServletActionContext.getRequest().setAttribute("loginError",
-						"用户名或密码错误，请重新输入");
+				request.setAttribute("loginError", "用户名或密码错误，请重新输入");
 				return LOGIN;
 			}
 
 			// 储存登录信息
-			ServletActionContext.getRequest().getSession()
-					.setAttribute("userInfo", userInfo);
+			request.getSession().setAttribute("userInfo", userInfo);
+			request.setAttribute(UtilKeys.REQ_SHOP_NAV, request.getSession().getAttribute(UtilKeys.SE_SHOP_ORIGNAL_NAV));
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -20,13 +20,14 @@
 			<interceptor name="setNav" class="com.yiqin.shop.interceptor.ShopNavInterceptor" />
 		</interceptors>
 
-		<action name="index">
-			<result type="tiles">shop.index</result>
+		<action name="index" class="com.yiqin.shop.action.IndexAction">
+			<param name="home">top_home</param>
+			<result type="chain">dispatcher</result>
 		</action>
 
 		<action name="login" class="com.yiqin.shop.action.LoginAction">
 			<result name="login" type="tiles">shop.login</result>
-			<result name="success" type="tiles">shop.index</result>
+			<result name="success" type="chain">dispatcher</result>
 		</action>
 		
 		<action name="logout" class="com.yiqin.shop.action.LogoutAction">
@@ -39,11 +40,11 @@
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">
 			<interceptor-ref name="setNav"></interceptor-ref>
-			<result name="top_account" type="chain">login</result>
-			<result name="top_quick_shopping" type="chain">login</result>
-			<result name="top_cart" type="chain">login</result>
-			<result name="top_login" type="chain">login</result>
-			<result name="top_home" type="chain">login</result>
+			<result name="top_account" type="tiles">login</result>
+			<result name="top_quick_shopping" type="tiles">login</result>
+			<result name="top_cart" type="tiles">login</result>
+			<result name="top_login" type="tiles">shop.login</result>
+			<result name="top_home" type="tiles">shop.index</result>
 		</action>
 	</package>
 
