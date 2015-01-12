@@ -2,7 +2,7 @@ package com.yiqin.shop.action;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -70,29 +70,33 @@ public class RegisteredUserAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String result = "1";
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/json;charset=UTF-8");
+		String result = "";
 		try {
 			// 参数判断
 			if (Util.isEmpty(name) || Util.isEmpty(password)
 					|| Util.isEmpty(confirmPwd) || Util.isEmpty(email)
 					|| Util.isEmpty(telephone)) {
 				result = "2";
-				return SUCCESS;
+				response.getWriter().print(result);
+				return null;
 			}
 
 			// 格式校验
 
 			if (!password.equals(confirmPwd)) {
 				result = "3";
-				return SUCCESS;
+				response.getWriter().print(result);
+				return null;
 			}
 
 			// 判断用户名是否重复
 			User existUser = userManager.findUserByName(name);
 			if (existUser != null) {
 				result = "4";
-				return SUCCESS;
+				response.getWriter().print(result);
+				return null;
 			}
 
 			// 添加用户
@@ -105,12 +109,17 @@ public class RegisteredUserAction extends ActionSupport {
 			boolean flag = userManager.registeUser(tempUser);
 			if (!flag) {
 				result = "5";
-				return SUCCESS;
+				response.getWriter().print(result);
+				return null;
 			}
-			return SUCCESS;
+			result = "1";
+			response.getWriter().print(result);
+			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = "5";
-			return SUCCESS;
+			response.getWriter().print(result);
+			return null;
 		}
 	}
 }
