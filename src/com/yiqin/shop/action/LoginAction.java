@@ -42,7 +42,7 @@ public class LoginAction extends ActionSupport {
 		try {
 			// 参数判断
 			if (Util.isEmpty(name) || Util.isEmpty(password)) {
-				ServletActionContext.getRequest().setAttribute("errorType",
+				ServletActionContext.getRequest().setAttribute("loginError",
 						"用户名或密码不能为空");
 				return LOGIN;
 			}
@@ -50,7 +50,7 @@ public class LoginAction extends ActionSupport {
 			// 查询信息
 			User userInfo = userManager.login(name, password);
 			if (null == userInfo) {
-				ServletActionContext.getRequest().setAttribute("errorType",
+				ServletActionContext.getRequest().setAttribute("loginError",
 						"用户名或密码错误，请重新输入");
 				return LOGIN;
 			}

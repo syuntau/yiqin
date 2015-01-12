@@ -21,7 +21,7 @@
 		</interceptors>
 
 		<action name="index">
-			<result type="tiles">shop.login</result>
+			<result type="tiles">shop.index</result>
 		</action>
 
 		<action name="login" class="com.yiqin.shop.action.LoginAction">

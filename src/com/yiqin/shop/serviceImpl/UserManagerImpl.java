@@ -13,8 +13,10 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public User login(String name, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = new User();
+		user.setName(name);
+		user.setPassword(password);
+		return user;
 	}
 
 	@Override

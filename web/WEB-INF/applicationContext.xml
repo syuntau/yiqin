@@ -47,4 +47,16 @@
 <!-- 		<aop:advisor advice-ref="txAdice" pointcut-ref="curd" /> -->
 <!-- 	</aop:config> -->
 
+	<bean id="userManager" class="com.yiqin.shop.serviceImpl.UserManagerImpl">
+<!-- 		<property name="userDao" ref="userDao"></property> -->
+	</bean>
+	
+	<bean id="shopManager" class="com.yiqin.shop.serviceImpl.ShoppingManagerImpl">
+<!-- 		<property name="userDao" ref="userDao"></property> -->
+	</bean>
+	
+	<bean id="commodityManager" class="com.yiqin.shop.serviceImpl.CommodityManagerImpl">
+<!-- 		<property name="userDao" ref="userDao"></property> -->
+	</bean>
+
 </beans>
