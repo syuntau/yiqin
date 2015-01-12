@@ -2,34 +2,161 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>  
 <script type="text/javascript">
-function loginCheck(evt) {
-	var errmsg = $("loginError");
-	errmsg.html("&nbsp;");
-	if (!checkItemRequired("login_name_id")) {
-		document.getElementById("login_name_id").focus();
-		errmsg.html("请输入用户名");
-		return false;
-	}
-	if (!checkItemRequired("login_password_id")) {
-		document.getElementById("login_password_id").focus();
-		errmsg.html("请输入密码");
-		return false;
-	}
-	loginForm.submit();
-}
-
-function checkItemRequired(item) {
+var yiqin_login_action = function(){
 	var REX=/^[\s\u3000]*|[\s\u3000]*$/g;
-	var obj = document.getElementById(item);
-	if (obj != null) {
-		var temp = obj.value.replace(REX, "");
-		document.getElementById(item).value = temp;
-		if (temp == null || temp.length == 0) {
-			return false;
+	
+	var action = {
+		loginCheck : function(evt){
+			var errmsg = $("loginError");
+			errmsg.html("&nbsp;");
+			if (!checkItemRequired("login_name_id")) {
+				document.getElementById("login_name_id").focus();
+				errmsg.html("请输入用户名");
+				return false;
+			}
+			if (!checkItemRequired("login_password_id")) {
+				document.getElementById("login_password_id").focus();
+				errmsg.html("请输入密码");
+				return false;
+			}
+			loginForm.submit();
+		},
+		
+		registerUser : function(){
+			var options = {
+		        resetForm: true,
+		        success: responseFunction
+			};
+			$('#registerFormId').submit(function() {
+		    	if (registerValidation()) {
+		        	$(this).ajaxSubmit(options);
+		    	}
+		        return false;
+			});
+		}
+	};
+	
+	var responseFunction = function(data) {
+		if (data == 2) {
+			regForm.find("input[name='name']").focus();
+			$("#registerError").html("注册项为必填项，不能为空");
+			return;
+		}
+		if (data == 3) {
+			regForm.find("input[name='confirmPwd']").focus();
+			$("#registerError").html("确认密码输入错误，请重新输入");
+			return;
+		}
+		if (data == 4) {
+			regForm.find("input[name='name']").focus();
+			$("#registerError").html("用户名已被使用，请重新输入");
+			return;
+		}
+		if (data == 5) {
+			regForm.find("input[name='name']").focus();
+			$("#registerError").html("注册失败，请稍后再试");
+			return;
+		}
+		if (data == 1) {
+			alert("注册成功，请登录");
 		}
 	}
-	return true;
-}
+
+	var registerValidation = function() {
+		$("#registerError").html("");
+		var regForm = $("#registerFormId");
+		var name = regForm.find("input[name='name']").val().replace(REX, "");
+		var password = regForm.find("input[name='password']").val().replace(REX, "");
+		var confirmPwd = regForm.find("input[name='confirmPwd']").val().replace(REX, "");
+		var email = regForm.find("input[name='email']").val().replace(REX,"");
+		var telephone = regForm.find("input[name='telephone']").val().replace(REX, "");
+		var msg = "注册项为必填项，不能为空";
+		if (name == "") {
+			regForm.find("input[name='name']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (!checkName(name)) {
+			regForm.find("input[name='name']").focus();
+			$("#registerError").html("用户名为4到16位字母数字或下划线组成");
+			return false;
+		}
+		if (password == "") {
+			regForm.find("input[name='password']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (confirmPwd == "") {
+			regForm.find("input[name='confirmPwd']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (password != confirmPwd) {
+			regForm.find("input[name='confirmPwd']").focus();
+			$("#registerError").html("确认密码输入错误，请重新输入");
+			return false;
+		}
+		if (email == "") {
+			regForm.find("input[name='email']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (!checkEmailFormat(email)) {
+			regForm.find("input[name='email']").focus();
+			$("#registerError").html("邮箱格式错误，请重新输入");
+			return false;
+		}
+		if (telephone == "") {
+			regForm.find("input[name='telephone']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (!checkPhone(value)) {
+			regForm.find("input[name='telephone']").focus();
+			$("#registerError").html("手机号码格式错误，请重新输入");
+			return false;
+		}
+		return true;
+	};
+
+	var checkEmailFormat = function(value) {
+		var REX_EMAIL_FORMAT = /^[\w-\.]+@[\w-]+(\.[\w-]+)+/;
+		if (value.length > 0 && !REX_EMAIL_FORMAT.test(value)) {
+			return false;
+		}
+		return true;
+	};
+
+	var checkName = function(value) {
+		var REX = /^[0-9a-zA-Z_]{4,16}$/;
+		if (value.length > 0 && !REX.test(value)) {
+			return false;
+		}
+		return true;
+	};
+
+	var checkPhone = function(value) {
+		var REX = /^[1][0-9]{10}$/;
+		if (value.length > 0 && !REX.test(value)) {
+			return false;
+		}
+		return true;
+	};
+
+	var checkItemRequired = function(item) {
+		var obj = document.getElementById(item);
+		if (obj != null) {
+			var temp = obj.value.replace(REX, "");
+			document.getElementById(item).value = temp;
+			if (temp == null || temp.length == 0) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+	return action;
+}();
 </script>
 	<section id="form"><!--form-->
 		<div class="container">
@@ -38,14 +165,14 @@ function checkItemRequired(item) {
 					<div class="login-form"><!--login form-->
 						<h2>Login to your account</h2>
 						<form action="login.action" method="post" name="loginForm">
-							<input type="text" name="name" id="login_name_id" placeholder="Name" value="${param.name}"/>
-							<input type="password" name="password" id="login_password_id" placeholder="Password"/>
+							<input type="text" name="login_name" id="login_name_id" placeholder="Name" value="${param.name}"/>
+							<input type="password" name="login_password" id="login_password_id" placeholder="Password"/>
 							<span id="loginError" style="COLOR: red;text-align: left;">${requestScope.loginError}</span><br>
 							<span>
 								<input type="checkbox" class="checkbox"> 
 								Keep me signed in
 							</span>
-							<button type="submit" class="btn btn-default" onclick="loginCheck();return false;">Login</button>
+							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.loginCheck();return false;">Login</button>
 						</form>
 					</div><!--/login form-->
 				</div>
@@ -55,13 +182,14 @@ function checkItemRequired(item) {
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
-						<form action="#">
+						<form action="register.action" name="registerForm" method="post" id="registerFormId">
 							<input type="text" placeholder="Name" name="name" value=""/>
 							<input type="password" placeholder="Password" name="password" value=""/>
 							<input type="password" placeholder="Confirm Password" name="confirmPwd" value=""/>
 							<input type="email" placeholder="Email Address" name="email" value=""/>
 							<input type="text" placeholder="Telephone" name="telephone" value=""/>
-							<button type="submit" class="btn btn-default">Signup</button>
+							<span id="registerError" style="COLOR: red;text-align: left;"></span>
+							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.registerUser();return false;">Signup</button>
 						</form>
 					</div><!--/sign up form-->
 				</div>
