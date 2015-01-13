@@ -28,3 +28,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>shop/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>shop/js/jquery.prettyPhoto.js"></script>
 <script src="<%=basePath%>shop/js/main.js"></script>
+<script src="<%=basePath%>shop/js/jquery.form.js"></script>

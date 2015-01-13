@@ -24,19 +24,20 @@ var yiqin_login_action = function(){
 		
 		registerUser : function(){
 			var options = {
+				target: "",
+				type: "POST",
+				url:"register.action",
 		        resetForm: true,
 		        success: responseFunction
 			};
 	    	if (registerValidation()) {
-	    		registerForm.ajaxSubmit(options);
-	    	}else{
-	    		return false;
+	    		$('#registerFormId').ajaxSubmit(options);
 	    	}
-		}
+	    	return false;
+	    }
 	};
 	
 	var responseFunction = function(data) {
-		alert("1111");
 		var regForm = $("#registerFormId");
 		if (data == 2) {
 			regForm.find("input[name='name']").focus();
@@ -183,7 +184,7 @@ var yiqin_login_action = function(){
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
-						<form action="register.action" name="registerForm" method="post" id="registerFormId">
+						<form action="" name="registerForm" method="post" id="registerFormId">
 							<input type="text" placeholder="Name" name="name" value=""/>
 							<input type="password" placeholder="Password" name="password" value=""/>
 							<input type="password" placeholder="Confirm Password" name="confirmPwd" value=""/>
