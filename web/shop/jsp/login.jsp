@@ -7,7 +7,7 @@ var yiqin_login_action = function(){
 	
 	var action = {
 		loginCheck : function(evt){
-			var errmsg = $("loginError");
+			var errmsg = $("#loginError");
 			errmsg.html("&nbsp;");
 			if (!checkItemRequired("login_name_id")) {
 				document.getElementById("login_name_id").focus();
@@ -27,16 +27,17 @@ var yiqin_login_action = function(){
 		        resetForm: true,
 		        success: responseFunction
 			};
-			$('#registerFormId').submit(function() {
-		    	if (registerValidation()) {
-		        	$(this).ajaxSubmit(options);
-		    	}
-		        return false;
-			});
+	    	if (registerValidation()) {
+	    		registerForm.ajaxSubmit(options);
+	    	}else{
+	    		return false;
+	    	}
 		}
 	};
 	
 	var responseFunction = function(data) {
+		alert("1111");
+		var regForm = $("#registerFormId");
 		if (data == 2) {
 			regForm.find("input[name='name']").focus();
 			$("#registerError").html("注册项为必填项，不能为空");
@@ -111,7 +112,7 @@ var yiqin_login_action = function(){
 			$("#registerError").html(msg);
 			return false;
 		}
-		if (!checkPhone(value)) {
+		if (!checkPhone(telephone)) {
 			regForm.find("input[name='telephone']").focus();
 			$("#registerError").html("手机号码格式错误，请重新输入");
 			return false;
@@ -128,16 +129,16 @@ var yiqin_login_action = function(){
 	};
 
 	var checkName = function(value) {
-		var REX = /^[0-9a-zA-Z_]{4,16}$/;
-		if (value.length > 0 && !REX.test(value)) {
+		var REX_NAME = /^[0-9a-zA-Z_]{4,16}$/;
+		if (value.length > 0 && !REX_NAME.test(value)) {
 			return false;
 		}
 		return true;
 	};
 
 	var checkPhone = function(value) {
-		var REX = /^[1][0-9]{10}$/;
-		if (value.length > 0 && !REX.test(value)) {
+		var REX_PHONE = /^[1][0-9]{10}$/;
+		if (value.length > 0 && !REX_PHONE.test(value)) {
 			return false;
 		}
 		return true;
