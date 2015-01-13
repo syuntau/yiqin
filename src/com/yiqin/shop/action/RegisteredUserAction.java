@@ -83,8 +83,7 @@ public class RegisteredUserAction extends ActionSupport {
 				return null;
 			}
 
-			// 格式校验
-
+			// 密码校验
 			if (!password.equals(confirmPwd)) {
 				result = "3";
 				response.getWriter().print(result);
