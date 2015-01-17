@@ -37,6 +37,14 @@
 		<action name="register" class="com.yiqin.shop.action.RegisteredUserAction"></action>
 		
 		<action name="modifyUserInfo" class="com.yiqin.shop.action.ModifyUserInfoAction"></action>
+		
+		<action name="addProductToCart" class="com.yiqin.shop.action.AddProductToCartAction"></action>
+		
+		<action name="findCartInfo" class="com.yiqin.shop.action.FindCartInfoAction"></action>
+		
+		<action name="findProductInfo" class="com.yiqin.shop.action.FindProductInfoAction"></action>
+		
+		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">
 			<interceptor-ref name="setNav"></interceptor-ref>

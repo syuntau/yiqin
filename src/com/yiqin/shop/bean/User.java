@@ -2,12 +2,22 @@ package com.yiqin.shop.bean;
 
 import java.util.Date;
 
+/**
+ * 用户信息
+ * 
+ * @author LiuJun
+ * 
+ */
 public class User {
+	// 用户名（唯一）
 	private String name;
+	// 密码
 	private String password;
-	private String confirmPwd;
+	// 邮箱
 	private String email;
+	// 手机
 	private String telephone;
+	// 注册时间
 	private Date regtime;
 
 	public String getPassword() {
@@ -16,14 +26,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getConfirmPwd() {
-		return confirmPwd;
-	}
-
-	public void setConfirmPwd(String confirmPwd) {
-		this.confirmPwd = confirmPwd;
 	}
 
 	public String getName() {

@@ -1,0 +1,62 @@
+package com.yiqin.shop.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.shop.bean.Cart;
+import com.yiqin.shop.bean.User;
+import com.yiqin.shop.service.ShoppingManager;
+import com.yiqin.util.Util;
+
+/**
+ * 我的购物车
+ * 
+ * @author LiuJun
+ * 
+ */
+public class FindCartInfoAction extends ActionSupport {
+
+	private static final long serialVersionUID = -5662631274249628276L;
+
+	private ShoppingManager shoppingManager;
+
+	public ShoppingManager getShoppingManager() {
+		return shoppingManager;
+	}
+
+	public void setShoppingManager(ShoppingManager shoppingManager) {
+		this.shoppingManager = shoppingManager;
+	}
+
+	public String execute() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		response.setContentType("text/json;charset=UTF-8");
+		String result = "";
+		try {
+			// 获取当前用户
+			Object userObj = session.getAttribute("userInfo");
+			User loninUser = (User) userObj;
+
+			// 查询用户购物车
+			List<Cart> cartList = shoppingManager.findCartListInfo(loninUser.getName());
+			if (Util.isEmpty(cartList)) {
+				result = "1";
+			} else {
+				result = cartList.toString();
+			}
+			response.getWriter().print(result);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "2";
+			response.getWriter().print(result);
+			return null;
+		}
+	}
+}

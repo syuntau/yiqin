@@ -11,14 +11,24 @@ import com.yiqin.shop.bean.User;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 
+/**
+ * 修改用户信息
+ * 
+ * @author LiuJun
+ * 
+ */
 public class ModifyUserInfoAction extends ActionSupport {
 
 	private static final long serialVersionUID = 4384288723004399437L;
+	// 邮箱
 	private String email;
+	// 手机
 	private String telephone;
+	// 密码
 	private String password;
+	// 确认密码
 	private String confirmPwd;
-	// email、telephone、password
+	// 修改类型(email、telephone、password)
 	private String modifyType;
 
 	private UserManager userManager;

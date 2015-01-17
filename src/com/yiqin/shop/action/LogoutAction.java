@@ -9,6 +9,12 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 退出登录
+ * 
+ * @author LiuJun
+ * 
+ */
 public class LogoutAction extends ActionSupport {
 
 	private static final long serialVersionUID = -8320063752515184933L;

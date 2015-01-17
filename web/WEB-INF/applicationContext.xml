@@ -50,7 +50,7 @@
 <!-- 		<property name="dataSource" ref="dataSource"></property> -->
 <!-- 	</bean> -->
 	
-<!-- 	<bean id="commodityDao" class="com.yiqin.shop.daoImpl.commodityDaoImpl"> -->
+<!-- 	<bean id="productDao" class="com.yiqin.shop.daoImpl.productDaoImpl"> -->
 <!-- 		<property name="dataSource" ref="dataSource"></property> -->
 <!-- 	</bean> -->
 
@@ -58,12 +58,12 @@
 <!-- 		<property name="userDao" ref="userDao"></property> -->
 	</bean>
 	
-	<bean id="shopManager" class="com.yiqin.shop.serviceImpl.ShoppingManagerImpl">
+	<bean id="shoppingManager" class="com.yiqin.shop.serviceImpl.ShoppingManagerImpl">
 <!-- 		<property name="shoppingDao" ref="shoppingDao"></property> -->
 	</bean>
 	
-	<bean id="commodityManager" class="com.yiqin.shop.serviceImpl.CommodityManagerImpl">
-<!-- 		<property name="commodityDao" ref="commodityDao"></property> -->
+	<bean id="productManager" class="com.yiqin.shop.serviceImpl.ProductManagerImpl">
+<!-- 		<property name="productDao" ref="productDao"></property> -->
 	</bean>
 
 </beans>

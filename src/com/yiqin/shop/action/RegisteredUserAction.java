@@ -11,14 +11,26 @@ import com.yiqin.shop.bean.User;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 
+/**
+ * 用户注册
+ * 
+ * @author LiuJun
+ * 
+ */
 public class RegisteredUserAction extends ActionSupport {
 
 	private static final long serialVersionUID = 7088615138788787514L;
+	// 用户名
 	private String name;
+	// 密码
 	private String password;
+	// 确认密码
 	private String confirmPwd;
+	// 邮箱
 	private String email;
+	// 手机
 	private String telephone;
+	
 	private UserManager userManager;
 
 	public String getName() {

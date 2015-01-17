@@ -10,10 +10,18 @@ import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
+/**
+ * 用户登录
+ * 
+ * @author LiuJun
+ * 
+ */
 public class LoginAction extends ActionSupport {
 
 	private static final long serialVersionUID = 316466680810245739L;
+	// 登录用户名
 	private String login_name;
+	// 登录密码
 	private String login_password;
 	private UserManager userManager;
 
