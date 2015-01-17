@@ -19,7 +19,7 @@ public class Order implements Serializable {
 	private String songhuoShiJian;     // 送货时间
 	private String faPiaoTaiTou;       // 发票抬头
 	private String faPiaoMingXi;       // 发票明细
-	private String productList;        // 商品ID + 商品缩略图URL + 数量  + 单价 + 总价
+	private String productList;        // 商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价
 	private float yuanJia;             // 订单原价
 	private float zheKou;              // 订单折扣
 	private float zongJia;             // 订单总价

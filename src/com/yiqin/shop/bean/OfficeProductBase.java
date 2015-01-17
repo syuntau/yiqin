@@ -19,6 +19,7 @@ public class OfficeProductBase implements Serializable {
 	private String comment;
 	private Date createDate;
 	private Date updateDate;
+
 	public String getId() {
 		return id;
 	}
