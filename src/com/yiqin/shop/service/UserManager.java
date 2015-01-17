@@ -7,6 +7,8 @@ public interface UserManager {
 	public boolean registeUser(User user);
 
 	public User login(String name, String password);
-	
+
 	public User findUserByName(String name);
+
+	public boolean modifyUserInfo(User user);
 }

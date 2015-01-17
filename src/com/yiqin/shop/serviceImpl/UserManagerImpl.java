@@ -5,6 +5,16 @@ import com.yiqin.shop.service.UserManager;
 
 public class UserManagerImpl implements UserManager {
 
+//	private UserDao userDao;
+//
+//	public UserDao getUserDao() {
+//		return userDao;
+//	}
+//
+//	public void setUserDao(UserDao userDao) {
+//		this.userDao = userDao;
+//	}
+
 	@Override
 	public boolean registeUser(User user) {
 		// TODO Auto-generated method stub
@@ -23,5 +33,11 @@ public class UserManagerImpl implements UserManager {
 	public User findUserByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean modifyUserInfo(User user) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }
