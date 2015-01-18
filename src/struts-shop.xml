@@ -16,16 +16,31 @@
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		
 		<interceptors>
 			<interceptor name="setNav" class="com.yiqin.shop.interceptor.ShopNavInterceptor" />
+			<!-- 自定义拦截器：用来拦截用户没有登录的操作 -->
+			<interceptor name="notLoginInterceptor" class="com.yiqin.shop.interceptor.NotLoginInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="notLoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
 		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+
+		<!-- 定义一个全局的结果login-->
+		<global-results>
+			<result name="login">/jsp/cenJump.jsp</result>
+		</global-results>
 
 		<action name="index" class="com.yiqin.shop.action.IndexAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<param name="home">top_home</param>
 			<result type="chain">dispatcher</result>
 		</action>
 
 		<action name="login" class="com.yiqin.shop.action.LoginAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="login" type="tiles">shop.login</result>
 			<result name="success" type="chain">dispatcher</result>
 		</action>
@@ -50,7 +65,7 @@
 			<interceptor-ref name="setNav"></interceptor-ref>
 			<result name="top_account" type="tiles">login</result>
 			<result name="top_quick_shopping" type="tiles">login</result>
-			<result name="top_cart" type="tiles">login</result>
+			<result name="top_cart" type="tiles">shop.cart</result>
 			<result name="top_login" type="tiles">shop.login</result>
 			<result name="top_home" type="tiles">shop.index</result>
 		</action>

@@ -48,6 +48,15 @@
 		<put-attribute name="category" value="/shop/jsp/idx_right_category.jsp" />
 		<put-attribute name="recommend" value="/shop/jsp/idx_right_recommend.jsp" />
 	</definition>
+	
+	<definition name="shop.cart.body" template="/shop/jsp/cart_body.jsp">
+		<put-attribute name="items" value="/shop/jsp/cart_items.jsp" />
+		<put-attribute name="check" value="/shop/jsp/cart_check.jsp" />
+	</definition>
+	
+	<definition name="shop.cart" extends="shop.template">
+		<put-attribute name="body" value="shop.cart.body" />
+	</definition>
 
 	<definition name="shop.login" extends="shop.template">
 		<put-attribute name="title" value="shop.login.title"/>

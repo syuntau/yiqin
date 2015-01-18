@@ -5,7 +5,7 @@
 var yiqin_login_action = function(){
 	var REX=/^[\s\u3000]*|[\s\u3000]*$/g;
 	
-	var action = {
+	var login_action = {
 		loginCheck : function(evt){
 			var errmsg = $("#loginError");
 			errmsg.html("&nbsp;");
@@ -62,7 +62,7 @@ var yiqin_login_action = function(){
 		if (data == 1) {
 			alert("注册成功，请登录");
 		}
-	}
+	};
 
 	var registerValidation = function() {
 		$("#registerError").html("");
@@ -157,7 +157,7 @@ var yiqin_login_action = function(){
 		return true;
 	};
 
-	return action;
+	return login_action;
 }();
 </script>
 	<section id="form"><!--form-->

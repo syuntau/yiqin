@@ -1,5 +1,6 @@
 package com.yiqin.shop.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.yiqin.shop.bean.Cart;
@@ -38,8 +39,22 @@ public class ShoppingManagerImpl implements ShoppingManager {
 
 	@Override
 	public List<Cart> findCartListInfo(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cart> cartList = new ArrayList<>();
+		Cart cart = new Cart();
+		cart.setImageUrl("images/cart/one.png");
+		cart.setPrice(98);
+		cart.setProductId("12347213947");
+		cart.setProductName("高级圆珠笔");
+		cart.setProductNum(1);
+		cartList.add(cart);
+		Cart cart1 = new Cart();
+		cart1.setImageUrl("images/cart/two.png");
+		cart1.setPrice(15);
+		cart1.setProductId("43543252345");
+		cart1.setProductName("办公用帖纸");
+		cart1.setProductNum(3);
+		cartList.add(cart1);
+		return cartList;
 	}
 
 	@Override
