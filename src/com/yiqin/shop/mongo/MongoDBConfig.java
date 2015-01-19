@@ -22,6 +22,9 @@ public class MongoDBConfig {
 	// 密码
 	private String dbPassword = null;
 
+	// dblog
+	private String dbLog = null;
+
 	// 默认构造方法
 	public MongoDBConfig() {
 
@@ -86,5 +89,13 @@ public class MongoDBConfig {
 	public void setDbUser(String dbUser) {
 
 		this.dbUser = dbUser;
+	}
+
+	public String getDbLog() {
+		return dbLog;
+	}
+
+	public void setDbLog(String dbLog) {
+		this.dbLog = dbLog;
 	}
 }

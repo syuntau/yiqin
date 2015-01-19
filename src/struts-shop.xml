@@ -30,7 +30,7 @@
 
 		<!-- 定义一个全局的结果login-->
 		<global-results>
-			<result name="login">/jsp/cenJump.jsp</result>
+			<result name="login">/shop/jsp/common/cenJump.jsp</result>
 		</global-results>
 
 		<action name="index" class="com.yiqin.shop.action.IndexAction">
@@ -49,7 +49,9 @@
 			<result name="login" type="tiles">shop.login</result>
 		</action>
 		
-		<action name="register" class="com.yiqin.shop.action.RegisteredUserAction"></action>
+		<action name="register" class="com.yiqin.shop.action.RegisteredUserAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
 		
 		<action name="modifyUserInfo" class="com.yiqin.shop.action.ModifyUserInfoAction"></action>
 		
