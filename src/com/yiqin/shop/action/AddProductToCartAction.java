@@ -10,7 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.bean.Cart;
-import com.yiqin.shop.bean.OfficeProductBase;
+import com.yiqin.shop.bean.ProductBase;
 import com.yiqin.shop.bean.User;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.shop.service.ShoppingManager;
@@ -68,7 +68,7 @@ public class AddProductToCartAction extends ActionSupport {
 				return null;
 			}
 			// 查询商品
-			OfficeProductBase oProductBase = productManager.findProductInfoById(productId);
+			ProductBase oProductBase = productManager.findProductInfoById(productId);
 			if (null == oProductBase) {
 				result = "1";
 				response.getWriter().print(result);

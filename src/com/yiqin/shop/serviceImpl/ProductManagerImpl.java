@@ -2,7 +2,7 @@ package com.yiqin.shop.serviceImpl;
 
 import java.util.List;
 
-import com.yiqin.shop.bean.OfficeProductBase;
+import com.yiqin.shop.bean.ProductBase;
 import com.yiqin.shop.service.ProductManager;
 
 public class ProductManagerImpl implements ProductManager {
@@ -18,13 +18,13 @@ public class ProductManagerImpl implements ProductManager {
 //	}
 	
 	@Override
-	public OfficeProductBase findProductInfoById(String cid) {
+	public ProductBase findProductInfoById(String cid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<OfficeProductBase> findProductInfo() {
+	public List<ProductBase> findProductInfo() {
 		// TODO Auto-generated method stub
 		return null;
 	}

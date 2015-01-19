@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.OfficeProductBase;
+import com.yiqin.shop.bean.ProductBase;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.util.Util;
 
@@ -47,7 +47,7 @@ public class FindProductInfoAction extends ActionSupport {
 			if (Util.isEmpty(productId)) {
 				result = "1";
 			} else {
-				OfficeProductBase oProductBase = productManager.findProductInfoById(productId);
+				ProductBase oProductBase = productManager.findProductInfoById(productId);
 				if (null == oProductBase) {
 					result = "2";
 				} else {

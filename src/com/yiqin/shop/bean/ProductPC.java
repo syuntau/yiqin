@@ -1,6 +1,6 @@
 package com.yiqin.shop.bean;
 
-public class ProductPC extends OfficeProductBase {
+public class ProductPC extends ProductBase {
 
 	private static final long serialVersionUID = 1165858599353264757L;
 	private String xiLie;
