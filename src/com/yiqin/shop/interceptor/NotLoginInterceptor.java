@@ -47,7 +47,6 @@ public class NotLoginInterceptor extends AbstractInterceptor {
 			// 如果用户没有登录
 			Map request = (Map) actionInvocation.getInvocationContext().get("request");
 			request.put("notLoginError", "您没有登录或登录超时，请先登录！");
-			return Action.LOGIN;
 		}
 		return Action.LOGIN;
 	}
