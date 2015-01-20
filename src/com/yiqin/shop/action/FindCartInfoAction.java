@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -48,7 +50,8 @@ public class FindCartInfoAction extends ActionSupport {
 			if (Util.isEmpty(cartList)) {
 				result = "1";
 			} else {
-				result = cartList.toString();
+				JSONArray jsArray = JSONArray.fromObject(cartList);
+				result = jsArray.toString();
 			}
 			response.getWriter().print(result);
 			return null;

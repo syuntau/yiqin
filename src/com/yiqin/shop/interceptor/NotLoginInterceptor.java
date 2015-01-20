@@ -1,6 +1,9 @@
 package com.yiqin.shop.interceptor;
 
+import java.io.PrintWriter;
 import java.util.Map;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -28,7 +31,9 @@ public class NotLoginInterceptor extends AbstractInterceptor {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public String intercept(ActionInvocation actionInvocation) {
+	public String intercept(ActionInvocation actionInvocation) throws Exception {
+		// 获得请求类型
+		String type = ServletActionContext.getRequest().getHeader("X-Requested-With");
 
 		// 获取session中用户信息
 		Map<String, Object> map = actionInvocation.getInvocationContext().getSession();
@@ -38,16 +43,21 @@ public class NotLoginInterceptor extends AbstractInterceptor {
 		if (user != null) {
 
 			// 调用下一个拦截器
-			try {
-				return actionInvocation.invoke();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			return actionInvocation.invoke();
 		} else {
-			// 如果用户没有登录
-			Map request = (Map) actionInvocation.getInvocationContext().get("request");
-			request.put("notLoginError", "您没有登录或登录超时，请先登录！");
+			// ajax请求
+			if ("XMLHttpRequest".equalsIgnoreCase(type)) {
+				PrintWriter printWriter = ServletActionContext.getResponse().getWriter();
+				printWriter.print("notLoginError");
+				printWriter.flush();
+				printWriter.close();
+				return null;
+			} else {
+				// 普通http请求
+				Map requestAttr = (Map) actionInvocation.getInvocationContext().get("request");
+				requestAttr.put("notLoginError", "您没有登录或登录超时，请先登录！");
+				return Action.LOGIN;
+			}
 		}
-		return Action.LOGIN;
 	}
 }
