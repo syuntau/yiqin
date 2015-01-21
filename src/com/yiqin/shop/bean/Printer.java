@@ -2,9 +2,12 @@ package com.yiqin.shop.bean;
 
 import com.yiqin.util.Util;
 
-public class Printer extends PrinterBase {
+public class Printer extends ProductBase {
 
 	private static final long serialVersionUID = -2051617213579934574L;
+	private String paperSize;           // 纸张规格
+	private String dianYuan;            // 电源
+	private String gongLv;              // 功率
 	
 	// 打印机
 	private String daYinSuDu;           // 打印速度
@@ -31,12 +34,18 @@ public class Printer extends PrinterBase {
 	private String cunFangShiDu;        // 存放湿度
 	private String shengNeng;           // 声能
 	private String shengYa;             // 声压
-	private String dianYuan;            // 电源
 	private String gongHao;             // 功耗
 	private String dianLiang;           // 典型用电量
 	private String anQuanRenZheng;      // 安全认证
 	private String EMC;                 // EMC
 	private String pinPaiZhiChi;        // 品牌支持
+
+	// 票据打印机
+	private String daYinTouShouMing;    // 打印头寿命
+	private String wuGuZhangShiJian;    // 无故障时间
+	private String jinZhiFangShi;       // 进纸方式
+	
+	
 
 	// 3D 打印机参数
 	private String xianShiPing;         // 显示屏
@@ -55,19 +64,37 @@ public class Printer extends PrinterBase {
 	private String fuYinFenBianLv;       // 复印分辨率
 	private String fuYinSuDu;            // 复印速度
 	private String fuYinYeShu;           // 复印页数
-	private String fuYinQiTa;            // 其他功能
+	private String fuYinQiTa;            // 复印其他功能
 
 	// 扫描
 	private String saoMiaoLeiXing;       // 扫描类型
 	private String saoMiaoFenBianLv;     // 扫描分辨率
 	private String saoMiaoSuDu;          // 扫描速度
-	private String saoMiaoQiTa;          // 其他功能
+	private String saoMiaoQiTa;          // 扫描其他功能
 
 	// 传真
 	private String chuanZhenFenBianLv;   // 传真分辨率
 	private String chuanZhenSuDu;        // 传真速度
-	private String chuanZhenQiTa;        // 其他功能
+	private String chuanZhenQiTa;        // 传真其他功能
 
+	public String getPaperSize() {
+		return paperSize;
+	}
+	public void setPaperSize(String paperSize) {
+		this.paperSize = paperSize;
+	}
+	public String getDianYuan() {
+		return dianYuan;
+	}
+	public void setDianYuan(String dianYuan) {
+		this.dianYuan = dianYuan;
+	}
+	public String getGongLv() {
+		return gongLv;
+	}
+	public void setGongLv(String gongLv) {
+		this.gongLv = gongLv;
+	}
 	public String getDaYinSuDu() {
 		return daYinSuDu;
 	}
@@ -211,12 +238,6 @@ public class Printer extends PrinterBase {
 	}
 	public void setShengYa(String shengYa) {
 		this.shengYa = shengYa;
-	}
-	public String getDianYuan() {
-		return dianYuan;
-	}
-	public void setDianYuan(String dianYuan) {
-		this.dianYuan = dianYuan;
 	}
 	public String getGongHao() {
 		return gongHao;
@@ -379,6 +400,24 @@ public class Printer extends PrinterBase {
 	}
 	public void setChuanZhenQiTa(String chuanZhenQiTa) {
 		this.chuanZhenQiTa = chuanZhenQiTa;
+	}
+	public String getDaYinTouShouMing() {
+		return daYinTouShouMing;
+	}
+	public void setDaYinTouShouMing(String daYinTouShouMing) {
+		this.daYinTouShouMing = daYinTouShouMing;
+	}
+	public String getWuGuZhangShiJian() {
+		return wuGuZhangShiJian;
+	}
+	public void setWuGuZhangShiJian(String wuGuZhangShiJian) {
+		this.wuGuZhangShiJian = wuGuZhangShiJian;
+	}
+	public String getJinZhiFangShi() {
+		return jinZhiFangShi;
+	}
+	public void setJinZhiFangShi(String jinZhiFangShi) {
+		this.jinZhiFangShi = jinZhiFangShi;
 	}
 
 	public String toString() {

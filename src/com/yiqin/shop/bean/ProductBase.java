@@ -21,6 +21,11 @@ public class ProductBase implements Serializable {
 	private String imageUrl;               // 商品图片，多个地址用 逗号 分隔
 	private String madeIn;                 // 产品产地
 	private String comment;                // 产品备注
+	private String series;                 // 产品系列
+	private String model;                  // 产品型号
+	private String size;                   // 产品尺寸
+	private String weight;                 // 产品重量
+	private String color;                  // 产品颜色
 	private String packageList;            // 包装清单
 	private Date saleDate;                 // 上架时间
 	private String afterMarketTel;         // 售后电话
@@ -28,6 +33,7 @@ public class ProductBase implements Serializable {
 	private String warranty;               // 保修
 	private Date createDate;               // 产品创建时间
 	private Date updateDate;               // 产品修改时间
+	private String qiTaGongNeng;           // 其他功能
 	private int deleteFlag;                // 产品删除Flag
 
 	public String getId() {
@@ -155,6 +161,42 @@ public class ProductBase implements Serializable {
 	}
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
+	}
+	public String getSeries() {
+		return series;
+	}
+	public void setSeries(String series) {
+		this.series = series;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getQiTaGongNeng() {
+		return qiTaGongNeng;
+	}
+	public void setQiTaGongNeng(String qiTaGongNeng) {
+		this.qiTaGongNeng = qiTaGongNeng;
 	}
 
 	public String toString() {
