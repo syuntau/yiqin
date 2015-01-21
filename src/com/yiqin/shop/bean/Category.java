@@ -3,6 +3,8 @@ package com.yiqin.shop.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.yiqin.util.Util;
+
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 6531351367406306429L;
@@ -48,5 +50,8 @@ public class Category implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

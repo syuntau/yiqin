@@ -2,6 +2,8 @@ package com.yiqin.shop.bean;
 
 import java.util.Date;
 
+import com.yiqin.util.Util;
+
 /**
  * 用户信息
  * 
@@ -58,5 +60,9 @@ public class User {
 
 	public void setRegtime(Date regtime) {
 		this.regtime = regtime;
+	}
+
+	public String toString() {
+		return Util.objToString(this);
 	}
 }

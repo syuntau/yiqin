@@ -3,6 +3,8 @@ package com.yiqin.shop.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.yiqin.util.Util;
+
 /**
  * 购物车
  * 
@@ -80,5 +82,9 @@ public class Cart implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public String toString() {
+		return Util.objToString(this);
 	}
 }

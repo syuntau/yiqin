@@ -1,5 +1,7 @@
 package com.yiqin.shop.bean;
 
+import com.yiqin.util.Util;
+
 public class Printer extends PrinterBase {
 
 	private static final long serialVersionUID = -2051617213579934574L;
@@ -50,9 +52,21 @@ public class Printer extends PrinterBase {
 	private String xiTongDaPei;         // 系统搭配
 
 	// 复印机
-	private String fuYinFenBianLv;     // 复印分辨率
+	private String fuYinFenBianLv;       // 复印分辨率
 	private String fuYinSuDu;            // 复印速度
 	private String fuYinYeShu;           // 复印页数
+	private String fuYinQiTa;            // 其他功能
+
+	// 扫描
+	private String saoMiaoLeiXing;       // 扫描类型
+	private String saoMiaoFenBianLv;     // 扫描分辨率
+	private String saoMiaoSuDu;          // 扫描速度
+	private String saoMiaoQiTa;          // 其他功能
+
+	// 传真
+	private String chuanZhenFenBianLv;   // 传真分辨率
+	private String chuanZhenSuDu;        // 传真速度
+	private String chuanZhenQiTa;        // 其他功能
 
 	public String getDaYinSuDu() {
 		return daYinSuDu;
@@ -300,5 +314,74 @@ public class Printer extends PrinterBase {
 	public void setXiTongDaPei(String xiTongDaPei) {
 		this.xiTongDaPei = xiTongDaPei;
 	}
-	
+	public String getFuYinFenBianLv() {
+		return fuYinFenBianLv;
+	}
+	public void setFuYinFenBianLv(String fuYinFenBianLv) {
+		this.fuYinFenBianLv = fuYinFenBianLv;
+	}
+	public String getFuYinSuDu() {
+		return fuYinSuDu;
+	}
+	public void setFuYinSuDu(String fuYinSuDu) {
+		this.fuYinSuDu = fuYinSuDu;
+	}
+	public String getFuYinYeShu() {
+		return fuYinYeShu;
+	}
+	public void setFuYinYeShu(String fuYinYeShu) {
+		this.fuYinYeShu = fuYinYeShu;
+	}
+	public String getFuYinQiTa() {
+		return fuYinQiTa;
+	}
+	public void setFuYinQiTa(String fuYinQiTa) {
+		this.fuYinQiTa = fuYinQiTa;
+	}
+	public String getSaoMiaoLeiXing() {
+		return saoMiaoLeiXing;
+	}
+	public void setSaoMiaoLeiXing(String saoMiaoLeiXing) {
+		this.saoMiaoLeiXing = saoMiaoLeiXing;
+	}
+	public String getSaoMiaoFenBianLv() {
+		return saoMiaoFenBianLv;
+	}
+	public void setSaoMiaoFenBianLv(String saoMiaoFenBianLv) {
+		this.saoMiaoFenBianLv = saoMiaoFenBianLv;
+	}
+	public String getSaoMiaoSuDu() {
+		return saoMiaoSuDu;
+	}
+	public void setSaoMiaoSuDu(String saoMiaoSuDu) {
+		this.saoMiaoSuDu = saoMiaoSuDu;
+	}
+	public String getSaoMiaoQiTa() {
+		return saoMiaoQiTa;
+	}
+	public void setSaoMiaoQiTa(String saoMiaoQiTa) {
+		this.saoMiaoQiTa = saoMiaoQiTa;
+	}
+	public String getChuanZhenFenBianLv() {
+		return chuanZhenFenBianLv;
+	}
+	public void setChuanZhenFenBianLv(String chuanZhenFenBianLv) {
+		this.chuanZhenFenBianLv = chuanZhenFenBianLv;
+	}
+	public String getChuanZhenSuDu() {
+		return chuanZhenSuDu;
+	}
+	public void setChuanZhenSuDu(String chuanZhenSuDu) {
+		this.chuanZhenSuDu = chuanZhenSuDu;
+	}
+	public String getChuanZhenQiTa() {
+		return chuanZhenQiTa;
+	}
+	public void setChuanZhenQiTa(String chuanZhenQiTa) {
+		this.chuanZhenQiTa = chuanZhenQiTa;
+	}
+
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

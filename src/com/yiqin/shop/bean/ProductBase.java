@@ -3,6 +3,8 @@ package com.yiqin.shop.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.yiqin.util.Util;
+
 public class ProductBase implements Serializable {
 
 	private static final long serialVersionUID = -9214719610872343839L;
@@ -154,6 +156,8 @@ public class ProductBase implements Serializable {
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}
-	
-	
+
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

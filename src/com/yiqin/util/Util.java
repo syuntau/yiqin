@@ -19,4 +19,11 @@ public class Util {
 	public static boolean isNotEmpty(@SuppressWarnings("rawtypes") List list) {
 		return list != null && list.size() > 0;
 	}
+
+	public static String objToString(Object obj) {
+		if(obj==null) return null;
+		net.sf.json.JSONObject jsonString = net.sf.json.JSONObject.fromObject(obj);
+		String content=jsonString.toString();
+		return content;
+	}
 }

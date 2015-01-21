@@ -2,6 +2,8 @@ package com.yiqin.shop.bean;
 
 import java.io.Serializable;
 
+import com.yiqin.util.Util;
+
 public class CategoryConf implements Serializable {
 
 	private static final long serialVersionUID = 6936901954526826683L;
@@ -27,5 +29,7 @@ public class CategoryConf implements Serializable {
 		this.value = value;
 	}
 
-	
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

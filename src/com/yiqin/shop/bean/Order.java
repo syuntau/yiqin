@@ -3,6 +3,8 @@ package com.yiqin.shop.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.yiqin.util.Util;
+
 /**
  * 订单信息
  * 
@@ -153,5 +155,7 @@ public class Order implements Serializable {
 		this.deleteFlag = deleteFlag;
 	}
 
-	
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

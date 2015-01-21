@@ -1,5 +1,7 @@
 package com.yiqin.shop.bean;
 
+import com.yiqin.util.Util;
+
 public class PrinterBase extends ProductBase {
 
 	private static final long serialVersionUID = 1258461306038206987L;
@@ -45,5 +47,9 @@ public class PrinterBase extends ProductBase {
 	}
 	public void setPaperSize(String paperSize) {
 		this.paperSize = paperSize;
-	}	
+	}
+
+	public String toString() {
+		return Util.objToString(this);
+	}
 }
