@@ -22,8 +22,8 @@
 									<button type="button" class="btn btn-default get">加入购物车</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="shop/images/home/ad-1.png" class="girl img-responsive" alt="" />
-<!-- 									<img src="shop/images/home/pricing.png"  class="pricing" alt="" /> -->
+									<img src="/shop/images/home/ad-1.png" class="girl img-responsive" alt="" />
+<!-- 									<img src="/shop/images/home/pricing.png"  class="pricing" alt="" /> -->
 								</div>
 							</div>
 							<div class="item">
@@ -34,8 +34,8 @@
 									<button type="button" class="btn btn-default get">加入购物车</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="shop/images/home/ad-2.png" class="girl img-responsive" alt="" />
-<!-- 									<img src="shop/images/home/pricing.png"  class="pricing" alt="" /> -->
+									<img src="/shop/images/home/ad-2.png" class="girl img-responsive" alt="" />
+<!-- 									<img src="/shop/images/home/pricing.png"  class="pricing" alt="" /> -->
 								</div>
 							</div>
 							
@@ -47,8 +47,8 @@
 									<button type="button" class="btn btn-default get">加入购物车</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="shop/images/home/ad-3.png" class="girl img-responsive" alt="" />
-<!-- 									<img src="shop/images/home/pricing.png" class="pricing" alt="" /> -->
+									<img src="/shop/images/home/ad-3.png" class="girl img-responsive" alt="" />
+<!-- 									<img src="/shop/images/home/pricing.png" class="pricing" alt="" /> -->
 								</div>
 							</div>
 							

@@ -38,7 +38,7 @@ public class FindCartInfoAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		response.setContentType("text/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
 			// 获取当前用户

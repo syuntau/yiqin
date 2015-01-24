@@ -17,7 +17,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery1.jpg" alt="" />
+								<img src="/shop/images/home/gallery1.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -30,7 +30,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery2.jpg" alt="" />
+								<img src="/shop/images/home/gallery2.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -43,7 +43,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery3.jpg" alt="" />
+								<img src="/shop/images/home/gallery3.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -56,7 +56,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery4.jpg" alt="" />
+								<img src="/shop/images/home/gallery4.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -72,7 +72,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery4.jpg" alt="" />
+								<img src="/shop/images/home/gallery4.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -85,7 +85,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery3.jpg" alt="" />
+								<img src="/shop/images/home/gallery3.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -98,7 +98,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery2.jpg" alt="" />
+								<img src="/shop/images/home/gallery2.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -111,7 +111,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery1.jpg" alt="" />
+								<img src="/shop/images/home/gallery1.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -127,7 +127,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery3.jpg" alt="" />
+								<img src="/shop/images/home/gallery3.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -140,7 +140,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery4.jpg" alt="" />
+								<img src="/shop/images/home/gallery4.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -153,7 +153,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery1.jpg" alt="" />
+								<img src="/shop/images/home/gallery1.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -166,7 +166,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery2.jpg" alt="" />
+								<img src="/shop/images/home/gallery2.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -182,7 +182,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery1.jpg" alt="" />
+								<img src="/shop/images/home/gallery1.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -195,7 +195,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery2.jpg" alt="" />
+								<img src="/shop/images/home/gallery2.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -208,7 +208,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery3.jpg" alt="" />
+								<img src="/shop/images/home/gallery3.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
@@ -221,7 +221,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="shop/images/home/gallery4.jpg" alt="" />
+								<img src="/shop/images/home/gallery4.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>

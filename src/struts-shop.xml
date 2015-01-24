@@ -61,6 +61,8 @@
 		
 		<action name="findProductInfo" class="com.yiqin.shop.action.FindProductInfoAction"></action>
 		
+		<action name="deleteCartProduct" class="com.yiqin.shop.action.DeleteCartProductAction"></action>
+		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">

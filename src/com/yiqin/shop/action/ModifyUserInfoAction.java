@@ -85,7 +85,7 @@ public class ModifyUserInfoAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "success";
 		try {
 			// 获取当前用户

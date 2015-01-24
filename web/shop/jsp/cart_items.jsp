@@ -17,7 +17,7 @@ var cart_template = {
 
 var yiqin_cart_action = function(){
 	var cart_action = {
-		initCartInfo : function(){
+		initCartInfo : function(touchType){
 			$.ajax({
 	             type: "POST",
 	             async: true,
@@ -32,11 +32,84 @@ var yiqin_cart_action = function(){
 	            		 $cart_info_list.append("购物车坏了，正在抢修哦，稍后再来");
 	            	 }else{
 	            		 appendInfoToCart(data);
+	            		 if(touchType=='delete'){
+	            			 $cart_info_list.append("成功删除1件商品");
+	            		 }
 	            	 }
                  },
                  beforeSend: function(){},
                  complete: function(){},
                  error: function(){}
+	         });
+		},
+		
+		deleteCartProduct : function(productId){
+			if (confirm("您是否真的需要从购物车里删除此商品？")) {
+				$.ajax({
+		             type: "POST",
+		             async: true,
+		             url: "deleteCartProduct.action",
+		             data: "productId="+productId,
+		             dataType: 'text',
+		             success: function(data){
+		            	 if(data=='1'){
+		            		alert("您要删除的商品不存在，请刷新页面再试哦！");
+		            	 }else if(data=='2'){
+		            		alert("删除商品失败，请稍后再试！");
+		            	 }else if(data=='success'){
+		            		yiqin_cart_action.initCartInfo("delete");
+		            	 }
+	                },
+	                beforeSend: function(){},
+	                complete: function(){},
+	                error: function(){}
+		         });
+		    }
+		},
+		
+		changeCartProductNum : function(touchType,productId,pIndex,customNum){
+			var $productTr = $("#"+pIndex+"_product"),
+				$productInput = $("#"+pIndex+"_input"),
+				price = $productTr.data(pIndex+"_price"),
+				pNum = $productTr.data(pIndex+"_productNum"),
+				REX_NUM = /^(0|[1-9][0-9]*)$/;
+			if(touchType=="custom"){
+				if(customNum==null || customNum=="" || customNum <0 || !REX_NUM.test(customNum) || customNum==pNum){
+					$productInput.val(pNum);
+					return false;
+				}
+				pNum = customNum;
+			}else{
+				if(touchType=="up"){
+					pNum = pNum+1;
+				}else{
+					if(pNum > 0){
+						pNum = pNum-1;
+					}else{
+						return false;
+					}
+				}
+			}
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "updateCartProductsNum.action",
+	             data: "productId="+productId+"&productNum="+pNum,
+	             dataType: 'text',
+	             success: function(data){
+	            	 if(data=='1'){
+	            		alert("此商品不存在，请刷新页面再试哦！");
+	            	 }else if(data=='2'){
+	            		alert("操作商品失败，请稍后再试！");
+	            	 }else if(data=='success'){
+	            		 $productTr.data(pIndex+"_productNum",pNum);
+	            		 $productInput.val(pNum);
+	            		 $productTr.find("p[class='cart_total_price']").html(pNum*price);
+	            	 }
+               },
+               beforeSend: function(){},
+               complete: function(){},
+               error: function(){}
 	         });
 		},
 	};
@@ -54,15 +127,13 @@ var yiqin_cart_action = function(){
 				$cart_img = $(cart_template.cart_img),
 			 	$cart_div = $(cart_template.cart_div),
 			 	$cart_input = $(cart_template.cart_input);
-			
 			 $cart_td.attr('class',"cart_product");
 			 $cart_td.append($cart_a.append($cart_img));
 			 $cart_a.click(function(){
 				 
 			 });
-			 $cart_img.arrt("src",val.imageUrl);
+			 $cart_img.attr("src",val.imageUrl);
 			 $cart_tr.append($cart_td);
-			 
 			 $cart_td = $(cart_template.cart_td),
 			 $cart_a = $(cart_template.cart_a),
 			 $cart_img = $(cart_template.cart_img);
@@ -74,7 +145,6 @@ var yiqin_cart_action = function(){
 				 
 			 });
  			$cart_tr.append($cart_td);
- 			 
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_price");
@@ -85,34 +155,39 @@ var yiqin_cart_action = function(){
  			$cart_a = $(cart_template.cart_a);
  			$cart_td.attr('class',"cart_quantity");
  			$cart_td.append($cart_div.append($cart_a).append($cart_input));
- 			$cart_input.val(val.productNum);
+ 			$cart_input.val(val.productNum).attr('id',i+"_input");
+ 			$cart_input.blur(function(){
+ 				var aaa = $(this).val();
+ 				yiqin_cart_action.changeCartProductNum('custom',val.productId,i,aaa);
+ 			});
  			$cart_a.attr('class',"cart_quantity_up").append(" + ");
  			$cart_a.click(function(){
-				 
+ 				yiqin_cart_action.changeCartProductNum('up',val.productId,i,1);
 			});
  			$cart_a = $(cart_template.cart_a);
  			$cart_a.attr('class',"cart_quantity_down").append(" - ");
  			$cart_div.append($cart_a);
  			$cart_a.click(function(){
-				 
+ 				yiqin_cart_action.changeCartProductNum('down',val.productId,i,1);
 			});
  			$cart_tr.append($cart_td);
- 			
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_total").append($cart_p);
  			$cart_p.attr('class',"cart_total_price").append(val.productNum*val.price);
  			$cart_tr.append($cart_td);
- 			
  			$cart_td = $(cart_template.cart_td),
  			$cart_a = $(cart_template.cart_a);
  			$cart_td.attr('class',"cart_delete").append($cart_a.append($cart_i));
  			$cart_a.attr('class',"cart_quantity_delete");
  			$cart_a.click(function(){
-				 
+ 				 yiqin_cart_action.deleteCartProduct(val.productId);
 			});
  			$cart_tr.append($cart_td);
  			
+ 			$cart_tr.data(i+"_price",val.price);
+ 			$cart_tr.data(i+"_productNum",val.productNum);
+ 			$cart_tr.attr('id',i+'_product');
  			$cart_info_list.append($cart_tr);
          });
 	};
@@ -127,7 +202,7 @@ var yiqin_cart_action = function(){
 }();
 
 $(document).ready(function() {
-	yiqin_cart_action.initCartInfo();
+	yiqin_cart_action.initCartInfo("init");
 });
 </script>
 

@@ -59,7 +59,7 @@ public class AddProductToCartAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-		response.setContentType("text/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
 			if (Util.isEmpty(productId)) {

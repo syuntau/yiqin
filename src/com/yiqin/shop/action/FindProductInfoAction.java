@@ -41,7 +41,7 @@ public class FindProductInfoAction extends ActionSupport {
 
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
 			if (Util.isEmpty(productId)) {

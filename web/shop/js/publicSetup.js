@@ -16,4 +16,4 @@ var postFormToLogin = function(){
      form.append(my_input);  
      form.submit();  
      return false;  
-}
+};

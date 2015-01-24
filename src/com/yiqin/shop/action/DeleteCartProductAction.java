@@ -6,41 +6,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.User;
 import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
 
-/**
- * 修改购物车商品数量
- * 
- * @author LiuJun
- * 
- */
-public class UpdateCartProductsNumAction extends ActionSupport {
+public class DeleteCartProductAction extends ActionSupport {
 
-	private static final long serialVersionUID = -5966255583359874907L;
+	private static final long serialVersionUID = -6595442375209215925L;
+
 	// 商品ID
 	private String productId;
-	// 商品数量
-	private int productNum;
 
 	private ShoppingManager shoppingManager;
-
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public int getProductNum() {
-		return productNum;
-	}
-
-	public void setProductNum(int productNum) {
-		this.productNum = productNum;
-	}
 
 	public ShoppingManager getShoppingManager() {
 		return shoppingManager;
@@ -48,6 +24,14 @@ public class UpdateCartProductsNumAction extends ActionSupport {
 
 	public void setShoppingManager(ShoppingManager shoppingManager) {
 		this.shoppingManager = shoppingManager;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public String execute() throws Exception {
@@ -62,18 +46,15 @@ public class UpdateCartProductsNumAction extends ActionSupport {
 				return null;
 			}
 
-			// 获取当前用户
-			Object userObj = session.getAttribute("userInfo");
-			User loninUser = (User) userObj;
-
-			// 更新数量
-			boolean flag = shoppingManager.updateCartProductsNum(
-					loninUser.getName(), productId, productNum);
+			// 删除购物车指定商品
+			Boolean flag = shoppingManager.deleteCartProduct(
+					Util.getLoginUser(session).getName(), productId);
 			if (!flag) {
 				result = "2";
 				response.getWriter().print(result);
 				return null;
 			}
+
 			result = "success";
 			response.getWriter().print(result);
 			return null;

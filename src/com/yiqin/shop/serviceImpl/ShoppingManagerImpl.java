@@ -28,7 +28,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	public boolean updateCartProductsNum(String userName, String productId,
 			int pNum) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -41,14 +41,14 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	public List<Cart> findCartListInfo(String userName) {
 		List<Cart> cartList = new ArrayList<>();
 		Cart cart = new Cart();
-		cart.setImageUrl("images/cart/one.png");
+		cart.setImageUrl("/shop/images/cart/one.png");
 		cart.setPrice(98);
 		cart.setProductId("12347213947");
 		cart.setProductName("高级圆珠笔");
 		cart.setProductNum(1);
 		cartList.add(cart);
 		Cart cart1 = new Cart();
-		cart1.setImageUrl("images/cart/two.png");
+		cart1.setImageUrl("/shop/images/cart/two.png");
 		cart1.setPrice(15);
 		cart1.setProductId("43543252345");
 		cart1.setProductName("办公用帖纸");
@@ -60,6 +60,6 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public boolean deleteCartProduct(String userName, String productId) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

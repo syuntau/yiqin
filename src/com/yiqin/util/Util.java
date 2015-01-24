@@ -2,6 +2,10 @@ package com.yiqin.util;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import com.yiqin.shop.bean.User;
+
 public class Util {
 
 	public static boolean isEmpty(String str) {
@@ -25,5 +29,14 @@ public class Util {
 		net.sf.json.JSONObject jsonString = net.sf.json.JSONObject.fromObject(obj);
 		String content=jsonString.toString();
 		return content;
+	}
+	
+	public static User getLoginUser(HttpSession session) {
+		User loninUser = null;
+		Object userObj = session.getAttribute("userInfo");
+		if (userObj != null) {
+			loninUser = (User) userObj;
+		}
+		return loninUser;
 	}
 }
