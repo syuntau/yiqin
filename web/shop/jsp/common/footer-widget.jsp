@@ -4,15 +4,17 @@
 	<div class="footer-widget">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="single-widget">
-						<h2><s:text name="shop.footer.widget.about.yiqin"></s:text></h2>
-						<ul class="nav nav-pills nav-stacked">
-							<li><s:text name="shop.footer.widget.about.yiqin.info"></s:text></li>
-						</ul>
+				<div class="col-sm-8">
+					<div class="pull-left col-sm-8">
+						<div class="single-widget">
+							<h2><s:text name="shop.footer.widget.about.yiqin"></s:text></h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><s:text name="shop.footer.widget.about.yiqin.info"></s:text></li>
+							</ul>
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 					<div class="single-widget">
 						<h2><s:text name="shop.footer.widget.service" /></h2>
 						<ul class="nav nav-pills nav-stacked">
@@ -23,7 +25,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 					<div class="single-widget">
 						<h2><s:text name="shop.footer.widget.policies" /></h2>
 						<ul class="nav nav-pills nav-stacked">
@@ -33,16 +35,16 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-sm-3">
-					<div class="single-widget">
-						<h2><s:text name="shop.footer.widget.subscription" /></h2>
-						<form action="#" class="searchform">
-							<input type="text" placeholder="Your email address" />
-							<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-							<p><s:text name="shop.footer.widget.subscription.info" /></p>
-						</form>
-					</div>
-				</div>
+<!-- 				<div class="col-sm-3"> -->
+<!-- 					<div class="single-widget"> -->
+<%-- 						<h2><s:text name="shop.footer.widget.subscription" /></h2> --%>
+<!-- 						<form action="#" class="searchform"> -->
+<!-- 							<input type="text" placeholder="Your email address" /> -->
+<!-- 							<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button> -->
+<%-- 							<p><s:text name="shop.footer.widget.subscription.info" /></p> --%>
+<!-- 						</form> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				
 			</div>
 		</div>
