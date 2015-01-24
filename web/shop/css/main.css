@@ -222,12 +222,10 @@ a#scrollUp i{
 
 .header-middle .container .row .col-sm-4{
   padding-left: 0;
-  width: 60%;
 }
 
 .header-middle .container .row .col-sm-8 {
   padding-right:0;
-  width: 40%;
 }
 
 .usa {
@@ -548,7 +546,8 @@ ul.sub-menu {
 }
 
 .footer-widget {
-  margin-bottom: 68px;
+/*   margin-bottom: 68px; */
+  margin-bottom: 18px;
 }
 
 .footer-widget .container {
