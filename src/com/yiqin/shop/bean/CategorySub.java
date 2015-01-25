@@ -1,20 +1,21 @@
 package com.yiqin.shop.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import com.yiqin.util.Util;
 
-public class CategoryMenu implements Serializable {
+public class CategorySub implements Serializable {
 
 	private static final long serialVersionUID = 6531351367406306429L;
+	// 分类ID
 	private String id;
+	// 名称
 	private String name;
+	// 排序号
 	private int level;
-	private Date createTime;
-	private Date updateTime;
-	private List<SubCategoryMenu> subMenu;// 子菜单
+	// 子分类
+	private List<CategorySub> subCategory;
 
 	public String getId() {
 		return id;
@@ -40,28 +41,12 @@ public class CategoryMenu implements Serializable {
 		this.level = level;
 	}
 
-	public List<SubCategoryMenu> getSubMenu() {
-		return subMenu;
+	public List<CategorySub> getSubCategory() {
+		return subCategory;
 	}
 
-	public void setSubMenu(List<SubCategoryMenu> subMenu) {
-		this.subMenu = subMenu;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public void setSubCategory(List<CategorySub> subCategory) {
+		this.subCategory = subCategory;
 	}
 
 	public String toString() {
