@@ -1,6 +1,10 @@
 package com.yiqin.shop.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -47,11 +51,12 @@ public class FindProductInfoAction extends ActionSupport {
 			if (Util.isEmpty(productId)) {
 				result = "1";
 			} else {
-				ProductBase oProductBase = productManager.findProductInfoById(productId);
-				if (null == oProductBase) {
+				List<ProductBase> oProductBase = productManager.findProductInfoById(productId);
+				if (Util.isEmpty(oProductBase)) {
 					result = "2";
 				} else {
-					result = oProductBase.toString();
+					JSONArray jsonArray = JSONArray.fromObject(oProductBase);
+					result = jsonArray.toString();
 				}
 			}
 			response.getWriter().print(result);

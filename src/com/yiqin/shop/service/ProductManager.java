@@ -6,19 +6,21 @@ import com.yiqin.shop.bean.ProductBase;
 
 public interface ProductManager {
 	/**
-	 * 查询单个商品信息
+	 * 通过ID查询商品信息
 	 * 
-	 * @param pid
-	 *            商品ID
+	 * @param pids
+	 *            商品ID 多个用逗号分隔 如（id1,id2,id3,....）
 	 * @return 对应商品
 	 */
-	public ProductBase findProductInfoById(String pid);
+	public List<ProductBase> findProductInfoById(String pids);
 
 	/**
-	 * 查询所有商品信息
+	 * 查询指定分类下的商品
 	 * 
-	 * @return list
+	 * @param categorys
+	 *            多级分类按序用逗号分隔 如（category,category1,category2,category3,.....）
+	 * @return 商品集合
 	 */
-	public List<ProductBase> findProductInfo();
+	public List<ProductBase> findProductInfo(String categorys);
 
 }

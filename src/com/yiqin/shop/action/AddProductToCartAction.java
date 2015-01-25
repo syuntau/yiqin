@@ -1,6 +1,7 @@
 package com.yiqin.shop.action;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,8 +69,8 @@ public class AddProductToCartAction extends ActionSupport {
 				return null;
 			}
 			// 查询商品
-			ProductBase oProductBase = productManager.findProductInfoById(productId);
-			if (null == oProductBase) {
+			List<ProductBase> oProductBaseList = productManager.findProductInfoById(productId);
+			if (Util.isEmpty(oProductBaseList)) {
 				result = "1";
 				response.getWriter().print(result);
 				return null;
@@ -79,6 +80,7 @@ public class AddProductToCartAction extends ActionSupport {
 			User loninUser = Util.getLoginUser(session);
 			
 			// 保存购物信息
+			ProductBase oProductBase = oProductBaseList.get(0);
 			Cart cart = new Cart();
 			cart.setCreateDate(new Date());
 			cart.setName(loninUser.getName());
