@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.shop.bean.User;
+import com.yiqin.util.Util;
 
 /**
  * 退出登录
@@ -24,8 +26,8 @@ public class LogoutAction extends ActionSupport {
 		HttpSession session = request.getSession();
 
 		// 获取当前用户
-		Object userObj = session.getAttribute("userInfo");
-		if (userObj != null) {
+		User loninUser = Util.getLoginUser(session);
+		if (loninUser != null) {
 			session.removeAttribute("userInfo");
 		}
 

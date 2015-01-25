@@ -42,8 +42,7 @@ public class FindCartInfoAction extends ActionSupport {
 		String result = "";
 		try {
 			// 获取当前用户
-			Object userObj = session.getAttribute("userInfo");
-			User loninUser = (User) userObj;
+			User loninUser = Util.getLoginUser(session);
 
 			// 查询用户购物车
 			List<Cart> cartList = shoppingManager.findCartListInfo(loninUser.getName());

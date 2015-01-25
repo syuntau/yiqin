@@ -89,8 +89,7 @@ public class ModifyUserInfoAction extends ActionSupport {
 		String result = "success";
 		try {
 			// 获取当前用户
-			Object userObj = session.getAttribute("userInfo");
-			User loninUser = (User) userObj;
+			User loninUser = Util.getLoginUser(session);
 
 			// 设置信息
 			if ("email".equals(modifyType)) {

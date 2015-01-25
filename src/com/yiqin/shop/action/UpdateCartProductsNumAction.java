@@ -63,8 +63,7 @@ public class UpdateCartProductsNumAction extends ActionSupport {
 			}
 
 			// 获取当前用户
-			Object userObj = session.getAttribute("userInfo");
-			User loninUser = (User) userObj;
+			User loninUser = Util.getLoginUser(session);
 
 			// 更新数量
 			boolean flag = shoppingManager.updateCartProductsNum(

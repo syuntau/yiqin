@@ -76,8 +76,7 @@ public class AddProductToCartAction extends ActionSupport {
 			}
 			
 			// 获取当前用户
-			Object userObj = session.getAttribute("userInfo");
-			User loninUser = (User) userObj;
+			User loninUser = Util.getLoginUser(session);
 			
 			// 保存购物信息
 			Cart cart = new Cart();
