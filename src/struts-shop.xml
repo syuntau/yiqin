@@ -42,7 +42,7 @@
 		<action name="login" class="com.yiqin.shop.action.LoginAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="login" type="tiles">shop.login</result>
-			<result name="success" type="chain">dispatcher</result>
+			<result name="success" type="chain">index</result>
 		</action>
 		
 		<action name="logout" class="com.yiqin.shop.action.LogoutAction">
