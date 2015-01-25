@@ -210,7 +210,7 @@ $(document).ready(function() {
 	<div class="container">
 		<div class="breadcrumbs">
 			<ol class="breadcrumb">
-			  <li><a href="#">Home</a></li>
+			  <li><a href="javaScript:void(0)" onclick="postFormToTopAction('top_home');">Home</a></li>
 			  <li class="active">Shopping Cart</li>
 			</ol>
 		</div>

@@ -19,7 +19,7 @@
 	var msg = "${requestScope.notLoginError}";
 	if (msg != "") {
 		alert(msg);
-		postFormToLogin();
+		postFormToTopAction("top_login");
 	}
 </script>
 </head>

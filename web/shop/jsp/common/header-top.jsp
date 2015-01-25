@@ -18,7 +18,14 @@
 							<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
 							<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>
 							<li><a class="shop_header" id="top_cart"><i class="fa fa-shopping-cart"></i> <s:text name="shop.header.top.cart" /></a></li>
-							<li><a class="shop_header" id="top_login"><i class="fa fa-lock"></i> <s:text name="shop.header.top.login" /></a></li>
+							<li>
+								<s:if test="#session.userInfo==null">
+									<a class="shop_header" id="top_login"><i class="fa fa-lock"></i> <s:text name="shop.header.top.login" /></a>
+								</s:if>
+								<s:else>
+									<a class="shop_header" id="top_logout"><i class="fa fa-lock"></i> <s:text name="shop.header.top.logout" /></a>
+								</s:else>
+							</li>
 						</ul>
 					</div>
 				</div>
