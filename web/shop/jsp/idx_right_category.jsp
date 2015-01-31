@@ -4,11 +4,11 @@
 		
 	<div class="category-tab"><!--category-tab-->
 		<div class="col-sm-12">
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#consumables" data-toggle="tab"><s:text name="shop.index.right.product.consumables" /></a></li>
-				<li><a href="#paper" data-toggle="tab"><s:text name="shop.index.right.product.paper" /></a></li>
-				<li><a href="#machines" data-toggle="tab"><s:text name="shop.index.right.product.machines" /></a></li>
-				<li><a href="#stationery" data-toggle="tab"><s:text name="shop.index.right.product.stationery" /></a></li>
+			<ul class="nav nav-tabs" id="right_category_tab">
+<%-- 				<li class="active"><a href="#consumables" data-toggle="tab"><s:text name="shop.index.right.product.consumables" /></a></li> --%>
+<%-- 				<li><a href="#paper" data-toggle="tab"><s:text name="shop.index.right.product.paper" /></a></li> --%>
+<%-- 				<li><a href="#machines" data-toggle="tab"><s:text name="shop.index.right.product.machines" /></a></li> --%>
+<%-- 				<li><a href="#stationery" data-toggle="tab"><s:text name="shop.index.right.product.stationery" /></a></li> --%>
 			</ul>
 		</div>
 		<div class="tab-content">

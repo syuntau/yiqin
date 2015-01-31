@@ -2,6 +2,7 @@ package com.yiqin.shop.service;
 
 import java.util.List;
 
+import com.yiqin.shop.bean.Category;
 import com.yiqin.shop.bean.ProductBase;
 
 public interface ProductManager {
@@ -22,5 +23,12 @@ public interface ProductManager {
 	 * @return 商品集合
 	 */
 	public List<ProductBase> findProductInfo(String categorys);
+
+	/**
+	 * 查询所有分类菜单
+	 * 
+	 * @return 分类信息
+	 */
+	public List<Category> findCategoryInfo();
 
 }
