@@ -8,6 +8,7 @@ public class Attribute implements Serializable {
 
 	private static final long serialVersionUID = 5900510729249709196L;
 	private int id;                                      // 属性ID，自增主键
+	private String nameId;                         // 属性标识符，例如：价格 为 price
 	private String name;                            // 属性名称
 	private String value;                            // 属性值（可能是包含多个值，例如：颜色 属性 的值为：黑色,红色,蓝色,白色）
 	private int categoryId;                        // 隶属的 二级分类ID，如果设定为 0，则为各分类通用属性
@@ -22,6 +23,14 @@ public class Attribute implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getNameId() {
+		return nameId;
+	}
+
+	public void setNameId(String nameId) {
+		this.nameId = nameId;
 	}
 
 	public String getName() {
