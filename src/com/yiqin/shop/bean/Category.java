@@ -10,23 +10,25 @@ public class Category implements Serializable {
 
 	private static final long serialVersionUID = 6531351367406306429L;
 	// 分类ID
-	private String id;
+	private int id;
 	// 名称
 	private String name;
 	// 排序号
 	private int level;
-	// 子分类
-	private List<CategorySub> subCategory;
+	// 父分类ID
+	private int parentId;
 	// 创建时间
 	private Date createTime;
 	// 更新时间
 	private Date updateTime;
+	// 子分类列表
+	private List<Category> subCategoryList;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -46,14 +48,6 @@ public class Category implements Serializable {
 		this.level = level;
 	}
 
-	public List<CategorySub> getSubCategory() {
-		return subCategory;
-	}
-
-	public void setSubCategory(List<CategorySub> subCategory) {
-		this.subCategory = subCategory;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -68,6 +62,22 @@ public class Category implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<Category> getSubCategoryList() {
+		return subCategoryList;
+	}
+
+	public void setSubCategoryList(List<Category> subCategoryList) {
+		this.subCategoryList = subCategoryList;
 	}
 
 	public String toString() {
