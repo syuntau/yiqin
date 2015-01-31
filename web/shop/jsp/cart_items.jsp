@@ -81,7 +81,7 @@ var yiqin_cart_action = function(){
 				pNum = customNum;
 			}else{
 				if(touchType=="up"){
-					pNum = pNum+1;
+					pNum = parseInt(pNum)+1;
 				}else{
 					if(pNum > 0){
 						pNum = pNum-1;
@@ -157,8 +157,8 @@ var yiqin_cart_action = function(){
  			$cart_td.append($cart_div.append($cart_a).append($cart_input));
  			$cart_input.val(val.productNum).attr('id',i+"_input");
  			$cart_input.blur(function(){
- 				var aaa = $(this).val();
- 				yiqin_cart_action.changeCartProductNum('custom',val.productId,i,aaa);
+ 				var cNum = $(this).val();
+ 				yiqin_cart_action.changeCartProductNum('custom',val.productId,i,cNum);
  			});
  			$cart_a.attr('class',"cart_quantity_up").append(" + ");
  			$cart_a.click(function(){
