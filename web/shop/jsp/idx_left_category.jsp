@@ -61,7 +61,7 @@ var yiqin_category_action = function(){
 			 $cate_div.attr('class','panel panel-default');
 			 $cate_div_heading.attr('class','panel-heading').append($cate_h4);
 			 $cate_div.append($cate_div_heading);
-			 if(val.subCategory.length>0){
+			 if(val.subCategoryList.length>0){
 				 $cate_div.append($cate_div_coll);
 				 $cate_h4.append($cate_coll_a.attr('href','#'+val.id));
 				 $cate_coll_a.append($cate_span_i).append(val.name);
@@ -69,7 +69,7 @@ var yiqin_category_action = function(){
 				 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',val.id); 
 				 $cate_div_body.attr('class',"panel-body").append($cate_ul);
 				 $cate_div_coll.append($cate_div_body);
- 				 $.each(val.subCategory, function(n,sub){
+ 				 $.each(val.subCategoryList, function(n,sub){
  					$cate_li = $(category_temp.cate_li),
  					$cate_panel_a = $(category_temp.cate_panel_a);
  					$cate_ul.append($cate_li);
