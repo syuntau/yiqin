@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yiqin.shop.bean.Category;
-import com.yiqin.shop.bean.CategorySub;
 import com.yiqin.shop.bean.ProductBase;
 import com.yiqin.shop.service.ProductManager;
 
@@ -37,46 +36,46 @@ public class ProductManagerImpl implements ProductManager {
 		List<Category> cate = new ArrayList<>();
 		
 		Category category = new Category();
-		category.setId("100000");
+		category.setId(100000);
 		category.setLevel(1);
 		category.setName("打印耗材");
 		
-		List<CategorySub> subCategory = new ArrayList();
-		CategorySub caSub = new CategorySub();
-		caSub.setId("100001");
+		List<Category> subCategory = new ArrayList();
+		Category caSub = new Category();
+		caSub.setId(100001);
 		caSub.setLevel(1);
 		caSub.setName("打印纸");
 		subCategory.add(caSub);
 		
-		CategorySub caSub1= new CategorySub();
-		caSub1.setId("100002");
+		Category caSub1= new Category();
+		caSub1.setId(100002);
 		caSub1.setLevel(2);
 		caSub1.setName("打印机");
 		subCategory.add(caSub1);
-		category.setSubCategory(subCategory);
+		category.setSubCategoryList(subCategory);
 		
 		Category category1 = new Category();
-		category1.setId("200000");
+		category1.setId(200000);
 		category1.setLevel(1);
 		category1.setName("办公用品");
 		
-		List<CategorySub> subCategory1 = new ArrayList();
-		CategorySub caSub2 = new CategorySub();
-		caSub2.setId("200001");
+		List<Category> subCategory1 = new ArrayList();
+		Category caSub2 = new Category();
+		caSub2.setId(200001);
 		caSub2.setLevel(1);
 		caSub2.setName("办公纸");
 		subCategory1.add(caSub2);
 		
-		CategorySub caSub3= new CategorySub();
-		caSub3.setId("200002");
+		Category caSub3= new Category();
+		caSub3.setId(200002);
 		caSub3.setLevel(2);
 		caSub3.setName("钢笔");
 		subCategory1.add(caSub3);
-		category1.setSubCategory(subCategory1);
+		category1.setSubCategoryList(subCategory1);
 		
 		
 		Category category2 = new Category();
-		category2.setId("300000");
+		category2.setId(300000);
 		category2.setLevel(1);
 		category2.setName("办公电脑");
 		
