@@ -34,6 +34,7 @@ public class ProductBase implements Serializable {
 	private Date createDate;               // 产品创建时间
 	private Date updateDate;               // 产品修改时间
 	private String qiTaGongNeng;           // 其他功能
+	private String barcode;                    // 条形码
 	private int deleteFlag;                // 产品删除Flag
 
 	public String getId() {
@@ -201,5 +202,11 @@ public class ProductBase implements Serializable {
 
 	public String toString() {
 		return Util.objToString(this);
+	}
+	public String getBarcode() {
+		return barcode;
+	}
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
 	}
 }
