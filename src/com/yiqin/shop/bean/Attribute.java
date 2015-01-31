@@ -12,7 +12,7 @@ public class Attribute implements Serializable {
 	private String value;                            // 属性值（可能是包含多个值，例如：颜色 属性 的值为：黑色,红色,蓝色,白色）
 	private int categoryId;                        // 隶属的 二级分类ID，如果设定为 0，则为各分类通用属性
 	private int filter;                                 // 是否为 二级分类 下可以筛选属性，0：不筛选，1：筛选
-	private int filterType;                          // 筛选类型，1：组合型，2：价格型，3：连续型
+	private int filterType;                          // 筛选类型，0：无类型，1：组合型，2：价格型，3：连续型
 	private String showValue;                   // 筛选显示值，筛选类型为1时，等同于 value 属性，筛选类型为2、3时，客户设定
 	private int sort;                                  // 是否 支持 排序，0：不排序，1：排序
 
