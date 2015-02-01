@@ -5,18 +5,19 @@ import java.util.List;
 
 import com.yiqin.shop.bean.Cart;
 import com.yiqin.shop.bean.Order;
+import com.yiqin.shop.dao.impl.ShoppingDao;
 import com.yiqin.shop.service.ShoppingManager;
 
 public class ShoppingManagerImpl implements ShoppingManager {
-	// private ShoppingDao shoppingDao;
-	//
-	// public ShoppingDao getShoppingDao() {
-	// return shoppingDao;
-	// }
-	//
-	// public void setShoppingDao(ShoppingDao shoppingDao) {
-	// this.shoppingDao = shoppingDao;
-	// }
+	private ShoppingDao shoppingDao;
+
+	public ShoppingDao getShoppingDao() {
+		return shoppingDao;
+	}
+
+	public void setShoppingDao(ShoppingDao shoppingDao) {
+		this.shoppingDao = shoppingDao;
+	}
 
 	@Override
 	public boolean addProductToCart(Cart cart) {

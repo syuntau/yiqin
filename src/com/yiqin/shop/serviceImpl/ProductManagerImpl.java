@@ -5,19 +5,20 @@ import java.util.List;
 
 import com.yiqin.shop.bean.Category;
 import com.yiqin.shop.bean.ProductBase;
+import com.yiqin.shop.dao.impl.ProductDao;
 import com.yiqin.shop.service.ProductManager;
 
 public class ProductManagerImpl implements ProductManager {
 
-	// private ProductDao productDao;
-	//
-	// public ProductDao getProductDao() {
-	// return productDao;
-	// }
-	//
-	// public void setProductDao(ProductDao productDao) {
-	// this.productDao = productDao;
-	// }
+	private ProductDao productDao;
+
+	public ProductDao getProductDao() {
+		return productDao;
+	}
+
+	public void setProductDao(ProductDao productDao) {
+		this.productDao = productDao;
+	}
 
 	@Override
 	public List<ProductBase> findProductInfoById(String pids) {

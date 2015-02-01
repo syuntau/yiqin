@@ -21,42 +21,58 @@
 	</bean>
 
 	<!--加载配置信息 -->
-	<bean id="mongoDBConfig" class="com.yiqin.shop.mongo.MongoDBConfig">
-		<property name="dbhost" value="${mongodb_host}"></property>
-		<property name="dbport" value="${mongodb_port}"></property>
-		<property name="database" value="${mongodb_database}"></property>
-		<property name="dbUser" value="${mongodb_user}"></property>
-		<property name="dbPassword" value="${mongodb_password}"></property>
-		<property name="dbLog" value="${mongodb_dblog}"></property>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="driverClass" value="${jdbc.driverClassName}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
 	</bean>
 
-	<!--数据库支持 -->
-	<bean id="mongoDBSupport" class="com.yiqin.shop.mongo.MongoDBSupport">
-		<property name="mongoDBConfig" ref="mongoDBConfig"></property>
+	<!--数据库事物 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	<tx:advice id="txAdice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" isolation="READ_COMMITTED" propagation="REQUIRED"/>
+			<tx:method name="find" isolation="READ_UNCOMMITTED" propagation="NOT_SUPPORTED" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+		
+	<aop:config>
+		<aop:pointcut id="curd" expression="execution (* com.yiqin.shop.dao.*.* (..))"/>
+		<aop:advisor advice-ref="txAdice" pointcut-ref="curd"/>
+	</aop:config>
 
-<!-- 	<bean id="userDao" class="com.yiqin.shop.daoImpl.UserDaoImpl"> -->
-<!-- 		<property name="mongoDBSupport" ref="mongoDBSupport"></property> -->
-<!-- 	</bean> -->
+	<!--dao service注入-->
+	<bean id="userDao" class="com.yiqin.shop.dao.impl.UserDao">
+		<property name="dataSource">
+			<ref bean="dataSource"></ref>
+		</property>
+	</bean>
 	
-<!-- 	<bean id="shoppingDao" class="com.yiqin.shop.daoImpl.ShoppingDaoImpl"> -->
-<!-- 		<property name="mongoDBSupport" ref="mongoDBSupport"></property> -->
-<!-- 	</bean> -->
+	<bean id="shoppingDao" class="com.yiqin.shop.dao.impl.ShoppingDao">
+		<property name="dataSource">
+			<ref bean="dataSource"></ref>
+		</property>
+	</bean>
 	
-<!-- 	<bean id="productDao" class="com.yiqin.shop.daoImpl.productDaoImpl"> -->
-<!-- 		<property name="mongoDBSupport" ref="mongoDBSupport"></property> -->
-<!-- 	</bean> -->
+	<bean id="productDao" class="com.yiqin.shop.dao.impl.ProductDao">
+		<property name="dataSource">
+			<ref bean="dataSource"></ref>
+		</property>
+	</bean>
 
 	<bean id="userManager" class="com.yiqin.shop.serviceImpl.UserManagerImpl">
-<!-- 		<property name="userDao" ref="userDao"></property> -->
+		<property name="userDao"><ref bean="userDao"></ref></property>
 	</bean>
 	
 	<bean id="shoppingManager" class="com.yiqin.shop.serviceImpl.ShoppingManagerImpl">
-<!-- 		<property name="shoppingDao" ref="shoppingDao"></property> -->
+		<property name="shoppingDao"><ref bean="shoppingDao"></ref></property>
 	</bean>
 	
 	<bean id="productManager" class="com.yiqin.shop.serviceImpl.ProductManagerImpl">
-<!-- 		<property name="productDao" ref="productDao"></property> -->
+		<property name="productDao"><ref bean="productDao"></ref></property>
 	</bean>
 
 </beans>

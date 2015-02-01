@@ -1,19 +1,20 @@
 package com.yiqin.shop.serviceImpl;
 
 import com.yiqin.shop.bean.User;
+import com.yiqin.shop.dao.impl.UserDao;
 import com.yiqin.shop.service.UserManager;
 
 public class UserManagerImpl implements UserManager {
 
-//	private UserDao userDao;
-//
-//	public UserDao getUserDao() {
-//		return userDao;
-//	}
-//
-//	public void setUserDao(UserDao userDao) {
-//		this.userDao = userDao;
-//	}
+	private UserDao userDao;
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	@Override
 	public boolean registeUser(User user) {
