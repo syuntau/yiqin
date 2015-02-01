@@ -5,18 +5,18 @@ import java.util.List;
 
 import com.yiqin.shop.bean.Category;
 import com.yiqin.shop.bean.ProductBase;
-import com.yiqin.shop.dao.impl.ProductDao;
+import com.yiqin.shop.dao.IProductDao;
 import com.yiqin.shop.service.ProductManager;
 
 public class ProductManagerImpl implements ProductManager {
 
-	private ProductDao productDao;
+	private IProductDao productDao;
 
-	public ProductDao getProductDao() {
+	public IProductDao getProductDao() {
 		return productDao;
 	}
 
-	public void setProductDao(ProductDao productDao) {
+	public void setProductDao(IProductDao productDao) {
 		this.productDao = productDao;
 	}
 

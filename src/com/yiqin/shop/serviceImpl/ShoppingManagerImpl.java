@@ -5,17 +5,17 @@ import java.util.List;
 
 import com.yiqin.shop.bean.Cart;
 import com.yiqin.shop.bean.Order;
-import com.yiqin.shop.dao.impl.ShoppingDao;
+import com.yiqin.shop.dao.IShoppingDao;
 import com.yiqin.shop.service.ShoppingManager;
 
 public class ShoppingManagerImpl implements ShoppingManager {
-	private ShoppingDao shoppingDao;
+	private IShoppingDao shoppingDao;
 
-	public ShoppingDao getShoppingDao() {
+	public IShoppingDao getShoppingDao() {
 		return shoppingDao;
 	}
 
-	public void setShoppingDao(ShoppingDao shoppingDao) {
+	public void setShoppingDao(IShoppingDao shoppingDao) {
 		this.shoppingDao = shoppingDao;
 	}
 

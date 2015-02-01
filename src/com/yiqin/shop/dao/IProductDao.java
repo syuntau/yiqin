@@ -18,7 +18,7 @@ public interface IProductDao {
 	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo();
-	
+
 	/**
 	 * 通过ID查询商品信息
 	 * 
