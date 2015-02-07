@@ -9,20 +9,13 @@ import com.yiqin.util.Util;
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 6531351367406306429L;
-	// 分类ID
-	private int id;
-	// 名称
-	private String name;
-	// 排序号
-	private int level;
-	// 父分类ID
-	private int parentId;
-	// 创建时间
-	private Date createTime;
-	// 更新时间
-	private Date updateTime;
-	// 子分类列表
-	private List<Category> subCategoryList;
+	private int id;                                             // 分类ID
+	private String name;                                  // 名称
+	private int level;                                        // 排序号
+	private int parentId;                                  // 父分类ID
+	private Date createDate;                            // 创建时间
+	private Date updateDate;                          // 更新时间
+	private List<Category> subCategoryList;   // 子分类列表
 
 	public int getId() {
 		return id;
@@ -48,20 +41,20 @@ public class Category implements Serializable {
 		this.level = level;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
-	public Date getUpdateTime() {
-		return updateTime;
+	public Date getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public int getParentId() {

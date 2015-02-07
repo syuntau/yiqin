@@ -83,7 +83,7 @@ public class AddProductToCartAction extends ActionSupport {
 			ProductBase oProductBase = oProductBaseList.get(0);
 			Cart cart = new Cart();
 			cart.setCreateDate(new Date());
-			cart.setName(loninUser.getName());
+			cart.setUserId(loninUser.getId());
 			cart.setProductId(oProductBase.getId());
 			cart.setProductName(oProductBase.getName());
 			cart.setPrice(oProductBase.getPrice());

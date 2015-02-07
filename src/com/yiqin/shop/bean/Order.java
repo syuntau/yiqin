@@ -19,7 +19,7 @@ public class Order implements Serializable {
 	private String userId;             // 用户ID
 	private String name;               // 用户名
 	private String address;            // 送货地址
-	private String phone;              // 用户电话
+	private String mobile;              // 用户电话
 	private String email;              // 用户Email
 	private int zhiFu;                 // 支付方式
 	private float yunFei;              // 运费
@@ -64,11 +64,11 @@ public class Order implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhone() {
-		return phone;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getEmail() {
 		return email;

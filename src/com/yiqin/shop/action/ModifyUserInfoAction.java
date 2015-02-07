@@ -102,7 +102,7 @@ public class ModifyUserInfoAction extends ActionSupport {
 				if (Util.isEmpty(telephone)) {
 					result = "2";
 				} else {
-					loninUser.setTelephone(telephone);
+					loninUser.setMobile(telephone);
 				}
 			} else if ("password".equals(modifyType)) {
 				if (Util.isEmpty(password)) {
