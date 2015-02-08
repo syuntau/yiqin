@@ -5,7 +5,7 @@
 
 <struts>
 <!-- 	<constant name="struts.locale" value="zh_CN" /> -->
-	<constant name="struts.custom.i18n.resources" value="app_shop, shop_config" />
+	<constant name="struts.custom.i18n.resources" value="app_shop, config_shop" />
 	<constant name="struts.ui.theme" value="simple"></constant>
 	<constant name="struts.i18n.encoding" value="utf-8"></constant>
 	<constant name="struts.action.extension" value="action"></constant>
