@@ -6,5 +6,5 @@
 <struts>
 
 	<include file="struts-shop.xml" />
-
+	<include file="struts-sa.xml" />
 </struts>
