@@ -109,8 +109,17 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 
-/*  */
-
+/* 购物车表 */
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `use_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
+  `product_id` varchar(20) DEFAULT NULL COMMENT '商品ID',
+  `img_url` varchar(40) DEFAULT NULL COMMENT '商品图片地址',
+  `price` float(9,3) DEFAULT NULL COMMENT '商品单价',
+  `count` int(11) DEFAULT NULL COMMENT '商品数量',
+  `product_info` varchar(200) DEFAULT NULL COMMENT '商品其他属性',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 
 /*  */
