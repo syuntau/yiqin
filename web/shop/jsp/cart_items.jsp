@@ -208,21 +208,15 @@ $(document).ready(function() {
 
 <section id="cart_items">
 	<div class="container">
-		<div class="breadcrumbs">
-			<ol class="breadcrumb">
-			  <li><a href="javaScript:void(0)" onclick="postFormToTopAction('top_home');">Home</a></li>
-			  <li class="active">Shopping Cart</li>
-			</ol>
-		</div>
 		<div class="table-responsive cart_info">
 			<table class="table table-condensed">
 				<thead>
 					<tr class="cart_menu">
-						<td class="image">Item</td>
-						<td class="description"></td>
-						<td class="price">Price</td>
-						<td class="quantity">Quantity</td>
-						<td class="total">Total</td>
+						<td class="image"></td>
+						<td class="description"><s:text name="cart.item.product"  /></td>
+						<td class="price"><s:text name="cart.item.price"  /></td>
+						<td class="quantity"><s:text name="cart.item.quantity"  /></td>
+						<td class="total"><s:text name="cart.item.total"  /></td>
 						<td></td>
 					</tr>
 				</thead>
