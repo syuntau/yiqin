@@ -165,16 +165,16 @@ var yiqin_login_action = function(){
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
+						<h2><s:text name="login.user.login.title"></s:text></h2>
 						<form action="login.action" method="post" name="loginForm">
-							<input type="text" name="login_name" id="login_name_id" placeholder="Name" value="${param.name}"/>
-							<input type="password" name="login_password" id="login_password_id" placeholder="Password"/>
+							<input type="text" name="login_name" id="login_name_id" placeholder="<s:text name='login.user.name' />" value="${param.name}"/>
+							<input type="password" name="login_password" id="login_password_id" placeholder="<s:text name='login.user.password' />"/>
 							<span id="loginError" style="COLOR: red;text-align: left;">${requestScope.loginError}</span><br>
 							<span>
 								<input type="checkbox" class="checkbox"> 
-								Keep me signed in
+								<s:text name="login.keep.logining"></s:text>
 							</span>
-							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.loginCheck();return false;">Login</button>
+							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.loginCheck();return false;"><s:text name="login.btn.login"></s:text></button>
 						</form>
 					</div><!--/login form-->
 				</div>
@@ -183,15 +183,15 @@ var yiqin_login_action = function(){
 				</div>
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
+						<h2><s:text name="login.user.sing.up"></s:text></h2>
 						<form action="" name="registerForm" method="post" id="registerFormId">
-							<input type="text" placeholder="Name" name="name" value=""/>
-							<input type="password" placeholder="Password" name="password" value=""/>
-							<input type="password" placeholder="Confirm Password" name="confirmPwd" value=""/>
-							<input type="email" placeholder="Email Address" name="email" value=""/>
-							<input type="text" placeholder="Telephone" name="telephone" value=""/>
+							<input type="text" placeholder="<s:text name='login.user.name' />" name="userId" value=""/>
+							<input type="password" placeholder="<s:text name='login.user.password' />" name="password" value=""/>
+							<input type="password" placeholder="<s:text name='login.user.confirm.password' />" name="confirmPwd" value=""/>
+							<input type="email" placeholder="<s:text name='login.user.email' />" name="email" value=""/>
+							<input type="text" placeholder="<s:text name='login.user.mobile' />" name="mobile" value=""/>
 							<span id="registerError" style="COLOR: red;text-align: left;"></span>
-							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.registerUser();return false;">Signup</button>
+							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.registerUser();return false;"><s:text name="login.btn.sign.up"></s:text></button>
 						</form>
 					</div><!--/sign up form-->
 				</div>
