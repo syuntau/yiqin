@@ -222,6 +222,7 @@ $(document).ready(function() {
 				</thead>
 				<tbody id="cart_info_list"></tbody>
 			</table>
+			<button type="button" class="btn btn-fefault pull-right">去结算</button>
 		</div>
 	</div>
 </section>

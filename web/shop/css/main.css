@@ -9,37 +9,37 @@
 */
 
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: normal;
   font-weight: 100;
   src: local('Roboto Thin'), local('Roboto-Thin'), url(http://fonts.gstatic.com/s/roboto/v14/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: normal;
   font-weight: 300;
   src: local('Roboto Light'), local('Roboto-Light'), url(../fonts/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: normal;
   font-weight: 400;
   src: local('Roboto Regular'), local('Roboto-Regular'), url(../fonts/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: normal;
   font-weight: 500;
   src: local('Roboto Medium'), local('Roboto-Medium'), url(../fonts/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: normal;
   font-weight: 700;
   src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-style: italic;
   font-weight: 400;
   src: local('Roboto Italic'), local('Roboto-Italic'), url(../fonts/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
@@ -83,7 +83,7 @@
 
 
 body {
-  font-family: 'Roboto', sans-serif, '\5b8b\4f53';
+  font-family: Microsoft YaHei, 'Roboto', sans-serif, '\5b8b\4f53';
   background:;
   position: relative;
   font-weight:400px;
@@ -111,7 +111,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif, '\5b8b\4f53';
+  font-family: Microsoft YaHei, 'Roboto', sans-serif, '\5b8b\4f53';
 }
 
 .btn:hover, 
@@ -154,7 +154,7 @@ a#scrollUp i{
 .contactinfo ul li a{
   font-size: 12px;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
 
@@ -257,7 +257,7 @@ a#scrollUp i{
 .dropdown-menu  li  a:hover, .dropdown-menu  li  a:focus {
   background-color: #FE980F;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   text-decoration: none;
 }
 
@@ -276,7 +276,7 @@ a#scrollUp i{
 .shop-menu ul li a {
 /*   background: #FFFFFF; */
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 300;
   padding:0;
@@ -316,7 +316,7 @@ a#scrollUp i{
 
 .mainmenu ul li a {
 	color: #696763;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 	font-size: 17px;
 	font-weight: 300;
 	padding: 0;
@@ -336,7 +336,7 @@ a#scrollUp i{
   background: #F0F0E9;
   border: medium none;
   color: #B2B2B2;
-  font-family: 'roboto';
+  font-family: Microsoft YaHei, 'Roboto';
   font-size: 12px;
   font-weight: 300;
   height: 35px;
@@ -452,7 +452,7 @@ ul.sub-menu {
 
 .companyinfo p {
   color: #B3B3AD;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 300;
 }
@@ -510,7 +510,7 @@ ul.sub-menu {
 
 .video-gallery p {
   color: #8C8C88;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 500;
   margin-bottom:0px;
@@ -518,7 +518,7 @@ ul.sub-menu {
 
 .video-gallery  h2 {
   color: #8c8c88;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 300;
   text-transform:uppercase;
@@ -537,7 +537,7 @@ ul.sub-menu {
 
 .address p {
   color: #666663;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 300;
   left: 25px;
@@ -557,7 +557,7 @@ ul.sub-menu {
 
 .single-widget h2 {
   color: #666663;
-/*   font-family: 'Roboto', sans-serif; */
+/*   font-family: Microsoft YaHei, 'Roboto', sans-serif; */
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 22px;
@@ -576,7 +576,7 @@ ul.sub-menu {
 
 .single-widget ul li a{
 	color: #8C8C88;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 	font-size: 12px;
 	font-weight: 300;
 	padding: 5px 0;
@@ -595,7 +595,7 @@ ul.sub-menu {
 .searchform input {
   border: 1px solid #DDDDDD;
   color: #CCCCC6;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   margin-top: 0;
   outline: medium none;
@@ -625,7 +625,7 @@ ul.sub-menu {
 
 .searchform p {
   color: #8C8C88;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 300;
   margin-top: 25px;
@@ -695,7 +695,7 @@ ul.sub-menu {
 
 .item h2 {
   color: #363432;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 22px;
@@ -706,7 +706,7 @@ ul.sub-menu {
 	color:#363432;
 	font-size:16px;
 	font-weight:300;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
 .get {
@@ -714,7 +714,7 @@ ul.sub-menu {
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 300;
   margin-top: 23px;
@@ -748,7 +748,7 @@ ul.sub-menu {
 }
 .left-sidebar h2, .brands_products h2 {
   color: #FE980F;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: 700;
   margin: 0 auto 30px;
@@ -810,7 +810,7 @@ h2.title:before{
 
 .category-products .panel-default .panel-heading .panel-title a {
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   text-decoration: none;
   text-transform: uppercase;
@@ -842,7 +842,7 @@ h2.title:before{
 
 .panel-body ul li a {
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   text-transform: uppercase;
 }
@@ -857,7 +857,7 @@ h2.title:before{
 .brands-name .nav-stacked li a {
   background-color: #FFFFFF;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   padding: 5px 25px;
   text-decoration: none;
@@ -923,7 +923,7 @@ h2.title:before{
 
 h2.title {
   color: #FE980F;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: 700;
   margin: 0 15px;
@@ -950,20 +950,20 @@ h2.title {
 
 .productinfo h2{
 	color: #FE980F;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 	font-size: 24px;
 	font-weight: 700;
 }
 .product-overlay h2{
 	color: #fff;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 	font-size: 24px;
 	font-weight: 700;
 }
 
 
 .productinfo p{
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #696763;
@@ -1008,7 +1008,7 @@ h2.title {
   border: 0 none;
   border-radius: 0;
   color: #FE980F;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 15px;
   margin-bottom: 25px;
 }
@@ -1020,7 +1020,7 @@ h2.title {
 
 
 .product-overlay p{
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #fff;
@@ -1033,7 +1033,7 @@ h2.title {
   border: 0 none;
   border-radius: 0;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 15px;
   margin-bottom: 25px;
 }
@@ -1064,7 +1064,7 @@ h2.title {
 
 .choose ul li a {
   color: #B3AFA8;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 13px;
   padding-left: 0;
   padding-right: 0;
@@ -1097,7 +1097,7 @@ h2.title {
   border-radius: 0;
   color: #B3AFA8;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -1268,7 +1268,7 @@ h2.title {
   background: #FE980F;
   bottom: 0;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 0;
@@ -1318,14 +1318,14 @@ h2.title {
 
 .product-information h2 {
   color: #363432;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 20px;
   margin-top: 0;
 }
 
 .product-information p {
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   margin-bottom: 5px;
 }
 
@@ -1338,7 +1338,7 @@ h2.title {
 .product-information span span {
   color: #FE980F;
   float: left;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 30px;
   font-weight: 700;
   margin-right: 20px;
@@ -1347,7 +1347,7 @@ h2.title {
 .product-information span input {
   border: 1px solid #DEDEDC;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 20px;
   font-weight: 700;
   height: 33px;
@@ -1358,7 +1358,7 @@ h2.title {
 
 .product-information span label {
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-weight: 700;
   margin-right: 5px;
 }
@@ -1373,7 +1373,7 @@ h2.title {
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 15px;
   margin-bottom: 10px;
   margin-left: 20px;
@@ -1408,7 +1408,7 @@ h2.title {
 #reviews ul li a {
   color: #696763;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   padding-right: 15px;
 }
@@ -1435,7 +1435,7 @@ h2.title {
   background:#F0F0E9;
   border: 0 none;
   color: #A6A6A1;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   outline: medium none;
   padding: 8px;
@@ -1464,7 +1464,7 @@ h2.title {
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
 }
 
@@ -1479,7 +1479,7 @@ h2.title {
 
 .content-404 h1 {
   color: #363432;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 41px;
   font-weight: 300;
 }
@@ -1490,7 +1490,7 @@ h2.title {
 
 .content-404 p {
   color: #363432;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 18px;
 }
 
@@ -1501,7 +1501,7 @@ h2.title {
 .content-404 h2 a {
   background: #FE980F;
   color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 44px;
   font-weight: 300;
   padding: 8px 40px;
@@ -1529,7 +1529,7 @@ h2.title {
 
 .login-form h2, .signup-form h2 {
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 20px;
   font-weight: 300;
   margin-bottom: 30px;
@@ -1541,7 +1541,7 @@ h2.title {
   border: medium none;
   color: #696763;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 300;
   height: 40px;
@@ -1572,7 +1572,7 @@ h2.title {
   border-radius: 0;
   color: #FFFFFF;
   display: block;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   padding: 6px 25px;
 }
 
@@ -1595,7 +1595,7 @@ h2.title {
 	background: #FE980F;
 	border-radius: 40px;
 	color: #FFFFFF;
-	font-family: 'Roboto', sans-serif;
+	font-family: Microsoft YaHei, 'Roboto', sans-serif;
 	font-size: 16px;
 	height: 50px;
 	line-height: 50px;
@@ -1610,7 +1610,7 @@ h2.title {
 **************************/
 
 #do_action {
-  margin-bottom: 50px;
+/*   margin-bottom: 50px; */
 }
 
 .breadcrumbs {
@@ -1651,12 +1651,23 @@ h2.title {
   margin-bottom: 50px
 }
 
+#cart_items button {
+  background: #FE980F;
+  border: 0 none;
+  border-radius: 0;
+  color: #FFFFFF;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  height: 40px;
+  width: 100px;
+}
 
 #cart_items .cart_info .cart_menu {
   background: #FE980F;
   color: #fff;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-weight: normal;
 }
 
@@ -1690,7 +1701,7 @@ h2.title {
 
 #cart_items .cart_info .cart_description h4 a {
   color: #363432;
-  font-family: 'Roboto',sans-serif;
+  font-family: Microsoft YaHei, 'Roboto',sans-serif;
   font-size: 20px;
   font-weight: normal;
 
@@ -1736,7 +1747,7 @@ h2.title {
   float: left;
   font-size: 16px;
   text-align: center;
-  font-family: 'Roboto',sans-serif;
+  font-family: Microsoft YaHei, 'Roboto',sans-serif;
   
 }
 
@@ -1769,7 +1780,7 @@ h2.title {
 .heading h3 {
   color: #363432;
   font-size: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
 .heading p {
@@ -1892,7 +1903,7 @@ h2.title {
   font-size: 20px;
   margin-bottom: 35px;
   padding: 10px 25px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
 .checkout-options {
@@ -1905,7 +1916,7 @@ h2.title {
   font-size: 20px;
   margin-bottom: 0;
   font-weight: normal;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
 .checkout-options p {
@@ -1919,7 +1930,7 @@ h2.title {
   margin-right: 45px;
   color: #696763;
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-weight: normal;
 }
 
@@ -2018,7 +2029,7 @@ h2.title {
 .order-message label {
   font-weight:300;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   margin-left: 10px;
   font-size: 14px
 }
@@ -2082,7 +2093,7 @@ h2.title {
 .single-blog-post h3 {
   color: #696763;
   font-size: 16px;
-  font-family: 'Roboto',sans-serif;
+  font-family: Microsoft YaHei, 'Roboto',sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   margin-bottom: 17px;
@@ -2311,7 +2322,7 @@ h2.title {
   color: #363432;
   font-size: 14px;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: Microsoft YaHei, 'Roboto', sans-serif;
   margin-bottom: 15px
 }
 
