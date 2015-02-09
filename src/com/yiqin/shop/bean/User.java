@@ -14,17 +14,17 @@ import com.yiqin.util.Util;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -2559753714128278922L;
-	private String id;                           // 用户名（唯一）
-	private String password;               // 密码
-	private String email;                     // 邮箱
-	private String name;                    // 用户名称
-	private String mobile;                  // 手机
-	private String company;              // 公司
-	private int role;                           // 用户类型，1：个人用户，2：企业用户
-	private Date createDate;             // 创建时间
-	private Date updateDate;           // 更新时间
-	private int flag;                          // 用户状态，1：正常，2：删除
-	
+	private String id; // 用户名（唯一）
+	private String password; // 密码
+	private String email; // 邮箱
+	private String name; // 用户名称
+	private String mobile; // 手机
+	private String company; // 公司
+	private int role; // 用户类型，1：个人用户，2：企业用户
+	private Date create_date; // 创建时间
+	private Date update_date; // 更新时间
+	private int flag; // 用户状态，1：正常，2：删除
+
 	public String getId() {
 		return id;
 	}
@@ -81,20 +81,20 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreate_date() {
+		return create_date;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
 	}
 
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getUpdate_date() {
+		return update_date;
 	}
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setUpdate_date(Date update_date) {
+		this.update_date = update_date;
 	}
 
 	public int getFlag() {

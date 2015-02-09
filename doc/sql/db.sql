@@ -114,6 +114,7 @@ CREATE TABLE `cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `use_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
   `product_id` varchar(20) DEFAULT NULL COMMENT '商品ID',
+  `product_name` varchar(20) DEFAULT NULL COMMENT '商品名称',
   `img_url` varchar(40) DEFAULT NULL COMMENT '商品图片地址',
   `price` float(9,3) DEFAULT NULL COMMENT '商品单价',
   `count` int(11) DEFAULT NULL COMMENT '商品数量',

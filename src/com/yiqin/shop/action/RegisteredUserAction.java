@@ -116,7 +116,7 @@ public class RegisteredUserAction extends ActionSupport {
 			tempUser.setPassword(password);
 			tempUser.setEmail(email);
 			tempUser.setMobile(telephone);
-			tempUser.setCreateDate(new Date());
+			tempUser.setCreate_date(new Date());
 			boolean flag = userManager.registeUser(tempUser);
 			if (!flag) {
 				result = "5";

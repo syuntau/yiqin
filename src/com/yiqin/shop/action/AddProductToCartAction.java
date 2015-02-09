@@ -83,12 +83,12 @@ public class AddProductToCartAction extends ActionSupport {
 			ProductBase oProductBase = oProductBaseList.get(0);
 			Cart cart = new Cart();
 			cart.setCreateDate(new Date());
-			cart.setUserId(loninUser.getId());
-			cart.setProductId(oProductBase.getId());
-			cart.setProductName(oProductBase.getName());
+			cart.setUse_id(loninUser.getId());
+			cart.setProduct_id(oProductBase.getId());
+			cart.setProduct_name(oProductBase.getName());
 			cart.setPrice(oProductBase.getPrice());
-			cart.setImageUrl(oProductBase.getImageUrl());
-			cart.setProductNum(1);
+			cart.setImg_url(oProductBase.getImageUrl());
+			cart.setCount(1);
 			boolean flag = shoppingManager.addProductToCart(cart);
 			if(!flag){
 				result = "2";
