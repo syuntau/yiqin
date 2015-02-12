@@ -20,14 +20,16 @@
 		</property>
 	</bean>
 
-	<!--加载配置信息 -->
+	<!--加载数据库连接配置信息 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="jdbcUrl" value="${jdbc.url}"></property>
 		<property name="driverClass" value="${jdbc.driverClassName}"></property>
 		<property name="user" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
+		<!-- 在此处  手动指定数据库连接池配置 -->
 	</bean>
 	
+	<!--hibernate sessionFactory-->
 	<bean name="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
