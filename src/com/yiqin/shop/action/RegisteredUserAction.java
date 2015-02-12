@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 
@@ -21,7 +21,7 @@ public class RegisteredUserAction extends ActionSupport {
 
 	private static final long serialVersionUID = 7088615138788787514L;
 	// 用户名
-	private String name;
+	private String userId;
 	// 密码
 	private String password;
 	// 确认密码
@@ -29,16 +29,16 @@ public class RegisteredUserAction extends ActionSupport {
 	// 邮箱
 	private String email;
 	// 手机
-	private String telephone;
-	
+	private String mobile;
+
 	private UserManager userManager;
 
-	public String getName() {
-		return name;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -65,12 +65,12 @@ public class RegisteredUserAction extends ActionSupport {
 		this.email = email;
 	}
 
-	public String getTelephone() {
-		return telephone;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public UserManager getUserManager() {
@@ -87,9 +87,9 @@ public class RegisteredUserAction extends ActionSupport {
 		String result = "";
 		try {
 			// 参数判断
-			if (Util.isEmpty(name) || Util.isEmpty(password)
+			if (Util.isEmpty(userId) || Util.isEmpty(password)
 					|| Util.isEmpty(confirmPwd) || Util.isEmpty(email)
-					|| Util.isEmpty(telephone)) {
+					|| Util.isEmpty(mobile)) {
 				result = "2";
 				response.getWriter().print(result);
 				return null;
@@ -103,7 +103,7 @@ public class RegisteredUserAction extends ActionSupport {
 			}
 
 			// 判断用户名是否重复
-			User existUser = userManager.findUserByName(name);
+			User existUser = userManager.findUserByUserId(userId);
 			if (existUser != null) {
 				result = "4";
 				response.getWriter().print(result);
@@ -112,11 +112,13 @@ public class RegisteredUserAction extends ActionSupport {
 
 			// 添加用户
 			User tempUser = new User();
-			tempUser.setName(name);
+			tempUser.setId(userId);
 			tempUser.setPassword(password);
 			tempUser.setEmail(email);
-			tempUser.setMobile(telephone);
-			tempUser.setCreate_date(new Date());
+			tempUser.setMobile(mobile);
+			tempUser.setFlag((byte) 1);
+			tempUser.setCreateDate(new Date());
+			tempUser.setUpdateDate(new Date());
 			boolean flag = userManager.registeUser(tempUser);
 			if (!flag) {
 				result = "5";

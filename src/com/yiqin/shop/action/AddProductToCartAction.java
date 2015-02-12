@@ -1,6 +1,5 @@
 package com.yiqin.shop.action;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.Cart;
-import com.yiqin.shop.bean.ProductBase;
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.Cart;
+import com.yiqin.shop.pojo.Product;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
@@ -69,8 +68,8 @@ public class AddProductToCartAction extends ActionSupport {
 				return null;
 			}
 			// 查询商品
-			List<ProductBase> oProductBaseList = productManager.findProductInfoById(productId);
-			if (Util.isEmpty(oProductBaseList)) {
+			List<Product> productList = productManager.findProductInfoById(productId);
+			if (Util.isEmpty(productList)) {
 				result = "1";
 				response.getWriter().print(result);
 				return null;
@@ -80,14 +79,13 @@ public class AddProductToCartAction extends ActionSupport {
 			User loninUser = Util.getLoginUser(session);
 			
 			// 保存购物信息
-			ProductBase oProductBase = oProductBaseList.get(0);
+			Product product = productList.get(0);
 			Cart cart = new Cart();
-			cart.setCreateDate(new Date());
-			cart.setUse_id(loninUser.getId());
-			cart.setProduct_id(oProductBase.getId());
-			cart.setProduct_name(oProductBase.getName());
-			cart.setPrice(oProductBase.getPrice());
-			cart.setImg_url(oProductBase.getImageUrl());
+			cart.setUseId(loninUser.getId());
+			cart.setProductId(product.getProductId());
+			//cart.setProductName(product);
+			//cart.setPrice(product);
+			//cart.setImgUrl(product.getImageUrl());
 			cart.setCount(1);
 			boolean flag = shoppingManager.addProductToCart(cart);
 			if(!flag){

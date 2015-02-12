@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;

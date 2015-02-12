@@ -2,8 +2,8 @@ package com.yiqin.shop.service;
 
 import java.util.List;
 
-import com.yiqin.shop.bean.Cart;
-import com.yiqin.shop.bean.Order;
+import com.yiqin.shop.pojo.Cart;
+import com.yiqin.shop.pojo.Order;
 
 public interface ShoppingManager {
 	/**

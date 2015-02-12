@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.User;
 
 public class Util {
 

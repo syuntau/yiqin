@@ -10,8 +10,8 @@ import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.Cart;
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.Cart;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
 

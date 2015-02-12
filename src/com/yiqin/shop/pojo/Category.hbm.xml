@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-2-12 14:36:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.yiqin.shop.pojo.Category" table="category" catalog="yiqin">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="50">
+            </column>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level">
+            </column>
+        </property>
+        <property name="parentId" type="java.lang.Integer">
+            <column name="parent_id">
+            </column>
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="create_date" length="19">
+            </column>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column name="update_date" length="19">
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

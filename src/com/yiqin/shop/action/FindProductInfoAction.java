@@ -9,7 +9,7 @@ import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.ProductBase;
+import com.yiqin.shop.pojo.Product;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.util.Util;
 
@@ -51,11 +51,11 @@ public class FindProductInfoAction extends ActionSupport {
 			if (Util.isEmpty(productId)) {
 				result = "1";
 			} else {
-				List<ProductBase> oProductBase = productManager.findProductInfoById(productId);
-				if (Util.isEmpty(oProductBase)) {
+				List<Product> product = productManager.findProductInfoById(productId);
+				if (Util.isEmpty(product)) {
 					result = "2";
 				} else {
-					JSONArray jsonArray = JSONArray.fromObject(oProductBase);
+					JSONArray jsonArray = JSONArray.fromObject(product);
 					result = jsonArray.toString();
 				}
 			}

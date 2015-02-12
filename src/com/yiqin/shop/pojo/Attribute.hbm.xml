@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-2-12 14:36:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.yiqin.shop.pojo.Attribute" table="attribute" catalog="yiqin">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nameId" type="string">
+            <column name="name_id" length="20"></column>
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="40"></column>
+        </property>
+        <property name="value" type="string">
+            <column name="value" length="100"></column>
+        </property>
+        <property name="categoryId" type="java.lang.Integer">
+            <column name="category_id"></column>
+        </property>
+        <property name="filter" type="java.lang.Byte">
+            <column name="filter">
+            </column>
+        </property>
+        <property name="filterType" type="java.lang.Byte">
+            <column name="filter_type">
+            </column>
+        </property>
+        <property name="showValue" type="string">
+            <column name="show_value" length="100">
+            </column>
+        </property>
+        <property name="sort" type="java.lang.Byte">
+            <column name="sort">
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

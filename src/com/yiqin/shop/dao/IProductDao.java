@@ -2,8 +2,8 @@ package com.yiqin.shop.dao;
 
 import java.util.List;
 
-import com.yiqin.shop.bean.Category;
-import com.yiqin.shop.bean.ProductBase;
+import com.yiqin.shop.pojo.Category;
+import com.yiqin.shop.pojo.Product;
 
 /**
  * 产品DAO
@@ -26,6 +26,15 @@ public interface IProductDao {
 	 *            商品ID 多个用逗号分隔 如（id1,id2,id3,....）
 	 * @return 对应商品
 	 */
-	public List<ProductBase> findProductInfoById(String pids);
+	public List<Product> findProductInfoById(String pids);
+
+	/**
+	 * 查询指定分类商品
+	 * 
+	 * @param cateId
+	 *            分类ids
+	 * @return 对应商品
+	 */
+	public List<Product> findProductInfoByCategorys(String cateId);
 
 }

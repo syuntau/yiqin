@@ -40,7 +40,7 @@ var yiqin_login_action = function(){
 	var responseFunction = function(data) {
 		var regForm = $("#registerFormId");
 		if (data == 2) {
-			regForm.find("input[name='name']").focus();
+			regForm.find("input[name='userId']").focus();
 			$("#registerError").html("注册项为必填项，不能为空");
 			return;
 		}
@@ -50,12 +50,12 @@ var yiqin_login_action = function(){
 			return;
 		}
 		if (data == 4) {
-			regForm.find("input[name='name']").focus();
+			regForm.find("input[name='userId']").focus();
 			$("#registerError").html("用户名已被使用，请重新输入");
 			return;
 		}
 		if (data == 5) {
-			regForm.find("input[name='name']").focus();
+			regForm.find("input[name='userId']").focus();
 			$("#registerError").html("注册失败，请稍后再试");
 			return;
 		}
@@ -67,19 +67,19 @@ var yiqin_login_action = function(){
 	var registerValidation = function() {
 		$("#registerError").html("");
 		var regForm = $("#registerFormId");
-		var name = regForm.find("input[name='name']").val().replace(REX, "");
+		var name = regForm.find("input[name='userId']").val().replace(REX, "");
 		var password = regForm.find("input[name='password']").val().replace(REX, "");
 		var confirmPwd = regForm.find("input[name='confirmPwd']").val().replace(REX, "");
 		var email = regForm.find("input[name='email']").val().replace(REX,"");
-		var telephone = regForm.find("input[name='telephone']").val().replace(REX, "");
+		var telephone = regForm.find("input[name='mobile']").val().replace(REX, "");
 		var msg = "注册项为必填项，不能为空";
 		if (name == "") {
-			regForm.find("input[name='name']").focus();
+			regForm.find("input[name='userId']").focus();
 			$("#registerError").html(msg);
 			return false;
 		}
 		if (!checkName(name)) {
-			regForm.find("input[name='name']").focus();
+			regForm.find("input[name='userId']").focus();
 			$("#registerError").html("用户名为4到16位字母数字或下划线组成");
 			return false;
 		}
@@ -109,12 +109,12 @@ var yiqin_login_action = function(){
 			return false;
 		}
 		if (telephone == "") {
-			regForm.find("input[name='telephone']").focus();
+			regForm.find("input[name='mobile']").focus();
 			$("#registerError").html(msg);
 			return false;
 		}
 		if (!checkPhone(telephone)) {
-			regForm.find("input[name='telephone']").focus();
+			regForm.find("input[name='mobile']").focus();
 			$("#registerError").html("手机号码格式错误，请重新输入");
 			return false;
 		}
@@ -167,7 +167,7 @@ var yiqin_login_action = function(){
 					<div class="login-form"><!--login form-->
 						<h2><s:text name="login.user.login.title"></s:text></h2>
 						<form action="login.action" method="post" name="loginForm">
-							<input type="text" name="login_name" id="login_name_id" placeholder="<s:text name='login.user.name' />" value="${param.name}"/>
+							<input type="text" name="login_name" id="login_name_id" placeholder="<s:text name='login.user.name' />" value="${param.login_name}"/>
 							<input type="password" name="login_password" id="login_password_id" placeholder="<s:text name='login.user.password' />"/>
 							<span id="loginError" style="COLOR: red;text-align: left;">${requestScope.loginError}</span><br>
 							<span>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.User;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.util.Util;
 
 /**

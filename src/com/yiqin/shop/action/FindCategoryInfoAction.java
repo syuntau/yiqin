@@ -9,7 +9,7 @@ import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.bean.Category;
+import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.util.Util;
 
@@ -50,6 +50,7 @@ public class FindCategoryInfoAction extends ActionSupport {
 			response.getWriter().print(result);
 			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = "2";
 			response.getWriter().print(result);
 			return null;

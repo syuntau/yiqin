@@ -2,35 +2,45 @@ package com.yiqin.shop.dao.impl;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.yiqin.shop.bean.Category;
-import com.yiqin.shop.bean.ProductBase;
 import com.yiqin.shop.dao.IProductDao;
+import com.yiqin.shop.pojo.Category;
+import com.yiqin.shop.pojo.Product;
 import com.yiqin.util.Util;
 
-public class ProductDao extends JdbcDaoSupport implements IProductDao {
+public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	public List<Category> findCategoryInfo() {
-		String sql = "select * from category";
-		return getJdbcTemplate().queryForList(sql);
+		String queryString = "from Category";
+		return getHibernateTemplate().find(queryString);
 	}
 
-	public List<ProductBase> findProductInfoById(String pids) {
+	public List<Product> findProductInfoById(String pids) {
 		if (Util.isNotEmpty(pids)) {
-			String sql = "";
+			String queryString = "";
 			if (pids.contains(",")) {
 				if (pids.startsWith(",")) {
 					pids = pids.substring(1);
 				} else if (pids.endsWith(",")) {
 					pids = pids.substring(0, pids.length() - 1);
 				}
-				sql = "select * from product where productId in (?)";
+				queryString = "from Product where productId in (?)";
 			} else {
-				sql = "select * from product where productId = ?";
+				queryString = "from Product where productId = ?";
 			}
-			return getJdbcTemplate().queryForList(sql, new Object[] { pids });
+			return getHibernateTemplate().find(queryString,
+					new Object[] { pids });
 		}
+		return null;
+	}
+
+	@Override
+	public List<Product> findProductInfoByCategorys(String cateId) {
+		if (null == cateId) {
+			return null;
+		}
+		String queryString = "from Product where ";
 		return null;
 	}
 

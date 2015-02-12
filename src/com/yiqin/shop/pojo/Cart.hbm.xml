@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-2-12 14:36:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.yiqin.shop.pojo.Cart" table="cart" catalog="yiqin">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="useId" type="string">
+            <column name="use_id" length="20">
+            </column>
+        </property>
+        <property name="productId" type="string">
+            <column name="product_id" length="20">
+            </column>
+        </property>
+        <property name="productName" type="string">
+            <column name="product_name" length="20">
+            </column>
+        </property>
+        <property name="imgUrl" type="string">
+            <column name="img_url" length="40">
+            </column>
+        </property>
+        <property name="price" type="java.lang.Float">
+            <column name="price" precision="9" scale="3">
+            </column>
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="count">
+            </column>
+        </property>
+        <property name="productInfo" type="string">
+            <column name="product_info" length="200">
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

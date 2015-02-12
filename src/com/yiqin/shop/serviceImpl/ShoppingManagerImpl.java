@@ -3,9 +3,9 @@ package com.yiqin.shop.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yiqin.shop.bean.Cart;
-import com.yiqin.shop.bean.Order;
 import com.yiqin.shop.dao.IShoppingDao;
+import com.yiqin.shop.pojo.Cart;
+import com.yiqin.shop.pojo.Order;
 import com.yiqin.shop.service.ShoppingManager;
 
 public class ShoppingManagerImpl implements ShoppingManager {

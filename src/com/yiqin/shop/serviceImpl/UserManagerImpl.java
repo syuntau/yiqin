@@ -1,8 +1,9 @@
 package com.yiqin.shop.serviceImpl;
 
-import com.yiqin.shop.bean.User;
 import com.yiqin.shop.dao.IUserDao;
+import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.UserManager;
+import com.yiqin.util.Util;
 
 public class UserManagerImpl implements UserManager {
 
@@ -18,27 +19,31 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean registeUser(User user) {
-		// TODO Auto-generated method stub
-		return true;
+		if (Util.isEmpty(user.getId())) {
+			return false;
+		}
+		return userDao.insertUser(user);
 	}
 
 	@Override
-	public User login(String name, String password) {
-		User user = new User();
-		user.setName(name);
-		user.setPassword(password);
+	public User login(String userId, String password) {
+		User user = userDao.findUserInfo(userId, password);
 		return user;
 	}
 
 	@Override
-	public User findUserByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findUserByUserId(String userId) {
+		User user = userDao.findUserByUserId(userId);
+		return user;
 	}
 
 	@Override
 	public boolean modifyUserInfo(User user) {
-		// TODO Auto-generated method stub
-		return true;
+		return userDao.modifyUserInfo(user);
+	}
+
+	@Override
+	public boolean deleteUser(String userId) {
+		return userDao.deleteUser(userId);
 	}
 }
