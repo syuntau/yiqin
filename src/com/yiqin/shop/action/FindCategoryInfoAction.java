@@ -38,6 +38,7 @@ public class FindCategoryInfoAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			// 查询分类菜单
 			List<Category> category = productManager.findCategoryInfo();
 			if (Util.isEmpty(category)) {
 				result = "1";

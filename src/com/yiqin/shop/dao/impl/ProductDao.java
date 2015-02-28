@@ -40,8 +40,10 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		if (null == cateId) {
 			return null;
 		}
-		String queryString = "from Product where ";
-		return null;
+		StringBuilder queryString = new StringBuilder();
+		queryString.append("from Product where productId like '");
+		queryString.append(cateId).append("%'");
+		return getHibernateTemplate().find(queryString.toString());
 	}
 
 }

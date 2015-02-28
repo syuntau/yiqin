@@ -32,7 +32,7 @@ public interface IProductDao {
 	 * 查询指定分类商品
 	 * 
 	 * @param cateId
-	 *            分类ids
+	 *            产品ID前缀,根据分类ID而来
 	 * @return 对应商品
 	 */
 	public List<Product> findProductInfoByCategorys(String cateId);

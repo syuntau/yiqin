@@ -66,26 +66,27 @@ var yiqin_category_action = function(){
 	 				 
 	 				 if(sub.subCategoryList.length>0){
 	 					 $cate_div.append($cate_div_coll);
-	 					 $cate_h4.append($cate_coll_a.attr('href','#'+sub.id));
+	 					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
 	 					 $cate_coll_a.append($cate_span_i).append(sub.name);
-	 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',sub.id); 
+	 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
 	 					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
 	 					 $cate_div_coll.append($cate_div_body);
 	 					 
 	 					$.each(sub.subCategoryList, function(k,nextSub){
 		 					$cate_li = $(category_temp.cate_li),
 		 					$cate_panel_a = $(category_temp.cate_panel_a);
+		 					$cate_panel_a.attr('id',"two_"+nextSub.id);
 		 					$cate_ul.append($cate_li);
 		 					$cate_panel_a.click(function(){
-		 						
+		 						//yiqin_shoplist_action.searchProductsByCategory(nextSub.id);
 		 					});
 		 					$cate_li.append($cate_panel_a.append(nextSub.name));
 	 					});
 	 				 }else{
 	 					 $cate_panel_a.click(function(){
-	 						 
+	 						//yiqin_shoplist_action.searchProductsByCategory(sub.id);
 	 					 });
-	 					 $cate_h4.append($cate_panel_a.append(sub.name));
+	 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
 	 				 }
 	 				$category_list.append($cate_div);
 				 });
@@ -102,16 +103,17 @@ var yiqin_category_action = function(){
 				$cate_li.attr('class', "active");
 			}
 			$cate_li.append($cate_right_a);
-			$cate_right_a.attr('href',"#"+val.id).append(val.name);
+			$cate_right_a.attr('href',"#right_"+val.id).append(val.name);
 			$("#right_category_tab").append($cate_li);
 			
 			var $cate_li = $(category_temp.cate_li),
 			$cate_panel_a = $(category_temp.cate_panel_a);
 			$cate_li.append($cate_panel_a);
 			$cate_panel_a.click(function(){
-					 
+				//yiqin_shoplist_action.searchProductsByCategory(val.id);	 
 			});
 			$cate_panel_a.attr('class',"shop_header").append(val.name);
+			$cate_panel_a.attr('id',"top_"+val.id);
 			$("#top_header_mainmenu").append($cate_li);
 		});
 	};

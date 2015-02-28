@@ -1,8 +1,11 @@
 package com.yiqin.shop.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.dao.IProductDao;
 import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.pojo.Product;
@@ -28,9 +31,41 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public List<Product> findProductInfo(String categorys) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductView> findProductInfo(String categorys) {
+		if (Util.isEmpty(categorys)) {
+			return null;
+		}
+		if (categorys.length() >= 3) {
+			categorys = categorys.substring(0, 1) + categorys;
+		}
+		List<Product> productList = productDao.findProductInfoByCategorys(categorys);
+		if (Util.isEmpty(productList)) {
+			return null;
+		}
+		List<ProductView> pViewList = new ArrayList<ProductView>();
+		Set<String> pidSet = new HashSet<String>();
+		for (Product product : productList) {
+			pidSet.add(product.getProductId());
+		}
+		for (String pid : pidSet) {
+			ProductView productView = new ProductView();
+			productView.setProductId(pid);
+			for (Product product : productList) {
+				if (pid.equals(product.getProductId())) {
+					if (product.getAttributeId() == 1) {
+						productView.setProductName(product.getValue());
+					}
+					if (product.getAttributeId() == 5) {
+						productView.setImgUrl(product.getValue());
+					}
+					if (product.getAttributeId() == 2) {
+						productView.setPrice(product.getValue());
+					}
+				}
+			}
+			pViewList.add(productView);
+		}
+		return pViewList;
 	}
 
 	@Override

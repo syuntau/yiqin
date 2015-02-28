@@ -2,6 +2,7 @@ package com.yiqin.shop.service;
 
 import java.util.List;
 
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.pojo.Product;
 
@@ -19,10 +20,10 @@ public interface ProductManager {
 	 * 查询指定分类下的商品
 	 * 
 	 * @param categorys
-	 *            多级分类按序用逗号分隔 如（category,category1,category2,category3,.....）
+	 *            分类ID
 	 * @return 商品集合
 	 */
-	public List<Product> findProductInfo(String categorys);
+	public List<ProductView> findProductInfo(String categorys);
 
 	/**
 	 * 查询所有分类菜单
