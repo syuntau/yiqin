@@ -67,7 +67,7 @@ public class UpdateCartProductsNumAction extends ActionSupport {
 
 			// 更新数量
 			boolean flag = shoppingManager.updateCartProductsNum(
-					loninUser.getName(), productId, productNum);
+					loninUser.getId(), productId, productNum);
 			if (!flag) {
 				result = "2";
 				response.getWriter().print(result);

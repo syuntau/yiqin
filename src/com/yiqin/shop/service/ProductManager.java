@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.pojo.Category;
-import com.yiqin.shop.pojo.Product;
 
 public interface ProductManager {
 	/**
@@ -14,7 +13,7 @@ public interface ProductManager {
 	 *            商品ID 多个用逗号分隔 如（id1,id2,id3,....）
 	 * @return 对应商品
 	 */
-	public List<Product> findProductInfoById(String pids);
+	public List<ProductView> findProductInfoById(String pids);
 
 	/**
 	 * 查询指定分类下的商品

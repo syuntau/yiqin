@@ -25,9 +25,46 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public List<Product> findProductInfoById(String pids) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductView> findProductInfoById(String pids) {
+		if (Util.isEmpty(pids)) {
+			return null;
+		}
+		if (pids.contains(",")) {
+			if (pids.startsWith(",")) {
+				pids = pids.substring(1);
+			}
+			if (pids.endsWith(",")) {
+				pids = pids.substring(0, pids.length() - 1);
+			}
+		}
+		List<Product> productList = productDao.findProductInfoById(pids);
+		if(Util.isEmpty(productList)){
+			return null;
+		}
+		List<ProductView> pViewList = new ArrayList<ProductView>();
+		Set<String> pidSet = new HashSet<String>();
+		for (Product product : productList) {
+			pidSet.add(product.getProductId());
+		}
+		for (String pid : pidSet) {
+			ProductView productView = new ProductView();
+			productView.setProductId(pid);
+			for (Product product : productList) {
+				if (pid.equals(product.getProductId())) {
+					if (product.getAttributeId() == 1) {
+						productView.setProductName(product.getValue());
+					}
+					if (product.getAttributeId() == 5) {
+						productView.setImgUrl(product.getValue());
+					}
+					if (product.getAttributeId() == 2) {
+						productView.setPrice(product.getValue());
+					}
+				}
+			}
+			pViewList.add(productView);
+		}
+		return pViewList;
 	}
 
 	@Override

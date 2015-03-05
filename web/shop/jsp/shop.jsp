@@ -15,7 +15,7 @@ var shoplist_feature_temp = {
 		feature_li : '<li></li>',
 		feature_a_ch : '<a href=""><i class="fa fa-plus-square"></i></a>',
 		feature_h2_tile : '<h2 class="title text-center"><s:text name="shop.index.right.features.items" /></h2>',
-		feature_img : '<img alt=""/>',
+		feature_img : '<img></img>',
 		feature_h2 : '<h2></h2>',
 		feature_p : '<p></p>',
 		feature_a : '<a href="javaScript:void(0)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>',
@@ -31,12 +31,13 @@ var shoplist_feature_temp = {
 		            type: "POST",
 		            async: true,
 		            url: "findProductsByCategory.action",
+		            data: "categoryId="+cid,
 		            dataType: "json",
 		            success: function(data){
 		           		if(data=='1'){
-		           			features_items.append("没有找到任何商品");
+		           			$fenlei_product_items.append("没有找到任何商品");
 		           		}else if(data=='2'){
-		           			features_items.append("加载失败，请稍后再试");
+		           			$fenlei_product_items.append("加载失败，请稍后再试");
 		           		}else{
 		           			appendProductToList(data);
 		           		}
@@ -64,15 +65,19 @@ var shoplist_feature_temp = {
 					$feature_a = $(shoplist_feature_temp.feature_a);
 				
 				$feature_col_div.append($feature_img_div.append($feature_single_div));
-				$feature_single_div.append($feature_info_div).append($feature_over_div);
+				$feature_single_div.append($feature_info_div);
 				
-				$feature_info_div.append($feature_img.attr('src',val.imgUrl));
+				$feature_info_div.append($feature_img.attr({'src':val.imgUrl,'width':'255px','name':"good_img"}));
+				$feature_img.css('cursor','pointer');
+				$feature_img.click(function(){
+					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
+				});
 				$feature_info_div.append($feature_h2.append('￥'+val.price));
 				$feature_info_div.append($feature_p.append(val.productName));
 				$feature_info_div.append($feature_a.attr('id',val.productId));
-				
-				$feature_over_div.append($feature_cont_div);
-				$feature_cont_div.append($feature_h2).append($feature_p).append($feature_a);
+				$feature_a.click(function(){
+					yiqin_public_js.addProductToCart(this.id, 1);
+				});
 				
 				$fenlei_product_items.append($feature_col_div);
 			});
@@ -80,13 +85,19 @@ var shoplist_feature_temp = {
 		
 		return action;
 	}();
+	
+	$(document).ready(function(){
+		yiqin_shoplist_action.searchProductsByCategory("<s:property value='#request.search_categoryId' />");
+	});
 </script>
 
-<div class="features_items" id="fenlei_product_items"><!--features_items-->
-<!-- 	<ul class="pagination"> -->
-<!-- 		<li class="active"><a href="">1</a></li> -->
-<!-- 		<li><a href="">2</a></li> -->
-<!-- 		<li><a href="">3</a></li> -->
-<!-- 		<li><a href="">&raquo;</a></li> -->
-<!-- 	</ul> -->
-</div><!--features_items-->
+<div class="col-sm-9 padding-right">
+	<div class="features_items" id="fenlei_product_items"><!--features_items-->
+<!-- 		<ul class="pagination"> -->
+<!-- 			<li class="active"><a href="">1</a></li> -->
+<!-- 			<li><a href="">2</a></li> -->
+<!-- 			<li><a href="">3</a></li> -->
+<!-- 			<li><a href="">&raquo;</a></li> -->
+<!-- 		</ul> -->
+	</div><!--features_items-->
+</div>

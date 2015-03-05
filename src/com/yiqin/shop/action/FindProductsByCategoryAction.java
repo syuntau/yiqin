@@ -13,6 +13,12 @@ import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.util.Util;
 
+/**
+ * 根据分类ID查询商品
+ * 
+ * @author liujun
+ *
+ */
 public class FindProductsByCategoryAction extends ActionSupport {
 
 	private static final long serialVersionUID = -6676005768684862992L;

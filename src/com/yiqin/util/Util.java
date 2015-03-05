@@ -1,6 +1,8 @@
 package com.yiqin.util;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,15 @@ public class Util {
 
 	public static boolean isNotEmpty(@SuppressWarnings("rawtypes") List list) {
 		return list != null && list.size() > 0;
+	}
+	
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*");
+		Matcher isNum = pattern.matcher(str);
+		if (!isNum.matches()) {
+			return false;
+		}
+		return true;
 	}
 
 	public static String objToString(Object obj) {

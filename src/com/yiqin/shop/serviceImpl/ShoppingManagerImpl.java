@@ -1,6 +1,5 @@
 package com.yiqin.shop.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.yiqin.shop.dao.IShoppingDao;
@@ -21,33 +20,49 @@ public class ShoppingManagerImpl implements ShoppingManager {
 
 	@Override
 	public boolean addProductToCart(Cart cart) {
-		// TODO Auto-generated method stub
+		if (cart != null) {
+			Cart saveCart = findCartInfo(cart.getUseId(), cart.getProductId());
+			if (saveCart != null) {
+				return updateCartProductsNum(saveCart.getUseId(),
+						saveCart.getProductId(), saveCart.getCount() + cart.getCount());
+			} else {
+				return shoppingDao.insertCart(cart);
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean updateCartProductsNum(String userName, String productId,
 			int pNum) {
-		// TODO Auto-generated method stub
-		return true;
+		return shoppingDao.updateCartProductsNum(userName, productId, pNum);
 	}
 
 	@Override
 	public boolean submitOrder(Order order) {
-		// TODO Auto-generated method stub
+		if (order != null) {
+			return shoppingDao.insertOrder(order);
+		}
 		return false;
 	}
 
 	@Override
 	public List<Cart> findCartListInfo(String userName) {
-		List<Cart> cartList = new ArrayList<>();
-		
-		return cartList;
+		return shoppingDao.findCartListInfo(userName);
 	}
 
 	@Override
 	public boolean deleteCartProduct(String userName, String productId) {
-		// TODO Auto-generated method stub
-		return true;
+		return shoppingDao.deleteCart(userName, productId);
+	}
+
+	@Override
+	public Cart findCartInfo(String userName, String productId) {
+		return shoppingDao.findCartInfo(userName, productId);
+	}
+
+	@Override
+	public int findCartNum(String userName) {
+		return shoppingDao.findCartNum(userName);
 	}
 }
