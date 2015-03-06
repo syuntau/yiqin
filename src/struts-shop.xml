@@ -71,6 +71,12 @@
 		
 		<action name="deleteCartProduct" class="com.yiqin.shop.action.DeleteCartProductAction"></action>
 		
+		<action name="deleteUserAddress" class="com.yiqin.shop.action.DeleteUserAddressAction"></action>
+		
+		<action name="findUserConf" class="com.yiqin.shop.action.FindUserConfAction"></action>
+		
+		<action name="saveOrUpdateAddress" class="com.yiqin.shop.action.ModifyUserAddressAction"></action>
+		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
 		
 		<action name="toCategorySearch" class="com.yiqin.shop.action.ToCategorySearchAction">

@@ -2,7 +2,30 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib uri="/struts-tags" prefix="s"%>
 
-<section id="do_action">	
+<script type="text/javascript">
+var yiqin_cart_check = function(){
+	var action = {
+		findUserAddress : function(){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findUserConf.action",
+	             dataType: "json",
+	             success: function(data){
+	            	
+                },
+                beforeSend: function(){},
+                complete: function(){},
+                error: function(){}
+	         });
+		},	
+	};
+	
+	return action;
+}();
+</script>
+
+<section id="do_action" style="display:none;">
 	<div class="container">
 		<div class="heading">
 			<h3><b><s:text name="cart.check.title"></s:text></b></h3>

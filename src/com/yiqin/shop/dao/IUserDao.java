@@ -1,6 +1,9 @@
 package com.yiqin.shop.dao;
 
+import java.util.List;
+
 import com.yiqin.shop.pojo.User;
+import com.yiqin.shop.pojo.UserConf;
 
 /**
  * 用户DAO
@@ -55,5 +58,45 @@ public interface IUserDao {
 	 * @return 成功状态
 	 */
 	public boolean deleteUser(String userId);
+
+	/**
+	 * 查找用户所有配置信息
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @return 配置信息集
+	 */
+	public List<UserConf> findUserConfList(String userId);
+
+	/**
+	 * 更新用户配置
+	 * 
+	 * @param userConf
+	 *            更新对象
+	 * @return 成功状态
+	 */
+	public boolean updateUserConf(UserConf userConf);
+
+	/**
+	 * 查询指定配置信息
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param attribute
+	 *            用户配置属性名
+	 * @return 配置对象
+	 */
+	public UserConf findUserConfInfo(String userId, String attribute);
+
+	/**
+	 * 删除指定用户配置信息
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param attribute
+	 *            配置属性名
+	 * @return 成功状态
+	 */
+	public boolean deleteUserConf(String userId, String attribute);
 
 }

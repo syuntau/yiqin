@@ -117,6 +117,19 @@ var yiqin_cart_action = function(){
                error: function(){}
 	         });
 		},
+		
+		toCartCheck : function(){
+			$("#to_check_btn").click(function(){
+				var checkObj = $("#do_action");
+				if(checkObj.css("display") == "none"){
+					$("#do_action").css("display", "");
+					$(this).html("取消结算");
+				}else{
+					$("#do_action").css("display", "none");
+					$(this).html("去结算");
+				}
+			});
+		},
 	};
 	
 	var appendInfoToCart = function(data){
@@ -202,6 +215,7 @@ var yiqin_cart_action = function(){
 
 $(document).ready(function() {
 	yiqin_cart_action.initCartInfo("init");
+	yiqin_cart_action.toCartCheck();
 });
 </script>
 
@@ -221,7 +235,7 @@ $(document).ready(function() {
 				</thead>
 				<tbody id="cart_info_list"></tbody>
 			</table>
-			<button type="button" class="btn btn-fefault pull-right">去结算</button>
+			<button type="button" id="to_check_btn" class="btn btn-fefault pull-right">去结算</button>
 		</div>
 	</div>
 </section>

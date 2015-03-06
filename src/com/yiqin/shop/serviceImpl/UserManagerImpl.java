@@ -1,7 +1,10 @@
 package com.yiqin.shop.serviceImpl;
 
+import java.util.List;
+
 import com.yiqin.shop.dao.IUserDao;
 import com.yiqin.shop.pojo.User;
+import com.yiqin.shop.pojo.UserConf;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
 
@@ -19,7 +22,7 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean registeUser(User user) {
-		if (Util.isEmpty(user.getId())) {
+		if (user == null || Util.isEmpty(user.getId())) {
 			return false;
 		}
 		return userDao.insertUser(user);
@@ -39,11 +42,37 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean modifyUserInfo(User user) {
+		if (user == null) {
+			return false;
+		}
 		return userDao.modifyUserInfo(user);
 	}
 
 	@Override
 	public boolean deleteUser(String userId) {
 		return userDao.deleteUser(userId);
+	}
+
+	@Override
+	public List<UserConf> findUserConfList(String userId) {
+		return userDao.findUserConfList(userId);
+	}
+
+	@Override
+	public boolean updateUserConf(UserConf userConf) {
+		if (userConf == null) {
+			return false;
+		}
+		return userDao.updateUserConf(userConf);
+	}
+
+	@Override
+	public UserConf findUserConfInfo(String userId, String attribute) {
+		return userDao.findUserConfInfo(userId, attribute);
+	}
+
+	@Override
+	public boolean deleteUserConf(String userId, String attribute) {
+		return userDao.deleteUserConf(userId, attribute);
 	}
 }
