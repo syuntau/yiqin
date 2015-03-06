@@ -35,10 +35,17 @@ var yiqin_category_action = function(){
                 },
                 beforeSend: function(){},
                 complete: function(){
-//                 	var categoryId = "<s:property value='#request.search_categoryId' />";
-//             		if(categoryId.length>=3){
-//             			window.location.href="#first_"+categoryId.substring(0,2);
-//             		}
+                	var categoryId = "<s:property value='#request.search_categoryId' />";
+                	if(categoryId != null && categoryId != ""){
+                		if(categoryId.length>=3){
+                			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
+                			$("#two_"+categoryId).css('color','#fdb45e');
+                		}else{
+                			if(categoryId.length==2){
+                				$("#first_"+categoryId).css('color','#fdb45e');
+                			}
+                		}
+                	}
                 },
                 error: function(){}
 	         });
