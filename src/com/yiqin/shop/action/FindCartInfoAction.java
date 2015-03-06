@@ -45,7 +45,7 @@ public class FindCartInfoAction extends ActionSupport {
 			User loninUser = Util.getLoginUser(session);
 
 			// 查询用户购物车
-			List<Cart> cartList = shoppingManager.findCartListInfo(loninUser.getName());
+			List<Cart> cartList = shoppingManager.findCartListInfo(loninUser.getId());
 			if (Util.isEmpty(cartList)) {
 				result = "1";
 			} else {

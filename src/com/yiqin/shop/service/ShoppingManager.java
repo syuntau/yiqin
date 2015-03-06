@@ -39,6 +39,26 @@ public interface ShoppingManager {
 	public List<Cart> findCartListInfo(String userName);
 
 	/**
+	 * 查询购物车数量
+	 * 
+	 * @param userName
+	 *            登录用户名
+	 * @return 数量
+	 */
+	public int findCartNum(String userName);
+
+	/**
+	 * 查询单个购物车信息
+	 * 
+	 * @param userName
+	 *            登录用户名
+	 * @param productId
+	 *            商品ID
+	 * @return 购物车信息
+	 */
+	public Cart findCartInfo(String userName, String productId);
+
+	/**
 	 * 删除购物车商品
 	 * 
 	 * @param userName

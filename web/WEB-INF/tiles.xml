@@ -30,11 +30,31 @@
 		<put-attribute name="title" value="shop.index.title"/>
 		<put-attribute name="body" value="shop.index.body" />
 	</definition>
-
+	
+	<definition name="shop.search" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="shop.search.body" />
+	</definition>
+	
+	<definition name="shop.details" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="shop.details.body" />
+	</definition>
+	
 	<definition name="shop.index.body" template="/shop/jsp/index.jsp">
 		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" />
 		<put-attribute name="left" value="shop.index.body.left" />
 		<put-attribute name="right" value="shop.index.body.right" />
+	</definition>
+	
+	<definition name="shop.search.body" template="/shop/jsp/other.jsp">
+		<put-attribute name="left" value="shop.index.body.left" />
+		<put-attribute name="right" value="/shop/jsp/shop.jsp" />
+	</definition>
+	
+	<definition name="shop.details.body" template="/shop/jsp/other.jsp">
+		<put-attribute name="left" value="shop.index.body.left" />
+		<put-attribute name="right" value="/shop/jsp/product-details.jsp" />
 	</definition>
 
 	<definition name="shop.index.body.left" template="/shop/jsp/idx_left.jsp">

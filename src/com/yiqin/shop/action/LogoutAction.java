@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.pojo.User;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 退出登录
@@ -36,6 +37,7 @@ public class LogoutAction extends ActionSupport {
 		while (em.hasMoreElements()) {
 			request.getSession().removeAttribute(em.nextElement().toString());
 		}
+		request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, "top_login");
 		return LOGIN;
 	}
 }

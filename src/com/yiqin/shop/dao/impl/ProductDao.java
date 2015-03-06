@@ -22,7 +22,8 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			if (pids.contains(",")) {
 				if (pids.startsWith(",")) {
 					pids = pids.substring(1);
-				} else if (pids.endsWith(",")) {
+				}
+				if (pids.endsWith(",")) {
 					pids = pids.substring(0, pids.length() - 1);
 				}
 				queryString = "from Product where productId in (?)";

@@ -11,7 +11,7 @@ var	category_temp = {
 	cate_ul : '<ul></ul>',
 	cate_li : '<li></li>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
-	cate_right_a : '<a data-toggle="tab"></a>'
+	cate_right_a : '<a data-toggle="tab"></a>',
 };
 
 var yiqin_category_action = function(){
@@ -34,7 +34,19 @@ var yiqin_category_action = function(){
 	            	 }
                 },
                 beforeSend: function(){},
-                complete: function(){},
+                complete: function(){
+                	var categoryId = "<s:property value='#request.search_categoryId' />";
+                	if(categoryId != null && categoryId != ""){
+                		if(categoryId.length>=3){
+                			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
+                			$("#two_"+categoryId).css('color','#fdb45e');
+                		}else{
+                			if(categoryId.length==2){
+                				$("#first_"+categoryId).css('color','#fdb45e');
+                			}
+                		}
+                	}
+                },
                 error: function(){}
 	         });
 		},
@@ -78,13 +90,13 @@ var yiqin_category_action = function(){
 		 					$cate_panel_a.attr('id',"two_"+nextSub.id);
 		 					$cate_ul.append($cate_li);
 		 					$cate_panel_a.click(function(){
-		 						//yiqin_shoplist_action.searchProductsByCategory(nextSub.id);
+		 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch.action");
 		 					});
 		 					$cate_li.append($cate_panel_a.append(nextSub.name));
 	 					});
 	 				 }else{
 	 					 $cate_panel_a.click(function(){
-	 						//yiqin_shoplist_action.searchProductsByCategory(sub.id);
+	 						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch.action");
 	 					 });
 	 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
 	 				 }
@@ -110,12 +122,13 @@ var yiqin_category_action = function(){
 			$cate_panel_a = $(category_temp.cate_panel_a);
 			$cate_li.append($cate_panel_a);
 			$cate_panel_a.click(function(){
-				//yiqin_shoplist_action.searchProductsByCategory(val.id);	 
+				yiqin_public_js.toTilesAction(val.id, "/toCategorySearch.action");
 			});
 			$cate_panel_a.attr('class',"shop_header").append(val.name);
 			$cate_panel_a.attr('id',"top_"+val.id);
 			$("#top_header_mainmenu").append($cate_li);
 		});
+		shop_header.setCurrentNav();
 	};
 	
 	return action;

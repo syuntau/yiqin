@@ -14,7 +14,7 @@ public class Cart implements java.io.Serializable {
 	private String imgUrl;//商品缩略图URL
 	private Float price;// 单价
 	private Integer count; // 数量
-	private String productInfo;// 商品其他属性
+	private String productInfo;// 商品其他属性(如：品牌,颜色,....)
 
 	public Cart() {
 	}

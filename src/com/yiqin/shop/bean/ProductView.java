@@ -1,7 +1,7 @@
 package com.yiqin.shop.bean;
 
 /**
- * 用于产品列表展示
+ * 用于产品详情、列表展示
  * 
  * @author LiuJun
  * 

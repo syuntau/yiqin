@@ -12,7 +12,7 @@
 			</ul>
 		</div>
 		<div class="tab-content">
-			<div class="tab-pane fade active in" id="consumables" >
+			<div class="tab-pane fade active in" id="right_1" >
 				<div class="col-sm-3">
 					<div class="product-image-wrapper">
 						<div class="single-products">
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			
-			<div class="tab-pane fade" id="paper" >
+			<div class="tab-pane fade" id="right_2" >
 				<div class="col-sm-3">
 					<div class="product-image-wrapper">
 						<div class="single-products">
@@ -122,7 +122,7 @@
 				</div>
 			</div>
 			
-			<div class="tab-pane fade" id="machines" >
+			<div class="tab-pane fade" id="right_3" >
 				<div class="col-sm-3">
 					<div class="product-image-wrapper">
 						<div class="single-products">
@@ -167,61 +167,6 @@
 						<div class="single-products">
 							<div class="productinfo text-center">
 								<img src="/shop/images/home/gallery2.jpg" alt="" />
-								<h2>￥56.99</h2>
-								<p>黑色经典版</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="tab-pane fade" id="stationery" >
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="/shop/images/home/gallery1.jpg" alt="" />
-								<h2>￥56.99</h2>
-								<p>黑色经典版</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="/shop/images/home/gallery2.jpg" alt="" />
-								<h2>￥56.99</h2>
-								<p>黑色经典版</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="/shop/images/home/gallery3.jpg" alt="" />
-								<h2>￥56.99</h2>
-								<p>黑色经典版</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="/shop/images/home/gallery4.jpg" alt="" />
 								<h2>￥56.99</h2>
 								<p>黑色经典版</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>

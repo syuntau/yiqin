@@ -1,5 +1,6 @@
 package com.yiqin.shop.action;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -10,17 +11,14 @@ import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
 
 /**
- * 删除购物车商品
+ * 查询购物车数量
  * 
  * @author liujun
  *
  */
-public class DeleteCartProductAction extends ActionSupport {
+public class FindCartNumberAction extends ActionSupport {
 
-	private static final long serialVersionUID = -6595442375209215925L;
-
-	// 商品ID
-	private String productId;
+	private static final long serialVersionUID = 1690431205134101920L;
 
 	private ShoppingManager shoppingManager;
 
@@ -32,38 +30,16 @@ public class DeleteCartProductAction extends ActionSupport {
 		this.shoppingManager = shoppingManager;
 	}
 
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
-		HttpSession session = ServletActionContext.getRequest().getSession();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
-			if (Util.isEmpty(productId)) {
-				result = "none";
-				response.getWriter().print(result);
-				return null;
-			}
-
-			// 删除购物车指定商品
-			Boolean flag = shoppingManager.deleteCartProduct(
-					Util.getLoginUser(session).getId(), productId);
-			if (!flag) {
-				result = "error";
-				response.getWriter().print(result);
-				return null;
-			}
-			
-			// 最新购物车数量
-			int nowCount = shoppingManager.findCartNum(Util.getLoginUser(session).getId());
-			result = String.valueOf(nowCount);
+			// 查询购物车数量
+			int count = shoppingManager.findCartNum(Util.getLoginUser(session).getId());
+			result = String.valueOf(count);
 			response.getWriter().print(result);
 			return null;
 		} catch (Exception e) {

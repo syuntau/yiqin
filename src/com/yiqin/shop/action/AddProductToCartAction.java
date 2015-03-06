@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.pojo.Cart;
-import com.yiqin.shop.pojo.Product;
 import com.yiqin.shop.pojo.User;
 import com.yiqin.shop.service.ProductManager;
 import com.yiqin.shop.service.ShoppingManager;
@@ -28,6 +28,9 @@ public class AddProductToCartAction extends ActionSupport {
 	//商品ID
 	private String productId;
 	
+	//添加数量
+	private Integer num;
+	
 	private ShoppingManager shoppingManager;
 	private ProductManager productManager;
 
@@ -37,6 +40,14 @@ public class AddProductToCartAction extends ActionSupport {
 
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+	
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
 	}
 
 	public ProductManager getProductManager() {
@@ -63,14 +74,14 @@ public class AddProductToCartAction extends ActionSupport {
 		String result = "";
 		try {
 			if (Util.isEmpty(productId)) {
-				result = "1";
+				result = "none";
 				response.getWriter().print(result);
 				return null;
 			}
 			// 查询商品
-			List<Product> productList = productManager.findProductInfoById(productId);
+			List<ProductView> productList = productManager.findProductInfoById(productId);
 			if (Util.isEmpty(productList)) {
-				result = "1";
+				result = "none";
 				response.getWriter().print(result);
 				return null;
 			}
@@ -79,26 +90,30 @@ public class AddProductToCartAction extends ActionSupport {
 			User loninUser = Util.getLoginUser(session);
 			
 			// 保存购物信息
-			Product product = productList.get(0);
+			ProductView product = productList.get(0);
 			Cart cart = new Cart();
 			cart.setUseId(loninUser.getId());
 			cart.setProductId(product.getProductId());
-			//cart.setProductName(product);
-			//cart.setPrice(product);
-			//cart.setImgUrl(product.getImageUrl());
-			cart.setCount(1);
+			cart.setProductName(product.getProductName());
+			cart.setPrice(Float.valueOf(product.getPrice()));
+			cart.setImgUrl(product.getImgUrl());
+			cart.setCount(num);
+			cart.setProductInfo("");
 			boolean flag = shoppingManager.addProductToCart(cart);
 			if(!flag){
-				result = "2";
+				result = "error";
 				response.getWriter().print(result);
 				return null;
 			}
-			result = "success";
+			
+			// 最新购物车数量
+			int nowCount = shoppingManager.findCartNum(loninUser.getId());
+			result = String.valueOf(nowCount);
 			response.getWriter().print(result);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = "2";
+			result = "error";
 			response.getWriter().print(result);
 			return null;
 		}

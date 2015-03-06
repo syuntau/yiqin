@@ -11,10 +11,20 @@ var template = {
 var shop_header = function() {
 	var shop_header_action = {
 		init : function() {
-			setCurrentNav();
+			shop_header.setCurrentNav();
 			setNav();
-		}
+		},
+		
+		setCurrentNav : function() {
+			var currentNav = "<s:property value='#session.se_shop_nav' />";
+			if (currentNav == '') {
+				currentNav = 'top_home';
+			}
+			$('#header li a').removeClass('active');
+			$('#' + currentNav).addClass('active').removeClass('shop_header');
+		},
 	};
+	
 	var setNav = function() {
 		$('.shop_header').on('click', function() {
 			var nav = $(this).attr('id');
@@ -25,16 +35,10 @@ var shop_header = function() {
 			$form.submit();
 		});
 	};
-	var setCurrentNav = function() {
-		var currentNav = "<s:property value='#session.se_shop_nav' />";
-		if (currentNav == '') {
-			currentNav = 'top_home';
-		}
-		$('#header li a').removeClass('active');
-		$('#' + currentNav).addClass('active').removeClass('shop_header');
-	};
+	
 	return shop_header_action;
 }();
+
 $(document).ready(function() {
 	shop_header.init();
 });

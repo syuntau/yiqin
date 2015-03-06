@@ -7,7 +7,7 @@ var cart_template = {
 	cart_tr : '<tr></tr>',
 	cart_td : '<td></td>',
 	cart_h4 : '<h4></h4>',
-	cart_a : '<a></a>',
+	cart_a : '<a href="javaScript:void(0);"></a>',
 	cart_i : '<i class="fa fa-times"></i>',
 	cart_p : '<p></p>',
 	cart_img : '<img/>',
@@ -52,11 +52,12 @@ var yiqin_cart_action = function(){
 		             data: "productId="+productId,
 		             dataType: 'text',
 		             success: function(data){
-		            	 if(data=='1'){
+		            	 if(data=='none'){
 		            		alert("您要删除的商品不存在，请刷新页面再试哦！");
-		            	 }else if(data=='2'){
+		            	 }else if(data=='error'){
 		            		alert("删除商品失败，请稍后再试！");
-		            	 }else if(data=='success'){
+		            	 }else{
+		            		$("#J_MiniCartNum").html(data);
 		            		yiqin_cart_action.initCartInfo("delete");
 		            	 }
 	                },
@@ -74,7 +75,7 @@ var yiqin_cart_action = function(){
 				pNum = $productTr.data(pIndex+"_productNum"),
 				REX_NUM = /^(0|[1-9][0-9]*)$/;
 			if(touchType=="custom"){
-				if(customNum==null || customNum=="" || customNum <0 || !REX_NUM.test(customNum) || customNum==pNum){
+				if(customNum==null || customNum=="" || !REX_NUM.test(customNum) || customNum <=0 || customNum==pNum){
 					$productInput.val(pNum);
 					return false;
 				}
@@ -84,6 +85,10 @@ var yiqin_cart_action = function(){
 					pNum = parseInt(pNum)+1;
 				}else{
 					if(pNum > 0){
+						if((pNum-1) <= 0){
+							$productInput.val(pNum);
+							return false;
+						}
 						pNum = pNum-1;
 					}else{
 						return false;
@@ -130,9 +135,9 @@ var yiqin_cart_action = function(){
 			 $cart_td.attr('class',"cart_product");
 			 $cart_td.append($cart_a.append($cart_img));
 			 $cart_a.click(function(){
-				 
+				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
 			 });
-			 $cart_img.attr("src",val.imageUrl);
+			 $cart_img.attr({"src":val.imgUrl,"width":"110px"});
 			 $cart_tr.append($cart_td);
 			 $cart_td = $(cart_template.cart_td),
 			 $cart_a = $(cart_template.cart_a),
@@ -142,7 +147,7 @@ var yiqin_cart_action = function(){
 			 $cart_h4.append($cart_a.append(val.productName));
 			 $cart_p.append(val.productId);
  			 $cart_a.click(function(){
-				 
+ 				yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
 			 });
  			$cart_tr.append($cart_td);
  			$cart_td = $(cart_template.cart_td),
@@ -155,7 +160,7 @@ var yiqin_cart_action = function(){
  			$cart_a = $(cart_template.cart_a);
  			$cart_td.attr('class',"cart_quantity");
  			$cart_td.append($cart_div.append($cart_a).append($cart_input));
- 			$cart_input.val(val.productNum).attr('id',i+"_input");
+ 			$cart_input.val(val.count).attr('id',i+"_input");
  			$cart_input.blur(function(){
  				var cNum = $(this).val();
  				yiqin_cart_action.changeCartProductNum('custom',val.productId,i,cNum);
@@ -174,7 +179,7 @@ var yiqin_cart_action = function(){
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_total").append($cart_p);
- 			$cart_p.attr('class',"cart_total_price").append(val.productNum*val.price);
+ 			$cart_p.attr('class',"cart_total_price").append(val.count*val.price);
  			$cart_tr.append($cart_td);
  			$cart_td = $(cart_template.cart_td),
  			$cart_a = $(cart_template.cart_a);
@@ -186,17 +191,11 @@ var yiqin_cart_action = function(){
  			$cart_tr.append($cart_td);
  			
  			$cart_tr.data(i+"_price",val.price);
- 			$cart_tr.data(i+"_productNum",val.productNum);
+ 			$cart_tr.data(i+"_productNum",val.count);
  			$cart_tr.attr('id',i+'_product');
  			$cart_info_list.append($cart_tr);
          });
 	};
-	
-	
-	
-	
-	
-	
 	
 	return cart_action;
 }();
