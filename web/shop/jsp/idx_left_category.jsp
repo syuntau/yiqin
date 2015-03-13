@@ -37,7 +37,7 @@ var yiqin_category_action = function(){
                 complete: function(){
                 	var categoryId = "<s:property value='#request.search_categoryId' />";
                 	if(categoryId != null && categoryId != ""){
-                		if(categoryId.length>=3){
+                		if(categoryId.length>=4){
                 			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
                 			$("#two_"+categoryId).css('color','#fdb45e');
                 		}else{

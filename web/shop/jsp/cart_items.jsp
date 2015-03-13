@@ -27,8 +27,10 @@ var yiqin_cart_action = function(){
 	            	 var $cart_info_list = $('#cart_info_list');
 	            	 $cart_info_list.empty();
 	            	 if(data=='1'){
+	            		 $("#to_check_btn").css("display", "none");
 	            		 $cart_info_list.append("购物车还没有心爱的商品哦，赶快去抢购吧！");
 	            	 }else if(data=='2'){
+	            		 $("#to_check_btn").css("display", "none");
 	            		 $cart_info_list.append("购物车坏了，正在抢修哦，稍后再来");
 	            	 }else{
 	            		 appendInfoToCart(data);
@@ -120,14 +122,13 @@ var yiqin_cart_action = function(){
 		
 		toCartCheck : function(){
 			$("#to_check_btn").click(function(){
-				var checkObj = $("#do_action");
-				if(checkObj.css("display") == "none"){
-					$("#do_action").css("display", "");
-					$(this).html("取消结算");
-				}else{
-					$("#do_action").css("display", "none");
-					$(this).html("去结算");
+				var $cart_info_list = $('#cart_info_list');
+				if($cart_info_list.find().length<=0){
+					alert("您购物车还没有商品，赶快去选购商品吧！");
+					return;
 				}
+				var productIds = "";
+				yiqin_public_js.toTilesAction(productIds, "/toSettlementOrder.action");
 			});
 		},
 	};

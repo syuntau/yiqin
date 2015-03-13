@@ -72,9 +72,6 @@ public class ProductManagerImpl implements ProductManager {
 		if (Util.isEmpty(categorys)) {
 			return null;
 		}
-		if (categorys.length() >= 3) {
-			categorys = categorys.substring(0, 1) + categorys;
-		}
 		List<Product> productList = productDao.findProductInfoByCategorys(categorys);
 		if (Util.isEmpty(productList)) {
 			return null;

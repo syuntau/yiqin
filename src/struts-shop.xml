@@ -79,6 +79,10 @@
 		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
 		
+		<action name="toSettlementOrder" class="com.yiqin.shop.action.ToSettlementOrderAction">
+			<result name="success" type="tiles">shop.order</result>
+		</action>
+		
 		<action name="toCategorySearch" class="com.yiqin.shop.action.ToCategorySearchAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success" type="tiles">shop.search</result>
