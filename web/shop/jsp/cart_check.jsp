@@ -22,10 +22,71 @@ var yiqin_cart_check = function(){
 	             dataType: "json",
 	             success: function(data){
 	            	appendToAddress(data);
-                },
-                beforeSend: function(){},
-                complete: function(){},
-                error: function(){}
+                 },
+                 beforeSend: function(){},
+                 complete: function(){},
+                 error: function(){}
+	         });
+		},
+		
+		findAddressByAttr : function(attribute){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findUserConf.action",
+	             data : "attribute="+attribute,
+	             dataType: "json",
+	             success: function(data){
+	            	var $modal = $("#EditReceiveInfo");
+	            	if(data=='1'){
+	            		alert("本条地址信息已被删除，请刷新页面！");
+	            	}else if(data=='2'){
+	            		alert("加载地址信息失败，请稍后再试！");
+	            	}else{
+	            		$modal.find("input[name=receive_name]").val();
+	            		$modal.find("input[name=receive_tel]").val();
+	            		$modal.find("input[name=receive_area]").val();
+	            	}
+	             },
+	             beforeSend: function(){},
+	             complete: function(){},
+	             error: function(){}
+	         });
+		},
+		
+		saveOrUpdateAddress : function(){
+			var options = {
+				target: "",
+				type: "POST",
+				url:"saveOrUpdateAddress.action",
+		        resetForm: true,
+		        success: responseFunction
+			};
+	    	if (registerValidation()) {
+	    		$('#registerFormId').ajaxSubmit(options);
+	    	}
+	    	return false;
+		},
+		
+		deleteUserAddress : function(){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "deleteUserAddress.action",
+	             data : "attribute="+attribute,
+	             dataType: "json",
+	             success: function(data){
+	            	if(data=='1'){
+	            		alert("本条收货信息不存在，请再次确认！");
+	            	}else if(data=='2'){
+	            		alert("删除失败，请稍后再试！");
+	            	}else if(data=='3'){
+	            		alert("删除成功！");
+	            	}
+	             },
+	             beforeSend: function(){},
+	             complete: function(){},
+	             error: function(){}
 	         });
 		},
 		
@@ -61,10 +122,17 @@ var yiqin_cart_check = function(){
 		if(data == '1'){
 			$user_acc_info.append($check_li);
 			$check_li.append("您还没有配送地址信息，请点击添加按钮添加");
+			$("#address_add").html("添加");
        	}else if(data == '2'){
        		$user_acc_info.append($check_li);
 			$check_li.append("配送地址信息加载失败，请刷新页面再试");
+			$("#address_add").remove();
        	}else{
+       		$("#address_add").html("修改");
+			$("#address_add").click(function(){
+				var type = $("input:checked[name=accept_info]").val();
+				yiqin_cart_check.findAddressByAttr(type);
+			});
        		$.each(data, function(n,val){
        			var $check_li = $(cart_check_temp.check_li),
        				$check_input_radio = $(cart_check_temp.check_input_radio),
@@ -117,7 +185,7 @@ $(document).ready(function(){
 <!-- 						 	</label> -->
 <!-- 						</li> -->
 					</ul>
-					<a class="btn btn-default update" id="address_add" href="javaScript:void(0);">修改</a>
+					<a class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo" href="javaScript:void(0);"></a>
 				</div>
 			</div>
 		</div>
@@ -186,5 +254,36 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div> 
+	</div>
+	
+	<!-- alert modal -->
+	<div class="modal" id="EditReceiveInfo" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" >
+				<div class="modal-header">
+		             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		             <h5 class="modal-title"><strong>填写收货信息</strong></h5>
+	         	</div>
+	         	<div class="modal-body">
+					<ul>
+						<li>
+							<label>收货人员：</label>
+							<input type="text" name="receive_name">
+						</li>
+						<li>
+							<label>联系电话：</label>
+							<input type="text" name="receive_tel">
+						</li>
+						<li>
+							<label>收货地址：</label>
+							<input type="text" name="receive_area">
+						</li>
+					</ul>
+	         	</div>
+	         	<div class="modal-footer">
+					<a class="btn btn-default check_out" href="javaScript:void(0);">保存</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
