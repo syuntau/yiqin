@@ -26,7 +26,7 @@ var yiqin_login_action = function(){
 			var options = {
 				target: "",
 				type: "POST",
-				url:"register.action",
+				url:"register",
 		        resetForm: true,
 		        success: responseFunction
 			};
@@ -166,7 +166,7 @@ var yiqin_login_action = function(){
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2><s:text name="login.user.login.title"></s:text></h2>
-						<form action="login.action" method="post" name="loginForm">
+						<form action="login" method="post" name="loginForm">
 							<input type="text" name="login_name" id="login_name_id" placeholder="<s:text name='login.user.name' />" value="${param.login_name}"/>
 							<input type="password" name="login_password" id="login_password_id" placeholder="<s:text name='login.user.password' />"/>
 							<span id="loginError" style="COLOR: red;text-align: left;">${requestScope.loginError}</span><br>

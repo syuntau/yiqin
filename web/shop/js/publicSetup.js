@@ -21,7 +21,7 @@ var yiqin_public_js = function(){
 		//top状态提交设置
 		postFormToTopAction	: function(top_value){
 			 var form = $('<form></form>');  
-		     form.attr('action', "/shop/index.action");  
+		     form.attr('action', "/shop/index");  
 		     form.attr('method', 'post');  
 		     form.attr('target', '_self');
 		     var my_input = $('<input type="text" name="home" />');
@@ -49,7 +49,7 @@ var yiqin_public_js = function(){
 			$.ajax({
 		        type: "POST",
 		        async: true,
-		        url: "addProductToCart.action",
+		        url: "addProductToCart",
 		        data: "productId="+productId+"&num="+num,
 		        dataType: "text",
 		        success: function(data){
@@ -73,7 +73,7 @@ var yiqin_public_js = function(){
 			$.ajax({
 		        type: "POST",
 		        async: true,
-		        url: "findProductInfo.action",
+		        url: "findProductInfo",
 		        data: "productId="+productId,
 		        dataType: "json",
 		        success: function(data){

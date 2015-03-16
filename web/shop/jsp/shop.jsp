@@ -30,7 +30,7 @@ var shoplist_feature_temp = {
 				$.ajax({
 		            type: "POST",
 		            async: true,
-		            url: "findProductsByCategory.action",
+		            url: "findProductsByCategory",
 		            data: "categoryId="+cid,
 		            dataType: "json",
 		            success: function(data){
@@ -70,7 +70,7 @@ var shoplist_feature_temp = {
 				$feature_info_div.append($feature_img.attr({'src':val.imgUrl,'width':'255px','name':"good_img"}));
 				$feature_img.css('cursor','pointer');
 				$feature_img.click(function(){
-					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
+					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 				});
 				$feature_info_div.append($feature_h2.append('￥'+val.price));
 				$feature_info_div.append($feature_p.append(val.productName));

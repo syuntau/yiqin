@@ -21,7 +21,7 @@ var yiqin_cart_action = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "findCartInfo.action",
+	             url: "findCartInfo",
 	             dataType: "json",
 	             success: function(data){
 	            	 var $cart_info_list = $('#cart_info_list');
@@ -50,7 +50,7 @@ var yiqin_cart_action = function(){
 				$.ajax({
 		             type: "POST",
 		             async: true,
-		             url: "deleteCartProduct.action",
+		             url: "deleteCartProduct",
 		             data: "productId="+productId,
 		             dataType: 'text',
 		             success: function(data){
@@ -100,7 +100,7 @@ var yiqin_cart_action = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "updateCartProductsNum.action",
+	             url: "updateCartProductsNum",
 	             data: "productId="+productId+"&productNum="+pNum,
 	             dataType: 'text',
 	             success: function(data){
@@ -136,7 +136,7 @@ var yiqin_cart_action = function(){
 				if(productIds != null && productIds != ""){
 					productIds = productIds.substring(1);
 				}
-				yiqin_public_js.toTilesAction(productIds, "/toSettlementOrder.action");
+				yiqin_public_js.toTilesAction(productIds, "/toSettlementOrder");
 			});
 		},
 	};
@@ -157,7 +157,7 @@ var yiqin_cart_action = function(){
 			 $cart_td.attr('class',"cart_product");
 			 $cart_td.append($cart_a.append($cart_img));
 			 $cart_a.click(function(){
-				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
+				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });
 			 $cart_img.attr({"src":val.imgUrl,"width":"110px"});
 			 $cart_tr.append($cart_td);
@@ -169,7 +169,7 @@ var yiqin_cart_action = function(){
 			 $cart_h4.append($cart_a.append(val.productName));
 			 $cart_p.append(val.productId);
  			 $cart_a.click(function(){
- 				yiqin_public_js.toTilesAction(val.productId, "/toProductDetails.action");
+ 				yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });
  			$cart_tr.append($cart_td);
  			$cart_td = $(cart_template.cart_td),

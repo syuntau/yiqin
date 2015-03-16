@@ -18,7 +18,7 @@ var yiqin_cart_check = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "findUserConf.action",
+	             url: "findUserConf",
 	             dataType: "json",
 	             success: function(data){
 	            	appendToAddress(data);
@@ -33,7 +33,7 @@ var yiqin_cart_check = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "findUserConf.action",
+	             url: "findUserConf",
 	             data : "attribute="+attribute,
 	             dataType: "json",
 	             success: function(data){
@@ -58,7 +58,7 @@ var yiqin_cart_check = function(){
 			var options = {
 				target: "",
 				type: "POST",
-				url:"saveOrUpdateAddress.action",
+				url:"saveOrUpdateAddress",
 		        resetForm: true,
 		        success: responseFunction
 			};
@@ -72,7 +72,7 @@ var yiqin_cart_check = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "deleteUserAddress.action",
+	             url: "deleteUserAddress",
 	             data : "attribute="+attribute,
 	             dataType: "json",
 	             success: function(data){

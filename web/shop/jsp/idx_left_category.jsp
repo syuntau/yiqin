@@ -20,7 +20,7 @@ var yiqin_category_action = function(){
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "findCategory.action",
+	             url: "findCategory",
 	             dataType: "json",
 	             success: function(data){
 	            	 var $category_list = $('#accordian');
@@ -90,13 +90,13 @@ var yiqin_category_action = function(){
 		 					$cate_panel_a.attr('id',"two_"+nextSub.id);
 		 					$cate_ul.append($cate_li);
 		 					$cate_panel_a.click(function(){
-		 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch.action");
+		 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch");
 		 					});
 		 					$cate_li.append($cate_panel_a.append(nextSub.name));
 	 					});
 	 				 }else{
 	 					 $cate_panel_a.click(function(){
-	 						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch.action");
+	 						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch");
 	 					 });
 	 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
 	 				 }
@@ -122,7 +122,7 @@ var yiqin_category_action = function(){
 			$cate_panel_a = $(category_temp.cate_panel_a);
 			$cate_li.append($cate_panel_a);
 			$cate_panel_a.click(function(){
-				yiqin_public_js.toTilesAction(val.id, "/toCategorySearch.action");
+				yiqin_public_js.toTilesAction(val.id, "/toCategorySearch");
 			});
 			$cate_panel_a.attr('class',"shop_header").append(val.name);
 			$cate_panel_a.attr('id',"top_"+val.id);

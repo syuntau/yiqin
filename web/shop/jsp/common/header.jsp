@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
 var template = {
-	dispatcher : '/dispatcher.action',
+	dispatcher : '/dispatcher',
 	form : '<form method="post"></form>',
 	nav : '<input type="hidden" name="para_nav" />'
 };

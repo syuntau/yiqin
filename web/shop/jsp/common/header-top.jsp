@@ -10,7 +10,7 @@ var findCartNum = function(){
 		$.ajax({
 	        type: "POST",
 	        async: true,
-	        url: "findCartNum.action",
+	        url: "findCartNum",
 	        dataType: "text",
 	        success: function(data){
 	       	 if(data!='error'){
