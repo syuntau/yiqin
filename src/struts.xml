@@ -4,6 +4,13 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.custom.i18n.resources" value="app_shop, config_shop, app_sa, config_sa" />
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<constant name="struts.action.extension" value=","></constant>
+	<constant name="struts.devMode" value="true"></constant>
 
 	<include file="struts-shop.xml" />
+	<include file="struts-sa.xml" />
 </struts>
