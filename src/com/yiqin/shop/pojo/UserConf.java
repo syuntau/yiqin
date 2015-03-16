@@ -7,6 +7,7 @@ package com.yiqin.shop.pojo;
  */
 public class UserConf implements java.io.Serializable {
 
+	private static final long serialVersionUID = -223864608078310420L;
 	private Integer id; // 自增主键
 	private String userId;// 用户ID
 	private String attribute;// 用户配置属性

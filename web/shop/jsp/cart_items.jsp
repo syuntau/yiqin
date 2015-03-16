@@ -122,12 +122,20 @@ var yiqin_cart_action = function(){
 		
 		toCartCheck : function(){
 			$("#to_check_btn").click(function(){
-				var $cart_info_list = $('#cart_info_list');
-				if($cart_info_list.find().length<=0){
+				var $cart_info_list = $('#cart_info_list'),
+					selectCartPid = $cart_info_list.find("tr");
+				if(selectCartPid.length<=0){
 					alert("您购物车还没有商品，赶快去选购商品吧！");
 					return;
 				}
 				var productIds = "";
+				$.each(selectCartPid, function(){
+					var pid = $(this).data("_productId");
+					productIds += ","+pid;
+				});
+				if(productIds != null && productIds != ""){
+					productIds = productIds.substring(1);
+				}
 				yiqin_public_js.toTilesAction(productIds, "/toSettlementOrder.action");
 			});
 		},
@@ -206,6 +214,7 @@ var yiqin_cart_action = function(){
  			
  			$cart_tr.data(i+"_price",val.price);
  			$cart_tr.data(i+"_productNum",val.count);
+ 			$cart_tr.data("_productId",val.productId);
  			$cart_tr.attr('id',i+'_product');
  			$cart_info_list.append($cart_tr);
          });

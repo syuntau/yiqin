@@ -38,6 +38,7 @@ var yiqin_public_js = function(){
 			$form.attr('action', url).append($param_input.val(param));
 			$('body').append($form);
 			$form.submit();
+			return false;
 		},
 		
 		//添加到购物车

@@ -6,6 +6,7 @@ import com.yiqin.shop.dao.IShoppingDao;
 import com.yiqin.shop.pojo.Cart;
 import com.yiqin.shop.pojo.Order;
 import com.yiqin.shop.service.ShoppingManager;
+import com.yiqin.util.Util;
 
 public class ShoppingManagerImpl implements ShoppingManager {
 	private IShoppingDao shoppingDao;
@@ -64,5 +65,20 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public int findCartNum(String userName) {
 		return shoppingDao.findCartNum(userName);
+	}
+
+	@Override
+	public List<Cart> findCartsByProductIds(String userName, String productIds) {
+		if (Util.isNotEmpty(productIds)) {
+			if (productIds.startsWith(",")) {
+				productIds = productIds.substring(1);
+			}
+			if (productIds.endsWith(",")) {
+				productIds = productIds.substring(0, productIds.length() - 1);
+			}
+		} else {
+			return null;
+		}
+		return shoppingDao.findCartsByProductIds(userName, productIds);
 	}
 }

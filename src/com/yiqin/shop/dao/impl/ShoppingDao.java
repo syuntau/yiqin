@@ -87,4 +87,11 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		return count.intValue();
 	}
 
+	@Override
+	public List<Cart> findCartsByProductIds(String userId, String productIds) {
+		String queryString = "from Cart where useId=? and productId in (?)";
+		return getHibernateTemplate().find(queryString,
+				new Object[] { userId, productIds });
+	}
+
 }

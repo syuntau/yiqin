@@ -67,6 +67,17 @@ public interface IShoppingDao {
 	public Cart findCartInfo(String userId, String productId);
 
 	/**
+	 * 查询指定productIds的购物车信息
+	 * 
+	 * @param userId
+	 *            用户名
+	 * @param productIds
+	 *            商品ID 多个用，分隔
+	 * @return 购物车信息
+	 */
+	public List<Cart> findCartsByProductIds(String userId, String productIds);
+
+	/**
 	 * 查询购物车数量
 	 * 
 	 * @param userId

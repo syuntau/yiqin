@@ -27,7 +27,31 @@ var yiqin_cart_check = function(){
                 complete: function(){},
                 error: function(){}
 	         });
-		},	
+		},
+		
+		totalSelCartInfo : function(){
+			var selCart = "<s:property value='#request.settlement_products'/>";
+			if(selCart != null && selCart != ""){
+				var $totalUl = $(".total_area ul"),
+					totalPrice = 0;
+				$totalUl.empty();
+				
+				<s:iterator value="#request.settlement_products">
+					var $check_li = $(cart_check_temp.check_li),
+    					$check_span = $(cart_check_temp.check_span),
+    					toPrice = "<s:property value='count'/>"*"<s:property value='price'/>";
+					
+					$totalUl.append($check_li.append("<s:property value='productName'/>"));
+					$check_li.append($check_span.append("<s:property value='count'/>×<s:property value='price'/> = "+toPrice));
+					totalPrice += parseInt(toPrice);
+				</s:iterator>
+				
+				var $check_li = $(cart_check_temp.check_li),
+    				$check_span = $(cart_check_temp.check_span);
+				$totalUl.append($check_li.append("总价"));
+				$check_li.append($check_span.append(totalPrice+" 元"));
+			}
+		},
 	};
 	
 	var appendToAddress = function(data){
@@ -53,7 +77,12 @@ var yiqin_cart_check = function(){
        			$check_input_radio.attr('name','accept_info').val(val.attribute);
        			$check_li.append($check_label.append($check_strong).append($check_shou).append($check_span));
        			$check_strong.append(val.userId).attr('title',val.userId);
-       			$check_span.append(val.value).css("margin-left","200px");
+       			$check_span.append(val.telephone).css("margin-left","50px");
+       			
+       			$check_span = $(cart_check_temp.check_span);
+       			$check_label.append($check_span);
+       			$check_span.append(val.value).css("margin-left","100px");
+       			
        			$user_acc_info.append($check_li);
        		});
        	}
@@ -62,9 +91,14 @@ var yiqin_cart_check = function(){
 	
 	return action;
 }();
+
+$(document).ready(function(){
+	yiqin_cart_check.findUserAddress();
+	yiqin_cart_check.totalSelCartInfo();
+});
 </script>
 
-<section id="do_action" style="display:none;">
+<section id="do_action">
 	<div class="container">
 		<div class="heading">
 			<h3><b><s:text name="cart.check.title"></s:text></b></h3>
@@ -78,11 +112,12 @@ var yiqin_cart_check = function(){
 <!-- 							<input type="radio" name="accept_info"> -->
 <!-- 							<label> -->
 <%-- 								<strong title="李三三">李三三</strong>&nbsp;&nbsp;&nbsp;&nbsp;收 --%>
-<%-- 							 	<span style="margin-left:200px">北京 朝阳区 建国路91号金地中心B座**层****室 ****有限公司</span> --%>
+<%-- 								<span style="margin-left:50px;">13501005894</span> --%>
+<%-- 							 	<span style="margin-left:100px;">北京 朝阳区 建国路91号金地中心B座**层****室 ****有限公司</span> --%>
 <!-- 						 	</label> -->
 <!-- 						</li> -->
 					</ul>
-					<a class="btn btn-default update" href="">修改</a>
+					<a class="btn btn-default update" id="address_add" href="javaScript:void(0);">修改</a>
 				</div>
 			</div>
 		</div>
@@ -146,12 +181,8 @@ var yiqin_cart_check = function(){
 			<div class="col-sm-6">
 				<h5><b><s:text name="cart.check.product.list"></s:text></b></h5>
 				<div class="total_area">
-					<ul>
-						<li>高级圆珠笔 <span>2 × 5 = 10</span></li>
-						<li>高级圆珠笔 <span>1 × 200 = 200</span></li>
-						<li>总价 <span>210</span></li>
-					</ul>
-						<a class="btn btn-default check_out" href="">提交订单</a>
+					<ul></ul>
+					<a class="btn btn-default check_out" href="">提交订单</a>
 				</div>
 			</div>
 		</div> 

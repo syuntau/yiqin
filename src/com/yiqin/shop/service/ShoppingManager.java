@@ -59,6 +59,17 @@ public interface ShoppingManager {
 	public Cart findCartInfo(String userName, String productId);
 
 	/**
+	 * 查询指定productIds的购物车信息
+	 * 
+	 * @param userName
+	 *            登录用户名
+	 * @param productIds
+	 *            商品ID 多个用，分隔
+	 * @return 购物车信息
+	 */
+	public List<Cart> findCartsByProductIds(String userName, String productIds);
+
+	/**
 	 * 删除购物车商品
 	 * 
 	 * @param userName
