@@ -6,7 +6,7 @@
     <class name="com.yiqin.shop.pojo.Order" table="order" catalog="yiqin">
         <id name="id" type="long">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="status" type="java.lang.Byte">
             <column name="status">
