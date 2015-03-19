@@ -6,6 +6,7 @@
 
 <tiles-definitions>
 
+<!-- shop -->
 	<definition name="shop.header" template="/shop/jsp/common/header.jsp">
 		<put-attribute name="header.top" value="/shop/jsp/common/header-top.jsp" />
 		<put-attribute name="header.middle" value="/shop/jsp/common/header-middle.jsp" />
@@ -92,4 +93,17 @@
 		<put-attribute name="body" value="/shop/jsp/login.jsp" />
 	</definition>
 
+<!-- sa -->
+	<definition name="sa.template" template="/sa/jsp/template.jsp">
+		<put-attribute name="title" value="title" />
+		<put-attribute name="include" value="/sa/jsp/common/common.jsp" />
+		<put-attribute name="header" value="sa.header" />
+		<put-attribute name="body" value="body" />
+		<put-attribute name="footer" value="sa.footer" />
+	</definition>
+
+
+	<definition name="sa.login" template="/sa/jsp/login.jsp">
+		<put-attribute name="include" value="/sa/jsp/common/common.jsp" />
+	</definition>
 </tiles-definitions>

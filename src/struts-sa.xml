@@ -4,19 +4,16 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-<!-- 	<constant name="struts.locale" value="zh_CN" /> -->
-	<constant name="struts.custom.i18n.resources" value="app_sa, config_sa" />
-	<constant name="struts.ui.theme" value="simple"></constant>
-	<constant name="struts.i18n.encoding" value="utf-8"></constant>
-	<constant name="struts.action.extension" value="action"></constant>
-	<constant name="struts.devMode" value="true"></constant>
 
 	<include file="struts-default.xml" />
-	<package name="sa" extends="struts-default">
+	<package name="sa" extends="struts-default" namespace="/sa">
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 		
+		<action name="toLogin" class="com.yiqin.sa.action.ToLogin">
+			<result type="tiles">sa.login</result>
+		</action>
 	</package>
 
 </struts>
