@@ -14,6 +14,22 @@
 		<action name="toLogin" class="com.yiqin.sa.action.ToLogin">
 			<result type="tiles">sa.login</result>
 		</action>
+
+		<action name="login" class="com.yiqin.sa.action.Login">
+			<result type="tiles">sa.index</result>
+		</action>
+
+		<action name="dispatcher" class="com.yiqin.sa.action.SANavDispatcherAction">
+			<result name="order" type="tiles">sa.order</result>
+			<result name="user-sa" type="tiles">sa.user.sa</result>
+			<result name="user-admin" type="tiles">sa.user.admin</result>
+			<result name="product-attribute" type="tiles">sa.product.attribute</result>
+			<result name="product-item" type="tiles">sa.product.item</result>
+			<result name="quick-shopping" type="tiles">sa.quick.shopping</result>
+			<result name="inventory-info" type="tiles">sa.inventory.info</result>
+			<result name="inventory-order-by-customer" type="tiles">sa.inventory.order.by.customer</result>
+			<result name="inventory-all-orders" type="tiles">sa.inventory.all.orders</result>
+		</action>
 	</package>
 
 </struts>

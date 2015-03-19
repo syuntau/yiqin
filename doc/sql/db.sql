@@ -84,8 +84,9 @@ CREATE TABLE `product` (
 
 
 /* 订单表 */
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
-  `id` bigint(20) NOT NULL COMMENT '订单ID',
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '订单ID',
   `status` tinyint(4) DEFAULT NULL COMMENT '订单状态\r\n',
   `user_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
   `name` varchar(50) DEFAULT NULL COMMENT '用户名称',
@@ -106,7 +107,7 @@ CREATE TABLE `order` (
   `update_date` datetime DEFAULT NULL COMMENT '订单更新时间',
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '订单删除Flag',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) AUTO_INCREMENT=10000001 ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 
 /* 购物车表 */
