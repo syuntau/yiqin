@@ -75,10 +75,19 @@ public interface ShoppingManager {
 	 * @param userName
 	 *            登录用户名
 	 * @param productId
-	 *            商品ID
+	 *            商品IDS
 	 * @return 删除成功状态
 	 */
 	public boolean deleteCartProduct(String userName, String productId);
+	
+	/**
+	 * 删除购物车指定商品
+	 * 
+	 * @param cartList
+	 *            删除cart集合
+	 * @return 删除成功状态
+	 */
+	public boolean deleteCartProduct(List<Cart> cartList);
 
 	/**
 	 * 提交最終订单

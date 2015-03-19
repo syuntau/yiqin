@@ -81,4 +81,9 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		}
 		return shoppingDao.findCartsByProductIds(userName, productIds);
 	}
+
+	@Override
+	public boolean deleteCartProduct(List<Cart> cartList) {
+		return shoppingDao.deleteCart(cartList);
+	}
 }

@@ -83,6 +83,8 @@
 			<result name="success" type="tiles">shop.order</result>
 		</action>
 		
+		<action name="submitOrder" class="com.yiqin.shop.action.SubmitOrderAction"></action>
+		
 		<action name="toCategorySearch" class="com.yiqin.shop.action.ToCategorySearchAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success" type="tiles">shop.search</result>

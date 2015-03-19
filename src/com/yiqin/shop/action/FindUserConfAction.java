@@ -49,6 +49,7 @@ public class FindUserConfAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
 			// 用户ID

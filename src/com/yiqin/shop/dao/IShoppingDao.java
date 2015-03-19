@@ -33,6 +33,15 @@ public interface IShoppingDao {
 	public boolean deleteCart(String userId, String productId);
 
 	/**
+	 * 删除购物车记录
+	 * 
+	 * @param cartList
+	 *            删除cart集合
+	 * @return 成功状态
+	 */
+	public boolean deleteCart(List<Cart> cartList);
+
+	/**
 	 * 更新购物车购买商品数量
 	 * 
 	 * @param userId

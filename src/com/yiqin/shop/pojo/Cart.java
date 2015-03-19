@@ -1,5 +1,7 @@
 package com.yiqin.shop.pojo;
 
+import com.yiqin.util.Util;
+
 // Generated 2015-2-12 14:36:12 by Hibernate Tools 3.4.0.CR1
 
 /**
@@ -11,7 +13,7 @@ public class Cart implements java.io.Serializable {
 	private String useId;// 用户名
 	private String productId;// 商品ID
 	private String productName;// 商品名
-	private String imgUrl;//商品缩略图URL
+	private String imgUrl;// 商品缩略图URL
 	private Float price;// 单价
 	private Integer count; // 数量
 	private String productInfo;// 商品其他属性(如：品牌,颜色,....)
@@ -94,4 +96,7 @@ public class Cart implements java.io.Serializable {
 		this.productInfo = productInfo;
 	}
 
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

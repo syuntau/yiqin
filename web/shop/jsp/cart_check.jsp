@@ -10,10 +10,40 @@ var cart_check_temp = {
 	check_strong : '<strong></strong>',
 	check_span : '<span></span>',
 	check_shou : '&nbsp;&nbsp;&nbsp;&nbsp;收',
+	check_defType : '&nbsp;&nbsp;&nbsp;&nbsp;默认地址',
+	saveOrUpdate : "",
 };
 
 var yiqin_cart_check = function(){
+	var REX=/^[\s\u3000]*|[\s\u3000]*$/g;
+	
 	var action = {
+		submitOrder : function(){
+			if(confirm("请确认订单信息是否正确，是否确认提交订单？")){
+				var param = submitOrderParam();
+				$.ajax({
+		             type: "POST",
+		             async: true,
+		             url: "submitOrder",
+		             dataType: "json",
+		             data : param,
+		             success: function(data){
+		            	if(data=='1'){
+		            		alert("订单信息填写不完整，请再次确认！");
+		            	}else if(data=='2'){
+		            		alert("订单提交失败，请稍后再试！");
+		            	}else if(data=='3'){
+		            		alert("订单提交成功，开发完成后会自动跳转到订单中心，谢谢！");
+		            		window.location.href="index";
+		            	}
+	                },
+	                beforeSend: function(){},
+	                complete: function(){},
+	                error: function(){}
+		         });
+			}
+		},
+			
 		findUserAddress : function(){
 			$.ajax({
 	             type: "POST",
@@ -29,7 +59,7 @@ var yiqin_cart_check = function(){
 	         });
 		},
 		
-		findAddressByAttr : function(attribute){
+		editAddressByAttr : function(attribute){
 			$.ajax({
 	             type: "POST",
 	             async: true,
@@ -43,9 +73,16 @@ var yiqin_cart_check = function(){
 	            	}else if(data=='2'){
 	            		alert("加载地址信息失败，请稍后再试！");
 	            	}else{
-	            		$modal.find("input[name=receive_name]").val();
-	            		$modal.find("input[name=receive_tel]").val();
-	            		$modal.find("input[name=receive_area]").val();
+	            		var userName = data.value.split("_receive_")[0],
+	       					telephone = data.value.split("_receive_")[1],
+	       					address = data.value.split("_receive_")[2];
+	            		$modal.find("input[name=receive_name]").val(userName);
+	            		$modal.find("input[name=receive_tel]").val(telephone);
+	            		$modal.find("input[name=receive_area]").val(address);
+	            		$modal.data("receive_aType",data.attribute);
+	            		if(data.attribute=="address_def"){
+	            			$modal.find("input[name=receive_default]").attr("checked",true);
+	            		}
 	            	}
 	             },
 	             beforeSend: function(){},
@@ -55,39 +92,62 @@ var yiqin_cart_check = function(){
 		},
 		
 		saveOrUpdateAddress : function(){
-			var options = {
-				target: "",
-				type: "POST",
-				url:"saveOrUpdateAddress",
-		        resetForm: true,
-		        success: responseFunction
-			};
-	    	if (registerValidation()) {
-	    		$('#registerFormId').ajaxSubmit(options);
-	    	}
-	    	return false;
-		},
-		
-		deleteUserAddress : function(){
+			var dataParm = checkReceiveAddress();
+			if(!dataParm){
+				return false;
+			}
+			dataParm = dataParm + "&saveOrUpdate="+cart_check_temp.saveOrUpdate;
 			$.ajax({
 	             type: "POST",
 	             async: true,
-	             url: "deleteUserAddress",
-	             data : "attribute="+attribute,
+	             url: "saveOrUpdateAddress",
+	             data : dataParm,
 	             dataType: "json",
 	             success: function(data){
-	            	if(data=='1'){
-	            		alert("本条收货信息不存在，请再次确认！");
-	            	}else if(data=='2'){
-	            		alert("删除失败，请稍后再试！");
-	            	}else if(data=='3'){
-	            		alert("删除成功！");
-	            	}
+	            	 if(data=='1'){
+	            		 $("#receive_error").html("信息填写不正确，请再次填写！");
+	            		 return false;
+	            	 }else if(data=='2'){
+	            		 $("#receive_error").html("保存失败，请稍后重试！");
+	            		 return false;
+	            	 }else if(data=='3'){
+	            		 yiqin_cart_check.findUserAddress();
+	            		 return false;
+	            	 }else if(data=='4'){
+	            		 $("#receive_error").html("地址数量超出最大数量10个");
+	            		 return false;
+	            	 }
 	             },
 	             beforeSend: function(){},
-	             complete: function(){},
+	             complete: function(){
+	            	 $('#EditReceiveInfo').modal('hide');
+	             },
 	             error: function(){}
 	         });
+		},
+		
+		deleteUserAddress : function(attribute){
+			if(confirm("确认要删除选择的地址信息吗？")){
+				$.ajax({
+		             type: "POST",
+		             async: true,
+		             url: "deleteUserAddress",
+		             data : "attribute="+attribute,
+		             dataType: "json",
+		             success: function(data){
+		            	if(data=='1'){
+		            		alert("本条收货信息不存在，请再次确认！");
+		            	}else if(data=='2'){
+		            		alert("删除失败，请稍后再试！");
+		            	}else if(data=='3'){
+		            		yiqin_cart_check.findUserAddress();
+		            	}
+		             },
+		             beforeSend: function(){},
+		             complete: function(){},
+		             error: function(){}
+		         });
+			}
 		},
 		
 		totalSelCartInfo : function(){
@@ -115,23 +175,51 @@ var yiqin_cart_check = function(){
 		},
 	};
 	
+	var submitOrderParam = function(){
+		var addressAttr = $("input:checked[name=accept_info]").val(),
+			zhifu = $("input:checked[name=zhi_fu]").val(),
+			peisong = $("input:checked[name=pei_song]").val(),  
+			fapiaotaitou = $("input[name=fapiaotaitou]").val(),
+			fapiaomingxi = $("input[name=fapiaomingxi]").val(),
+			productIds = "<s:property value='#request.submit_ProductIds'/>";
+		return "addressAttr="+addressAttr+"&zhifu="+zhifu+"&peisong="+peisong+"&fapiaotaitou="+fapiaotaitou+"&fapiaomingxi="+fapiaomingxi+"&productIds="+productIds;
+	};
+	
 	var appendToAddress = function(data){
 		var $user_acc_info = $("#user_acc_info"),
 			$check_li = $(cart_check_temp.check_li);
 			$user_acc_info.empty();
+			$("#address_add").click(function(){
+				cart_check_temp.saveOrUpdate = "save";
+				emptyReceiveModal();
+			});
 		if(data == '1'){
 			$user_acc_info.append($check_li);
 			$check_li.append("您还没有配送地址信息，请点击添加按钮添加");
-			$("#address_add").html("添加");
+			$("#address_update").remove();
+			$("#address_delete").remove();
        	}else if(data == '2'){
        		$user_acc_info.append($check_li);
 			$check_li.append("配送地址信息加载失败，请刷新页面再试");
-			$("#address_add").remove();
        	}else{
-       		$("#address_add").html("修改");
-			$("#address_add").click(function(){
+       		if(data.length>=10){
+       			$("#address_add").remove();
+       		}
+			$("#address_update").click(function(){
+				cart_check_temp.saveOrUpdate = "update";
+				emptyReceiveModal();
 				var type = $("input:checked[name=accept_info]").val();
-				yiqin_cart_check.findAddressByAttr(type);
+				yiqin_cart_check.editAddressByAttr(type);
+			});
+			$("#address_delete").click(function(){
+				var type = $("input:checked[name=accept_info]").val();
+				yiqin_cart_check.deleteUserAddress(type);
+			});
+			var isDef = false;
+			$.each(data, function(i,tempVal){
+				if(tempVal.attribute=="address_def"){
+					isDef = true;
+				}
 			});
        		$.each(data, function(n,val){
        			var $check_li = $(cart_check_temp.check_li),
@@ -139,24 +227,92 @@ var yiqin_cart_check = function(){
        				$check_label = $(cart_check_temp.check_label),
        				$check_strong = $(cart_check_temp.check_strong),
        				$check_span = $(cart_check_temp.check_span),
-       				$check_shou = $(cart_check_temp.check_shou);
+       				check_shou = cart_check_temp.check_shou,
+       				check_defType = cart_check_temp.check_defType,
+       				userName = val.value.split("_receive_")[0],
+       				telephone = val.value.split("_receive_")[1],
+       				address = val.value.split("_receive_")[2];
        			
        			$check_li.attr('id',val.attribute).append($check_input_radio);
        			$check_input_radio.attr('name','accept_info').val(val.attribute);
-       			$check_li.append($check_label.append($check_strong).append($check_shou).append($check_span));
-       			$check_strong.append(val.userId).attr('title',val.userId);
-       			$check_span.append(val.telephone).css("margin-left","50px");
+       			if(isDef){
+       				if(val.attribute=="address_def"){
+       					$check_input_radio.attr("checked",true);
+       				}
+       			}else{
+       				if(n==0){
+       					$check_input_radio.attr("checked",true);
+       				}
+       			}
+       			$check_li.append($check_label.append($check_strong).append(check_shou).append($check_span));
+       			$check_strong.append(userName).attr('title',userName);
+       			$check_span.append(telephone).css("margin-left","50px");
        			
        			$check_span = $(cart_check_temp.check_span);
        			$check_label.append($check_span);
-       			$check_span.append(val.value).css("margin-left","100px");
+       			$check_span.append(address).css("margin-left","100px");
+       			if(val.attribute=="address_def"){
+       				$check_span.append(check_defType);
+       			}
        			
        			$user_acc_info.append($check_li);
        		});
        	}
-		
 	};
 	
+	var checkReceiveAddress = function(){
+		var $modal = $("#EditReceiveInfo"),
+			userName = $modal.find("input[name=receive_name]").val().replace(REX, ""),
+			telephone = $modal.find("input[name=receive_tel]").val().replace(REX, ""),
+			address = $modal.find("input[name=receive_area]").val().replace(REX, ""),
+			defObj = $modal.find("input[name=receive_default]"),
+			oldAttribute = $modal.data("receive_aType"),
+			attribute = "";
+		if(userName==""){
+			$modal.find("input[name=receive_name]").focus();
+			$("#receive_error").html("收货人员必须填写");
+			return false;
+		}
+		if(telephone==""){
+			$modal.find("input[name=receive_tel]").focus();
+			$("#receive_error").html("联系电话必须填写");
+			return false;
+		}
+		if(address==""){
+			$modal.find("input[name=receive_area]").focus();
+			$("#receive_error").html("收货地址必须填写");
+			return false;
+		}
+		if (!checkPhone(telephone)) {
+			$modal.find("input[name=receive_tel]").focus();
+			$("#receive_error").html("联系电话格式错误，请重新输入");
+			return false;
+		}
+		if(defObj.is(':checked')){
+			attribute = "address_def";
+		}
+		return "attribute="+attribute+"&address="+address+"&telephone="+telephone+"&userName="+userName+"&oldAttribute="+oldAttribute;
+	};
+	
+	var checkPhone = function(value) {
+		var REX_PHONE = /^[1][0-9]{10}$/;
+		var REX_DIANH = /^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
+		if (REX_PHONE.test(value) || REX_DIANH.test(value)) {
+			return true;
+		}
+		return false;
+	};
+	
+	var emptyReceiveModal = function(){
+		var $modal = $("#EditReceiveInfo");
+		$("#receive_error").html("");
+		$modal.find("input[name=receive_name]").val("");
+		$modal.find("input[name=receive_tel]").val("");
+		$modal.find("input[name=receive_area]").val("");
+		$modal.find("input[name=receive_default]").attr("checked",false);
+		$modal.data("receive_aType","");
+	};
+
 	return action;
 }();
 
@@ -175,17 +331,10 @@ $(document).ready(function(){
 			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.receiver.information"></s:text></b></h5>
 				<div class="chose_area">
-					<ul class="user_option" id="user_acc_info">
-<!-- 						<li> -->
-<!-- 							<input type="radio" name="accept_info"> -->
-<!-- 							<label> -->
-<%-- 								<strong title="李三三">李三三</strong>&nbsp;&nbsp;&nbsp;&nbsp;收 --%>
-<%-- 								<span style="margin-left:50px;">13501005894</span> --%>
-<%-- 							 	<span style="margin-left:100px;">北京 朝阳区 建国路91号金地中心B座**层****室 ****有限公司</span> --%>
-<!-- 						 	</label> -->
-<!-- 						</li> -->
-					</ul>
-					<a class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo" href="javaScript:void(0);"></a>
+					<ul class="user_option" id="user_acc_info"></ul>
+					<button class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo">添加</button>
+					<button class="btn btn-default update" id="address_update" data-toggle="modal" data-target="#EditReceiveInfo">修改</button>
+					<button class="btn btn-default update" id="address_delete">删除</button>
 				</div>
 			</div>
 		</div>
@@ -195,15 +344,15 @@ $(document).ready(function(){
 				<div class="chose_area">
 					<ul class="user_option">
 						<li>
-							<input type="radio" name="zhi_fu" value="zhifu_1" checked="checked">
+							<input type="radio" name="zhi_fu" value="1" checked="checked">
 							<label>货到付款</label>
 						</li>
 						<li>
-							<input type="radio" name="zhi_fu" value="zhifu_2">
+							<input type="radio" name="zhi_fu" value="2">
 							<label>公司转账</label>
 						</li>
 						<li>
-							<input type="radio" name="zhi_fu" value="zhifu_3">
+							<input type="radio" name="zhi_fu" value="3">
 							<label>邮局汇款</label>
 						</li>
 					</ul>
@@ -214,11 +363,11 @@ $(document).ready(function(){
 				<div class="chose_area">
 					<ul class="user_option">
 						<li>
-							<input type="radio" name="pei_song" value="peisong_1" checked="checked">
+							<input type="radio" name="pei_song" value="1" checked="checked">
 							<label>依勤送货</label>
 						</li>
 						<li>
-							<input type="radio" name="pei_song" value="peisong_2">
+							<input type="radio" name="pei_song" value="2">
 							<label>上门自提</label>
 						</li>
 					</ul>
@@ -236,21 +385,20 @@ $(document).ready(function(){
 						</li>
 						<li>
 							<label>发票抬头：</label>
-							<span>北京XXXXX有限公司</span>
+							<input type="text" name="fapiaotaitou" value="个人">
 						</li>
 						<li>
-							<label>发票内容：</label>
-							<span>办公用品</span>
+							<label>发票明细：</label>
+							<input type="text" name="fapiaomingxi" value="办公用品">
 						</li>
 					</ul>
-					<a class="btn btn-default update" href="">修改</a>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<h5><b><s:text name="cart.check.product.list"></s:text></b></h5>
 				<div class="total_area">
 					<ul></ul>
-					<a class="btn btn-default check_out" href="">提交订单</a>
+					<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.submitOrder();">提交订单</a>
 				</div>
 			</div>
 		</div> 
@@ -278,10 +426,17 @@ $(document).ready(function(){
 							<label>收货地址：</label>
 							<input type="text" name="receive_area">
 						</li>
+						<li>
+							<label>是否设置为默认地址 </label>
+							<input type="checkbox" name="receive_default" value="address_def">
+						</li>
+						<li>
+							<span style="color:red" id="receive_error"></span>
+						</li>
 					</ul>
 	         	</div>
 	         	<div class="modal-footer">
-					<a class="btn btn-default check_out" href="javaScript:void(0);">保存</a>
+					<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.saveOrUpdateAddress();">保存</a>
 				</div>
 			</div>
 		</div>

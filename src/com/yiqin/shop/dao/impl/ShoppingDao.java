@@ -94,4 +94,15 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 				new Object[] { userId, productIds });
 	}
 
+	@Override
+	public boolean deleteCart(List<Cart> cartList) {
+		try {
+			getHibernateTemplate().deleteAll(cartList);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

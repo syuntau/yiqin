@@ -51,6 +51,7 @@ public class ToSettlementOrderAction extends ActionSupport {
 			List<Cart> cartList = shoppingManager.findCartsByProductIds(Util
 					.getLoginUser(request.getSession()).getId(), paramVal);
 			request.setAttribute("settlement_products", cartList);
+			request.setAttribute("submit_ProductIds", paramVal);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
