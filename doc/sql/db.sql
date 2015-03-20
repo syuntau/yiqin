@@ -96,7 +96,7 @@ CREATE TABLE `order` (
   `zhifu` tinyint(4) DEFAULT NULL COMMENT '支付方式',
   `yunfei` float(9,3) DEFAULT NULL COMMENT '运费',
   `songhuoriqi` varchar(20) DEFAULT NULL COMMENT '送货日期',
-  `songhuoshijian` varchar(20) DEFAULT NULL COMMENT '送货时间',
+  `peisongfangshi` varchar(20) DEFAULT NULL COMMENT '配送方式',
   `fapiaotaitou` varchar(50) DEFAULT NULL COMMENT '发票抬头',
   `fapiaomingxi` varchar(100) DEFAULT NULL COMMENT '发票明细',
   `product_list` varchar(1024) DEFAULT NULL COMMENT '商品列表：商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价',

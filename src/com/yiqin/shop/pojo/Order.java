@@ -19,7 +19,7 @@ public class Order implements java.io.Serializable {
 	private Byte zhifu;// 支付方式
 	private Float yunfei; // 运费
 	private String songhuoriqi;// 送货日期
-	private String songhuoshijian;// 送货时间
+	private String peisongfangshi;// 配送方式
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
 	private String productList; // 商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价
@@ -39,7 +39,7 @@ public class Order implements java.io.Serializable {
 
 	public Order(long id, Byte status, String userId, String name,
 			String address, String mobile, String email, Byte zhifu,
-			Float yunfei, String songhuoriqi, String songhuoshijian,
+			Float yunfei, String songhuoriqi, String peisongfangshi,
 			String fapiaotaitou, String fapiaomingxi, String productList,
 			Float yuanjia, Float zhekou, Float zongjia, Date crateDate,
 			Date updateDate, Byte deleteFlag) {
@@ -53,7 +53,7 @@ public class Order implements java.io.Serializable {
 		this.zhifu = zhifu;
 		this.yunfei = yunfei;
 		this.songhuoriqi = songhuoriqi;
-		this.songhuoshijian = songhuoshijian;
+		this.peisongfangshi = peisongfangshi;
 		this.fapiaotaitou = fapiaotaitou;
 		this.fapiaomingxi = fapiaomingxi;
 		this.productList = productList;
@@ -145,12 +145,12 @@ public class Order implements java.io.Serializable {
 		this.songhuoriqi = songhuoriqi;
 	}
 
-	public String getSonghuoshijian() {
-		return this.songhuoshijian;
+	public String getPeisongfangshi() {
+		return peisongfangshi;
 	}
 
-	public void setSonghuoshijian(String songhuoshijian) {
-		this.songhuoshijian = songhuoshijian;
+	public void setPeisongfangshi(String peisongfangshi) {
+		this.peisongfangshi = peisongfangshi;
 	}
 
 	public String getFapiaotaitou() {
