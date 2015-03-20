@@ -44,8 +44,8 @@
             <column name="songhuoriqi" length="20">
             </column>
         </property>
-        <property name="songhuoshijian" type="string">
-            <column name="songhuoshijian" length="20">
+        <property name="peisongfangshi" type="string">
+            <column name="peisongfangshi" length="20">
             </column>
         </property>
         <property name="fapiaotaitou" type="string">
