@@ -34,6 +34,16 @@ public class Util {
 		}
 		return true;
 	}
+	
+	public static String peiSongFangShi(String peisong) {
+		String peisongfangshi = "依勤送货";
+		if ("1".equals(peisong)) {
+			peisongfangshi = "依勤送货";
+		} else if ("2".equals(peisong)) {
+			peisongfangshi = "上门自提";
+		}
+		return peisongfangshi;
+	}
 
 	public static String objToString(Object obj) {
 		if(obj==null) return null;

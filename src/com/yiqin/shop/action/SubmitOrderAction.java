@@ -78,6 +78,7 @@ public class SubmitOrderAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
 			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
@@ -98,7 +99,7 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setZhifu(zhifu);
 			order.setFapiaotaitou(fapiaotaitou);
 			order.setFapiaomingxi(fapiaomingxi);
-			order.setSonghuoriqi(peisong);
+			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
 			order.setStatus((byte) 0);
 			order.setCrateDate(new Date());
 			order.setUpdateDate(new Date());
