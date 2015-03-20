@@ -139,5 +139,5 @@ $(document).ready(function() {
 	yiqin_category_action.initCategoryInfo();
 });
 </script>
-
+<h2><s:text name="shop.index.left.category"/></h2>
 <div class="panel-group category-products" id="accordian"><!--category-productsr--></div><!--/category-products-->
