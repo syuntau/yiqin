@@ -19,7 +19,7 @@
 	var msg = "${requestScope.notLoginError}";
 	if (msg != "") {
 		alert(msg);
-		postFormToTopAction("top_login");
+		yiqin_public_js.postFormToTopAction("top_login");
 	}
 </script>
 </head>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.shop.dao.IProductDao;
+import com.yiqin.shop.pojo.Attribute;
 import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.pojo.Product;
 import com.yiqin.util.Util;
@@ -26,12 +27,12 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 				if (pids.endsWith(",")) {
 					pids = pids.substring(0, pids.length() - 1);
 				}
-				queryString = "from Product where productId in (?)";
+				queryString = "from Product where productId in ("+ pids +")";
+				return getHibernateTemplate().find(queryString);
 			} else {
 				queryString = "from Product where productId = ?";
+				return getHibernateTemplate().find(queryString, pids);
 			}
-			return getHibernateTemplate().find(queryString,
-					new Object[] { pids });
 		}
 		return null;
 	}
@@ -45,6 +46,17 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		queryString.append("from Product where productId like '");
 		queryString.append(cateId).append("%'");
 		return getHibernateTemplate().find(queryString.toString());
+	}
+
+	@Override
+	public Attribute findProductAttr(String attrNameId, int cateId) {
+		String queryString = "from Attribute where nameId=? and categoryId=?";
+		List<?> list = getHibernateTemplate().find(queryString,
+				new Object[] { attrNameId, cateId });
+		if (Util.isNotEmpty(list)) {
+			return (Attribute) list.get(0);
+		}
+		return null;
 	}
 
 }

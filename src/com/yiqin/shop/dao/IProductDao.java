@@ -2,6 +2,7 @@ package com.yiqin.shop.dao;
 
 import java.util.List;
 
+import com.yiqin.shop.pojo.Attribute;
 import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.pojo.Product;
 
@@ -36,5 +37,16 @@ public interface IProductDao {
 	 * @return 对应商品
 	 */
 	public List<Product> findProductInfoByCategorys(String cateId);
+
+	/**
+	 * 查询指定分类、属性记录
+	 * 
+	 * @param attrNameId
+	 *            属性名称ID 英文名
+	 * @param cateId
+	 *            分类ID
+	 * @return Attribute
+	 */
+	public Attribute findProductAttr(String attrNameId, int cateId);
 
 }

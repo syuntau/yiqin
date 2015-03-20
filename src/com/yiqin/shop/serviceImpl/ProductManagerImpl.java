@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.dao.IProductDao;
+import com.yiqin.shop.pojo.Attribute;
 import com.yiqin.shop.pojo.Category;
 import com.yiqin.shop.pojo.Product;
 import com.yiqin.shop.service.ProductManager;
@@ -47,6 +48,9 @@ public class ProductManagerImpl implements ProductManager {
 			pidSet.add(product.getProductId());
 		}
 		for (String pid : pidSet) {
+			int categoryId = Integer.valueOf(pid.substring(0, 4));
+			Attribute attr = productDao.findProductAttr("price", categoryId);
+			int priceAttr = attr.getId();
 			ProductView productView = new ProductView();
 			productView.setProductId(pid);
 			for (Product product : productList) {
@@ -57,7 +61,7 @@ public class ProductManagerImpl implements ProductManager {
 					if (product.getAttributeId() == 5) {
 						productView.setImgUrl(product.getValue());
 					}
-					if (product.getAttributeId() == 2) {
+					if (product.getAttributeId() == priceAttr) {
 						productView.setPrice(product.getValue());
 					}
 				}
@@ -76,12 +80,22 @@ public class ProductManagerImpl implements ProductManager {
 		if (Util.isEmpty(productList)) {
 			return null;
 		}
+		int priceAttr = 0;
+		if (categorys.length() >= 4) {
+			Attribute attr = productDao.findProductAttr("price", Integer.valueOf(categorys));
+			priceAttr = attr.getId();
+		}
 		List<ProductView> pViewList = new ArrayList<ProductView>();
 		Set<String> pidSet = new HashSet<String>();
 		for (Product product : productList) {
 			pidSet.add(product.getProductId());
 		}
 		for (String pid : pidSet) {
+			if (categorys.length() < 4) {
+				int categoryId = Integer.valueOf(pid.substring(0, 4));
+				Attribute attr = productDao.findProductAttr("price", categoryId);
+				priceAttr = attr.getId();
+			}
 			ProductView productView = new ProductView();
 			productView.setProductId(pid);
 			for (Product product : productList) {
@@ -92,7 +106,7 @@ public class ProductManagerImpl implements ProductManager {
 					if (product.getAttributeId() == 5) {
 						productView.setImgUrl(product.getValue());
 					}
-					if (product.getAttributeId() == 2) {
+					if (product.getAttributeId() == priceAttr) {
 						productView.setPrice(product.getValue());
 					}
 				}
