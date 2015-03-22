@@ -1,6 +1,3 @@
-
-    <div id="wrapper">
-
         <!-- Navigation -->
 
         <div id="page-wrapper">
@@ -545,6 +542,3 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->

@@ -140,6 +140,6 @@
 	</definition>
 
 	<definition name="sa.product.attribute" extends="sa.template">
-		<put-attribute name="body" value="/sa/jsp/index.jsp" />
+		<put-attribute name="body" value="/sa/jsp/product.jsp" />
 	</definition>
 </tiles-definitions>

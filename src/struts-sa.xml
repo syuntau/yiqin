@@ -11,14 +11,16 @@
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 		
-		<action name="toLogin" class="com.yiqin.sa.action.ToLogin">
+		<action name="toLogin" class="com.yiqin.sa.action.ToLoginAction">
 			<result type="tiles">sa.login</result>
 		</action>
 
-		<action name="login" class="com.yiqin.sa.action.Login">
+		<action name="login" class="com.yiqin.sa.action.LoginAction">
 			<result type="tiles">sa.index</result>
 		</action>
 
+		<action name="getCategoryList_*" class="com.yiqin.sa.action.GetCategoryListAction" method="{1}"></action>
+		
 		<action name="dispatcher" class="com.yiqin.sa.action.SANavDispatcherAction">
 			<result name="order" type="tiles">sa.order</result>
 			<result name="user-sa" type="tiles">sa.user.sa</result>

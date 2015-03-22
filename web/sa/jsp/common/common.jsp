@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath%>sa/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 <link href="<%=basePath%>sa/css/plugins/timeline.css" rel="stylesheet">
 <link href="<%=basePath%>sa/css/sb-admin-2.css" rel="stylesheet">
-<link href="<%=basePath%>sa/css/plugins/morris.css" rel="stylesheet">
+<%-- <link href="<%=basePath%>sa/css/plugins/morris.css" rel="stylesheet"> --%>
 <link href="<%=basePath%>sa/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,7 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>sa/js/jquery-1.11.0.js"></script>
 <script src="<%=basePath%>sa/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>sa/js/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="<%=basePath%>sa/js/plugins/morris/raphael.min.js"></script>
-<script src="<%=basePath%>sa/js/plugins/morris/morris.min.js"></script>
-<script src="<%=basePath%>sa/js/plugins/morris/morris-data.js"></script>
+<%-- <script src="<%=basePath%>sa/js/plugins/morris/raphael.min.js"></script> --%>
+<%-- <script src="<%=basePath%>sa/js/plugins/morris/morris.min.js"></script> --%>
+<%-- <script src="<%=basePath%>sa/js/plugins/morris/morris-data.js"></script> --%>
 <script src="<%=basePath%>sa/js/sb-admin-2.js"></script>
+<script type="text/javascript">
+var com_conf = {
+	loading_icon : '<h4><i class="icon-spinner icon-spin"></i></h4>'
+}
+</script>
