@@ -14,6 +14,9 @@
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
+	<script src="<%=basePath%>shop/js/jquery.js"></script>
+	<script src="<%=basePath%>shop/js/jquery.form.js"></script>
+	<script src="<%=basePath%>shop/js/publicSetup.js"></script>
 <script type="text/javascript">
 	//错误提示信息
 	var msg = "${requestScope.notLoginError}";

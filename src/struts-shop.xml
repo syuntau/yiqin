@@ -77,7 +77,9 @@
 			<result name="success" type="tiles">shop.order</result>
 		</action>
 		
-		<action name="submitOrder" class="com.yiqin.shop.action.SubmitOrderAction"></action>
+		<action name="submitOrder" class="com.yiqin.shop.action.SubmitOrderAction">
+			<result name="success" type="tiles">shop.center.order</result>
+		</action>
 		
 		<action name="toCategorySearch" class="com.yiqin.shop.action.ToCategorySearchAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -98,6 +100,7 @@
 			<result name="top_account" type="tiles">shop.index</result>
 			<result name="top_quick_shopping" type="tiles">shop.index</result>
 			<result name="top_cart" type="tiles">shop.cart</result>
+			<result name="top_order" type="tiles">shop.center.order</result>
 			<result name="top_login" type="tiles">shop.login</result>
 			<result name="top_home" type="tiles">shop.index</result>
 			<result name="top_logout" type="chain">logout</result>

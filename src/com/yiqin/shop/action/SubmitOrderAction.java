@@ -79,14 +79,12 @@ public class SubmitOrderAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
-		String result = "";
 		try {
 			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
 					|| Util.isEmpty(fapiaotaitou) || Util.isEmpty(fapiaomingxi)
 					|| Util.isEmpty(productIds) || zhifu == null) {
-				result = "1";
-				response.getWriter().print(result);
-				return null;
+				request.setAttribute("submit_order_error", 1);
+				return SUCCESS;
 			}
 			// 登录用户
 			User user = Util.getLoginUser(request.getSession());
@@ -131,17 +129,16 @@ public class SubmitOrderAction extends ActionSupport {
 			if (flag) {
 				//删除购物车记录
 				shoppingManager.deleteCartProduct(cartList);
-				result = "3";
+				request.setAttribute("submit_order_error", 3);
+				return SUCCESS;
 			} else {
-				result = "2";
+				request.setAttribute("submit_order_error", 2);
+				return SUCCESS;
 			}
-			response.getWriter().print(result);
-			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = "2";
-			response.getWriter().print(result);
-			return null;
+			request.setAttribute("submit_order_error", 2);
+			return SUCCESS;
 		}
 	}
 }

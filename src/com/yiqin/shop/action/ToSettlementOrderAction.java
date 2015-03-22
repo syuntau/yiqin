@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.pojo.Cart;
 import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 去结算购物车商品
@@ -52,6 +53,7 @@ public class ToSettlementOrderAction extends ActionSupport {
 					.getLoginUser(request.getSession()).getId(), paramVal);
 			request.setAttribute("settlement_products", cartList);
 			request.setAttribute("submit_ProductIds", paramVal);
+			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, "top_sett");
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 
 <script type="text/javascript">
 var cart_check_temp = {
@@ -12,6 +12,9 @@ var cart_check_temp = {
 	check_shou : '&nbsp;&nbsp;&nbsp;&nbsp;收',
 	check_defType : '&nbsp;&nbsp;&nbsp;&nbsp;默认地址',
 	saveOrUpdate : "",
+	
+	check_from : '<form method="post" action="submitOrder"></form>',
+	check_input_hidden : '<input type="hidden"/>',
 };
 
 var yiqin_cart_check = function(){
@@ -20,27 +23,27 @@ var yiqin_cart_check = function(){
 	var action = {
 		submitOrder : function(){
 			if(confirm("请确认订单信息是否正确，是否确认提交订单？")){
-				var param = submitOrderParam();
-				$.ajax({
-		             type: "POST",
-		             async: true,
-		             url: "submitOrder",
-		             dataType: "json",
-		             data : param,
-		             success: function(data){
-		            	if(data=='1'){
-		            		alert("订单信息填写不完整，请再次确认！");
-		            	}else if(data=='2'){
-		            		alert("订单提交失败，请稍后再试！");
-		            	}else if(data=='3'){
-		            		alert("订单提交成功，开发完成后会自动跳转到订单中心，谢谢！");
-		            		window.location.href="index";
-		            	}
-	                },
-	                beforeSend: function(){},
-	                complete: function(){},
-	                error: function(){}
-		         });
+				var addressAttr = $("input:checked[name=accept_info]").val(),
+					zhifu = $("input:checked[name=zhi_fu]").val(),
+					peisong = $("input:checked[name=pei_song]").val(),  
+					fapiaotaitou = $("input[name=fapiaotaitou]").val(),
+					fapiaomingxi = $("input[name=fapiaomingxi]").val(),
+					productIds = "<s:property value='#request.submit_ProductIds'/>",
+					$check_from = $(cart_check_temp.check_from);
+					
+				var $check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','addressAttr').val(addressAttr));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','zhifu').val(zhifu));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','peisong').val(peisong));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','fapiaotaitou').val(fapiaotaitou));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','fapiaomingxi').val(fapiaomingxi));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','productIds').val(productIds));
+					$check_from.submit();
 			}
 		},
 			
@@ -173,16 +176,6 @@ var yiqin_cart_check = function(){
 				$check_li.append($check_span.append(totalPrice+" 元"));
 			}
 		},
-	};
-	
-	var submitOrderParam = function(){
-		var addressAttr = $("input:checked[name=accept_info]").val(),
-			zhifu = $("input:checked[name=zhi_fu]").val(),
-			peisong = $("input:checked[name=pei_song]").val(),  
-			fapiaotaitou = $("input[name=fapiaotaitou]").val(),
-			fapiaomingxi = $("input[name=fapiaomingxi]").val(),
-			productIds = "<s:property value='#request.submit_ProductIds'/>";
-		return "addressAttr="+addressAttr+"&zhifu="+zhifu+"&peisong="+peisong+"&fapiaotaitou="+fapiaotaitou+"&fapiaomingxi="+fapiaomingxi+"&productIds="+productIds;
 	};
 	
 	var appendToAddress = function(data){
