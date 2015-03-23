@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
-<div class="col-sm-9 padding-right">
+<div class="center-right padding-right">
 	<section id="cart_items">
 		<div>
 			<div class="table-responsive cart_info">
