@@ -92,8 +92,6 @@ public class SubmitOrderAction extends ActionSupport {
 			Order order = new Order();
 			order.setUserId(user.getId());
 			order.setEmail(user.getEmail());
-			order.setMobile(user.getMobile());
-			order.setName(user.getName());
 			order.setZhifu(zhifu);
 			order.setFapiaotaitou(fapiaotaitou);
 			order.setFapiaomingxi(fapiaomingxi);
@@ -121,7 +119,10 @@ public class SubmitOrderAction extends ActionSupport {
 			UserConf userConf = userManager.findUserConfInfo(user.getId(),
 					addressAttr);
 			if (userConf != null) {
-				order.setAddress(userConf.getValue());
+				String [] address = userConf.getValue().split("_receive_");
+				order.setName(address[0]);
+				order.setMobile(address[1]);
+				order.setAddress(address[2]);
 			}
 
 			// 保存订单

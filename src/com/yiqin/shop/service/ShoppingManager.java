@@ -1,5 +1,6 @@
 package com.yiqin.shop.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.yiqin.shop.pojo.Cart;
@@ -79,7 +80,7 @@ public interface ShoppingManager {
 	 * @return 删除成功状态
 	 */
 	public boolean deleteCartProduct(String userName, String productId);
-	
+
 	/**
 	 * 删除购物车指定商品
 	 * 
@@ -97,4 +98,8 @@ public interface ShoppingManager {
 	 * @return 提交成功状态
 	 */
 	public boolean submitOrder(Order order);
+
+	public List<Order> findOrderList(String userId, Date startTime,
+			Date endTime, int status, long orderId, String productName,
+			String productId);
 }

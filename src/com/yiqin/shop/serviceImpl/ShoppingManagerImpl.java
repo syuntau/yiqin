@@ -1,5 +1,6 @@
 package com.yiqin.shop.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.yiqin.shop.dao.IShoppingDao;
@@ -85,5 +86,13 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public boolean deleteCartProduct(List<Cart> cartList) {
 		return shoppingDao.deleteCart(cartList);
+	}
+
+	@Override
+	public List<Order> findOrderList(String userId, Date startTime,
+			Date endTime, int status, long orderId, String productName,
+			String productId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
