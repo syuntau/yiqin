@@ -103,4 +103,27 @@ public interface IShoppingDao {
 	 * @return 成功状态
 	 */
 	public boolean insertOrder(Order order);
+
+	/**
+	 * 过滤查询订单
+	 * 
+	 * @param hql
+	 *            执行的HQL语句
+	 * @param offset
+	 *            第一条记录索引
+	 * @param pageSize
+	 *            每页需要显示的记录数
+	 * @return 当前页的所有记录
+	 */
+	public List<Order> findOrderList(final String hql, final int offset,
+			final int pageSize);
+
+	/**
+	 * 过滤查询订单总数
+	 * 
+	 * @param hql
+	 *            执行的HQL语句
+	 * @return 符合条件总数
+	 */
+	public int findOrderCount(final String hql);
 }

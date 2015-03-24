@@ -1,8 +1,10 @@
 package com.yiqin.shop.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.yiqin.shop.bean.OrderView;
 import com.yiqin.shop.dao.IShoppingDao;
 import com.yiqin.shop.pojo.Cart;
 import com.yiqin.shop.pojo.Order;
@@ -89,10 +91,94 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	}
 
 	@Override
-	public List<Order> findOrderList(String userId, Date startTime,
+	public List<OrderView> findOrderList(String userId, Date startTime,
 			Date endTime, int status, long orderId, String productName,
-			String productId) {
-		// TODO Auto-generated method stub
+			String productId, int offset, int pageSize) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from Order where 1=1");
+		if (status != 10) {
+			hql.append(" and status=").append(status);
+		}
+		if (startTime != null) {
+			hql.append(" and crateDate>=").append(startTime);
+		}
+		if (endTime != null) {
+			hql.append(" and crateDate<").append(endTime);
+		}
+		if (Util.isNotEmpty(userId)) {
+			hql.append(" and userId='").append(userId).append("'");
+		}
+		if (orderId != 0) {
+			hql.append(" and productList like '%").append(orderId).append("%'");
+		} else if (Util.isNotEmpty(productName)) {
+			hql.append(" and productList like '%").append(productName).append("%'");
+		} else if (Util.isNotEmpty(productId)) {
+			hql.append(" and productList like '%").append(productId).append("%'");
+		}
+		hql.append(" order by crateDate desc");
+		
+		List<Order> listOrder = shoppingDao.findOrderList(hql.toString(),offset, pageSize);
+		List<OrderView> ovList = new ArrayList<OrderView>();
+		if (Util.isNotEmpty(listOrder)) {
+			for (Order order : listOrder) {
+				ovList.add(orderToOrderView(order));
+			}
+		}
+		return ovList;
+	}
+	
+	private OrderView orderToOrderView(Order order) {
+		if (order != null) {
+			OrderView ov = new OrderView();
+			ov.setAddress(order.getAddress());
+			ov.setCrateDate(Util.format(order.getCrateDate(), "yyyy-MM-dd HH:mm:ss"));
+			ov.setDeleteFlag(order.getDeleteFlag());
+			ov.setEmail(order.getEmail());
+			ov.setFapiaomingxi(order.getFapiaomingxi());
+			ov.setFapiaotaitou(order.getFapiaotaitou());
+			ov.setId(order.getId());
+			ov.setMobile(order.getMobile());
+			ov.setName(order.getName());
+			ov.setPeisongfangshi(order.getPeisongfangshi());
+			ov.setSonghuoriqi(order.getSonghuoriqi());
+			ov.setStatus(Util.orderStatusStr(order.getStatus()));
+			ov.setUpdateDate(Util.format(order.getUpdateDate(), "yyyy-MM-dd HH:mm:ss"));
+			ov.setUserId(order.getUserId());
+			ov.setYuanjia(order.getYuanjia());
+			ov.setYunfei(order.getYunfei());
+			ov.setZhekou(order.getZhekou());
+			ov.setZhifu(order.getZhifu());
+			ov.setZongjia(order.getZongjia());
+			ov.setProductList(Util.getDTOList(order.getProductList(),Cart.class));
+			return ov;
+		}
 		return null;
+	}
+
+	@Override
+	public int findOrderCount(String userId, Date startTime, Date endTime,
+			int status, long orderId, String productName, String productId) {
+		StringBuilder hql = new StringBuilder();
+		hql.append("from Order where 1=1");
+		if (status != 10) {
+			hql.append(" and status=").append(status);
+		}
+		if (startTime != null) {
+			hql.append(" and crateDate>=").append(startTime);
+		}
+		if (endTime != null) {
+			hql.append(" and crateDate<").append(endTime);
+		}
+		if (Util.isNotEmpty(userId)) {
+			hql.append(" and userId='").append(userId).append("'");
+		}
+		if (orderId != 0) {
+			hql.append(" and productList like '%").append(orderId).append("%'");
+		} else if (Util.isNotEmpty(productName)) {
+			hql.append(" and productList like '%").append(productName).append("%'");
+		} else if (Util.isNotEmpty(productId)) {
+			hql.append(" and productList like '%").append(productId).append("%'");
+		}
+		return shoppingDao.findOrderCount(hql.toString());
 	}
 }

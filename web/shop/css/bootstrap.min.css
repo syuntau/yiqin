@@ -6592,3 +6592,20 @@ th.hidden-lg, td.hidden-lg {
 	float: left;
 	width: 85%;
 }
+
+select{
+	-webkit-appearance: menulist;
+	box-sizing: border-box;
+	align-items: center;
+	border: 1px solid;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	white-space: pre;
+	-webkit-rtl-ordering: logical;
+	color: black;
+	background-color: white;
+	cursor: default;
+}

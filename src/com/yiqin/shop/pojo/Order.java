@@ -22,7 +22,7 @@ public class Order implements java.io.Serializable {
 	private String peisongfangshi;// 配送方式
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
-	private String productList; // 商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价
+	private String productList; // cart对象list 
 	private Float yuanjia;// 订单原价
 	private Float zhekou;// 订单折扣
 	private Float zongjia;// 订单总价

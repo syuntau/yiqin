@@ -1,7 +1,11 @@
 package com.yiqin.shop.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.shop.dao.IShoppingDao;
@@ -104,4 +108,26 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		}
 	}
 
+	@Override
+	public List<Order> findOrderList(final String hql, final int offset,
+			final int pageSize) {
+		List list = getHibernateTemplate().executeFind(
+				new HibernateCallback() {
+					public Object doInHibernate(Session session)
+							throws HibernateException, SQLException {
+						List result = session.createQuery(hql)
+								.setFirstResult(offset).setMaxResults(pageSize)
+								.list();
+						return result;
+					}
+				});
+		return list;
+	}
+
+	@Override
+	public int findOrderCount(String hql) {
+		String queryString = "select count(*) " + hql;
+		Long count = (Long) getHibernateTemplate().iterate(queryString).next();
+		return count.intValue();
+	}
 }

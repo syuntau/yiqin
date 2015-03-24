@@ -3,6 +3,7 @@ package com.yiqin.shop.service;
 import java.util.Date;
 import java.util.List;
 
+import com.yiqin.shop.bean.OrderView;
 import com.yiqin.shop.pojo.Cart;
 import com.yiqin.shop.pojo.Order;
 
@@ -99,7 +100,10 @@ public interface ShoppingManager {
 	 */
 	public boolean submitOrder(Order order);
 
-	public List<Order> findOrderList(String userId, Date startTime,
+	public List<OrderView> findOrderList(String userId, Date startTime,
 			Date endTime, int status, long orderId, String productName,
-			String productId);
+			String productId, int offset, int pageSize);
+
+	public int findOrderCount(String userId, Date startTime, Date endTime,
+			int status, long orderId, String productName, String productId);
 }

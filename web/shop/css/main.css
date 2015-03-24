@@ -1857,7 +1857,7 @@ h2.title {
 .user_info > li > span {
 }
 
-.user_info input, select, textarea {
+.user_info input, textarea {
   background: #F0F0E9;
   border:0;
   color: #696763;
@@ -2629,4 +2629,45 @@ h2.title {
 	outline:0;
 	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(254,152,15,0.6);
 	box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(254,152,15,0.6)
+}
+
+.search-01{
+	float: right;
+}
+
+.search-01 input{
+	margin: 0em;
+	font: -webkit-small-control;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+}
+
+.s-itxt{
+	line-height: 18px;
+	border: 1px solid #ccc;
+	padding: 3px 5px 4px;
+	float: none;
+	width: 195px;
+}
+
+.btn-13{
+	background: #fff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	display: inline-block;
+	line-height: 18px;
+	border: 1px solid #ddd;
+	padding: 2px 14px 3px;
+	color: #333;
+}
+
+.btn-13:hover{
+	background: #fff;
 }

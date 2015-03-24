@@ -16,6 +16,7 @@ import com.yiqin.shop.pojo.UserConf;
 import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.shop.service.UserManager;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 提交订单
@@ -83,8 +84,7 @@ public class SubmitOrderAction extends ActionSupport {
 			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
 					|| Util.isEmpty(fapiaotaitou) || Util.isEmpty(fapiaomingxi)
 					|| Util.isEmpty(productIds) || zhifu == null) {
-				request.setAttribute("submit_order_error", 1);
-				return SUCCESS;
+				return ERROR;
 			}
 			// 登录用户
 			User user = Util.getLoginUser(request.getSession());
@@ -130,16 +130,14 @@ public class SubmitOrderAction extends ActionSupport {
 			if (flag) {
 				//删除购物车记录
 				shoppingManager.deleteCartProduct(cartList);
-				request.setAttribute("submit_order_error", 3);
-				return SUCCESS;
 			} else {
-				request.setAttribute("submit_order_error", 2);
-				return SUCCESS;
+				return ERROR;
 			}
+			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, "top_account");
+			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("submit_order_error", 2);
-			return SUCCESS;
+			return ERROR;
 		}
 	}
 }
