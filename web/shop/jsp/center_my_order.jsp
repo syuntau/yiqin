@@ -102,7 +102,13 @@ $(document).ready(function(){
 						</tr>
 					</thead>
 					<s:if test="page.results==null">
-						没有符合条件的订单信息
+						<tbody>
+							<tr>
+								<td colspan="6">
+									没有符合条件的订单信息
+								</td>
+							</tr>
+						</tbody>
 					</s:if>
 					<s:else>
 						<s:iterator value="page.results" var="order">
