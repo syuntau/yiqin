@@ -6,6 +6,7 @@
 var yiqin_order_center = function(){
 	var action = {
 		initOrderCheck : function(){
+			$("#my_order_left").css('color','#fdb45e');
 			filterDateSelectInit();
 			
 			var searchObj = document.getElementById("ip_keyword"),
