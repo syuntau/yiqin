@@ -6,6 +6,8 @@
 var yiqin_order_center = function(){
 	var action = {
 		initOrderCheck : function(){
+			filterDateSelectInit();
+			
 			var searchObj = document.getElementById("ip_keyword"),
 				searchName = "<s:property value='searchName'/>";
 				if(searchName!=null && searchName!=""){
@@ -31,8 +33,7 @@ var yiqin_order_center = function(){
 				searchStr = searchObj.value,
 				productName = "",
 				productId = "",
-				orderId = "",
-				pageIndex = $("input[name=pageIndex]").val();
+				orderId = "";
 			if (searchStr==searchObj.defaultValue){
 				searchStr = "";
 			}
@@ -41,22 +42,47 @@ var yiqin_order_center = function(){
 				alert("请输入查询关键词！");
 				return;
 			}
-			window.location.href = "findOrderList?searchName="+encodeURIComponent(encodeURIComponent(searchStr))+"&pageIndex="+pageIndex;
+			window.location.href = "findOrderList?searchName="+encodeURIComponent(encodeURIComponent(searchStr));
 		},
 		
 		orderFilter : function(){
 			var filterTime= $("#submitDate").val(),
-				status = $("#submitStatus").val(),
-				pageIndex = $("input[name=pageIndex]").val();
-			window.location.href = "findOrderList?filterTime="+filterTime+"&status="+status+"&pageIndex="+pageIndex;
+				status = $("#submitStatus").val();
+			window.location.href = "findOrderList?filterTime="+filterTime+"&status="+status;
 		}
+	};
+	
+	var filterDateSelectInit = function(){
+		var $dateOption = $("<option></option>"),
+			$dateSelect = $("#submitDate"),
+			nowDate = new Date(),
+			nowYear = nowDate.getFullYear();
+		$dateSelect.append($dateOption.attr("value","1").append("最近三个月"));
+		$dateOption = $("<option></option>");
+		$dateSelect.append($dateOption.attr("value","2").append("今年内"));
+		$dateOption = $("<option></option>");
+		$dateSelect.append($dateOption.attr("value",nowYear-1).append((nowYear-1)+"年"));
+		$dateOption = $("<option></option>");
+		$dateSelect.append($dateOption.attr("value",nowYear-2).append((nowYear-2)+"年"));
+		$dateOption = $("<option></option>");
+		$dateSelect.append($dateOption.attr("value",nowYear-3).append((nowYear-3)+"年"));
+		$dateOption = $("<option></option>");
+		$dateSelect.append($dateOption.attr("value","3").append((nowYear-3)+"年以前"));
 	};
 	
 	return action;
 }();
 
 var toIndexPage = function(pageIndex){
-	$("input[name=pageIndex]").val(pageIndex);
+	var type = $("#submitDate").css("display"),
+		filterTime = "<s:property value='filterTime'/>",
+		searchStr = "<s:property value='searchName'/>",
+		status = "<s:property value='status'/>";
+	if(type=="none"){
+		window.location.href = "findOrderList?searchName="+encodeURIComponent(encodeURIComponent(searchStr))+"&pageIndex="+pageIndex;
+	}else{
+		window.location.href = "findOrderList?filterTime="+filterTime+"&status="+status+"&pageIndex="+pageIndex;
+	}
 };
 
 $(document).ready(function(){
@@ -69,7 +95,6 @@ $(document).ready(function(){
     <a href="javascript:;" class="btn-13" onclick="yiqin_order_center.orderSearch('ip_keyword')">查 询</a>
 </div>
 <div class="center-right padding-right">
-	<input type="hidden" name="pageIndex" value="<s:property value="pageIndex"/>" />
 	<section id="cart_items">
 		<div>
 			<div class="table-responsive cart_info" style="margin-bottom:10px;">
@@ -81,14 +106,7 @@ $(document).ready(function(){
 							<td width="8%" style="text-align:center;">数量</td>
 							<td width="10%" style="text-align:center;">实付款</td>
 							<td width="15%" style="text-align:center;">
-								<select id="submitDate">
-									<option value="1">最近三个月</option>
-									<option value="2">今年内</option>
-									<option value="2014">2014年</option>
-									<option value="2013">2013年</option>
-									<option value="2012">2012年</option>
-									<option value="3">2012年以前</option>
-								</select>
+								<select id="submitDate"></select>
 							</td>
 							<td width="13%" style="text-align:center;">
 								<select id="submitStatus">
@@ -127,8 +145,8 @@ $(document).ready(function(){
 								<s:iterator value="#order.productList" var="product" status="st">
 									 <tr>
 										<td class="cart_product">
-											<img src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/>
-											<h4><a href=""><s:property value="#product.productName"/></a></h4>
+											<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
+											<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
 											<p>商品ID: <s:property value="#product.productId"/></p>
 										</td>
 										<td class="cart_price" style="text-align:center;">
