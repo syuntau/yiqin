@@ -100,10 +100,52 @@ public interface ShoppingManager {
 	 */
 	public boolean submitOrder(Order order);
 
+	/**
+	 * 订单信息查询
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param status
+	 *            订单状态
+	 * @param orderId
+	 *            订单号
+	 * @param productName
+	 *            商品名称
+	 * @param productId
+	 *            商品ID
+	 * @param offset
+	 *            第一条记录索引
+	 * @param pageSize
+	 *            每页数量
+	 * @return
+	 */
 	public List<OrderView> findOrderList(String userId, Date startTime,
 			Date endTime, int status, long orderId, String productName,
 			String productId, int offset, int pageSize);
 
+	/**
+	 * 订单数量查询
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param status
+	 *            订单状态
+	 * @param orderId
+	 *            订单号
+	 * @param productName
+	 *            商品名称
+	 * @param productId
+	 *            商品ID
+	 * @return
+	 */
 	public int findOrderCount(String userId, Date startTime, Date endTime,
 			int status, long orderId, String productName, String productId);
 }

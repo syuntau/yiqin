@@ -44,7 +44,7 @@ public class Util {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 获取当天零点时间
 	 * 
@@ -90,6 +90,22 @@ public class Util {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.add(Calendar.MONTH, ammount);
+		return c.getTime();
+	}
+
+	/**
+	 * 将某个日期增加指定年数，并返回结果。如果传入负数，则为减。
+	 * 
+	 * @param date
+	 *            要操作的日期对象
+	 * @param ammount
+	 *            要增加年的数目
+	 * @return 结果日期对象
+	 */
+	public static Date addYear(final Date date, final int ammount) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.YEAR, ammount);
 		return c.getTime();
 	}
 
@@ -155,6 +171,18 @@ public class Util {
 	 */
 	public static String format(final Date date) {
 		return format(date, "yyyy-MM-dd");
+	}
+
+	/**
+	 * 将年的整数形式（yyyy）转换为日期对象返回。
+	 * 
+	 * @param year
+	 *            年月的整数形式（yyyy）
+	 * @return 日期类型
+	 * @throws ParseException
+	 */
+	public static Date parseYear(final Integer year) {
+		return parse(String.valueOf(year), "yyyy");
 	}
 
 	public static List getDTOList(String jsonString, Class clazz) {

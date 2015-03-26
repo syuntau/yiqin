@@ -1,5 +1,6 @@
 package com.yiqin.shop.action;
 
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
@@ -15,24 +16,24 @@ import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
 
+/**
+ * 查询订单列表
+ * 
+ * @author liujun
+ *
+ */
 public class FindOrderListAction extends ActionSupport {
-	
+
 	private static final long serialVersionUID = 4175224246287224080L;
 
 	// 每页显示的条目数目
 	public static final int MAXITEMINPAGE = 5;
-	// 商品名称
-	private String productName;
-	// 商品编号
-	private String productId;
-	// 订单编号
-	private String orderId;
+	// 搜索关键词
+	private String searchName;
 	// 订单状态
 	private String status;
-	// 开始时间
-	private String startTime;
-	// 结束时间
-	private String endTime;
+	// 过滤时间值
+	private String filterTime;
 	// 选中页号
 	private String pageIndex;
 	// 分页对象
@@ -62,41 +63,55 @@ public class FindOrderListAction extends ActionSupport {
 			}
 
 			// 开始时间、结束时间
-			if (!GenericValidator.isBlankOrNull(startTime)
-					&& !GenericValidator.isBlankOrNull(endTime)) {
-				startTime = startTime.trim();
-				endTime = endTime.trim();
-
-				if (!GenericValidator.isDate(startTime, "yyyy-MM-dd", false)
-						|| !GenericValidator.isDate(endTime, "yyyy-MM-dd",
-								false)) {
-					return SUCCESS;
+			Date  currDate =  Util.getCurrentStartTime();
+			if (!GenericValidator.isBlankOrNull(filterTime)) {
+				filterTime = filterTime.trim();
+				//最近3个月
+				if(filterTime.equals("1")){
+					Date  yyyymm = Util.parse(Util.format(currDate, "yyyy-MM"), "yyyy-MM");
+					startDate = Util.addMonth(yyyymm, -2);
+					endDate = Util.addMonth(yyyymm, 1);
+				//今年内
+				}else if(filterTime.equals("2")){
+					startDate = Util.parse(Util.format(currDate, "yyyy"), "yyyy");
+					endDate = Util.addYear(startDate, 1);
+				//3年之前
+				}else if(filterTime.equals("3")){
+					Date yyyy = Util.parse(Util.format(currDate, "yyyy"), "yyyy");
+					endDate = Util.addYear(yyyy, -3);
+				}else {
+					startDate = Util.parseYear(Integer.valueOf(filterTime));
+					endDate = Util.addYear(startDate, 1);
 				}
-				startDate = Util.parse(startTime);
-				endDate = Util.parse(endTime);
-				endDate = Util.addDay(endDate, 1);
-
-				if (!startDate.before(endDate)) {
-					return SUCCESS;
-				}
+			}else{
+				filterTime = "1";
+				Date  yyyymm = Util.parse(Util.format(currDate, "yyyy-MM"), "yyyy-MM");
+				startDate = Util.addMonth(yyyymm, -2);
+				endDate = Util.addMonth(yyyymm, 1);
 			}
 
+			// 订单状态
 			if (!GenericValidator.isBlankOrNull(status)) {
 				status = status.trim();
-			}else{
+			} else {
 				status = "10";
 			}
-			if (!GenericValidator.isBlankOrNull(productName)) {
-				productName = productName.trim();
+			
+			String productName = "", productId = "", orderId = "0";
+			if (!GenericValidator.isBlankOrNull(searchName)) {
+				searchName = URLDecoder.decode(searchName, "utf-8");
+				searchName = searchName.trim();
+				if(searchName.length()==8 && Util.isNumeric(searchName) && searchName.startsWith("10")){
+					orderId = searchName;
+				}else if(searchName.length()==8 && Util.isNumeric(searchName)){
+					productId = searchName;
+				}else{
+					productName = searchName;
+				}
+				startDate = null;
+				endDate = null;
 			}
-			if (!GenericValidator.isBlankOrNull(productId)) {
-				productId = productId.trim();
-			}
-			if (!GenericValidator.isBlankOrNull(orderId)) {
-				orderId = orderId.trim();
-			}else{
-				orderId = "0";
-			}
+			
 			// 查询过滤总数
 			List<OrderView> orderList = null;
 			int count = shoppingManager.findOrderCount(
@@ -122,28 +137,12 @@ public class FindOrderListAction extends ActionSupport {
 		}
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getSearchName() {
+		return searchName;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
 	}
 
 	public String getStatus() {
@@ -154,20 +153,12 @@ public class FindOrderListAction extends ActionSupport {
 		this.status = status;
 	}
 
-	public String getStartTime() {
-		return startTime;
+	public String getFilterTime() {
+		return filterTime;
 	}
 
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
+	public void setFilterTime(String filterTime) {
+		this.filterTime = filterTime;
 	}
 
 	public String getPageIndex() {

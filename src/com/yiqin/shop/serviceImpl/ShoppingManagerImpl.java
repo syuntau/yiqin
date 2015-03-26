@@ -100,17 +100,18 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			hql.append(" and status=").append(status);
 		}
 		if (startTime != null) {
-			hql.append(" and crateDate>=").append(startTime);
+			hql.append(" and crateDate>='").append(Util.format(startTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
 		if (endTime != null) {
-			hql.append(" and crateDate<").append(endTime);
+			hql.append(" and crateDate<'").append(Util.format(endTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
 		if (Util.isNotEmpty(userId)) {
 			hql.append(" and userId='").append(userId).append("'");
 		}
 		if (orderId != 0) {
-			hql.append(" and productList like '%").append(orderId).append("%'");
-		} else if (Util.isNotEmpty(productName)) {
+			hql.append(" and id=").append(orderId);
+		}
+		if (Util.isNotEmpty(productName)) {
 			hql.append(" and productList like '%").append(productName).append("%'");
 		} else if (Util.isNotEmpty(productId)) {
 			hql.append(" and productList like '%").append(productId).append("%'");
@@ -164,17 +165,18 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			hql.append(" and status=").append(status);
 		}
 		if (startTime != null) {
-			hql.append(" and crateDate>=").append(startTime);
+			hql.append(" and crateDate>='").append(Util.format(startTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
 		if (endTime != null) {
-			hql.append(" and crateDate<").append(endTime);
+			hql.append(" and crateDate<'").append(Util.format(endTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
 		if (Util.isNotEmpty(userId)) {
 			hql.append(" and userId='").append(userId).append("'");
 		}
 		if (orderId != 0) {
-			hql.append(" and productList like '%").append(orderId).append("%'");
-		} else if (Util.isNotEmpty(productName)) {
+			hql.append(" and id=").append(orderId);
+		}
+		if (Util.isNotEmpty(productName)) {
 			hql.append(" and productList like '%").append(productName).append("%'");
 		} else if (Util.isNotEmpty(productId)) {
 			hql.append(" and productList like '%").append(productId).append("%'");

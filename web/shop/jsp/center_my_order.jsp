@@ -3,16 +3,73 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 <script type="text/javascript">
-function toIndexPage(pageIndex){
+var yiqin_order_center = function(){
+	var action = {
+		initOrderCheck : function(){
+			var searchObj = document.getElementById("ip_keyword"),
+				searchName = "<s:property value='searchName'/>";
+				if(searchName!=null && searchName!=""){
+					searchObj.value = searchName;
+					$("#submitDate").css("display","none");
+					$("#submitStatus").css("display","none");
+				}
+				
+			 var filterDate = "<s:property value='filterTime'/>";
+			 $("#submitDate").val(filterDate);
+			 
+			 var filterStatus = "<s:property value='status'/>";
+			 $("#submitStatus").val(filterStatus);
+			
+			 $("#submitDate, #submitStatus").change(function(){
+				 yiqin_order_center.orderFilter();
+			 });
+			
+		},
+			
+		orderSearch : function(searchId){
+			var searchObj = document.getElementById(searchId),
+				searchStr = searchObj.value,
+				productName = "",
+				productId = "",
+				orderId = "",
+				pageIndex = $("input[name=pageIndex]").val();
+			if (searchStr==searchObj.defaultValue){
+				searchStr = "";
+			}
+			searchStr = $.trim(searchStr);
+			if(searchStr==""){
+				alert("请输入查询关键词！");
+				return;
+			}
+			window.location.href = "findOrderList?searchName="+encodeURIComponent(encodeURIComponent(searchStr))+"&pageIndex="+pageIndex;
+		},
+		
+		orderFilter : function(){
+			var filterTime= $("#submitDate").val(),
+				status = $("#submitStatus").val(),
+				pageIndex = $("input[name=pageIndex]").val();
+			window.location.href = "findOrderList?filterTime="+filterTime+"&status="+status+"&pageIndex="+pageIndex;
+		}
+	};
 	
-}
+	return action;
+}();
+
+var toIndexPage = function(pageIndex){
+	$("input[name=pageIndex]").val(pageIndex);
+};
+
+$(document).ready(function(){
+	yiqin_order_center.initOrderCheck();
+});
 </script>
 
 <div class="search-01">
-	<input id="ip_keyword" name="" type="text" class="s-itxt" value="商品名称、商品编号、订单编号" onfocus="if (this.value==this.defaultValue) this.value=''" onblur="if (this.value=='') this.value=this.defaultValue" onkeydown="javascript:if(event.keyCode==13) OrderSearch('ip_keyword');">
-    <a href="javascript:;" class="btn-13" onclick="OrderSearch('ip_keyword')" clstag="click|keycount|orderinfo|search">查 询</a>
+	<input id="ip_keyword" name="searchName" type="text" class="s-itxt" value="商品名称、商品编号、订单编号" onfocus="if (this.value==this.defaultValue) this.value=''" onblur="if (this.value=='') this.value=this.defaultValue" onkeydown="javascript:if(event.keyCode==13) yiqin_order_center.orderSearch('ip_keyword');">
+    <a href="javascript:;" class="btn-13" onclick="yiqin_order_center.orderSearch('ip_keyword')">查 询</a>
 </div>
 <div class="center-right padding-right">
+	<input type="hidden" name="pageIndex" value="<s:property value="pageIndex"/>" />
 	<section id="cart_items">
 		<div>
 			<div class="table-responsive cart_info" style="margin-bottom:10px;">
@@ -24,8 +81,8 @@ function toIndexPage(pageIndex){
 							<td width="8%" style="text-align:center;">数量</td>
 							<td width="10%" style="text-align:center;">实付款</td>
 							<td width="15%" style="text-align:center;">
-								<select id="date">
-									<option value="1" selected="selected">最近三个月</option>
+								<select id="submitDate">
+									<option value="1">最近三个月</option>
 									<option value="2">今年内</option>
 									<option value="2014">2014年</option>
 									<option value="2013">2013年</option>
@@ -34,8 +91,8 @@ function toIndexPage(pageIndex){
 								</select>
 							</td>
 							<td width="13%" style="text-align:center;">
-								<select id="state">
-									<option value="10" selected="selected">全部状态</option>
+								<select id="submitStatus">
+									<option value="10">全部状态</option>
 									<option value="1">等待付款</option>
 									<option value="2">等待收货</option>
 									<option value="3">已完成</option>
