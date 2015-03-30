@@ -97,7 +97,7 @@ var pro_att = {
 		$('.attr-hr').addClass('display-off');
 		$('.upload-attr').addClass('display-off');
 		$('.attr-section .attr-panel').addClass('display-off');
-		
+		$('.attr-section .attr-panel').parent().find('span').remove();
 	},
 	changeCategory : function() {
 		$('.first-category').on('change', function() {
