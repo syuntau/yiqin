@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-2-12 14:36:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.yiqin.pojo.Brand" table="brand" catalog="yiqin">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nameEn" type="string">
+            <column name="name_en" length="30">
+            </column>
+        </property>
+        <property name="nameCn" type="string">
+            <column name="name_cn" length="30">
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

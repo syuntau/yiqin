@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.pojo.Cart;
-import com.yiqin.shop.service.ShoppingManager;
+import com.yiqin.pojo.Cart;
+import com.yiqin.service.ShoppingManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 

@@ -40,15 +40,15 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/yiqin/shop/pojo/Attribute.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/Brand.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/Cart.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/Category.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/CategoryConf.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/Order.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/Product.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/User.hbm.xml</value>
-				<value>com/yiqin/shop/pojo/UserConf.hbm.xml</value>
+				<value>com/yiqin/pojo/Attribute.hbm.xml</value>
+				<value>com/yiqin/pojo/Brand.hbm.xml</value>
+				<value>com/yiqin/pojo/Cart.hbm.xml</value>
+				<value>com/yiqin/pojo/Category.hbm.xml</value>
+				<value>com/yiqin/pojo/CategoryConf.hbm.xml</value>
+				<value>com/yiqin/pojo/Order.hbm.xml</value>
+				<value>com/yiqin/pojo/Product.hbm.xml</value>
+				<value>com/yiqin/pojo/User.hbm.xml</value>
+				<value>com/yiqin/pojo/UserConf.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -65,32 +65,32 @@
 	</tx:advice>
 		
 	<aop:config>
-		<aop:pointcut id="curd" expression="execution (* com.yiqin.shop.dao.*.* (..))"/>
+		<aop:pointcut id="curd" expression="execution (* com.yiqin.dao.*.* (..))"/>
 		<aop:advisor advice-ref="txAdice" pointcut-ref="curd"/>
 	</aop:config>
 
 	<!--dao service注入-->
-	<bean id="userDao" class="com.yiqin.shop.dao.impl.UserDao">
+	<bean id="userDao" class="com.yiqin.dao.impl.UserDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<bean id="shoppingDao" class="com.yiqin.shop.dao.impl.ShoppingDao">
+	<bean id="shoppingDao" class="com.yiqin.dao.impl.ShoppingDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<bean id="productDao" class="com.yiqin.shop.dao.impl.ProductDao">
+	<bean id="productDao" class="com.yiqin.dao.impl.ProductDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="userManager" class="com.yiqin.shop.serviceImpl.UserManagerImpl">
+	<bean id="userManager" class="com.yiqin.serviceImpl.UserManagerImpl">
 		<property name="userDao"><ref bean="userDao"></ref></property>
 	</bean>
 	
-	<bean id="shoppingManager" class="com.yiqin.shop.serviceImpl.ShoppingManagerImpl">
+	<bean id="shoppingManager" class="com.yiqin.serviceImpl.ShoppingManagerImpl">
 		<property name="shoppingDao"><ref bean="shoppingDao"></ref></property>
 	</bean>
 	
-	<bean id="productManager" class="com.yiqin.shop.serviceImpl.ProductManagerImpl">
+	<bean id="productManager" class="com.yiqin.serviceImpl.ProductManagerImpl">
 		<property name="productDao"><ref bean="productDao"></ref></property>
 	</bean>
 

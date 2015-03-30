@@ -1,6 +1,6 @@
 package com.yiqin.util;
 
-import com.yiqin.shop.pojo.Category;
+import com.yiqin.pojo.Category;
 
 public class CategorySimple {
 

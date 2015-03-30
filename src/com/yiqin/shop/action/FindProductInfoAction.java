@@ -9,8 +9,8 @@ import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductView;
-import com.yiqin.shop.service.ProductManager;
 import com.yiqin.util.Util;
 
 /**

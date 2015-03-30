@@ -11,8 +11,8 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.shop.pojo.UserConf;
-import com.yiqin.shop.service.UserManager;
+import com.yiqin.pojo.UserConf;
+import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
 
 /**

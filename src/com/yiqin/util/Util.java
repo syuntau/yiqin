@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.yiqin.shop.pojo.User;
+import com.yiqin.pojo.User;
 
 public class Util {
 

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.User;
+import com.yiqin.service.ProductManager;
+import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.ProductView;
-import com.yiqin.shop.pojo.Cart;
-import com.yiqin.shop.pojo.User;
-import com.yiqin.shop.service.ProductManager;
-import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Util;
 
 /**

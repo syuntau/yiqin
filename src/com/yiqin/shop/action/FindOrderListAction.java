@@ -11,8 +11,8 @@ import org.apache.commons.validator.GenericValidator;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.OrderView;
-import com.yiqin.shop.service.ShoppingManager;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
 

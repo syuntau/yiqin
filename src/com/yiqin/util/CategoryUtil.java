@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.yiqin.shop.pojo.Category;
-import com.yiqin.shop.service.ProductManager;
-import com.yiqin.shop.serviceImpl.ProductManagerImpl;
+
+import com.yiqin.pojo.Category;
+import com.yiqin.service.ProductManager;
+import com.yiqin.serviceImpl.ProductManagerImpl;
 
 public class CategoryUtil {
 
