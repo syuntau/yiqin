@@ -96,7 +96,7 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setFapiaotaitou(fapiaotaitou);
 			order.setFapiaomingxi(fapiaomingxi);
 			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
-			order.setStatus((byte) 0);
+			order.setStatus((byte) 1);
 			order.setCrateDate(new Date());
 			order.setUpdateDate(new Date());
 			order.setDeleteFlag((byte) 0);
