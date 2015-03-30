@@ -133,14 +133,11 @@ $(document).ready(function(){
 						<s:iterator value="page.results" var="order">
 							<tbody>
 								<tr style="background-color: #F0F0E9;">
-									<td colspan="5">
+									<td colspan="6">
 										<div class="summary" style="margin-left:20px">
 											 <span>订单号：<s:property value="#order.id"/></span>
 											 <span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
 										 </div>
-									</td>
-									<td colspan="1">
-										<a href=""><i class="fa fa-times"></i></a>
 									</td>
 								</tr>
 								<s:iterator value="#order.productList" var="product" status="st">
