@@ -2671,3 +2671,14 @@ h2.title {
 .btn-13:hover{
 	background: #fff;
 }
+
+#address_list .total_area {
+  padding-bottom: 18px !important;
+}
+
+#address_list .total_area, #address_list .chose_area {
+  border: 1px solid #E6E4DF;
+  color: #696763;
+  padding: 10px 5px 10px 0;
+  margin-bottom: 10px;
+}

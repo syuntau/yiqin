@@ -8,8 +8,14 @@ var initCenterClick = function(){
 		window.location.href = "findOrderList";
 	});
 	
+	$("#my_set_info").click(function(){
+		yiqin_public_js.toTilesAction("info", "/toCenterMySet");
+	});
 	
-}
+	$("#my_set_address").click(function(){
+		yiqin_public_js.toTilesAction("address", "/toCenterMySet");
+	});
+};
 
 $(document).ready(function(){
 	initCenterClick();
@@ -30,8 +36,8 @@ $(document).ready(function(){
 		<h2>设置</h2>
 		<div class="brands-name">
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="">个人信息</a></li>
-				<li><a href="">收货地址</a></li>
+				<li><a href="javaScript:;" id="my_set_info">个人信息</a></li>
+				<li><a href="javaScript:;" id="my_set_address">收货地址</a></li>
 			</ul>
 		</div>
 	</div>

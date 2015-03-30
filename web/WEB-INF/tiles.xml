@@ -103,6 +103,11 @@
 		<put-attribute name="body" value="shop.my_set.body"/>
 	</definition>
 	
+	<definition name="shop.center.address" extends="shop.template">
+		<put-attribute name="title" value="shop.center.title"/>
+		<put-attribute name="body" value="shop.my_address.body"/>
+	</definition>
+	
 	<definition name="shop.my_order.body" template="/shop/jsp/center.jsp">
 		<put-attribute name="center_left" value="/shop/jsp/center_left.jsp"/>
 		<put-attribute name="center_right" value="/shop/jsp/center_my_order.jsp"/>
@@ -110,7 +115,12 @@
 	
 	<definition name="shop.my_set.body" template="/shop/jsp/center.jsp">
 		<put-attribute name="center_left" value="/shop/jsp/center_left.jsp"/>
-		<put-attribute name="center_right" value=""/>
+		<put-attribute name="center_right" value="/shop/jsp/center_my_set.jsp"/>
+	</definition>
+	
+	<definition name="shop.my_address.body" template="/shop/jsp/center.jsp">
+		<put-attribute name="center_left" value="/shop/jsp/center_left.jsp"/>
+		<put-attribute name="center_right" value="/shop/jsp/center_my_address.jsp"/>
 	</definition>
 
 <!-- sa -->

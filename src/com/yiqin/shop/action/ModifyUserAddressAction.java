@@ -117,7 +117,7 @@ public class ModifyUserAddressAction extends ActionSupport {
 			UserConf userConf = new UserConf();
 			
 			// 所有地址信息
-			List<UserConf> confList = userManager.findUserConfList(userId);
+			List<UserConf> confList = userManager.findUserAddressList(userId);
 			
 			if ("save".equals(saveOrUpdate)) {
 				if (Util.isEmpty(confList)) {

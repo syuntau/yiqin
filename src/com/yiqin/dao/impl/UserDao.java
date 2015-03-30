@@ -68,8 +68,8 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 	}
 
 	@Override
-	public List<UserConf> findUserConfList(String userId) {
-		String queryString = "from UserConf where userId=?";
+	public List<UserConf> findUserAddressList(String userId) {
+		String queryString = "from UserConf where userId=? and attribute like 'address%'";
 		return getHibernateTemplate().find(queryString, userId);
 	}
 

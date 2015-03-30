@@ -66,7 +66,7 @@ public class FindUserConfAction extends ActionSupport {
 					result = "1";
 				}
 			} else {
-				List<UserConf> confList = userManager.findUserConfList(userId);
+				List<UserConf> confList = userManager.findUserAddressList(userId);
 				if (Util.isNotEmpty(confList)) {
 					JSONArray jsonArray = JSONArray.fromObject(confList);
 					result = jsonArray.toString();

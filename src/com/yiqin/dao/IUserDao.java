@@ -60,13 +60,13 @@ public interface IUserDao {
 	public boolean deleteUser(String userId);
 
 	/**
-	 * 查找用户所有配置信息
+	 * 查找用户所有收货地址信息
 	 * 
 	 * @param userId
 	 *            用户ID
-	 * @return 配置信息集
+	 * @return 地址信息集
 	 */
-	public List<UserConf> findUserConfList(String userId);
+	public List<UserConf> findUserAddressList(String userId);
 
 	/**
 	 * 更新用户配置
