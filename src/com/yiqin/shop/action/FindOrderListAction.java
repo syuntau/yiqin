@@ -27,7 +27,7 @@ public class FindOrderListAction extends ActionSupport {
 	private static final long serialVersionUID = 4175224246287224080L;
 
 	// 每页显示的条目数目
-	public static final int MAXITEMINPAGE = 1;
+	public static final int MAXITEMINPAGE = 5;
 	// 搜索关键词
 	private String searchName;
 	// 订单状态
