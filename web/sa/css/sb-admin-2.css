@@ -348,7 +348,15 @@ table.dataTable thead .sorting:after {
 .category-form .display-off {
 	display: none;
 }
-
+.display-off {
+	display: none;
+}
+.display-inline {
+	display: inline;
+}
 .cursor-pointer {
 	cursor: pointer;
+}
+.btn-remove-all-attr {
+	padding: 0px 12px;
 }

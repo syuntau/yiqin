@@ -49,4 +49,6 @@ public interface IProductDao {
 	 */
 	public Attribute findProductAttr(String attrNameId, int cateId);
 
+	public List<Attribute> findAttributeByCategoryId(int categoryId);
+	public Attribute findAttributeById(int id);
 }

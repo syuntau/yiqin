@@ -150,4 +150,14 @@ public class ProductManagerImpl implements ProductManager {
 			}
 		}
 	}
+
+	@Override
+	public List<Attribute> findAttributeByCategoryId(int categoryId) {
+		return productDao.findAttributeByCategoryId(categoryId);
+	}
+
+	@Override
+	public Attribute findAttributeById(int id) {
+		return productDao.findAttributeById(id);
+	}
 }

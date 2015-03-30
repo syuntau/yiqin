@@ -10,4 +10,7 @@ public class UtilKeys {
 	public final static String PARA_NAV = "para_nav";
 
 	public final static String REQ_SHOP_NAV = "req_shop_nav";
+	
+	public final static String CODE_ERR_PARAM = "1";
+	public final static String CODE_NO_RESULT = "2";
 }

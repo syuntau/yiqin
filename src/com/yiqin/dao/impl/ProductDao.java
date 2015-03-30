@@ -59,4 +59,24 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
+	@Override
+	public List<Attribute> findAttributeByCategoryId(int categoryId) {
+		String queryString = "from Attribute where categoryId=?";
+		List<?> list = getHibernateTemplate().find(queryString, categoryId);
+		if (Util.isNotEmpty(list)) {
+			return (List<Attribute>) list;
+		}
+		return null;
+	}
+
+	@Override
+	public Attribute findAttributeById(int id) {
+		String queryString = "from Attribute where id=?";
+		List<?> list = getHibernateTemplate().find(queryString, id);
+		if (Util.isNotEmpty(list)) {
+			return (Attribute) list.get(0);
+		}
+		return null;
+	}
+
 }

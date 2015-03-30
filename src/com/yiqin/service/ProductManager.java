@@ -2,6 +2,7 @@ package com.yiqin.service;
 
 import java.util.List;
 
+import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.shop.bean.ProductView;
 
@@ -31,4 +32,6 @@ public interface ProductManager {
 	 */
 	public List<Category> findCategoryInfo();
 
+	public List<Attribute> findAttributeByCategoryId(int categoryId);
+	public Attribute findAttributeById(int id);
 }
