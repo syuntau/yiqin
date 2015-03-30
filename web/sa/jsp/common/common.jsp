@@ -28,6 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>sa/js/sb-admin-2.js"></script>
 <script type="text/javascript">
 var com_conf = {
-	loading_icon : '<h4><i class="icon-spinner icon-spin"></i></h4>'
+	loading_icon : '<span><i class="fa fa-refresh fa-spin fa-2x fa-fw"></i></span>'
 }
 </script>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.service.ProductManager;
 import com.yiqin.util.CategorySimple;
 import com.yiqin.util.CategoryUtil;
 import com.yiqin.util.Util;
@@ -15,6 +16,15 @@ public class GetCategoryListAction extends ActionSupport {
 
 	private static final long serialVersionUID = -6306668186602136040L;
 	private String categoryId;
+	private ProductManager productManager;
+
+	public ProductManager getProductManager() {
+		return productManager;
+	}
+
+	public void setProductManager(ProductManager productManager) {
+		this.productManager = productManager;
+	}
 
 	public String getFirst() {
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -22,6 +32,7 @@ public class GetCategoryListAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			CategoryUtil.init(productManager);
 			List<CategorySimple> list = CategoryUtil.getFirstCategory();
 				if (Util.isEmpty(list)) {
 					result = "1";
@@ -33,7 +44,7 @@ public class GetCategoryListAction extends ActionSupport {
 				result = jsArray.toString();
 				out.print(result);
 				return null;
-		} catch (IOException e1) {
+		} catch (Exception e1) {
 			System.out.println("error in GetCategoryListAction.getFirst for make printwriter");
 			e1.printStackTrace();
 			return null;

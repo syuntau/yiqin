@@ -348,3 +348,7 @@ table.dataTable thead .sorting:after {
 .category-form .display-off {
 	display: none;
 }
+
+.cursor-pointer {
+	cursor: pointer;
+}

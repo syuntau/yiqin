@@ -4,31 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.yiqin.pojo.Category;
 import com.yiqin.service.ProductManager;
-import com.yiqin.serviceImpl.ProductManagerImpl;
 
 public class CategoryUtil {
 
-	private static CategoryUtil categoryUtil = new CategoryUtil();
+	private static boolean isInit = false;
 	private static List<Category> categoryList = new ArrayList<Category>();
 	private static List<CategorySimple> firstCategorySimpleList = new ArrayList<CategorySimple>();;
 	private static Map<String, List<Category>> categoryMap = new HashMap<String, List<Category>>();
 	private static Map<String, List<CategorySimple>> categorySimpleMap = new HashMap<String, List<CategorySimple>>();
 
-	private CategoryUtil() {
-		ProductManager productManager = new ProductManagerImpl();
-		categoryList = productManager.findCategoryInfo();
-		for (Category category : categoryList) {
-			firstCategorySimpleList.add(new CategorySimple(category));
-		}
-		setCategoryMap(categoryList);
-		setCategorySimpleMap();
-	}
+	private CategoryUtil() { }
 
+	private static class CategoryUtilSingletonHolder {  
+		static CategoryUtil instance = new CategoryUtil();  
+	}
 	public CategoryUtil getInstance() {
-		return categoryUtil;
+		return CategoryUtilSingletonHolder.instance;
 	}
 
 	public static List<CategorySimple> getFirstCategory() {
@@ -60,5 +53,16 @@ public class CategoryUtil {
 			}
 			categorySimpleMap.put(key, tempList);
 		}
+	}
+
+	public static void init(ProductManager productManager) {
+		if (isInit) return ;
+		categoryList = productManager.findCategoryInfo();
+		for (Category category : categoryList) {
+			firstCategorySimpleList.add(new CategorySimple(category));
+		}
+		setCategoryMap(categoryList);
+		setCategorySimpleMap();
+		isInit = true;
 	}
 }
