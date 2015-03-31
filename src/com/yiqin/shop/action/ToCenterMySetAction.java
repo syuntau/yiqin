@@ -1,13 +1,6 @@
 package com.yiqin.shop.action;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
 
@@ -47,12 +40,9 @@ public class ToCenterMySetAction extends ActionSupport {
 			if (Util.isEmpty(paramVal)) {
 				return null;
 			}
-			HttpServletRequest request = ServletActionContext.getRequest();
 			if (paramVal.equals("info")) {
 				return "userset";
 			} else if (paramVal.equals("address")) {
-				List<UserConf> list = userManager.findUserAddressList(Util.getLoginUser(request.getSession()).getId());
-				request.setAttribute("address_list", list);
 				return "address";
 			}
 			return null;
