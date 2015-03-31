@@ -6609,3 +6609,21 @@ select{
 	background-color: white;
 	cursor: default;
 }
+
+.address-list-abtn{
+	margin: 0 0 0 10px;
+	cursor: pointer;
+}
+
+.ftx-02 {
+	color: #71b247;
+}
+
+.ftx-04 {
+	margin: 0 0 0 10px;
+	font-size: 12px;
+	background: #ffaa45;
+	padding: 2px;
+	color: #fff;
+	font-weight: 400;
+}

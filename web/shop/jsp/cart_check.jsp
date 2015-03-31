@@ -84,7 +84,7 @@ var yiqin_cart_check = function(){
 	            		$modal.find("input[name=receive_area]").val(address);
 	            		$modal.data("receive_aType",data.attribute);
 	            		if(data.attribute=="address_def"){
-	            			$modal.find("input[name=receive_default]").attr("checked",true);
+	            			$modal.find("input[name=receive_default]").prop("checked",true);
 	            		}
 	            	}
 	             },
@@ -302,7 +302,7 @@ var yiqin_cart_check = function(){
 		$modal.find("input[name=receive_name]").val("");
 		$modal.find("input[name=receive_tel]").val("");
 		$modal.find("input[name=receive_area]").val("");
-		$modal.find("input[name=receive_default]").attr("checked",false);
+		$modal.find("input[name=receive_default]").prop("checked",false);
 		$modal.data("receive_aType","");
 	};
 

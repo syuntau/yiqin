@@ -41,7 +41,7 @@ public class ModifyUserAddressAction extends ActionSupport {
 	// 之前地址属性
 	private String oldAttribute;
 
-	// 保存或更新
+	// 保存或更新或设置默认
 	private String saveOrUpdate;
 
 	public UserManager getUserManager() {
@@ -106,8 +106,8 @@ public class ModifyUserAddressAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
-			if (Util.isEmpty(address) || Util.isEmpty(telephone)
-					|| Util.isEmpty(userName)) {
+			if (!"setdef".equals(saveOrUpdate) && (Util.isEmpty(address) || Util.isEmpty(telephone)
+					|| Util.isEmpty(userName))) {
 				result = "1";
 				response.getWriter().print(result);
 				return null;
@@ -205,6 +205,38 @@ public class ModifyUserAddressAction extends ActionSupport {
 								result = "2";
 							}
 						}
+					}
+				}
+			}else if("setdef".equals(saveOrUpdate)){
+				UserConf oldUserConf = userManager.findUserConfInfo(userId,oldAttribute);
+				// 查询之前是否有默认信息
+				userConf = userManager.findUserConfInfo(userId, attribute);
+				if (userConf == null) {
+					if (oldUserConf != null) {
+						oldUserConf.setAttribute(attribute);
+						boolean updateFlag = userManager.updateUserConf(oldUserConf);
+						if (updateFlag) {
+							result = "3";
+						} else {
+							result = "2";
+						}
+					} else {
+						result = "2";
+					}
+				} else {
+					// 更新之前的默认信息编号为当前信息的编号
+					userConf.setAttribute(oldAttribute);
+					boolean flag = userManager.updateUserConf(userConf);
+					if (flag) {
+						oldUserConf.setAttribute(attribute);
+						boolean updateFlag = userManager.updateUserConf(oldUserConf);
+						if (updateFlag) {
+							result = "3";
+						} else {
+							result = "2";
+						}
+					} else {
+						result = "2";
 					}
 				}
 			}

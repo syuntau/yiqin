@@ -5,7 +5,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
+	$("#my_set_info").css('color','#fdb45e');
 });
 </script>
 <div class="center-right padding-right">
