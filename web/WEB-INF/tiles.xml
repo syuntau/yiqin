@@ -43,7 +43,7 @@
 	</definition>
 	
 	<definition name="shop.index.body" template="/shop/jsp/index.jsp">
-		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" />
+<!-- 		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" /> -->
 		<put-attribute name="left" value="shop.index.body.left" />
 		<put-attribute name="right" value="shop.index.body.right" />
 	</definition>
@@ -60,14 +60,14 @@
 
 	<definition name="shop.index.body.left" template="/shop/jsp/idx_left.jsp">
 		<put-attribute name="category" value="/shop/jsp/idx_left_category.jsp" />
-		<put-attribute name="brands" value="/shop/jsp/idx_left_brands.jsp" />
-		<put-attribute name="ad" value="/shop/jsp/idx_left_ad.jsp" />
+<!-- 		<put-attribute name="brands" value="/shop/jsp/idx_left_brands.jsp" /> -->
+<!-- 		<put-attribute name="ad" value="/shop/jsp/idx_left_ad.jsp" /> -->
 	</definition>
 
 	<definition name="shop.index.body.right" template="/shop/jsp/idx_right.jsp">
 		<put-attribute name="features" value="/shop/jsp/idx_right_features.jsp" />
 		<put-attribute name="category" value="/shop/jsp/idx_right_category.jsp" />
-		<put-attribute name="recommend" value="/shop/jsp/idx_right_recommend.jsp" />
+<!-- 		<put-attribute name="recommend" value="/shop/jsp/idx_right_recommend.jsp" /> -->
 	</definition>
 	
 	<definition name="shop.cart.body" template="/shop/jsp/cart.jsp">

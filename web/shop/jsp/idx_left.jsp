@@ -5,7 +5,7 @@
 	<div class="col-sm-3">
 		<div class="left-sidebar">
 			<tiles:insertAttribute name="category" />
-			<tiles:insertAttribute name="brands" />
-			<tiles:insertAttribute name="ad" />		
+<%-- 			<tiles:insertAttribute name="brands" /> --%>
+<%-- 			<tiles:insertAttribute name="ad" /> --%>
 		</div>
 	</div>

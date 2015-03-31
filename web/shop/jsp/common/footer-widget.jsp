@@ -31,7 +31,7 @@
 						<ul class="nav nav-pills nav-stacked">
 							<li><a href=""><s:text name="shop.footer.widget.policies.terms.of.use" /></a></li>
 							<li><a href=""><s:text name="shop.footer.widget.policies.refund.policy" /></a></li>
-							<li><a href=""><s:text name="shop.footer.widget.policies.billing.system"></s:text></a></li>
+<%-- 							<li><a href=""><s:text name="shop.footer.widget.policies.billing.system"></s:text></a></li> --%>
 						</ul>
 					</div>
 				</div>
