@@ -262,6 +262,11 @@ var yiqin_my_address = function(){
 			$("#receive_error").html("收货地址必须填写");
 			return false;
 		}
+		if(!checkShouHuoUser(userName)){
+			$modal.find("input[name=receive_name]").focus();
+			$("#receive_error").html("收货人员不能包含特殊字符");
+			return false;
+		}
 		if (!checkPhone(telephone)) {
 			$modal.find("input[name=receive_tel]").focus();
 			$("#receive_error").html("联系电话格式错误，请重新输入");
@@ -277,6 +282,14 @@ var yiqin_my_address = function(){
 		var REX_PHONE = /^[1][0-9]{10}$/;
 		var REX_DIANH = /^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
 		if (REX_PHONE.test(value) || REX_DIANH.test(value)) {
+			return true;
+		}
+		return false;
+	};
+	
+	var checkShouHuoUser = function(value){
+		var NAMEEXP = /^[a-zA-Z\u4e00-\u9fa5- ]*$/;
+		if (NAMEEXP.test(value)) {
 			return true;
 		}
 		return false;

@@ -63,7 +63,7 @@ public interface UserManager {
 	public List<UserConf> findUserAddressList(String userId);
 
 	/**
-	 * 更新用户配置
+	 * 保存更新用户配置
 	 * 
 	 * @param userConf
 	 *            更新对象

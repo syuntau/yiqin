@@ -122,7 +122,7 @@ var yiqin_login_action = function(){
 	};
 
 	var checkEmailFormat = function(value) {
-		var REX_EMAIL_FORMAT = /^[\w-\.]+@[\w-]+(\.[\w-]+)+/;
+		var REX_EMAIL_FORMAT = /^([a-zA-Z0-9]+[-|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[-|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
 		if (value.length > 0 && !REX_EMAIL_FORMAT.test(value)) {
 			return false;
 		}
@@ -130,7 +130,7 @@ var yiqin_login_action = function(){
 	};
 
 	var checkName = function(value) {
-		var REX_NAME = /^[0-9a-zA-Z_]{4,16}$/;
+		var REX_NAME = /^([a-zA-Z0-9]{1}[a-zA-Z0-9_]{3,16})$/;
 		if (value.length > 0 && !REX_NAME.test(value)) {
 			return false;
 		}

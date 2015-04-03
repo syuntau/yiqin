@@ -6627,3 +6627,8 @@ select{
 	color: #fff;
 	font-weight: 400;
 }
+
+.span-mark{
+	color: #e4393c;
+	font-size: 8px;
+}

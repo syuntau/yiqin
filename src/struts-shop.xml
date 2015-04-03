@@ -49,6 +49,8 @@
 		
 		<action name="modifyUserInfo" class="com.yiqin.shop.action.ModifyUserInfoAction"></action>
 		
+		<action name="toMailCode" class="com.yiqin.shop.action.MailAction"></action>
+		
 		<action name="addProductToCart" class="com.yiqin.shop.action.AddProductToCartAction"></action>
 		
 		<action name="findCartInfo" class="com.yiqin.shop.action.FindCartInfoAction"></action>

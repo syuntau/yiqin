@@ -27,7 +27,7 @@ public class FindUserConfAction extends ActionSupport {
 
 	private UserManager userManager;
 
-	// 用户配置属性(参数为空，查询当前用户所有)
+	// 用户配置属性(参数为空，查询地址列表)
 	private String attribute;
 
 	public UserManager getUserManager() {
@@ -65,7 +65,7 @@ public class FindUserConfAction extends ActionSupport {
 				} else {
 					result = "1";
 				}
-			} else {
+			} else {//查询地址列表
 				List<UserConf> confList = userManager.findUserAddressList(userId);
 				if (Util.isNotEmpty(confList)) {
 					JSONArray jsonArray = JSONArray.fromObject(confList);
