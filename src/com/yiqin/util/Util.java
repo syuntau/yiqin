@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +24,14 @@ public class Util {
 
 	public static boolean isEmpty(String str) {
 		return str == null || "".equals(str);
+	}
+
+	public static boolean isEmpty(@SuppressWarnings("rawtypes") Map map) {
+		return map == null || map.size() == 0;
+	}
+
+	public static boolean isNotEmpty(@SuppressWarnings("rawtypes") Map map) {
+		return map != null && map.size() > 0;
 	}
 
 	public static boolean isEmpty(@SuppressWarnings("rawtypes") List list) {
@@ -59,6 +69,20 @@ public class Util {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
 		return cal.getTime();
+	}
+	
+	/**
+	 * 将某个日期增加指定分钟，并返回结果。如果传入负数，则为减。
+	 * 
+	 * @param date
+	 * @param ammount
+	 * @return
+	 */
+	public static Date addMinute(final Date date, final int ammount) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, ammount);
+		return c.getTime();
 	}
 
 	/**
@@ -185,6 +209,7 @@ public class Util {
 		return parse(String.valueOf(year), "yyyy");
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List getDTOList(String jsonString, Class clazz) {
 		JSONArray array = JSONArray.fromObject(jsonString);
 		List list = new ArrayList();
@@ -237,5 +262,128 @@ public class Util {
 			loninUser = (User) userObj;
 		}
 		return loninUser;
+	}
+	
+	public static String verificationCodeProcess() {
+		int length = 6;
+		Date d = new Date();
+		long lseed = d.getTime();
+		// 设置随机种子
+		java.util.Random r = new Random(lseed);
+		StringBuffer str = new StringBuffer();
+		for (int i = 0; i < length; i++) {
+			str.append(r.nextInt(9));// 生成随机数字
+		}
+		return str.toString();
+	}
+
+	/** 文件类型 */
+	public enum FileType {
+		/** pdf 文件 */
+		PDF {
+			public String getExtName() {
+				return "pdf";
+			}
+
+			@Override
+			public String toString() {
+				return ".pdf";
+			}
+		},
+		/** word 文件(.doc) */
+		WORD {
+			public String getExtName() {
+				return "doc";
+			}
+
+			@Override
+			public String toString() {
+				return ".doc";
+			}
+		},
+		/** html 文件 */
+		HTML {
+			public String getExtName() {
+				return "html";
+			}
+
+			@Override
+			public String toString() {
+				return ".html";
+			}
+		},
+		/** html 附件 */
+		HTMLATT {
+			public String getExtName() {
+				return "html";
+			}
+
+			@Override
+			public String toString() {
+				return ".html";
+			}
+		},
+		/** jpeg 文件 */
+		JPEG {
+			public String getExtName() {
+				return "jpeg";
+			}
+
+			@Override
+			public String toString() {
+				return ".jpeg";
+			}
+		},
+		/** gif 文件 */
+		GIF {
+			public String getExtName() {
+				return "gif";
+			}
+
+			@Override
+			public String toString() {
+				return ".gif";
+			}
+		},
+		/** jpg 文件 */
+		JPG {
+			public String getExtName() {
+				return "jpg";
+			}
+
+			@Override
+			public String toString() {
+				return ".jpg";
+			}
+		},
+		/** png 文件 */
+		PNG {
+			public String getExtName() {
+				return "png";
+			}
+
+			@Override
+			public String toString() {
+				return ".png";
+			}
+		},
+		/** xml 文件 */
+		XML {
+			public String getExtName() {
+				return "xml";
+			}
+
+			@Override
+			public String toString() {
+				return ".xml";
+			}
+		};
+		public String toString() {
+			return null;
+		}
+
+		public String getExtName() {
+			return null;
+		}
 	}
 }
