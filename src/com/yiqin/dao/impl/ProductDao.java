@@ -2,6 +2,7 @@ package com.yiqin.dao.impl;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IProductDao;
@@ -79,4 +80,8 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
+	@Override
+	public void saveAttribute(List<Attribute> list) throws DataAccessException {
+		getHibernateTemplate().saveOrUpdateAll(list);
+	}
 }

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.dao.DataAccessException;
+
 import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
@@ -159,5 +161,10 @@ public class ProductManagerImpl implements ProductManager {
 	@Override
 	public Attribute findAttributeById(int id) {
 		return productDao.findAttributeById(id);
+	}
+
+	@Override
+	public void saveAttribute(List<Attribute> list) throws DataAccessException {
+		productDao.saveAttribute(list);
 	}
 }

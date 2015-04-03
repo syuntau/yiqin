@@ -2,6 +2,8 @@ package com.yiqin.dao;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
@@ -51,4 +53,5 @@ public interface IProductDao {
 
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 	public Attribute findAttributeById(int id);
+	public void saveAttribute(List<Attribute> list) throws DataAccessException;
 }

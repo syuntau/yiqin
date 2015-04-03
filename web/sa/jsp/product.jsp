@@ -13,6 +13,7 @@ var pro_att = {
 	initCategory : function() {
 		pro_att.loadFirstCategory();
 		pro_att.initSubmitCategory();
+		pro_att.initUploadSubmit();
 		
 	},
 	loadFirstCategory : function() {
@@ -128,6 +129,80 @@ var pro_att = {
             type: "post",
             url: "getAttribute_getList",
             data: 'cId='+catetoryId,
+            dataType: "json",
+            success: function(data) {
+	           	 if (data=='1') {
+	           		$attrDiv.find('.attr-panel').parent().append("<span>查询参数有误！</span>");
+	           	 } else if (data=='2') {
+					$('.upload-attr').removeClass('display-off');
+		           	$attrDiv.find('.attr-panel').parent().append("<span>暂无属性信息！</span>");
+	           	 } else {
+	           		var $tbody = $attrDiv.find('tbody');
+					$.each(data, function(i, val) {
+						var $tr = $(pro_att.conf.tr);
+						var _id = $(pro_att.conf.td).html(val.id);
+						var _nameId = $(pro_att.conf.td).html(val.nameId);
+						var _name = $(pro_att.conf.td).html(val.name);
+						var _value = $(pro_att.conf.td).html(val.value);
+						var _categoryId = $(pro_att.conf.td).html(val.categoryId);
+						var _filter = $(pro_att.conf.td).html(val.filter);
+						var _filterType = $(pro_att.conf.td).html(val.filterType);
+						var _showValue = $(pro_att.conf.td).html(val.showValue);
+						var _sort = $(pro_att.conf.td).html(val.sort);
+						var $iRemove = $(pro_att.conf.i_remove);
+						$iRemove.on('click', function() {
+							alert("remove id : " + val.id);
+						});
+						var $iEdit = $(pro_att.conf.i_edit);
+						$iEdit.on('click', function() {
+							alert("edit id : " + val.id);
+						});
+						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+
+						$tr.append(_id).append(_nameId).append(_name).append(_value)
+							.append(_categoryId).append(_filter).append(_filterType)
+							.append(_showValue).append(_sort).append(_setting);
+
+						$tbody.append($tr);
+					});
+					$attrDiv.find('.attr-panel').removeClass('display-off');
+	           	 }
+            },
+            beforeSend: function() {
+            	$attrHR.removeClass('display-off');
+           		$attrDiv.find('span').remove();
+				$('.upload-attr').addClass('display-off');
+           		$attrDiv.find('.attr-panel').addClass('display-off');
+           		var $tbody = $attrDiv.find('tbody');
+           		$tbody.empty();
+            	var $loadingIcon = $(com_conf.loading_icon);
+            	$attrDiv.prepend($loadingIcon);
+        	},
+            complete: function() {
+            	$attrDiv.find('.fa-refresh').parent().remove();
+            }
+		});
+	},
+	initUploadSubmit : function() {
+		$('.btn-upload').on('click', function() {
+			pro_att.uploadAttribute();
+		});
+	},
+	uploadAttribute : function() {
+		var catetoryId = $('.third-category select').find('option:selected').val();
+		if (catetoryId && isNaN(catetoryId)) {
+			alert("所选分类错误，请重试！");
+			return ;
+		}
+		console.log("file : " + $('.upload-attr-file').val());
+		var fPath = $('.upload-attr-file').val().replace(/C:\\fakepath\\/i, '');
+		console.log("file 1 : " + fPath);
+		var $attrHR = $('.attr-hr');
+		var $attrDiv = $('.attr-section');
+		$.ajax({
+            type: "post",
+            url: "uploadAttribute",
+            data: 'fPath=' + fPath,
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
