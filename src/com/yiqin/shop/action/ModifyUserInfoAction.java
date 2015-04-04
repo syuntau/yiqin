@@ -178,6 +178,10 @@ public class ModifyUserInfoAction extends ActionSupport {
 						response.getWriter().print(result);
 						return null;
 					}
+					if(email.equals(loninUser.getEmail())){
+						response.getWriter().print(result);
+						return null;
+					}
 					loninUser.setEmail(email);
 				}
 			} else if ("normal".equals(modifyType)) {
@@ -260,6 +264,17 @@ public class ModifyUserInfoAction extends ActionSupport {
 			if (!flag) {
 				result = "9";
 			} else {
+				if ("mem".equals(modifyType)) {
+					if (userConf != null) {
+						userConf.setValue("00");
+					}else{
+						userConf = new UserConf();
+						userConf.setAttribute("email_verify");
+						userConf.setValue("00");
+						userConf.setUserId(loninUser.getId());
+					}
+					userManager.updateUserConf(userConf);
+				}
 				session.setAttribute("userInfo", loninUser);
 			}
 			response.getWriter().print(result);
