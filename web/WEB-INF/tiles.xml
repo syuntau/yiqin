@@ -42,6 +42,21 @@
 		<put-attribute name="body" value="shop.details.body" />
 	</definition>
 	
+	<definition name="shop.contact.us" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="/shop/jsp/common/contact-us.jsp" />
+	</definition>
+	
+	<definition name="shop.about.yiqin" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="/shop/jsp/common/about-yiqin.jsp" />
+	</definition>
+	
+	<definition name="shop.return.instructions" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="/shop/jsp/common/return-instructions.jsp" />
+	</definition>
+	
 	<definition name="shop.index.body" template="/shop/jsp/index.jsp">
 <!-- 		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" /> -->
 		<put-attribute name="left" value="shop.index.body.left" />

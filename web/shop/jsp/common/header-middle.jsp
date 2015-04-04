@@ -26,19 +26,6 @@
 					<div class="mainmenu pull-right">
 						<ul class="nav navbar-nav collapse navbar-collapse" id="top_header_mainmenu">
 							<li><a class="shop_header active" id="top_home"><s:text name="shop.header.nav.home" /></a></li>
-<%-- 							<li class="dropdown"><a id="top_product"><s:text name="shop.header.nav.product" /><i class="fa fa-angle-down"></i></a> --%>
-<!--                                 <ul role="menu" class="sub-menu"> -->
-<%-- 									<s:set var="products"><s:text name='shop.header.nav.products' /></s:set> --%>
-<%-- 									<s:generator separator="," val="#products" var="productList"></s:generator> --%>
-<%-- 									<s:iterator value="#productList" var="product"> --%>
-<%-- 										<li><a  class="shop_header" id='top_p_<s:property value="%{#product}"/>'><s:text name="%{'shop.header.nav.product.' + #product}" /></a></li> --%>
-<%-- 									</s:iterator> --%>
-<!--                                 </ul> -->
-<!--                             </li> -->
-<%-- 							<li><a  class="shop_header" id="top_sales_promotion"><s:text name="shop.header.nav.sales.promotion" /></a></li> --%>
-<%-- 							<li><a  class="shop_header" id="top_new_goods"><s:text name="shop.header.nav.new.goods" /></a></li><s:text name="" ></s:text> --%>
-<%-- 							<li><a  class="shop_header"  id="top_office_product"><s:text name="shop.header.nav.product.office.product" /></a></li> --%>
-<%-- 							<li><a  class="shop_header"  id="top_gift_card"><s:text name="shop.header.nav.product.gift.card" /></a></li> --%>
 						</ul>
 					</div>
 				</div>
