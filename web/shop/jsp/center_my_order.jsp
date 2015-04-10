@@ -145,7 +145,7 @@ $(document).ready(function(){
 										<td class="cart_product">
 											<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
 											<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
-											<p>商品ID: <s:property value="#product.productId"/></p>
+											<p><s:text name="shop.product.details.productId"/><s:property value="#product.productId"/></p>
 										</td>
 										<td class="cart_price" style="text-align:center;">
 											<p><s:property value="#product.price"/></p>

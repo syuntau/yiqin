@@ -58,8 +58,10 @@ var yiqin_public_js = function(){
 		       	 }else if(data=='error'){
 		       		 alert("加入到购物车失败，请稍后再试！");
 		       	 }else{
-		       		 moveToCartBox($("#"+productId).parent().find("img"));
-		       		 $("#J_MiniCartNum").html(data);
+		       		 if(data != "notLoginError"){
+		       			 moveToCartBox($("#"+productId).parent().find("img"));
+			       		 $("#J_MiniCartNum").html(data);
+		       		 }
 		       	 }
 		       },
 		       beforeSend: function(){},

@@ -59,7 +59,9 @@ var yiqin_cart_action = function(){
 		            	 }else if(data=='error'){
 		            		alert("删除商品失败，请稍后再试！");
 		            	 }else{
-		            		$("#J_MiniCartNum").html(data);
+		            		 if(data != "notLoginError"){
+		            			 $("#J_MiniCartNum").html(data);
+		            		 }
 		            		yiqin_cart_action.initCartInfo("delete");
 		            	 }
 	                },
@@ -167,7 +169,7 @@ var yiqin_cart_action = function(){
 			 $cart_td.attr('class',"cart_description");
 			 $cart_td.append($cart_h4).append($cart_p);
 			 $cart_h4.append($cart_a.append(val.productName));
-			 $cart_p.append(val.productId);
+			 $cart_p.append('<s:text name="shop.product.details.productId"/>'+val.productId);
  			 $cart_a.click(function(){
  				yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });

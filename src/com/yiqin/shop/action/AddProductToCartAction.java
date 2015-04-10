@@ -31,6 +31,9 @@ public class AddProductToCartAction extends ActionSupport {
 	//添加数量
 	private Integer num;
 	
+	//选择的商品其他属性(如：品牌,颜色,....)
+	private String productInfo;
+	
 	private ShoppingManager shoppingManager;
 	private ProductManager productManager;
 
@@ -48,6 +51,14 @@ public class AddProductToCartAction extends ActionSupport {
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+	
+	public String getProductInfo() {
+		return productInfo;
+	}
+
+	public void setProductInfo(String productInfo) {
+		this.productInfo = productInfo;
 	}
 
 	public ProductManager getProductManager() {

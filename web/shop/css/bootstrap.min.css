@@ -6632,3 +6632,51 @@ select{
 	color: #e4393c;
 	font-size: 8px;
 }
+
+.none-detail-a{
+	border: 1px solid #ccc;
+	background: #fff;
+	display: block;
+	white-space: nowrap;
+	text-decoration: none;
+	float: left;
+	padding: 2px;
+}
+
+#select_product_info a img{
+	margin: 1px 3px 1px 1px;
+	display: inline-block;
+	vertical-align: middle;
+	border: 0;
+}
+
+#select_product_info a i{
+	display: inline-block;
+	font-size: 12px;
+	vertical-align: middle;
+	font-style: normal;
+	color: #666;
+}
+
+.none-sel-div{
+	float:left;
+}
+
+.select-a{
+	border: 2px solid #e4393c;
+}
+
+.selected-div{
+	position: relative;
+	zoom: 1;
+}
+
+.select-b{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 12px;
+	height: 12px;
+	overflow: hidden;
+	background: url(http://misc.360buyimg.com/product/item/1.0.12/css/i/newicon20140910.png) no-repeat -202px -224px;
+}
