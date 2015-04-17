@@ -13,8 +13,6 @@ var pro_att = {
 	initCategory : function() {
 		pro_att.loadFirstCategory();
 		pro_att.initSubmitCategory();
-		pro_att.initUploadSubmit();
-		
 	},
 	loadFirstCategory : function() {
 		var $firstCategory = $('.first-category');
@@ -182,45 +180,52 @@ var pro_att = {
             	$attrDiv.find('.fa-refresh').parent().remove();
             }
 		});
-	},
-	initUploadSubmit : function() {
-		$('.btn-upload').on('click', function() {
-			pro_att.uploadAttribute();
-		});
-	},
-	uploadAttribute : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
-			alert("所选分类错误，请重试！");
-			return ;
-		}
-// 		console.log("file : " + $('.upload-attr-file').val());
-// // 		var fPath = $('.upload-attr-file').val().replace(/C:\\fakepath\\/i, '');
-// 		var fPath = $('.category-form .upload-attr-file').fieldSerialize();
-// 		console.log("file 1 : " + fPath);
+	}
+}
+$(document).ready(function() {
+	pro_att.initCategory();
+	pro_att.changeCategory();
+
+	(function() {
+// 		var catetoryId = $('.third-category select').find('option:selected').val();
+// 		if (catetoryId && isNaN(catetoryId)) {
+// 			alert("所选分类错误，请重试！");
+// 			return ;
+// 		}
+		console.log("uploadAttribute in...");
 		var $attrHR = $('.attr-hr');
 		var $attrDiv = $('.attr-section');
+		var bar = $('.bar');
+		var percent = $('.percent');
 
-    	$attrHR.removeClass('display-off');
-   		$attrDiv.find('span').remove();
-		$('.upload-attr').addClass('display-off');
-   		$attrDiv.find('.attr-panel').addClass('display-off');
-   		var $tbody = $attrDiv.find('tbody');
-   		$tbody.empty();
-    	var $loadingIcon = $(com_conf.loading_icon);
-    	$attrDiv.prepend($loadingIcon);
-    	
-		$.ajaxFileUpload({
-            url: "uploadAttribute",
-            fileElementId: 'attributeFile',
+		$('.attribute-form').ajaxForm({
+			url : 'uploadAttribute',
             dataType: "json",
-            success: function(data) {
-	           	 if (data=='1') {
+		    beforeSend: function() {console.log("uploadAttribute beforeSend in...");
+		        var percentVal = '0%';
+		        bar.width(percentVal)
+		        percent.html(percentVal);
+            	$attrHR.removeClass('display-off');
+           		$attrDiv.find('span').remove();
+				$('.upload-attr').addClass('display-off');
+           		$attrDiv.find('.attr-panel').addClass('display-off');
+           		var $tbody = $attrDiv.find('tbody');
+           		$tbody.empty();
+            	var $loadingIcon = $(com_conf.loading_icon);
+            	$attrDiv.prepend($loadingIcon);
+		    },
+		    uploadProgress: function(event, position, total, percentComplete) {
+		        var percentVal = percentComplete + '%';
+		        bar.width(percentVal)
+		        percent.html(percentVal);
+		    },
+		    success: function() {console.log("uploadAttribute success in...");
+	           	if (data=='1') {
 	           		$attrDiv.find('.attr-panel').parent().append("<span>查询参数有误！</span>");
-	           	 } else if (data=='2') {
+	           	} else if (data=='2') {
 					$('.upload-attr').removeClass('display-off');
 		           	$attrDiv.find('.attr-panel').parent().append("<span>暂无属性信息！</span>");
-	           	 } else {
+	           	} else {
 	           		var $tbody = $attrDiv.find('tbody');
 					$.each(data, function(i, val) {
 						var $tr = $(pro_att.conf.tr);
@@ -242,23 +247,24 @@ var pro_att = {
 							alert("edit id : " + val.id);
 						});
 						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
-
+	
 						$tr.append(_id).append(_nameId).append(_name).append(_value)
 							.append(_categoryId).append(_filter).append(_filterType)
 							.append(_showValue).append(_sort).append(_setting);
-
+	
 						$tbody.append($tr);
 					});
 					$attrDiv.find('.attr-panel').removeClass('display-off');
 	           	}
-	           	$attrDiv.find('.fa-refresh').parent().remove();
-            }
+		        var percentVal = '100%';
+		        bar.width(percentVal)
+		        percent.html(percentVal);
+		    },
+			complete: function() {console.log("uploadAttribute complete in...");
+            	$attrDiv.find('.fa-refresh').parent().remove();
+			}
 		});
-	}
-}
-$(document).ready(function() {
-	pro_att.initCategory();
-	pro_att.changeCategory();
+	})();
 });
 </script>
         <div id="page-wrapper">
@@ -271,7 +277,7 @@ $(document).ready(function() {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <form role="form" class="form-inline category-form" enctype="multipart/form-data">
+                    <form role="form" class="form-inline category-form">
                         <div class="form-group category-list first-category">
                             <label class="category-select  display-off">选择分类</label>
                             <select class="form-control category-select display-off"></select>
@@ -282,12 +288,19 @@ $(document).ready(function() {
                         <div class="form-group category-list third-category">
                             <select class="form-control category-select display-off"></select>
                         </div>
-                        
-                        <button type="button" class="btn btn-default btn-category-submit category-select display-off">查询</button>
-                        <div class="form-group" style="padding-left:20px">
-                            <input type="file" id="attributeFile" name="attributeFile" class="upload-attr-file upload-attr display-off">
+                        <button type="button" class="btn btn-info btn-category-submit category-select display-off">查询</button>
+                    </form>
+                    <form role="form" class="form-inline attribute-form" method="post" enctype="multipart/form-data">
+                    	<hr class="upload-attr">
+                    	<label for="upload_attribute" class="upload-attr">请选择上传文件</label>
+                        <div class="form-group">
+                            <input type="file" id="upload_attribute" name="fPath" class="upload-attr-file upload-attr display-off">
                         </div>
-                        <button type="button" class="btn btn-default btn-upload upload-attr display-off">上传</button>
+                        <button type="submit" class="btn btn-info btn-upload upload-attr display-off">上传</button>
+                        <div class="progress upload-attr">
+					        <div class="bar" style="width: 100%;"></div>
+					        <div class="percent">100%</div>
+					    </div>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->

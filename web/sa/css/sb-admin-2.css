@@ -348,6 +348,9 @@ table.dataTable thead .sorting:after {
 .category-form .display-off {
 	display: none;
 }
+.attribute-form .display-off {
+	display: none;
+}
 .display-off {
 	display: none;
 }

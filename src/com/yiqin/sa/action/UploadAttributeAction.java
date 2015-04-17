@@ -22,15 +22,24 @@ import com.yiqin.util.UtilKeys;
 public class UploadAttributeAction extends ActionSupport {
 
 	private static final long serialVersionUID = 168934024332408535L;
-	private String fPath;
+	private File attributeFile;
+	private String attributeFileFileName;
 	private ProductManager productManager;
 
-	public String getFPath() {
-		return fPath;
+	public File getAttributeFile() {
+		return attributeFile;
 	}
 
-	public void setFPath(String fPath) {
-		this.fPath = fPath;
+	public void setAttributeFile(File attributeFile) {
+		this.attributeFile = attributeFile;
+	}
+
+	public String getAttributeFileFileName() {
+		return attributeFileFileName;
+	}
+
+	public void setAttributeFileFileName(String attributeFileFileName) {
+		this.attributeFileFileName = attributeFileFileName;
 	}
 
 	public ProductManager getProductManager() {
@@ -47,13 +56,16 @@ public class UploadAttributeAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			System.out.println("###################### attributeFileFileName : " + attributeFileFileName);
+			File f = this.getAttributeFile();
+			System.out.println("###################### tmp file : " + f);
 			
-			if (Util.isEmpty(fPath)) {
+			if (Util.isEmpty(attributeFileFileName)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				return null;
 			} else {
-				File file = new File(fPath);
-				List<List<Object>> list = ExcelUtil.readExcel(file);
+//				File file = new File(attributeFileFileName);
+				List<List<Object>> list = ExcelUtil.readExcel(getAttributeFile(), attributeFileFileName.substring(attributeFileFileName.indexOf(".") + 1));
 				System.out.println(list);
 				List<Attribute> attributeList = new ArrayList<Attribute>();
 				if (Util.isNotEmpty(list) && list.size() > 1) {
