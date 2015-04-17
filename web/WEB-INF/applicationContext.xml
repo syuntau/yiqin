@@ -28,13 +28,13 @@
 		<property name="password" value="${jdbc.password}"></property>
 		<!-- 在此处  手动指定数据库连接池配置 -->
 		<!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
-		<property name="hibernate.c3p0.timeout">3600</property>
+		<property name="hibernate.c3p0.timeout" value="3600"></property>
 		<!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->
-		<property name="hibernate.c3p0.idle_test_period">120</property>
+		<property name="hibernate.c3p0.idle_test_period" value="120"></property>
 		<!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
-		<property name="hibernate.c3p0.acquire_increment">10</property>
+		<property name="hibernate.c3p0.acquire_increment" value="10"></property>
 		<!-- 每次都验证连接是否可用 -->
-		<property name="hibernate.c3p0.validate">true</property>
+		<property name="hibernate.c3p0.validate" value="true"></property>
 		
 	</bean>
 	
