@@ -9,6 +9,7 @@ import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
+import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.util.Util;
 
 public class ProductDao extends HibernateDaoSupport implements IProductDao {
@@ -83,5 +84,11 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	@Override
 	public void saveAttribute(List<Attribute> list) throws DataAccessException {
 		getHibernateTemplate().saveOrUpdateAll(list);
+	}
+
+	@Override
+	public List<Product> findProductInfoByFilter(ProductFilter productFilter) {
+		
+		return null;
 	}
 }

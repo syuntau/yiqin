@@ -12,6 +12,7 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.service.ProductManager;
+import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Util;
 
@@ -166,5 +167,21 @@ public class ProductManagerImpl implements ProductManager {
 	@Override
 	public void saveAttribute(List<Attribute> list) throws DataAccessException {
 		productDao.saveAttribute(list);
+	}
+
+	@Override
+	public List<ProductView> findProductInfoByFilter(ProductFilter productFilter) {
+		if(productFilter==null || Util.isEmpty(productFilter.getCategorys())){
+			return null;
+		}
+		List<Product> productList = productDao.findProductInfoByCategorys(productFilter.getCategorys());
+		if (Util.isEmpty(productList)) {
+			return null;
+		}
+		int cateId = Integer.valueOf(productFilter.getCategorys());
+		List<Attribute> attrList = findAttributeByCategoryId(cateId);
+		
+		
+		return null;
 	}
 }
