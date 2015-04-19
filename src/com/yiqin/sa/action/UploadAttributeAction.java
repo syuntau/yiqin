@@ -1,7 +1,11 @@
 package com.yiqin.sa.action;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,15 @@ public class UploadAttributeAction extends ActionSupport {
 	private File attributeFile;
 	private String attributeFileFileName;
 	private ProductManager productManager;
+	private String attributeList;
+
+	public String getAttributeList() {
+		return attributeList;
+	}
+
+	public void setAttributeList(String attributeList) {
+		this.attributeList = attributeList;
+	}
 
 	public File getAttributeFile() {
 		return attributeFile;
@@ -57,15 +70,37 @@ public class UploadAttributeAction extends ActionSupport {
 			PrintWriter out = response.getWriter();
 			String result = "";
 			System.out.println("###################### attributeFileFileName : " + attributeFileFileName);
-			File f = this.getAttributeFile();
-			System.out.println("###################### tmp file : " + f);
 			
 			if (Util.isEmpty(attributeFileFileName)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				return null;
 			} else {
-//				File file = new File(attributeFileFileName);
-				List<List<Object>> list = ExcelUtil.readExcel(getAttributeFile(), attributeFileFileName.substring(attributeFileFileName.indexOf(".") + 1));
+				OutputStream output = null;
+		        InputStream input = null;
+		        String path = ServletActionContext.getServletContext().getRealPath(UtilKeys.UPLOAD_PATH);
+		        String fileName = new StringBuilder().append(path).append("\\").append(attributeFileFileName).toString();
+				System.out.println("###################### fileName : " + fileName);
+		        try{
+		            output = new FileOutputStream(fileName);  
+		            //建立一个1k大小的缓冲区
+		            byte[] bs = new byte[1024];
+
+		            //将上传过来的文件输出到output中
+		            input = new FileInputStream(attributeFile);
+		            int length = 0;
+		            //length=input.read(bs)这句话中，length=-1代表了读到文件结尾
+		            while ((length=input.read(bs))>0){
+		                output.write(bs, 0, length);
+		            }
+		        }catch(Exception e) {
+		        	e.printStackTrace();
+		        }finally{
+		            input.close();
+		            output.close();
+		        }
+
+		        File file = new File(fileName);
+				List<List<Object>> list = ExcelUtil.readExcel(file);
 				System.out.println(list);
 				List<Attribute> attributeList = new ArrayList<Attribute>();
 				if (Util.isNotEmpty(list) && list.size() > 1) {
@@ -74,11 +109,15 @@ public class UploadAttributeAction extends ActionSupport {
 						Attribute attribute = new Attribute();
 						attribute.setNameId(String.valueOf(obj.get(0)));
 						attribute.setName(String.valueOf(obj.get(1)));
-						attribute.setValue(String.valueOf(obj.get(2)));
+						String val = String.valueOf(obj.get(2));
+						val = UtilKeys.BLANK_HASH.equals(val) ? UtilKeys.BLANK : val;
+						attribute.setValue(val);
 						attribute.setCategoryId(Integer.parseInt(String.valueOf(obj.get(3))));
 						attribute.setFilter(Byte.parseByte(String.valueOf(obj.get(4))));
 						attribute.setFilterType(Byte.parseByte(String.valueOf(obj.get(5))));
-						attribute.setShowValue(String.valueOf(obj.get(6)));
+						String showVal = String.valueOf(obj.get(6));
+						showVal = UtilKeys.BLANK_HASH.equals(showVal) ? UtilKeys.BLANK : showVal;
+						attribute.setShowValue(showVal);
 						attribute.setSort(Byte.parseByte(String.valueOf(obj.get(7))));
 						attributeList.add(attribute);
 					}

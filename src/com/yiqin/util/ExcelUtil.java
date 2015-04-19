@@ -24,10 +24,10 @@ public class ExcelUtil {
 	/**
 	 * 对外提供读取excel 的方法
 	 * */
-	public static List<List<Object>> readExcel(File file, String extension) throws IOException {
+	public static List<List<Object>> readExcel(File file) throws IOException {
 		String fileName = file.getName();
-//		String extension = fileName.lastIndexOf(".") == -1 ? "" : fileName
-//				.substring(fileName.lastIndexOf(".") + 1);
+		String extension = fileName.lastIndexOf(".") == -1 ? "" : fileName
+				.substring(fileName.lastIndexOf(".") + 1);
 		if ("xls".equals(extension)) {
 			return read2003Excel(file);
 		} else if ("xlsx".equals(extension)) {
@@ -188,7 +188,8 @@ public class ExcelUtil {
 
 	public static void main(String[] args) {
 		try {
-			 List<List<Object>> list = readExcel(new File("D:\\产品结构.xlsx"), "xlsx");
+//			 List<List<Object>> list = readExcel(new File("D:\\s2\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\yiqin\\uploadfile产品结构.xlsx"));
+			 List<List<Object>> list = readExcel(new File("D:\\temp\\产品结构.xls"));
 			 System.out.println(list);
 			// readExcel(new File("D:\\test.xls"));
 		} catch (IOException e) {

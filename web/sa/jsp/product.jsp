@@ -214,7 +214,7 @@ var pro_att = {
             url: "uploadAttribute",
             fileElementId: 'attributeFile',
             dataType: "json",
-            success: function(data) {
+            success: function(data) {console.log("data : " + data);
 	           	 if (data=='1') {
 	           		$attrDiv.find('.attr-panel').parent().append("<span>查询参数有误！</span>");
 	           	 } else if (data=='2') {
@@ -222,7 +222,7 @@ var pro_att = {
 		           	$attrDiv.find('.attr-panel').parent().append("<span>暂无属性信息！</span>");
 	           	 } else {
 	           		var $tbody = $attrDiv.find('tbody');
-					$.each(data, function(i, val) {
+					$.each(data, function(i, val) {console.log("val.id" + val.id);
 						var $tr = $(pro_att.conf.tr);
 						var _id = $(pro_att.conf.td).html(val.id);
 						var _nameId = $(pro_att.conf.td).html(val.nameId);
@@ -252,6 +252,11 @@ var pro_att = {
 					$attrDiv.find('.attr-panel').removeClass('display-off');
 	           	}
 	           	$attrDiv.find('.fa-refresh').parent().remove();
+            },
+            error : function(data,status,e) {
+            	console.log("error in...");
+            	console.log("error data : " + data);
+            	console.log("e : "+e);
             }
 		});
 	}
