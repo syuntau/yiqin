@@ -81,6 +81,29 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
+	public void deleteAttributeByCategoryId(String categoryId) throws DataAccessException {
+		List<Attribute> list = findAttributeByCategoryId(Integer.valueOf(categoryId));
+		if (Util.isNotEmpty(list)) {
+			getHibernateTemplate().deleteAll(list);
+		}
+	}
+
+	public void deleteAttributeById(String id) throws DataAccessException {
+		Attribute attribute = findAttributeById(Integer.valueOf(id));
+		if (attribute != null) {
+			getHibernateTemplate().delete(attribute);
+		}
+	}
+
+	@Override
+	public Attribute saveAttribute(Attribute attribute) throws DataAccessException {
+		return (Attribute) getHibernateTemplate().save(attribute);
+	}
+
+	public void editAttribute(Attribute attribute) throws DataAccessException {
+		getHibernateTemplate().update(attribute);
+	}
+
 	@Override
 	public void saveAttribute(List<Attribute> list) throws DataAccessException {
 		getHibernateTemplate().saveOrUpdateAll(list);

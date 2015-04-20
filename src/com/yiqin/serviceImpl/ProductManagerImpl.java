@@ -169,6 +169,22 @@ public class ProductManagerImpl implements ProductManager {
 		productDao.saveAttribute(list);
 	}
 
+	public Attribute saveAttribute(Attribute attribute) throws DataAccessException {
+		return productDao.saveAttribute(attribute);
+	}
+
+	public void updateAttribute(Attribute attribute) throws DataAccessException {
+		productDao.editAttribute(attribute);
+	}
+
+	public void deleteAttribute(String id) throws DataAccessException {
+		productDao.deleteAttributeById(id);
+	}
+
+	public void deleteAllAttribute(String categoryId) throws DataAccessException {
+		productDao.deleteAttributeByCategoryId(categoryId);
+	}
+
 	@Override
 	public List<ProductView> findProductInfoByFilter(ProductFilter productFilter) {
 		if(productFilter==null || Util.isEmpty(productFilter.getCategorys())){

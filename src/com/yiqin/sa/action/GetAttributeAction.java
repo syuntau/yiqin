@@ -51,6 +51,7 @@ public class GetAttributeAction extends ActionSupport {
 			String result = "";
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
 				return null;
 			} else {
 				int categoryId = Integer.parseInt(cId);
@@ -81,6 +82,7 @@ public class GetAttributeAction extends ActionSupport {
 			String result = "";
 			if (Util.isEmpty(aId) || !Util.isNumeric(aId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
 				return null;
 			} else {
 				int id = Integer.parseInt(aId);

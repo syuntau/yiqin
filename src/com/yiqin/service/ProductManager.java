@@ -49,4 +49,12 @@ public interface ProductManager {
 	public Attribute findAttributeById(int id);
 
 	public void saveAttribute(List<Attribute> list) throws DataAccessException;
+
+	public Attribute saveAttribute(Attribute attribute) throws DataAccessException;
+
+	public void updateAttribute(Attribute attribute) throws DataAccessException;
+
+	public void deleteAttribute(String id) throws DataAccessException;
+
+	public void deleteAllAttribute(String categoryId) throws DataAccessException;
 }

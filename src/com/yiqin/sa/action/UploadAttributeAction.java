@@ -73,6 +73,7 @@ public class UploadAttributeAction extends ActionSupport {
 			
 			if (Util.isEmpty(attributeFileFileName)) {
 				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
 				return null;
 			} else {
 				OutputStream output = null;
