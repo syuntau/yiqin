@@ -7,7 +7,6 @@ import org.springframework.dao.DataAccessException;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
-import com.yiqin.shop.bean.ProductFilter;
 
 /**
  * 产品DAO
@@ -42,13 +41,15 @@ public interface IProductDao {
 	public List<Product> findProductInfoByCategorys(String cateId);
 
 	/**
-	 * 查询指定过滤条件的商品
+	 * 查询指定属性、值的产品
 	 * 
-	 * @param productFilter
-	 *            过滤条件集合
+	 * @param attrId
+	 *            属性ID
+	 * @param value
+	 *            属性值
 	 * @return 对应商品
 	 */
-	public List<Product> findProductInfoByFilter(ProductFilter productFilter);
+	public List<Product> findProductInfo(int attrId, String value);
 
 	/**
 	 * 查询指定分类、属性记录

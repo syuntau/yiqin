@@ -1,6 +1,7 @@
 package com.yiqin.shop.action;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -8,6 +9,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.service.ProductManager;
+import com.yiqin.shop.bean.ProductFilter;
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Page;
 
 /**
@@ -20,13 +23,13 @@ public class ProductFilterAction extends ActionSupport {
 
 	private static final long serialVersionUID = -1063703459420329225L;
 
-	//分类ID
+	//二级分类ID
 	private String categorys;
-	// 过滤品牌
+	// 过滤品牌 attId_brand
 	private String brand;
-	// 过滤价格
+	// 过滤价格 attId_price
 	private String price;
-	// 过滤颜色
+	// 过滤颜色 attId_color
 	private String color;
 	// 选中页号
 	private String pageIndex;
@@ -40,7 +43,6 @@ public class ProductFilterAction extends ActionSupport {
 	private ProductManager productManager;
 
 	public String execute() throws Exception {
-		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try{
@@ -55,27 +57,32 @@ public class ProductFilterAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
-			
-//			// 查询过滤总数
-//			List<OrderView> orderList = null;
-//			int count = productManager.
-//			if (count > 0) {
-//				// 查询当前页信息
-//				orderList = shoppingManager.findOrderList(
-//						Util.getLoginUser(request.getSession()).getId(),
-//						startDate, endDate, Integer.valueOf(status),
-//						Long.valueOf(orderId), productName, productId, pageNo
-//								* MAXITEMINPAGE, MAXITEMINPAGE);
-//			}
+			// 查询过滤总数
+			ProductFilter productFilter = new ProductFilter(categorys, brand,
+					price, color, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+			List<ProductView> productList = null;
+			int count = productManager.findProductCountByFilter(productFilter);
+			if (count > 0) {
+				// 查询当前页信息
+				productList = productManager.findProductInfoByFilter(productFilter);
+			}
 
 			// 分页对象
-			page = new Page(MAXITEMINPAGE, 1, pageNo + 1);
-			page.setResults(null);
+			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
+			page.setResults(productList);
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();
 			return SUCCESS;
 		}
+	}
+	
+	public String getCategorys() {
+		return categorys;
+	}
+
+	public void setCategorys(String categorys) {
+		this.categorys = categorys;
 	}
 
 	public String getBrand() {

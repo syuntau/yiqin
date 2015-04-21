@@ -9,7 +9,6 @@ import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
-import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.util.Util;
 
 public class ProductDao extends HibernateDaoSupport implements IProductDao {
@@ -110,8 +109,12 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	}
 
 	@Override
-	public List<Product> findProductInfoByFilter(ProductFilter productFilter) {
-		
+	public List<Product> findProductInfo(int attrId, String value) {
+		String queryString = "from Product where attributeId = ? and value = ?";
+		List<?> list = getHibernateTemplate().find(queryString,new Object[] { attrId, value });
+		if (Util.isNotEmpty(list)) {
+			return (List<Product>) list;
+		}
 		return null;
 	}
 }

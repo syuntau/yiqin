@@ -36,6 +36,15 @@ public interface ProductManager {
 	 * @return 商品集合
 	 */
 	public List<ProductView> findProductInfoByFilter(ProductFilter productFilter);
+	
+	/**
+	 * 查询指定过滤条件下商品总数
+	 * 
+	 * @param productFilter
+	 *            过滤条件集合
+	 * @return 总数
+	 */
+	public int findProductCountByFilter(ProductFilter productFilter);
 
 	/**
 	 * 查询所有分类菜单

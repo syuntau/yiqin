@@ -187,17 +187,83 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public List<ProductView> findProductInfoByFilter(ProductFilter productFilter) {
-		if(productFilter==null || Util.isEmpty(productFilter.getCategorys())){
+		if (productFilter == null || Util.isEmpty(productFilter.getCategorys())) {
 			return null;
 		}
-		List<Product> productList = productDao.findProductInfoByCategorys(productFilter.getCategorys());
-		if (Util.isEmpty(productList)) {
+		Set<String> pidSet = findProductIdByFilter(productFilter);
+		List<ProductView> result = new ArrayList<ProductView>();
+		if (pidSet != null && pidSet.size() > 0) {
+			List<String> pidList = new ArrayList(pidSet);
+			int beginCount = productFilter.getOffset() + 1;
+			int pageSize = productFilter.getPageSize();
+			if (beginCount >= pidSet.size()) {
+				return null;
+			}
+			if ((beginCount + pageSize) <= pidSet.size()) {
+				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
+			} else if ((beginCount + pageSize) > pidSet.size()) {
+				pidList = pidList.subList(beginCount - 1, pidList.size() - 1);
+			}
+			StringBuilder pids = new StringBuilder();
+			for (String pid : pidList) {
+				pids.append(pid).append(",");
+			}
+			result = findProductInfoById(pids.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int findProductCountByFilter(ProductFilter productFilter) {
+		if (productFilter == null) {
+			return 0;
+		}
+		Set<String> pidSet = findProductIdByFilter(productFilter);
+		if (pidSet != null) {
+			return pidSet.size();
+		}
+		return 0;
+	}
+	
+	private Set<String> findProductIdByFilter(ProductFilter productFilter){
+		if (productFilter == null) {
 			return null;
 		}
-		int cateId = Integer.valueOf(productFilter.getCategorys());
-		List<Attribute> attrList = findAttributeByCategoryId(cateId);
-		
-		
-		return null;
+		Set<String> setPid = new HashSet<String>();
+		List<Product> resultList = new ArrayList<Product>();
+		// 品牌
+		if (!Util.isEmpty(productFilter.getBrand())) {
+			String[] brandArr = productFilter.getBrand().split("_");
+			resultList = productDao.findProductInfo(Integer.valueOf(brandArr[0]), brandArr[1]);
+			if (Util.isEmpty(resultList)) {
+				return null;
+			}
+			for (Product p : resultList) {
+				setPid.add(p.getProductId());
+			}
+		}
+		// 颜色
+		if (!Util.isEmpty(productFilter.getColor())) {
+			String[] colorArr = productFilter.getColor().split("_");
+			resultList = productDao.findProductInfo(Integer.valueOf(colorArr[0]), colorArr[1]);
+			if (Util.isEmpty(resultList)) {
+				return null;
+			}
+			for (Product p : resultList) {
+				setPid.add(p.getProductId());
+			}
+		}
+		// 价格
+		if (!Util.isEmpty(productFilter.getPrice())) {
+			String[] priceArr = productFilter.getPrice().split("_");
+			resultList = productDao.findProductInfo(Integer.valueOf(priceArr[0]), priceArr[1]);
+			if (Util.isEmpty(resultList)) {
+				return null;
+			}
+			for (Product p : resultList) {
+				setPid.add(p.getProductId());
+			}
+		}
+		return setPid;
 	}
 }

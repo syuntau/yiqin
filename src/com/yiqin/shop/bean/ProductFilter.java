@@ -9,16 +9,27 @@ package com.yiqin.shop.bean;
 public class ProductFilter {
 	// 分类ID
 	private String categorys;
-	// 过滤品牌
+	// 过滤品牌 attId_brand
 	private String brand;
-	// 过滤价格
+	// 过滤价格 attId_price
 	private String price;
-	// 过滤颜色
+	// 过滤颜色 attId_color
 	private String color;
 	// 第一条记录索引
 	private int offset;
 	// 每页显示的条目数目
 	private int pageSize;
+	
+	public ProductFilter(String categorys, String brand, String price,
+			String color, int offset, int pageSize) {
+		super();
+		this.categorys = categorys;
+		this.brand = brand;
+		this.price = price;
+		this.color = color;
+		this.offset = offset;
+		this.pageSize = pageSize;
+	}
 
 	public String getCategorys() {
 		return categorys;
