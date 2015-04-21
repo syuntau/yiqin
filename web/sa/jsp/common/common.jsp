@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath%>sa/js/jquery-1.11.0.js"></script>
 <script src="<%=basePath%>sa/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>sa/js/ajaxfileupload.js"></script>
+<script src="<%=basePath%>sa/js/bootbox.min.js"></script>
 <script src="<%=basePath%>sa/js/plugins/metisMenu/metisMenu.min.js"></script>
 <%-- <script src="<%=basePath%>sa/js/plugins/morris/raphael.min.js"></script> --%>
 <%-- <script src="<%=basePath%>sa/js/plugins/morris/morris.min.js"></script> --%>

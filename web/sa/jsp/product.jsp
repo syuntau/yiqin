@@ -264,6 +264,9 @@ var pro_att = {
 				alert("所选分类错误，请重试！");
 				return ;
 			}
+
+			var $attrHR = $('.attr-hr');
+			var $attrDiv = $('.attr-section');
 			$.ajax({
 	            type: "post",
 	            url: "editAttribute_removeAll",
