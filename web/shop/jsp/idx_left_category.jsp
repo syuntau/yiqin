@@ -118,17 +118,17 @@ var yiqin_category_action = function(){
 	 					$cate_panel_a.attr('id',"two_"+nextSub.id);
 	 					$cate_ul.append($cate_li);
 	 					$cate_panel_a.click(function(){
-	 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch");
+	 						yiqin_public_js.toTilesAction(nextSub.id, "/productFilter");
 	 					});
 	 					$cate_li.append($cate_panel_a.append(nextSub.name));
 					});
 				 }else{
 					 $cate_panel_a.click(function(){
-						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch");
+						yiqin_public_js.toTilesAction(sub.id, "/productFilter");
 					 });
 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
 				 }
-				$category_list.append($cate_div);
+				 cate_accordian.append($cate_div);
 			 });
 		 }
 	};
@@ -160,7 +160,6 @@ var yiqin_category_action = function(){
 	
 	return action;
 }();
-
 
 $(document).ready(function() {
 	yiqin_category_action.findTopCategorys();
