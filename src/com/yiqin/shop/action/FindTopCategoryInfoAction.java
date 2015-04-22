@@ -14,26 +14,15 @@ import com.yiqin.service.ProductManager;
 import com.yiqin.util.Util;
 
 /**
- * 查询分类菜单
+ * 查询顶级分类菜单
  * 
  * @author LiuJun
  * 
  */
-public class FindCategoryInfoAction extends ActionSupport {
+public class FindTopCategoryInfoAction extends ActionSupport {
 
-	private static final long serialVersionUID = -5628712416578803631L;
+	private static final long serialVersionUID = 1075114999187692665L;
 	
-	// 顶级分类ID
-	private String topCateId;
-	
-	public String getTopCateId() {
-		return topCateId;
-	}
-
-	public void setTopCateId(String topCateId) {
-		this.topCateId = topCateId;
-	}
-
 	private ProductManager productManager;
 
 	public ProductManager getProductManager() {
@@ -49,13 +38,8 @@ public class FindCategoryInfoAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
-			// 查询分类菜单
-			List<Category> category = null;
-			if(Util.isEmpty(topCateId)){
-				category = productManager.findCategoryInfo();
-			}else{
-				category = productManager.findCategoryInfo(Integer.valueOf(topCateId));
-			}
+			// 查询顶级分类菜单
+			List<Category> category = productManager.findTopCategoryInfo();
 			if (Util.isEmpty(category)) {
 				result = "1";
 				response.getWriter().print(result);
@@ -63,7 +47,6 @@ public class FindCategoryInfoAction extends ActionSupport {
 			}
 
 			JSONArray jsArray = JSONArray.fromObject(category);
-			System.out.println(jsArray.size());
 			result = jsArray.toString();
 			response.getWriter().print(result);
 			return null;

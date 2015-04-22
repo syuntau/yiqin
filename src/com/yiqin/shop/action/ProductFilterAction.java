@@ -2,6 +2,7 @@ package com.yiqin.shop.action;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -12,6 +13,7 @@ import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Page;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 产品检索过滤
@@ -23,8 +25,8 @@ public class ProductFilterAction extends ActionSupport {
 
 	private static final long serialVersionUID = -1063703459420329225L;
 
-	//二级分类ID
-	private String categorys;
+	//分类ID
+	private String paramVal;
 	// 过滤品牌 attId_brand
 	private String brand;
 	// 过滤价格 attId_price
@@ -43,6 +45,7 @@ public class ProductFilterAction extends ActionSupport {
 	private ProductManager productManager;
 
 	public String execute() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try{
@@ -58,7 +61,7 @@ public class ProductFilterAction extends ActionSupport {
 			}
 			
 			// 查询过滤总数
-			ProductFilter productFilter = new ProductFilter(categorys, brand,
+			ProductFilter productFilter = new ProductFilter(paramVal, brand,
 					price, color, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 			List<ProductView> productList = null;
 			int count = productManager.findProductCountByFilter(productFilter);
@@ -70,6 +73,9 @@ public class ProductFilterAction extends ActionSupport {
 			// 分页对象
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(productList);
+			
+			String shop_nav = "top_" + paramVal.substring(0, 1);
+			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -77,12 +83,12 @@ public class ProductFilterAction extends ActionSupport {
 		}
 	}
 	
-	public String getCategorys() {
-		return categorys;
+	public String getParamVal() {
+		return paramVal;
 	}
-
-	public void setCategorys(String categorys) {
-		this.categorys = categorys;
+	
+	public void setParamVal(String paramVal) {
+		this.paramVal = paramVal;
 	}
 
 	public String getBrand() {

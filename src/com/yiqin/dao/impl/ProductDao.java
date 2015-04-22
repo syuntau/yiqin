@@ -13,11 +13,27 @@ import com.yiqin.util.Util;
 
 public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
+	@Override
 	public List<Category> findCategoryInfo() {
 		String queryString = "from Category";
 		return getHibernateTemplate().find(queryString);
 	}
+	
+	@Override
+	public List<Category> findCategoryInfo(int topCateId) {
+		StringBuilder queryString = new StringBuilder();
+		queryString.append("from Category where parentId like '");
+		queryString.append(topCateId).append("%'");
+		return getHibernateTemplate().find(queryString.toString());
+	}
+	
+	@Override
+	public List<Category> findTopCategoryInfo() {
+		String queryString = "from Category where parentId=0";
+		return getHibernateTemplate().find(queryString);
+	}
 
+	@Override
 	public List<Product> findProductInfoById(String pids) {
 		if (Util.isNotEmpty(pids)) {
 			String queryString = "";
@@ -117,4 +133,5 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		}
 		return null;
 	}
+
 }

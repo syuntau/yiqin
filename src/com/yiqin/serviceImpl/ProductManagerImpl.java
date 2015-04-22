@@ -153,6 +153,28 @@ public class ProductManagerImpl implements ProductManager {
 			}
 		}
 	}
+	
+	@Override
+	public List<Category> findCategoryInfo(int topCateId) {
+		List<Category> categoryList = productDao.findCategoryInfo(topCateId);
+		List<Category> tempCategory = new ArrayList<Category>();
+		if (Util.isNotEmpty(categoryList)) {
+			for (Category cate : categoryList) {
+				int parentId = cate.getParentId();
+				if (parentId == topCateId) {
+					tempCategory.add(cate);
+				}
+			}
+			handleSubCategory(categoryList, tempCategory);
+		}
+		return tempCategory;
+	}
+
+	@Override
+	public List<Category> findTopCategoryInfo() {
+		List<Category> categoryList = productDao.findTopCategoryInfo();
+		return categoryList;
+	}
 
 	@Override
 	public List<Attribute> findAttributeByCategoryId(int categoryId) {
@@ -231,6 +253,7 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		Set<String> setPid = new HashSet<String>();
 		List<Product> resultList = new ArrayList<Product>();
+		boolean flag = false;
 		// 品牌
 		if (!Util.isEmpty(productFilter.getBrand())) {
 			String[] brandArr = productFilter.getBrand().split("_");
@@ -241,6 +264,7 @@ public class ProductManagerImpl implements ProductManager {
 			for (Product p : resultList) {
 				setPid.add(p.getProductId());
 			}
+			flag = true;
 		}
 		// 颜色
 		if (!Util.isEmpty(productFilter.getColor())) {
@@ -252,11 +276,24 @@ public class ProductManagerImpl implements ProductManager {
 			for (Product p : resultList) {
 				setPid.add(p.getProductId());
 			}
+			flag = true;
 		}
 		// 价格
 		if (!Util.isEmpty(productFilter.getPrice())) {
 			String[] priceArr = productFilter.getPrice().split("_");
 			resultList = productDao.findProductInfo(Integer.valueOf(priceArr[0]), priceArr[1]);
+			if (Util.isEmpty(resultList)) {
+				return null;
+			}
+			for (Product p : resultList) {
+				setPid.add(p.getProductId());
+			}
+			flag = true;
+		}
+		
+		// 分类
+		if(!flag){
+			resultList = productDao.findProductInfoByCategorys(productFilter.getCategorys());
 			if (Util.isEmpty(resultList)) {
 				return null;
 			}

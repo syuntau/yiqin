@@ -16,11 +16,12 @@ var	category_temp = {
 
 var yiqin_category_action = function(){
 	var action = {
-		initCategoryInfo : function(){
+		findCategoryByTopCate : function(topCateId){
 			$.ajax({
 	             type: "POST",
 	             async: true,
 	             url: "findCategory",
+	             data: "topCateId="+topCateId,
 	             dataType: "json",
 	             success: function(data){
 	            	 var $category_list = $('#accordian');
@@ -30,12 +31,11 @@ var yiqin_category_action = function(){
 	            		 $category_list.html("加载失败，稍后再试！");
 	            	 }else{
 	            		 appendToCategory(data);
-	            		 appendRightCategory(data);
 	            	 }
                 },
                 beforeSend: function(){},
                 complete: function(){
-                	var categoryId = "<s:property value='#request.search_categoryId' />";
+                	var categoryId = "<s:property value='paramVal'/>";
                 	if(categoryId != null && categoryId != ""){
                 		if(categoryId.length>=4){
                 			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
@@ -51,59 +51,86 @@ var yiqin_category_action = function(){
 	         });
 		},
 		
-		
+		findTopCategorys : function(){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findTopCategory",
+	             dataType: "json",
+	             success: function(data){
+	            	 if(data=='1'){
+	            		 alert("暂无顶级分类信息！");
+	            	 }else if(data=='2'){
+	            		 alert("加载失败，稍后再试！");
+	            	 }else{
+	            		 appendRightCategory(data);
+	            	 }
+               },
+               beforeSend: function(){},
+               complete: function(){},
+               error: function(){}
+	         });
+		},
 	};
 	
 	var appendToCategory = function(data){
 		 var $category_list = $('#accordian');
 		 $category_list.empty();
-		 
-		 $.each(data, function(i, val){
-			 if(val.subCategoryList.length>0){
- 				 $.each(val.subCategoryList, function(n,sub){
- 					var $cate_div = $(category_temp.cate_div),
- 				 	 $cate_div_heading = $(category_temp.cate_div),
- 				 	 $cate_div_coll = $(category_temp.cate_div),
- 				 	 $cate_div_body = $(category_temp.cate_div),
- 				 	 $cate_h4 = $(category_temp.cate_h4),
- 				 	 $cate_coll_a = $(category_temp.cate_coll_a),
- 				 	 $cate_span_i = $(category_temp.cate_span_i),
- 				 	 $cate_ul = $(category_temp.cate_ul),
- 				 	 $cate_li = $(category_temp.cate_li),
- 				 	 $cate_panel_a = $(category_temp.cate_panel_a);
- 				 
-	 				 $cate_div.attr('class','panel panel-default');
-	 				 $cate_div_heading.attr('class','panel-heading').append($cate_h4);
-	 				 $cate_div.append($cate_div_heading);
-	 				 
-	 				 if(sub.subCategoryList.length>0){
-	 					 $cate_div.append($cate_div_coll);
-	 					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
-	 					 $cate_coll_a.append($cate_span_i).append(sub.name);
-	 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
-	 					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
-	 					 $cate_div_coll.append($cate_div_body);
-	 					 
-	 					$.each(sub.subCategoryList, function(k,nextSub){
-		 					$cate_li = $(category_temp.cate_li),
-		 					$cate_panel_a = $(category_temp.cate_panel_a);
-		 					$cate_panel_a.attr('id',"two_"+nextSub.id);
-		 					$cate_ul.append($cate_li);
-		 					$cate_panel_a.click(function(){
-		 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch");
-		 					});
-		 					$cate_li.append($cate_panel_a.append(nextSub.name));
+		 var currentNav = "<s:property value='#session.se_shop_nav' />";
+		 if("top_home"==currentNav){
+			 $.each(data, function(i, val){
+				 appendTo(val.subCategoryList,$category_list);				 
+			 });
+		 }else{
+			 appendTo(data,$category_list);
+		 }
+	};
+	
+	var appendTo = function(beginList,cate_accordian){
+		if(beginList.length>0){
+			 $.each(beginList, function(n,sub){
+				var $cate_div = $(category_temp.cate_div),
+			 	 $cate_div_heading = $(category_temp.cate_div),
+			 	 $cate_div_coll = $(category_temp.cate_div),
+			 	 $cate_div_body = $(category_temp.cate_div),
+			 	 $cate_h4 = $(category_temp.cate_h4),
+			 	 $cate_coll_a = $(category_temp.cate_coll_a),
+			 	 $cate_span_i = $(category_temp.cate_span_i),
+			 	 $cate_ul = $(category_temp.cate_ul),
+			 	 $cate_li = $(category_temp.cate_li),
+			 	 $cate_panel_a = $(category_temp.cate_panel_a);
+			 
+				 $cate_div.attr('class','panel panel-default');
+				 $cate_div_heading.attr('class','panel-heading').append($cate_h4);
+				 $cate_div.append($cate_div_heading);
+				 
+				 if(sub.subCategoryList.length>0){
+					 $cate_div.append($cate_div_coll);
+					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
+					 $cate_coll_a.append($cate_span_i).append(sub.name);
+					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
+					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
+					 $cate_div_coll.append($cate_div_body);
+					 
+					$.each(sub.subCategoryList, function(k,nextSub){
+	 					$cate_li = $(category_temp.cate_li),
+	 					$cate_panel_a = $(category_temp.cate_panel_a);
+	 					$cate_panel_a.attr('id',"two_"+nextSub.id);
+	 					$cate_ul.append($cate_li);
+	 					$cate_panel_a.click(function(){
+	 						yiqin_public_js.toTilesAction(nextSub.id, "/toCategorySearch");
 	 					});
-	 				 }else{
-	 					 $cate_panel_a.click(function(){
-	 						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch");
-	 					 });
-	 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
-	 				 }
-	 				$category_list.append($cate_div);
-				 });
-			 }
-		 });
+	 					$cate_li.append($cate_panel_a.append(nextSub.name));
+					});
+				 }else{
+					 $cate_panel_a.click(function(){
+						yiqin_public_js.toTilesAction(sub.id, "/toCategorySearch");
+					 });
+					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
+				 }
+				$category_list.append($cate_div);
+			 });
+		 }
 	};
 	
 	var appendRightCategory = function(data){
@@ -122,7 +149,7 @@ var yiqin_category_action = function(){
 			$cate_panel_a = $(category_temp.cate_panel_a);
 			$cate_li.append($cate_panel_a);
 			$cate_panel_a.click(function(){
-				yiqin_public_js.toTilesAction(val.id, "/toCategorySearch");
+				yiqin_public_js.toTilesAction(val.id, "/productFilter");
 			});
 			$cate_panel_a.attr('class',"shop_header").append(val.name);
 			$cate_panel_a.attr('id',"top_"+val.id);
@@ -136,7 +163,18 @@ var yiqin_category_action = function(){
 
 
 $(document).ready(function() {
-	yiqin_category_action.initCategoryInfo();
+	yiqin_category_action.findTopCategorys();
+	var currentNav = "<s:property value='#session.se_shop_nav' />";
+	if (currentNav != '' && currentNav != null) {
+		var topcid =  currentNav.split("_")[1];
+		if(!isNaN(topcid)){
+			yiqin_category_action.findCategoryByTopCate(topcid);
+		}else{
+			yiqin_category_action.findCategoryByTopCate("");
+		}
+	}else{
+		yiqin_category_action.findCategoryByTopCate("");
+	}
 });
 </script>
 <h2><s:text name="shop.index.left.category"/></h2>

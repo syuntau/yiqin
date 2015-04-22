@@ -65,6 +65,10 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		
+		<action name="findTopCategory" class="com.yiqin.shop.action.FindTopCategoryInfoAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
 		<action name="deleteCartProduct" class="com.yiqin.shop.action.DeleteCartProductAction"></action>
 		
 		<action name="deleteUserAddress" class="com.yiqin.shop.action.DeleteUserAddressAction"></action>
@@ -105,6 +109,11 @@
 		
 		<action name="findProductsByCategory" class="com.yiqin.shop.action.FindProductsByCategoryAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		
+		<action name="productFilter" class="com.yiqin.shop.action.ProductFilterAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="tiles">shop.search</result>
 		</action>
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">

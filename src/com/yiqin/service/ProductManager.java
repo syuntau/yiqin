@@ -45,13 +45,29 @@ public interface ProductManager {
 	 * @return 总数
 	 */
 	public int findProductCountByFilter(ProductFilter productFilter);
-
+	
 	/**
 	 * 查询所有分类菜单
 	 * 
-	 * @return 分类信息
+	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo();
+
+	/**
+	 * 查询顶级分类下分类菜单
+	 * 
+	 * @param topCateId 顶级分类ID
+	 * 
+	 * @return 分类集
+	 */
+	public List<Category> findCategoryInfo(int topCateId);
+	
+	/**
+	 * 查询顶级分类
+	 * 
+	 * @return 分类集
+	 */
+	public List<Category> findTopCategoryInfo();
 
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 
