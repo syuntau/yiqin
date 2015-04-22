@@ -174,9 +174,11 @@ $(document).ready(function(){
 					</s:else>
 				</table>
 			</div>
-			<div style="text-align: center;width: 99%">
-				<jsp:include page="/shop/jsp/common/page.jsp"></jsp:include>
-			</div>
+			<s:if test="page.results!=null">
+				<div style="text-align: center;width: 99%">
+					<jsp:include page="/shop/jsp/common/page.jsp"></jsp:include>
+				</div>
+			</s:if>
 		</div>
 	</section>
 </div>

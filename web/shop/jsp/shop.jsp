@@ -3,21 +3,13 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 <script type="text/javascript">
-	var yiqin_shoplist_action = function(){
-		var action = {
-			shopInit : function(){
-				
-				
-			},
-			
-		};
-		
-		return action;
-	}();
-	
-	$(document).ready(function(){
-		//yiqin_shoplist_action
-	});
+var toIndexPage = function(pageIndex){
+	var paramVal = "<s:property value='paramVal'/>",
+		brand = "<s:property value='brand'/>",
+		color = "<s:property value='color'/>",
+		price = "<s:property value='price'/>";
+	window.location.href = "productFilter?paramVal="+paramVal+"&brand="+encodeURIComponent(encodeURIComponent(brand))+"&color="+encodeURIComponent(encodeURIComponent(color))+"&price="+"&pageIndex="+pageIndex;
+};
 </script>
 
 <div class="col-sm-9 padding-right">
@@ -42,8 +34,10 @@
 				</div>
 			</s:iterator>
 		</s:else>
+	</div><!--features_items-->
+	<s:if test="page.results!=null">
 		<div style="text-align: center;width: 99%">
 			<jsp:include page="/shop/jsp/common/page.jsp"></jsp:include>
 		</div>
-	</div><!--features_items-->
+	</s:if>
 </div>

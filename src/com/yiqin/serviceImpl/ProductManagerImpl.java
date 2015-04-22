@@ -218,13 +218,13 @@ public class ProductManagerImpl implements ProductManager {
 			List<String> pidList = new ArrayList(pidSet);
 			int beginCount = productFilter.getOffset() + 1;
 			int pageSize = productFilter.getPageSize();
-			if (beginCount >= pidSet.size()) {
+			if (beginCount > pidSet.size()) {
 				return null;
 			}
 			if ((beginCount + pageSize) <= pidSet.size()) {
 				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
 			} else if ((beginCount + pageSize) > pidSet.size()) {
-				pidList = pidList.subList(beginCount - 1, pidList.size() - 1);
+				pidList = pidList.subList(beginCount - 1, pidList.size());
 			}
 			StringBuilder pids = new StringBuilder();
 			for (String pid : pidList) {

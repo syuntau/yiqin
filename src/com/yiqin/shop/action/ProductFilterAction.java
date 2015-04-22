@@ -40,7 +40,7 @@ public class ProductFilterAction extends ActionSupport {
 	// 当前页号
 	private int pageNo = 0;
 	// 每页显示的条目数目
-	public static final int MAXITEMINPAGE = 12;
+	public static final int MAXITEMINPAGE = 1;
 
 	private ProductManager productManager;
 
