@@ -115,6 +115,10 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success" type="tiles">shop.search</result>
 		</action>
+		
+		<action name="findFilterAttr" class="com.yiqin.shop.action.FindFilterAttributeAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">
 			<interceptor-ref name="setNav"></interceptor-ref>

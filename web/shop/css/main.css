@@ -2682,3 +2682,36 @@ h2.title {
   padding: 10px 5px 10px 0;
   margin-bottom: 10px;
 }
+
+.s-title {
+	border-bottom: 1px solid #DDD;
+	background: #F1F1F1;
+	line-height: 34px;
+	height: 34px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.s-title h4 {
+	float: left;
+	padding-left: 10px;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.s-title h4 b {
+	color: #e4393c;
+	margin-right: 5px;
+	font-size: 14px;
+}
+
+.user_option a{
+	width: 80px;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align:middle;
+	zoom: 1;
+	color: #005aa0;
+	cursor: pointer;
+}

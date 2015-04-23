@@ -303,4 +303,19 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return setPid;
 	}
+
+	@Override
+	public List<Attribute> findFilterAttribute(int categoryId) {
+		List<Attribute> list = productDao.findAttributeByCategoryId(categoryId);
+		List<Attribute> tempList = new ArrayList<Attribute>();
+		if(!Util.isEmpty(list)){
+			for(Attribute attr : list){
+				String nameId = attr.getNameId();
+				if("brand".equals(nameId) || "color".equals(nameId) || "price".equals(nameId)){
+					tempList.add(attr);
+				}
+			}
+		}
+		return tempList;
+	}
 }

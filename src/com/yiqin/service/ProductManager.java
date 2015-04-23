@@ -36,7 +36,7 @@ public interface ProductManager {
 	 * @return 商品集合
 	 */
 	public List<ProductView> findProductInfoByFilter(ProductFilter productFilter);
-	
+
 	/**
 	 * 查询指定过滤条件下商品总数
 	 * 
@@ -45,7 +45,7 @@ public interface ProductManager {
 	 * @return 总数
 	 */
 	public int findProductCountByFilter(ProductFilter productFilter);
-	
+
 	/**
 	 * 查询所有分类菜单
 	 * 
@@ -56,12 +56,13 @@ public interface ProductManager {
 	/**
 	 * 查询顶级分类下分类菜单
 	 * 
-	 * @param topCateId 顶级分类ID
+	 * @param topCateId
+	 *            顶级分类ID
 	 * 
 	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo(int topCateId);
-	
+
 	/**
 	 * 查询顶级分类
 	 * 
@@ -69,17 +70,28 @@ public interface ProductManager {
 	 */
 	public List<Category> findTopCategoryInfo();
 
+	/**
+	 * 查询过滤商品的filter属性
+	 * 
+	 * @param categoryId
+	 *            分类id
+	 * @return 属性集
+	 */
+	public List<Attribute> findFilterAttribute(int categoryId);
+
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 
 	public Attribute findAttributeById(int id);
 
 	public void saveAttribute(List<Attribute> list) throws DataAccessException;
 
-	public Attribute saveAttribute(Attribute attribute) throws DataAccessException;
+	public Attribute saveAttribute(Attribute attribute)
+			throws DataAccessException;
 
 	public void updateAttribute(Attribute attribute) throws DataAccessException;
 
 	public void deleteAttribute(String id) throws DataAccessException;
 
-	public void deleteAllAttribute(String categoryId) throws DataAccessException;
+	public void deleteAllAttribute(String categoryId)
+			throws DataAccessException;
 }
