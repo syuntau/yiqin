@@ -311,8 +311,14 @@ public class ProductManagerImpl implements ProductManager {
 		if(!Util.isEmpty(list)){
 			for(Attribute attr : list){
 				String nameId = attr.getNameId();
-				if("brand".equals(nameId) || "color".equals(nameId) || "price".equals(nameId)){
-					tempList.add(attr);
+				if("brand".equals(nameId)){
+					tempList.add(0, attr);
+				}
+				if("price".equals(nameId)){
+					tempList.add(1, attr);
+				}
+				if("color".equals(nameId)){
+					tempList.add(2, attr);
 				}
 			}
 		}

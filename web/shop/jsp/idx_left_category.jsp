@@ -40,6 +40,7 @@ var yiqin_category_action = function(){
                 		if(categoryId.length>=4){
                 			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
                 			$("#two_"+categoryId).css('color','#fdb45e');
+                			$("#shop_filter_div b").html($("#two_"+categoryId).html());
                 		}else{
                 			if(categoryId.length==2){
                 				$("#first_"+categoryId).css('color','#fdb45e');

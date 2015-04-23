@@ -4,21 +4,30 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 <script type="text/javascript">
+var shop_temp = {
+	filter_li : '<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;"></li>',
+	filter_label : '<label></label>',
+	filter_span : '<span style="margin-left:30px;"></span>',
+	filter_a : '<a></a>',
+};
+
 var yiqin_shoplist_action = function(){
 	var action = {
-		findFilterAttr : function(){
+		findFilterAttr : function(categoryId){
 			$.ajax({
 	             type: "POST",
 	             async: true,
 	             url: "findFilterAttr",
+	             data: "categoryId="+categoryId,
 	             dataType: "json",
 	             success: function(data){
+	            	var $shop_filter_ul = $("#shop_filter_ul");
 	            	 if(data=='1'){
-	            		 alert("暂无检索过滤信息！");
+	            		 $shop_filter_ul.append("暂无筛选项信息！");
 	            	 }else if(data=='2'){
-	            		 alert("加载失败，稍后再试！");
+	            		 $shop_filter_ul.append("筛选项信息加载失败！");
 	            	 }else{
-	            		 
+	            		 appendToFilter(data);
 	            	 }
               },
               beforeSend: function(){},
@@ -32,6 +41,30 @@ var yiqin_shoplist_action = function(){
 	return action;
 }();
 
+var appendToFilter = function(data){
+	var $shop_filter_ul = $("#shop_filter_ul");
+	$shop_filter_ul.empty();
+		
+	$.each(data, function(i,val){
+		var $filter_li = $(shop_temp.filter_li),
+			$filter_label = $(shop_temp.filter_label),
+			$filter_span = $(shop_temp.filter_span),
+			nameId = val.nameId,
+			showValue = val.showValue;
+		
+		$filter_li.append($filter_label);
+		$filter_label.append(val.name).append("：");
+		var valueArr = showValue.split(",");
+		$.each(valueArr, function(n,arr){
+			$filter_a = $(shop_temp.filter_a);
+			$filter_a.append(arr);
+			$filter_span.append($filter_a);
+		});
+		$filter_li.append($filter_span);
+		$shop_filter_ul.append($filter_li);
+	});
+};
+
 var toIndexPage = function(pageIndex){
 	var paramVal = "<s:property value='paramVal'/>",
 		brand = "<s:property value='brand'/>",
@@ -41,31 +74,26 @@ var toIndexPage = function(pageIndex){
 };
 
 $(document).ready(function(){
-	//yiqin_shoplist_action
+	var cateId = "<s:property value='paramVal'/>";
+	if(cateId.length >=4 ){
+		yiqin_shoplist_action.findFilterAttr(cateId);
+	}else{
+		$("#shop_filter_div").hide();
+	}
 });
 </script>
 
 <div class="col-sm-9 padding-right">
-	<div class="s-title">
-		<h4>
-			<b>多功能一体机</b><em>&nbsp;商品筛选</em>
-		</h4>
-	</div>
-	<div class="container">
+	<div class="container" id="shop_filter_div">
+		<div class="s-title">
+			<h4>
+				<b></b><em>&nbsp;商品筛选</em>
+			</h4>
+		</div>
 		<div class="row">
 			<div class="col-sm-6" style="width: 100%">
 				<div class="chose_area">
-					<ul class="user_option" style="padding-left:0px;">
-						<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;">
-							<label>品牌：</label><span style="margin-left:30px;"><a>惠普</a><a>佳能</a></span>
-						</li>
-						<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;">
-							<label>价格：</label><span style="margin-left:30px;"><a>10-100</a><a>101-200</a></span>
-						</li>
-						<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;">
-							<label>颜色：</label><span style="margin-left:30px;"><a>红色</a><a>蓝色</a></span>
-						</li>
-					</ul>
+					<ul class="user_option" style="padding-left:0px;" id="shop_filter_ul"></ul>
 				</div>
 			</div>
 		</div>
