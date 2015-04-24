@@ -7,8 +7,8 @@ var pro_att = {
 		option : '<option></option>',
 		tr : '<tr></tr>',
 		td : '<td></td>',
-		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" title="删除属性"></i>',
-		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" title="修改属性"></i>',
+		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" title="<s:text name='msg.attr.remove'></s:text>"></i>',
+		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" title="<s:text name='msg.attr.edit'></s:text>"></i>',
 	},
 	initCategory : function() {
 		pro_att.loadFirstCategory();
@@ -24,7 +24,7 @@ var pro_att = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='2') {
-	           		$firstCategory.html("暂无产品分类信息！");
+	           		$firstCategory.html("<s:text name='msg.no.item'><s:param name='msg.param.category'></s:param></s:text>");
 	           	 } else {
 	           		var $firstCategorySelect = $firstCategory.find('select');
 					$.each(data, function(i, val) {
@@ -56,10 +56,10 @@ var pro_att = {
             success: function(data) {
 	           	 if (data=='1') {
 	           		pro_att.hideCategory(type);
-	           		$categoryDiv.append("<span>查询参数有误！</span>");
+	           		$categoryDiv.append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 		           	pro_att.hideCategory(type);
-		           	$categoryDiv.append("<span>暂无产品分类信息！</span>");
+		           	$categoryDiv.append("<span><s:text name='msg.no.item'><s:param name='msg.param.category'></s:param></s:text></span>");
 	           	 } else {
 	           		$categoryDiv.find('span').remove();
 	           		var $categoryDivSelect = $categoryDiv.find('select');
@@ -120,7 +120,7 @@ var pro_att = {
 	loadAttributeList : function() {
 		var catetoryId = $('.third-category select').find('option:selected').val();
 		if (catetoryId && isNaN(catetoryId)) {
-			alert("所选分类错误，请重试！");
+			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
 		var $attrHR = $('.attr-hr');
@@ -132,40 +132,12 @@ var pro_att = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
-	           		$attrDiv.find('.attr-panel').parent().append("<span>查询参数有误！</span>");
+	           		$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 					$('.upload-attr').removeClass('display-off');
-		           	$attrDiv.find('.attr-panel').parent().append("<span>暂无属性信息！</span>");
+		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param name='msg.param.attribute'></s:param></s:text></span>");
 	           	 } else {
-	           		var $tbody = $attrDiv.find('tbody');
-					$.each(data, function(i, val) {
-						var $tr = $(pro_att.conf.tr);
-						var _id = $(pro_att.conf.td).html(val.id);
-						var _nameId = $(pro_att.conf.td).html(val.nameId);
-						var _name = $(pro_att.conf.td).html(val.name);
-						var _value = $(pro_att.conf.td).html(val.value);
-						var _categoryId = $(pro_att.conf.td).html(val.categoryId);
-						var _filter = $(pro_att.conf.td).html(val.filter);
-						var _filterType = $(pro_att.conf.td).html(val.filterType);
-						var _showValue = $(pro_att.conf.td).html(val.showValue);
-						var _sort = $(pro_att.conf.td).html(val.sort);
-						var $iRemove = $(pro_att.conf.i_remove);
-						$iRemove.on('click', function() {
-							alert("remove id : " + val.id);
-						});
-						var $iEdit = $(pro_att.conf.i_edit);
-						$iEdit.on('click', function() {
-							alert("edit id : " + val.id);
-						});
-						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
-
-						$tr.append(_id).append(_nameId).append(_name).append(_value)
-							.append(_categoryId).append(_filter).append(_filterType)
-							.append(_showValue).append(_sort).append(_setting);
-
-						$tbody.append($tr);
-					});
-					$attrDiv.find('.attr-panel').removeClass('display-off');
+	           		pro_att.editAttrTbl(data);
 	           	 }
             },
             beforeSend: function() {
@@ -191,7 +163,7 @@ var pro_att = {
 	uploadAttribute : function() {
 		var catetoryId = $('.third-category select').find('option:selected').val();
 		if (catetoryId && isNaN(catetoryId)) {
-			alert("所选分类错误，请重试！");
+			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
 		
@@ -211,57 +183,60 @@ var pro_att = {
             url: "uploadAttribute",
             fileElementId: 'attributeFile',
             dataType: "json",
-            success: function(data) {console.log("data : " + data);
+            success: function(data) {
 	           	 if (data=='1') {
-	           		$attrDiv.find('.attr-panel').parent().append("<span>查询参数有误！</span>");
+	           		$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 					$('.upload-attr').removeClass('display-off');
-		           	$attrDiv.find('.attr-panel').parent().append("<span>暂无属性信息！</span>");
+		           	$attrDiv.find('.attr-panel').parent().append("<span><span><s:text name='msg.no.item'><s:param name='msg.param.attribute'></s:param></s:text></span>");
 	           	 } else {
-	           		var $tbody = $attrDiv.find('tbody');
-					$.each(data, function(i, val) {console.log("val.id" + val.id);
-						var $tr = $(pro_att.conf.tr);
-						var _id = $(pro_att.conf.td).html(val.id);
-						var _nameId = $(pro_att.conf.td).html(val.nameId);
-						var _name = $(pro_att.conf.td).html(val.name);
-						var _value = $(pro_att.conf.td).html(val.value);
-						var _categoryId = $(pro_att.conf.td).html(val.categoryId);
-						var _filter = $(pro_att.conf.td).html(val.filter);
-						var _filterType = $(pro_att.conf.td).html(val.filterType);
-						var _showValue = $(pro_att.conf.td).html(val.showValue);
-						var _sort = $(pro_att.conf.td).html(val.sort);
-						var $iRemove = $(pro_att.conf.i_remove);
-						$iRemove.on('click', function() {
-							alert("remove id : " + val.id);
-						});
-						var $iEdit = $(pro_att.conf.i_edit);
-						$iEdit.on('click', function() {
-							alert("edit id : " + val.id);
-						});
-						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
-
-						$tr.append(_id).append(_nameId).append(_name).append(_value)
-							.append(_categoryId).append(_filter).append(_filterType)
-							.append(_showValue).append(_sort).append(_setting);
-
-						$tbody.append($tr);
-					});
-					$attrDiv.find('.attr-panel').removeClass('display-off');
+	           		pro_att.editAttrTbl(data);
 	           	}
 	           	$attrDiv.find('.fa-refresh').parent().remove();
             },
             error : function(data,status,e) {
-            	console.log("error in...");
-            	console.log("error data : " + data);
-            	console.log("e : "+e);
+            	alert("<s:text name='msg.err.upload'></s:text>");
+	           	$attrDiv.find('.fa-refresh').parent().remove();
             }
 		});
+	},
+	editAttrTbl : function(data) {
+		var $attrDiv = $('.attr-section');
+   		var $tbody = $attrDiv.find('tbody');
+		$.each(data, function(i, val) {
+			var $tr = $(pro_att.conf.tr).addClass('tr_'+val.id);
+			var _id = $(pro_att.conf.td).html(val.id);
+			var _nameId = $(pro_att.conf.td).html(val.nameId);
+			var _name = $(pro_att.conf.td).html(val.name);
+			var _value = $(pro_att.conf.td).html(val.value);
+			var _categoryId = $(pro_att.conf.td).html(val.categoryId);
+			var _filter = $(pro_att.conf.td).html(val.filter);
+			var _filterType = $(pro_att.conf.td).html(val.filterType);
+			var _showValue = $(pro_att.conf.td).html(val.showValue);
+			var _sort = $(pro_att.conf.td).html(val.sort);
+			var $iRemove = $(pro_att.conf.i_remove);
+			$iRemove.on('click', function() {
+				pro_att.removeAttr(val.id, val.name);
+			});
+			var $iEdit = $(pro_att.conf.i_edit);
+			$iEdit.on('click', function() {
+				alert("edit id : " + val.id);
+			});
+			var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+
+			$tr.append(_id).append(_nameId).append(_name).append(_value)
+				.append(_categoryId).append(_filter).append(_filterType)
+				.append(_showValue).append(_sort).append(_setting);
+
+			$tbody.append($tr);
+		});
+		$attrDiv.find('.attr-panel').removeClass('display-off');
 	},
 	removeAllAttr : function() {
 		$('.btn-remove-all-attr').on('click', function() {
 			var catetoryId = $('.third-category select').find('option:selected').val();
 			if (catetoryId && isNaN(catetoryId)) {
-				alert("所选分类错误，请重试！");
+				alert("<span><s:text name='msg.err.param'></s:text>");
 				return ;
 			}
 
@@ -270,7 +245,7 @@ var pro_att = {
 
         	bootbox.confirm({
         	    size: 'small',
-        	    message: "确认删除所有属性？", 
+        	    message: "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.all.attr' /></s:param></s:text>", 
         	    callback: function(result){
         	    	if (result) {
         				$.ajax({
@@ -279,28 +254,85 @@ var pro_att = {
         		            data: 'categoryId='+catetoryId,
         		            dataType: "json",
         		            success: function(data) {
-        			           	 if (data=='1') {
-        			           		alert("所选分类有误，请重试！");
-        			           	 } else if (data=='3') {
-        				           		alert("数据库操作错误，请重试！");
-        			           	 } else {
-             		            	alert("删除成功！");
-             		           		$attrDiv.find('span').remove();
+        			           	if (data=='1') {
+        			           		alert("<span><s:text name='msg.err.param'></s:text>");
+        			           	} else if (data=='3') {
+        				           	alert("<s:text name='msg.err.db'></s:text>");
+        			           	} else {
+             		            	alert("<s:text name='msg.suc.remove'></s:text>");
         			           		$attrHR.addClass('display-off');
              		           		$attrDiv.find('.attr-panel').addClass('display-off');
              		           		var $tbody = $attrDiv.find('tbody');
              		           		$tbody.empty();
-        			           	 }
+        			           	}
         		            },
         		            beforeSend: function() {
         		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
         		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
+        		        	},
+        		        	error: function() {
+        		        		alert("<s:text name='msg.err.remove'></s:text>");
+        		        	},
+        		        	complete: function() {
+         		           		$attrDiv.find('span').remove();
         		        	}
         				});
         	    	}
         	    }
         	})
 		});
+	},
+	removeAttr : function(attrId, attrName) {
+		if (attrId && isNaN(attrId)) {
+			alert("<span><s:text name='msg.err.param'></s:text>");
+			return ;
+		}
+
+		var $attrHR = $('.attr-hr');
+		var $attrDiv = $('.attr-section');
+		var alertMsg = "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.attr.' /></s:param></s:text>";
+		alertMsg = alertMsg.replace(/attrName/, attrName);
+
+       	bootbox.confirm({
+       	    size: 'small',
+       	    message: alertMsg, 
+       	    callback: function(result){
+       	    	if (result) {
+       				$.ajax({
+       		            type: "post",
+       		            url: "editAttribute_removeAttr",
+       		            data: 'attrId='+attrId,
+       		            dataType: "json",
+       		            success: function(data) {
+							if (data=='1') {
+								alert("<span><s:text name='msg.err.param'></s:text>");
+							} else if (data=='3') {
+								alert("<s:text name='msg.err.db'></s:text>");
+							} else {
+							   	alert("<s:text name='msg.suc.remove'></s:text>");
+				           		var $tbody = $attrDiv.find('tbody');
+				           		$tbody.find('.tr_'+attrId).remove();
+				           		var trCnt = $tbody.children().length;
+				           		if (trCnt == 0) {
+					           		$attrHR.addClass('display-off');
+							  		$attrDiv.find('.attr-panel').addClass('display-off');
+				           		}
+							}
+       		            },
+       		            beforeSend: function() {
+       		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+       		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
+       		        	},
+       		        	error: function() {
+       		        		alert("<s:text name='msg.err.remove'></s:text>");
+       		        	},
+       		        	complete: function() {
+        		        	$attrDiv.find('span').remove();
+       		        	}
+       				});
+       	    	}
+       	    }
+       	})
 	}
 }
 $(document).ready(function() {
