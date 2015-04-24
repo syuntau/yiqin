@@ -14,7 +14,8 @@ var pro_att = {
 		pro_att.loadFirstCategory();
 		pro_att.initSubmitCategory();
 		pro_att.initUploadSubmit();
-		pro_att.removeAllAttr();
+		pro_att.initRemoveAllAttr();
+		pro_att.initAddAttr();
 	},
 	loadFirstCategory : function() {
 		var $firstCategory = $('.first-category');
@@ -232,55 +233,59 @@ var pro_att = {
 		});
 		$attrDiv.find('.attr-panel').removeClass('display-off');
 	},
-	removeAllAttr : function() {
+	initRemoveAllAttr : function() {
 		$('.btn-remove-all-attr').on('click', function() {
-			var catetoryId = $('.third-category select').find('option:selected').val();
-			if (catetoryId && isNaN(catetoryId)) {
-				alert("<span><s:text name='msg.err.param'></s:text>");
-				return ;
-			}
-
-			var $attrHR = $('.attr-hr');
-			var $attrDiv = $('.attr-section');
-
-        	bootbox.confirm({
-        	    size: 'small',
-        	    message: "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.all.attr' /></s:param></s:text>", 
-        	    callback: function(result){
-        	    	if (result) {
-        				$.ajax({
-        		            type: "post",
-        		            url: "editAttribute_removeAll",
-        		            data: 'categoryId='+catetoryId,
-        		            dataType: "json",
-        		            success: function(data) {
-        			           	if (data=='1') {
-        			           		alert("<span><s:text name='msg.err.param'></s:text>");
-        			           	} else if (data=='3') {
-        				           	alert("<s:text name='msg.err.db'></s:text>");
-        			           	} else {
-             		            	alert("<s:text name='msg.suc.remove'></s:text>");
-        			           		$attrHR.addClass('display-off');
-             		           		$attrDiv.find('.attr-panel').addClass('display-off');
-             		           		var $tbody = $attrDiv.find('tbody');
-             		           		$tbody.empty();
-        			           	}
-        		            },
-        		            beforeSend: function() {
-        		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
-        		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
-        		        	},
-        		        	error: function() {
-        		        		alert("<s:text name='msg.err.remove'></s:text>");
-        		        	},
-        		        	complete: function() {
-         		           		$attrDiv.find('span').remove();
-        		        	}
-        				});
-        	    	}
-        	    }
-        	})
+			pro_att.removeAllAttr();
 		});
+	},
+	removeAllAttr : function() {
+		var catetoryId = $('.third-category select').find('option:selected').val();
+		if (catetoryId && isNaN(catetoryId)) {
+			alert("<span><s:text name='msg.err.param'></s:text>");
+			return ;
+		}
+
+		var $attrHR = $('.attr-hr');
+		var $attrDiv = $('.attr-section');
+
+       	bootbox.confirm({
+       	    size: 'small',
+       	    message: "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.all.attr' /></s:param></s:text>",
+       	 	locale: 'zh_CN',
+       	    callback: function(result){
+       	    	if (result) {
+       				$.ajax({
+       		            type: "post",
+       		            url: "editAttribute_removeAll",
+       		            data: 'categoryId='+catetoryId,
+       		            dataType: "json",
+       		            success: function(data) {
+       			           	if (data=='1') {
+       			           		alert("<span><s:text name='msg.err.param'></s:text>");
+       			           	} else if (data=='3') {
+       				           	alert("<s:text name='msg.err.db'></s:text>");
+       			           	} else {
+            		            alert("<s:text name='msg.suc.remove'></s:text>");
+       			           		$attrHR.addClass('display-off');
+            		           	$attrDiv.find('.attr-panel').addClass('display-off');
+            		           	var $tbody = $attrDiv.find('tbody');
+            		           	$tbody.empty();
+       			           	}
+       		            },
+       		            beforeSend: function() {
+       		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+       		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
+       		        	},
+       		        	error: function() {
+       		        		alert("<s:text name='msg.err.remove'></s:text>");
+       		        	},
+       		        	complete: function() {
+        		           	$attrDiv.find('span').remove();
+       		        	}
+       				});
+       	    	}
+       	    }
+       	})
 	},
 	removeAttr : function(attrId, attrName) {
 		if (attrId && isNaN(attrId)) {
@@ -296,6 +301,7 @@ var pro_att = {
        	bootbox.confirm({
        	    size: 'small',
        	    message: alertMsg, 
+       	 	locale: 'zh_CN',
        	    callback: function(result){
        	    	if (result) {
        				$.ajax({
@@ -333,6 +339,118 @@ var pro_att = {
        	    	}
        	    }
        	})
+	},
+	initAddAttr : function() {
+		$('.btn-add-attr').on('click', function() {
+			pro_att.addAttr();
+		});
+	},
+	addAttr : function() {
+		bootbox.dialog({
+            title: "<s:text name='sa.pd.attr.lbl.add' />",
+            message: 
+	            '<div class="row">' +
+	            	'<div class="col-md-12">' +
+	            		'<form class="form-horizontal attr-form">' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<input id="attrNameId" name="nameId" type="text" placeholder="name id" class="form-control input-md">' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="attrName">name</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<input id="attrName" name="name" type="text" placeholder="name..." class="form-control input-md">' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="attrValue">value</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<input id="attrValue" name="value" type="text" placeholder="value" class="form-control input-md">' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="attrCategoryId">category id</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<input id="attrCategoryId" name="categoryId" type="text" placeholder="category id" class="form-control input-md">' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="filter">filter</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<div class="radio">' +
+	            						'<label class="radio-inline" for="attrFilter0">' +
+	            							'<input type="radio" name="filter" id="attrFilter0" value="0" checked="checked"> 非筛选项' +
+	            						'</label>' +
+	            						'<label class="radio-inline" for="attrFilter1">' +
+	            							'<input type="radio" name="filter" id="attrFilter1" value="1"> 筛选项' +
+	            						'</label>' +
+	            					'</div>' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="filter">filter type</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<div class="radio">' +
+	            						'<label class="radio-inline" for="attrFilterType0">' +
+	            							'<input type="radio" name="filterType" id="attrFilterType0" value="0" checked="checked"> 无类型' +
+	            						'</label>' +
+	            						'<label class="radio-inline" for="attrFilterType1">' +
+	            							'<input type="radio" name="filterType" id="attrFilterType1" value="1"> 组合型' +
+	            						'</label>' +
+	            						'<label class="radio-inline" for="attrFilterType2">' +
+	            							'<input type="radio" name="filterType" id="attrFilterType2" value="2"> 价格型' +
+	            						'</label>' +
+	            						'<label class="radio-inline" for="attrFilterType3">' +
+	            							'<input type="radio" name="filterType" id="attrFilterType3" value="3"> 连续型' +
+	            						'</label>' +
+	            					'</div>' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="attrShowValue">show value</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<input id="attrShowValue" name="showValue" type="text" placeholder="show value" class="form-control input-md">' +
+	            				'</div>' +
+	            			'</div>' +
+	            			'<div class="form-group">' +
+	            				'<label class="col-md-3 control-label" for="sort">sort</label>' +
+	            				'<div class="col-md-7">' +
+	            					'<div class="radio">' +
+	            						'<label class="radio-inline" for="attrSort0">' +
+	            							'<input type="radio" name="sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
+	            						'</label>' +
+	            						'<label class="radio-inline" for="attrSort1">' +
+	            							'<input type="radio" name="sort" id="attrSort1" value="1"> 排序项' +
+	            						'</label>' +
+	            					'</div>' +
+	            				'</div>' +
+	            			'</div>' +
+	            		'</form>' +
+	            	'</div>' +
+	            '</div>',
+            buttons: {
+                reset: {
+                    label: "<s:text name='sa.btn.reset' />",
+                    className: "btn-default",
+                    callback: function () {
+                        $('.attr-form')[0].reset();
+                        return false;
+                    }
+                },
+                success: {
+                    label: "<s:text name='sa.btn.save' />",
+                    className: "btn-success",
+                    callback: function () {
+                        alert("save click");
+                    }
+                }
+            }
+        });
+	},
+	modifyAttr : function() {
+		
 	}
 }
 $(document).ready(function() {
@@ -362,11 +480,11 @@ $(document).ready(function() {
                             <select class="form-control category-select display-off"></select>
                         </div>
                         
-                        <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.pd.attr.btn.query" /></button>
+                        <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
                         <div class="form-group" style="padding-left:20px">
                             <input type="file" id="attributeFile" name="attributeFile" class="upload-attr-file upload-attr display-off">
                         </div>
-                        <button type="button" class="btn btn-info btn-upload upload-attr display-off"><s:text name="sa.pd.attr.btn.upload" /></button>
+                        <button type="button" class="btn btn-info btn-upload upload-attr display-off"><s:text name="sa.btn.upload" /></button>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->
