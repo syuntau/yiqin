@@ -7,8 +7,8 @@ var pro_att = {
 		option : '<option></option>',
 		tr : '<tr></tr>',
 		td : '<td></td>',
-		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" title="<s:text name='msg.attr.remove'></s:text>"></i>',
-		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" title="<s:text name='msg.attr.edit'></s:text>"></i>',
+		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="<s:text name='msg.attr.remove'></s:text>"></i>',
+		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.attr.edit'></s:text>"></i>',
 	},
 	initCategory : function() {
 		pro_att.loadFirstCategory();
@@ -343,7 +343,7 @@ $(document).ready(function() {
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><s:text name="sa.product.att.title" /></h3>
+                    <h3 class="page-header"><s:text name="sa.pd.attr.title" /></h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -352,7 +352,7 @@ $(document).ready(function() {
                 <div class="col-lg-12">
                     <form role="form" class="form-inline category-form" enctype="multipart/form-data">
                         <div class="form-group category-list first-category">
-                            <label class="category-select  display-off">选择分类</label>
+                            <label class="category-select  display-off"><s:text name="sa.pd.attr.lbl.select" /></label>
                             <select class="form-control category-select display-off"></select>
                         </div>
                         <div class="form-group category-list second-category">
@@ -362,11 +362,11 @@ $(document).ready(function() {
                             <select class="form-control category-select display-off"></select>
                         </div>
                         
-                        <button type="button" class="btn btn-default btn-category-submit category-select display-off">查询</button>
+                        <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.pd.attr.btn.query" /></button>
                         <div class="form-group" style="padding-left:20px">
                             <input type="file" id="attributeFile" name="attributeFile" class="upload-attr-file upload-attr display-off">
                         </div>
-                        <button type="button" class="btn btn-default btn-upload upload-attr display-off">上传</button>
+                        <button type="button" class="btn btn-info btn-upload upload-attr display-off"><s:text name="sa.pd.attr.btn.upload" /></button>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -378,9 +378,9 @@ $(document).ready(function() {
                 <div class="col-lg-12">
                     <div class="panel panel-default attr-panel display-off">
                         <div class="panel-heading">
-                            属性列表
-                            <button type="button" class="btn btn-link btn-remove-all-attr">删除所有属性</button>
-                            <button type="button" class="btn btn-link btn-add-attr">追加属性</button>
+                            <s:text name="sa.pd.attr.list.title" />
+                            <button type="button" class="btn btn-link btn-remove-all-attr"><s:text name="sa.pd.attr.btn.remove.all" /></button>
+                            <button type="button" class="btn btn-link btn-add-attr"><s:text name="sa.pd.attr.btn.add" /></button>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
