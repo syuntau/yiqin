@@ -38,39 +38,67 @@ var yiqin_shoplist_action = function(){
 		
 	};
 	
+	var appendToFilter = function(data){
+		var $shop_filter_ul = $("#shop_filter_ul"),
+			brand = "<s:property value='brand'/>",
+			color = "<s:property value='color'/>",
+			price = "<s:property value='price'/>";
+		$shop_filter_ul.empty();
+			
+		$.each(data, function(i,val){
+			var $filter_li = $(shop_temp.filter_li),
+				$filter_label = $(shop_temp.filter_label),
+				$filter_span = $(shop_temp.filter_span),
+				nameId = val.nameId,
+				showValue = val.showValue,
+				id = val.id;
+			
+			$filter_li.append($filter_label);
+			$filter_label.append(val.name).append("：");
+			var showValueArr = showValue.split(",");
+			var valueArr = val.value.split(",");
+			$.each(showValueArr, function(n,arr){
+				$filter_a = $(shop_temp.filter_a);
+				$filter_a.append(arr);
+				if(nameId=='price'){
+					arr = valueArr[n];
+				}
+				if(brand==id+"_"+arr || color==id+"_"+arr || price==id+"_"+arr){
+					$filter_a.addClass('select-filter-a');
+				}
+				$filter_a.click(function(){
+					filterProduct(nameId, id+"_"+arr);
+				});
+				$filter_span.append($filter_a);
+			});
+			$filter_li.append($filter_span);
+			$shop_filter_ul.append($filter_li);
+		});
+	};
+	
 	return action;
 }();
 
-var appendToFilter = function(data){
-	var $shop_filter_ul = $("#shop_filter_ul");
-	$shop_filter_ul.empty();
-		
-	$.each(data, function(i,val){
-		var $filter_li = $(shop_temp.filter_li),
-			$filter_label = $(shop_temp.filter_label),
-			$filter_span = $(shop_temp.filter_span),
-			nameId = val.nameId,
-			showValue = val.showValue;
-		
-		$filter_li.append($filter_label);
-		$filter_label.append(val.name).append("：");
-		var valueArr = showValue.split(",");
-		$.each(valueArr, function(n,arr){
-			$filter_a = $(shop_temp.filter_a);
-			$filter_a.append(arr);
-			$filter_span.append($filter_a);
-		});
-		$filter_li.append($filter_span);
-		$shop_filter_ul.append($filter_li);
-	});
-};
-
-var toIndexPage = function(pageIndex){
+var filterProduct = function(filterType,filterVal){
 	var paramVal = "<s:property value='paramVal'/>",
 		brand = "<s:property value='brand'/>",
 		color = "<s:property value='color'/>",
-		price = "<s:property value='price'/>";
-	window.location.href = "productFilter?paramVal="+paramVal+"&brand="+encodeURIComponent(encodeURIComponent(brand))+"&color="+encodeURIComponent(encodeURIComponent(color))+"&price="+"&pageIndex="+pageIndex;
+		price = "<s:property value='price'/>",
+		pageIndex = 1;
+	if(filterType=='brand'){
+		brand = filterVal;
+	}else if(filterType=='price'){
+		price = filterVal;
+	}else if(filterType=='color'){
+		color = filterVal;
+	}else if(filterType=='page'){
+		pageIndex = filterVal;
+	}
+	window.location.href = "productFilter?paramVal="+paramVal+"&brand="+encodeURIComponent(encodeURIComponent(brand))+"&color="+encodeURIComponent(encodeURIComponent(color))+"&price="+price+"&pageIndex="+pageIndex;
+};
+
+var toIndexPage = function(pageIndex){
+	filterProduct('page', pageIndex);
 };
 
 $(document).ready(function(){

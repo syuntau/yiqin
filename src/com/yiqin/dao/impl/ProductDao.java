@@ -127,7 +127,20 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	@Override
 	public List<Product> findProductInfo(int attrId, String value) {
 		String queryString = "from Product where attributeId = ? and value = ?";
-		List<?> list = getHibernateTemplate().find(queryString,new Object[] { attrId, value });
+		Object[] param = new Object[]{attrId, value};
+		if(!Util.isEmpty(value)){
+			if(value.contains("-")){
+				String[] prices = value.split("-");
+				if(prices.length==2){
+					queryString = "from Product where attributeId = ? and value between ? and ?";
+					param = new Object[]{attrId, prices[0], prices[1]};
+				}else{
+					queryString = "from Product where attributeId = ? and value >= ?";
+					param = new Object[]{attrId, prices[0]};
+				}
+			}
+		}
+		List<?> list = getHibernateTemplate().find(queryString, param);
 		if (Util.isNotEmpty(list)) {
 			return (List<Product>) list;
 		}

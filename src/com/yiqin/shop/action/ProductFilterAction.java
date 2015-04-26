@@ -1,5 +1,6 @@
 package com.yiqin.shop.action;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Page;
+import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
 /**
@@ -58,6 +60,13 @@ public class ProductFilterAction extends ActionSupport {
 			}
 			if (pageNo < 0) {
 				pageNo = 0;
+			}
+			
+			if(!Util.isEmpty(brand)){
+				brand = URLDecoder.decode(brand, "utf-8");
+			}
+			if(!Util.isEmpty(color)){
+				color = URLDecoder.decode(color, "utf-8");
 			}
 			
 			// 查询过滤总数

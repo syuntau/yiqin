@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.User;
 
 public class Util {
@@ -275,6 +278,19 @@ public class Util {
 			str.append(r.nextInt(9));// 生成随机数字
 		}
 		return str.toString();
+	}
+	
+	public static List<Attribute> sort(List<Attribute> list) {
+		Collections.sort(list, new Comparator<Attribute>() {
+			@Override
+			public int compare(Attribute o1, Attribute o2) {
+				String nameId1 = o1.getNameId();
+				String nameId2 = o2.getNameId();
+
+				return nameId1.compareTo(nameId2);
+			}
+		});
+		return list;
 	}
 
 	/** 文件类型 */

@@ -2711,7 +2711,14 @@ h2.title {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	vertical-align:middle;
+	text-align:center;
 	zoom: 1;
 	color: #005aa0;
 	cursor: pointer;
+}
+
+.select-filter-a{
+	background-color: #FE980F;
+	border-color: #FE980F;
+	color: #FFFFFF;
 }

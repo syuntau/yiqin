@@ -1,8 +1,10 @@
 package com.yiqin.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
@@ -50,21 +52,30 @@ public class ProductManagerImpl implements ProductManager {
 		for (Product product : productList) {
 			pidSet.add(product.getProductId());
 		}
+		
+		int nameAttrId = 0;
+		int imgAttrId = 0;
+		int priceAttrId = 0;
 		for (String pid : pidSet) {
 			int categoryId = Integer.valueOf(pid.substring(0, 4));
-			Attribute attr = productDao.findProductAttr("price", categoryId);
-			int priceAttr = attr.getId();
+			Map<String, Integer> map = initAttrIdToMap(categoryId);
+			if(!Util.isEmpty(map)){
+				nameAttrId = map.get("name");
+				imgAttrId = map.get("imgurl");
+				priceAttrId = map.get("price");
+			}
+			
 			ProductView productView = new ProductView();
 			productView.setProductId(pid);
 			for (Product product : productList) {
 				if (pid.equals(product.getProductId())) {
-					if (product.getAttributeId() == 1) {
+					if (product.getAttributeId() == nameAttrId) {
 						productView.setProductName(product.getValue());
 					}
-					if (product.getAttributeId() == 5) {
+					if (product.getAttributeId() == imgAttrId) {
 						productView.setImgUrl(product.getValue());
 					}
-					if (product.getAttributeId() == priceAttr) {
+					if (product.getAttributeId() == priceAttrId) {
 						productView.setPrice(product.getValue());
 					}
 				}
@@ -83,33 +94,44 @@ public class ProductManagerImpl implements ProductManager {
 		if (Util.isEmpty(productList)) {
 			return null;
 		}
-		int priceAttr = 0;
-		if (categorys.length() >= 4) {
-			Attribute attr = productDao.findProductAttr("price", Integer.valueOf(categorys));
-			priceAttr = attr.getId();
-		}
 		List<ProductView> pViewList = new ArrayList<ProductView>();
 		Set<String> pidSet = new HashSet<String>();
 		for (Product product : productList) {
 			pidSet.add(product.getProductId());
 		}
+		
+		int nameAttrId = 0;
+		int imgAttrId = 0;
+		int priceAttrId = 0;
+		if (categorys.length() >= 4) {
+			Map<String, Integer> map = initAttrIdToMap(Integer.valueOf(categorys));
+			if(!Util.isEmpty(map)){
+				nameAttrId = map.get("name");
+				imgAttrId = map.get("imgurl");
+				priceAttrId = map.get("price");
+			}
+		}
 		for (String pid : pidSet) {
 			if (categorys.length() < 4) {
 				int categoryId = Integer.valueOf(pid.substring(0, 4));
-				Attribute attr = productDao.findProductAttr("price", categoryId);
-				priceAttr = attr.getId();
+				Map<String, Integer> map = initAttrIdToMap(categoryId);
+				if(!Util.isEmpty(map)){
+					nameAttrId = map.get("name");
+					imgAttrId = map.get("imgurl");
+					priceAttrId = map.get("price");
+				}
 			}
 			ProductView productView = new ProductView();
 			productView.setProductId(pid);
 			for (Product product : productList) {
 				if (pid.equals(product.getProductId())) {
-					if (product.getAttributeId() == 1) {
+					if (product.getAttributeId() == nameAttrId) {
 						productView.setProductName(product.getValue());
 					}
-					if (product.getAttributeId() == 5) {
+					if (product.getAttributeId() == imgAttrId) {
 						productView.setImgUrl(product.getValue());
 					}
-					if (product.getAttributeId() == priceAttr) {
+					if (product.getAttributeId() == priceAttrId) {
 						productView.setPrice(product.getValue());
 					}
 				}
@@ -117,6 +139,22 @@ public class ProductManagerImpl implements ProductManager {
 			pViewList.add(productView);
 		}
 		return pViewList;
+	}
+	
+	/**
+	 * Attribute 转为MAP
+	 * 
+	 * @param categoryId
+	 *            分类ID
+	 * @return Map<String, Integer> key=nameID value=id
+	 */
+	private Map<String, Integer> initAttrIdToMap(int categoryId) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Attribute> attrList = productDao.findAttributeByCategoryId(categoryId);
+		for (Attribute attr : attrList) {
+			map.put(attr.getNameId(), attr.getId());
+		}
+		return map;
 	}
 
 	@Override
@@ -311,16 +349,13 @@ public class ProductManagerImpl implements ProductManager {
 		if(!Util.isEmpty(list)){
 			for(Attribute attr : list){
 				String nameId = attr.getNameId();
-				if("brand".equals(nameId)){
-					tempList.add(0, attr);
-				}
-				if("price".equals(nameId)){
-					tempList.add(1, attr);
-				}
-				if("color".equals(nameId)){
-					tempList.add(2, attr);
+				if("brand".equals(nameId) || "price".equals(nameId) || "color".equals(nameId)){
+					tempList.add(attr);
 				}
 			}
+		}
+		if(!Util.isEmpty(tempList)){
+			Util.sort(tempList);
 		}
 		return tempList;
 	}
