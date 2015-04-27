@@ -196,7 +196,7 @@ var pro_att = {
 	           	$attrDiv.find('.fa-refresh').parent().remove();
             },
             error : function(data,status,e) {
-            	alert("<s:text name='msg.err.upload'></s:text>");
+            	alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.upload' /></s:param></s:text>");
 	           	$attrDiv.find('.fa-refresh').parent().remove();
             }
 		});
@@ -221,7 +221,7 @@ var pro_att = {
 			});
 			var $iEdit = $(pro_att.conf.i_edit);
 			$iEdit.on('click', function() {
-				alert("edit id : " + val.id);
+				pro_att.modifyAttr(val.id);
 			});
 			var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
 
@@ -265,7 +265,7 @@ var pro_att = {
        			           	} else if (data=='3') {
        				           	alert("<s:text name='msg.err.db'></s:text>");
        			           	} else {
-            		            alert("<s:text name='msg.suc.remove'></s:text>");
+            		            alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
        			           		$attrHR.addClass('display-off');
             		           	$attrDiv.find('.attr-panel').addClass('display-off');
             		           	var $tbody = $attrDiv.find('tbody');
@@ -277,7 +277,7 @@ var pro_att = {
        		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
        		        	},
        		        	error: function() {
-       		        		alert("<s:text name='msg.err.remove'></s:text>");
+       		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
        		        	},
        		        	complete: function() {
         		           	$attrDiv.find('span').remove();
@@ -315,7 +315,7 @@ var pro_att = {
 							} else if (data=='3') {
 								alert("<s:text name='msg.err.db'></s:text>");
 							} else {
-							   	alert("<s:text name='msg.suc.remove'></s:text>");
+							   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
 				           		var $tbody = $attrDiv.find('tbody');
 				           		$tbody.find('.tr_'+attrId).remove();
 				           		var trCnt = $tbody.children().length;
@@ -330,7 +330,7 @@ var pro_att = {
        		            	$attrDiv.find('.panel-heading').append($loadingTextIcon);
        		        	},
        		        	error: function() {
-       		        		alert("<s:text name='msg.err.remove'></s:text>");
+       		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
        		        	},
        		        	complete: function() {
         		        	$attrDiv.find('span').remove();
@@ -351,7 +351,7 @@ var pro_att = {
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal attr-form">' +
+	            		'<form class="form-horizontal attr-form" id="attrForm" action="editAttribute_saveAttr" method="post">' +
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
 	            				'<div class="col-md-7">' +
@@ -427,6 +427,7 @@ var pro_att = {
 	            					'</div>' +
 	            				'</div>' +
 	            			'</div>' +
+	            			'<input type="submit" value="Submit Comment" />' +
 	            		'</form>' +
 	            	'</div>' +
 	            '</div>',
@@ -443,14 +444,73 @@ var pro_att = {
                     label: "<s:text name='sa.btn.save' />",
                     className: "btn-success",
                     callback: function () {
-                        alert("save click");
+                    	var successFlag = true;
+                    	var options = {
+                  		    url: 'editAttribute_saveAttr',
+                  		    dataType: 'json',
+                  		    beforeSubmit : function() {
+           		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+                  		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
+                  		    },
+                  		    success:    function(data) {
+    							if (data=='1') {
+    								alert("<span><s:text name='msg.err.param'></s:text>");
+    							} else if (data=='3') {
+    								alert("<s:text name='msg.err.db'></s:text>");
+    							} else {
+    								var $attrDiv = $('.attr-section');
+    						   		var $tbody = $attrDiv.find('tbody');
+
+    						   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
+   									var _id = $(pro_att.conf.td).html(data.id);
+   									var _nameId = $(pro_att.conf.td).html(data.nameId);
+   									var _name = $(pro_att.conf.td).html(data.name);
+   									var _value = $(pro_att.conf.td).html(data.value);
+   									var _categoryId = $(pro_att.conf.td).html(data.categoryId);
+   									var _filter = $(pro_att.conf.td).html(data.filter);
+   									var _filterType = $(pro_att.conf.td).html(data.filterType);
+   									var _showValue = $(pro_att.conf.td).html(data.showValue);
+   									var _sort = $(pro_att.conf.td).html(data.sort);
+   									var $iRemove = $(pro_att.conf.i_remove);
+   									$iRemove.on('click', function() {
+   										pro_att.removeAttr(data.id, data.name);
+   									});
+   									var $iEdit = $(pro_att.conf.i_edit);
+   									$iEdit.on('click', function() {
+   										pro_att.modifyAttr(data.id);
+   									});
+   									var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+
+   									$tr.append(_id).append(_nameId).append(_name).append(_value)
+   										.append(_categoryId).append(_filter).append(_filterType)
+   										.append(_showValue).append(_sort).append(_setting);
+
+   									$tbody.append($tr);
+
+    							   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+    							}
+           		        		$('.bootbox.modal .modal-footer').find('span').remove();
+                  		    },
+           		        	error: function() {
+           		        		$('.bootbox.modal .modal-footer').find('span').remove();
+           		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+           		        	}
+                  		};
+                    	console.log('111...');
+                    	console.log('form : ' + $('#attrForm'));
+						$('#attrForm').submit(function() {
+							console.log("222....");
+							$(this).ajaxSubmit(options);
+							return false;
+						});
+						console.log("333....");
                     }
                 }
             }
         });
 	},
-	modifyAttr : function() {
-		
+	modifyAttr : function(id) {
+		alert("id : " + id);
 	}
 }
 $(document).ready(function() {
