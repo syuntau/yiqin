@@ -32,6 +32,18 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public List<ProductView> findProductInfoById(String pids) {
+		Map<String,Map<String,String>> productMap = findProductAllInfoByIds(pids);
+		return productToProductView(productMap);
+	}
+	
+	@Override
+	public List<ProductView> findProductInfo(String categorys) {
+		Map<String,Map<String,String>> productMap = findProductAllInfo(categorys);
+		return productToProductView(productMap);
+	}
+	
+	@Override
+	public Map<String, Map<String, String>> findProductAllInfoByIds(String pids) {
 		if (Util.isEmpty(pids)) {
 			return null;
 		}
@@ -47,45 +59,39 @@ public class ProductManagerImpl implements ProductManager {
 		if(Util.isEmpty(productList)){
 			return null;
 		}
-		List<ProductView> pViewList = new ArrayList<ProductView>();
 		Set<String> pidSet = new HashSet<String>();
 		for (Product product : productList) {
 			pidSet.add(product.getProductId());
 		}
+		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
+		Map<Integer, String> id_nameid= new HashMap<Integer, String>();
 		
-		int nameAttrId = 0;
-		int imgAttrId = 0;
-		int priceAttrId = 0;
+		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
 		for (String pid : pidSet) {
-			int categoryId = Integer.valueOf(pid.substring(0, 4));
-			Map<String, Integer> map = initAttrIdToMap(categoryId);
-			if(!Util.isEmpty(map)){
-				nameAttrId = map.get("name");
-				imgAttrId = map.get("imgurl");
-				priceAttrId = map.get("price");
-			}
-			
-			ProductView productView = new ProductView();
-			productView.setProductId(pid);
-			for (Product product : productList) {
+			Map<Integer,String> attrid_pvalue = new HashMap<Integer,String>();
+			productMap.put(pid, attrid_pvalue);
+			for(Product product : productList){
 				if (pid.equals(product.getProductId())) {
-					if (product.getAttributeId() == nameAttrId) {
-						productView.setProductName(product.getValue());
-					}
-					if (product.getAttributeId() == imgAttrId) {
-						productView.setImgUrl(product.getValue());
-					}
-					if (product.getAttributeId() == priceAttrId) {
-						productView.setPrice(product.getValue());
-					}
+					attrid_pvalue.put(product.getAttributeId(), product.getValue());
 				}
 			}
-			pViewList.add(productView);
 		}
-		return pViewList;
+		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
+			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
+			id_nameid = initAttributeToMap(categoryId);
+			
+			Map<Integer,String> attrid_pvalueMap = entry.getValue();
+			Map<String,String> nameid_pvalue = new HashMap<String,String>();
+			resultMap.put(entry.getKey(), nameid_pvalue);
+			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
+				nameid_pvalue.put(id_nameid.get(entrysub.getKey()), entrysub.getValue());
+			}
+		}
+		return resultMap;
 	}
 	
-	private Map<String,Map<String,String>> findProduct(String categorys){
+	@Override
+	public Map<String,Map<String,String>> findProductAllInfo(String categorys){
 		List<Product> productList = productDao.findProductInfoByCategorys(categorys);
 		if (Util.isEmpty(productList)) {
 			return null;
@@ -111,7 +117,6 @@ public class ProductManagerImpl implements ProductManager {
 				}
 			}
 		}
-		
 		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
 			if (categorys.length() < 4) {
 				int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
@@ -127,57 +132,22 @@ public class ProductManagerImpl implements ProductManager {
 		return resultMap;
 	}
 
-	@Override
-	public List<ProductView> findProductInfo(String categorys) {
-		if (Util.isEmpty(categorys)) {
-			return null;
-		}
-		List<Product> productList = productDao.findProductInfoByCategorys(categorys);
-		if (Util.isEmpty(productList)) {
-			return null;
-		}
+	private List<ProductView> productToProductView(Map<String,Map<String,String>> productMap){
 		List<ProductView> pViewList = new ArrayList<ProductView>();
-		Set<String> pidSet = new HashSet<String>();
-		for (Product product : productList) {
-			pidSet.add(product.getProductId());
+		if(Util.isEmpty(productMap)){
+			return pViewList;
 		}
-		
-		int nameAttrId = 0;
-		int imgAttrId = 0;
-		int priceAttrId = 0;
-		if (categorys.length() >= 4) {
-			Map<String, Integer> map = initAttrIdToMap(Integer.valueOf(categorys));
-			if(!Util.isEmpty(map)){
-				nameAttrId = map.get("name");
-				imgAttrId = map.get("imgurl");
-				priceAttrId = map.get("price");
-			}
-		}
-		for (String pid : pidSet) {
-			if (categorys.length() < 4) {
-				int categoryId = Integer.valueOf(pid.substring(0, 4));
-				Map<String, Integer> map = initAttrIdToMap(categoryId);
-				if(!Util.isEmpty(map)){
-					nameAttrId = map.get("name");
-					imgAttrId = map.get("imgurl");
-					priceAttrId = map.get("price");
-				}
-			}
+		for (Map.Entry<String,Map<String,String>> entry : productMap.entrySet()) {
 			ProductView productView = new ProductView();
-			productView.setProductId(pid);
-			for (Product product : productList) {
-				if (pid.equals(product.getProductId())) {
-					if (product.getAttributeId() == nameAttrId) {
-						productView.setProductName(product.getValue());
-					}
-					if (product.getAttributeId() == imgAttrId) {
-						productView.setImgUrl(product.getValue());
-					}
-					if (product.getAttributeId() == priceAttrId) {
-						productView.setPrice(product.getValue());
-					}
-				}
-			}
+			productView.setProductId(entry.getKey());
+			
+			Map<String,String> nameid_pvalue = entry.getValue();
+			
+			productView.setProductName(nameid_pvalue.get("name"));
+			productView.setPrice(nameid_pvalue.get("price"));
+			productView.setColor(nameid_pvalue.get("color"));
+			productView.setImgUrl(nameid_pvalue.get("imgurl"));
+			
 			pViewList.add(productView);
 		}
 		return pViewList;
@@ -188,17 +158,8 @@ public class ProductManagerImpl implements ProductManager {
 	 * 
 	 * @param categoryId
 	 *            分类ID
-	 * @return Map<String, Integer> key=nameID value=id
+	 * @return Map<Integer, String> key=id value=nameID
 	 */
-	private Map<String, Integer> initAttrIdToMap(int categoryId) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		List<Attribute> attrList = productDao.findAttributeByCategoryId(categoryId);
-		for (Attribute attr : attrList) {
-			map.put(attr.getNameId(), attr.getId());
-		}
-		return map;
-	}
-	
 	private Map<Integer, String> initAttributeToMap(int categoryId) {
 		Map<Integer, String> map = new HashMap<Integer, String>();
 		List<Attribute> attrList = productDao.findAttributeByCategoryId(categoryId);

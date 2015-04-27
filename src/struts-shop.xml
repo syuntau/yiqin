@@ -92,11 +92,6 @@
 			<result name="success" type="tiles">shop.center.order</result>
 		</action>
 		
-		<action name="toCategorySearch" class="com.yiqin.shop.action.ToCategorySearchAction">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="success" type="tiles">shop.search</result>
-		</action>
-		
 		<action name="toCenterMySet" class="com.yiqin.shop.action.ToCenterMySetAction">
 			<result name="userset" type="tiles">shop.center.userset</result>
 			<result name="address" type="tiles">shop.center.address</result>

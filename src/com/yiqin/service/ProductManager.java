@@ -1,6 +1,7 @@
 package com.yiqin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -11,25 +12,43 @@ import com.yiqin.shop.bean.ProductView;
 
 public interface ProductManager {
 	/**
-	 * 通过ID查询商品信息
+	 * 通过ID查询商品列表展示信息
 	 * 
 	 * @param pids
 	 *            商品ID 多个用逗号分隔 如（id1,id2,id3,....）
 	 * @return 对应商品
 	 */
 	public List<ProductView> findProductInfoById(String pids);
+	
+	/**
+	 * 通过ID查询商品所有信息
+	 * 
+	 * @param pids
+	 *            商品ID 多个用逗号分隔 如（id1,id2,id3,....）
+	 * @return 对应商品 key=productId value={key=nameid value=pvalue}
+	 */
+	public Map<String, Map<String, String>> findProductAllInfoByIds(String pids);
 
 	/**
-	 * 查询指定分类下的商品
+	 * 查询指定分类下的列表展示商品信息
 	 * 
 	 * @param categorys
 	 *            分类ID
 	 * @return 商品集合
 	 */
 	public List<ProductView> findProductInfo(String categorys);
+	
+	/**
+	 * 查询指定分类查询商品所有信息
+	 * 
+	 * @param categorys
+	 *            分类ID
+	 * @return 对应商品 key=productId value={key=nameid value=pvalue}
+	 */
+	public Map<String, Map<String, String>> findProductAllInfo(String categorys);
 
 	/**
-	 * 查询指定过滤条件下的商品
+	 * 查询指定过滤条件下的列表展示商品信息
 	 * 
 	 * @param productFilter
 	 *            过滤条件集合
@@ -45,7 +64,7 @@ public interface ProductManager {
 	 * @return 总数
 	 */
 	public int findProductCountByFilter(ProductFilter productFilter);
-
+	
 	/**
 	 * 查询所有分类菜单
 	 * 

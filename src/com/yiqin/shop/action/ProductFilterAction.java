@@ -27,6 +27,8 @@ public class ProductFilterAction extends ActionSupport {
 
 	private static final long serialVersionUID = -1063703459420329225L;
 
+	// 每页显示的条目数目
+	public static final int MAXITEMINPAGE = 12;
 	//分类ID
 	private String paramVal;
 	// 过滤品牌 attId_brand
@@ -41,8 +43,6 @@ public class ProductFilterAction extends ActionSupport {
 	private Page page;
 	// 当前页号
 	private int pageNo = 0;
-	// 每页显示的条目数目
-	public static final int MAXITEMINPAGE = 1;
 
 	private ProductManager productManager;
 

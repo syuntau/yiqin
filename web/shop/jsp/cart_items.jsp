@@ -170,6 +170,9 @@ var yiqin_cart_action = function(){
 			 $cart_td.append($cart_h4).append($cart_p);
 			 $cart_h4.append($cart_a.append(val.productName));
 			 $cart_p.append('<s:text name="shop.product.details.productId"/>'+val.productId);
+			 $cart_p = $(cart_template.cart_p);
+			 $cart_p.append('<s:text name="cart.item.product.color"/>'+val.productInfo);
+			 $cart_td.append($cart_p);
  			 $cart_a.click(function(){
  				yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });

@@ -2,12 +2,17 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
+<s:iterator value="#request.product_detail" var="product">
+	<s:set name="productInfo" value="#product.value"></s:set>
+	<s:set name="productId" value="#product.key"></s:set>
+</s:iterator>
+
 <script type="text/javascript">
 var yiqin_product_detail = function(){
 	var action = {
 		initProductDetail : function(){
 			$("#detail_add_cart").click(function(){
-				var productId = "<s:property value='#request.product_detail[0].productId'/>",
+				var productId = "<s:property value='#productId'/>",
 					customNum = $(this).prev().val(),
 					selName = $("#select_product_info").find("a[class*=select-a]").attr("title"),
 					REX_NUM = /^(0|[1-9][0-9]*)$/;
@@ -42,10 +47,10 @@ var yiqin_product_detail = function(){
 					$(this).parent().addClass("selected-div");
 				});
 			});
+			$("#select_product_info a").click();
 		},
 		
 	};
-	
 	
 	return action;
 }();
@@ -60,26 +65,26 @@ $(document).ready(function(){
 		<!--product-details-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="329" height="380"/>
-				<input type="hidden" id="<s:property value='#request.product_detail[0].productId'/>" value="<s:property value='#request.product_detail[0].productId'/>">
+				<img src="<s:property value='#productInfo.imgurl'/>" width="329" height="380"/>
+				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
 					<div class="item active">
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#request.product_detail[0].imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
 					</div>
 				</div>
 				<!-- Controls -->
@@ -90,13 +95,13 @@ $(document).ready(function(){
 		<div class="col-sm-7">
 			<div class="product-information">
 				<!--/product-information-->
-				<h2><s:property value='#request.product_detail[0].productName'/></h2>
+				<h2><s:property value='#productInfo.name'/></h2>
 				<p>
 					<s:text name="shop.product.details.productId" />
-					<s:property value='#request.product_detail[0].productId'/>
+					<s:property value='#productId'/>
 				</p>
 				<span>
-					<span><s:property value='#request.product_detail[0].price'/></span>
+					<span><s:property value='#productInfo.price'/></span>
 					<label><s:text name="cart.item.quantity" />:</label>
 					<input type="text" value="1" />
 					<button type="button" class="btn btn-fefault cart" id="detail_add_cart">
@@ -110,23 +115,9 @@ $(document).ready(function(){
 					</p>
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
-						<a href="#none" title="红色" class="none-detail-a">
-							<img src="<s:property value='#request.product_detail[0].imgUrl'/>" class="share img-responsive" alt="红色" width="25" height="25"/>
-							<i>红色</i>
-						</a>
-					</div>
-					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
-						<b></b>
-						<a href="#none" title="黑色" class="none-detail-a">
-							<img src="<s:property value='#request.product_detail[0].imgUrl'/>" class="share img-responsive" alt="黑色" width="25" height="25"/>
-							<i>黑色</i>
-						</a>
-					</div>
-					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
-						<b></b>
-						<a href="#none" title="蓝色" class="none-detail-a">
-							<img src="<s:property value='#request.product_detail[0].imgUrl'/>" class="share img-responsive" alt="蓝色" width="25" height="25"/>
-							<i>蓝色</i>
+						<a href="#none" title="<s:property value='#productInfo.color'/>" class="none-detail-a">
+							<img src="<s:property value='#productInfo.imgurl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
+							<i><s:property value='#productInfo.color'/></i>
 						</a>
 					</div>
 				</div>
@@ -139,7 +130,7 @@ $(document).ready(function(){
 	<div class="category-tab shop-details-tab">
 		<!--category-tab-->
 		<div class="col-sm-12">
-			<ul class="nav nav-tabs">
+			<ul class="category-tab-ul nav nav-tabs">
 				<li class="active">
 					<a href="#details" data-toggle="tab"><s:text name="shop.product.details.details"></s:text></a>
 				</li>
@@ -152,18 +143,38 @@ $(document).ready(function(){
 			</ul>
 		</div>
 		<div class="tab-content">
-			<div class="tab-pane fade" id="details">
-				<div class="col-sm-3">
+			<div class="tab-pane fade active in" id="details">
+				<div class="col-sm-12">
 					<div class="product-image-wrapper">
 						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart">
-									<i class="fa fa-shopping-cart"></i>
-									<s:text name="shop.add.to.cart" />
-								</button>
+							<div class="productinfo">
+								<ul class="p-parameter-list">
+									<li>
+										<label>商品名称：</label>
+										<span><s:property value='#productInfo.name'/></span>
+									</li>
+									<li>	
+										<label>商品编号：</label>
+										<span><s:property value='#productId'/></span>
+									</li>
+									<li>		
+										<label>品牌：</label>
+										<span><s:property value='#productInfo.brand'/></span>
+									</li>
+									<li>
+										<label>颜色：</label>
+										<span><s:property value='#productInfo.color'/></span>
+									</li>
+									<li>
+										<label>产地：</label>
+										<span><s:property value='#productInfo.producer'/></span>
+									</li>
+									<li>	
+										<label>类别：</label>
+										<span><s:property value='#productInfo.category'/></span>
+									</li>
+								</ul>
+								<img src="<s:property value='#productInfo.imgurl'/>" alt="" />
 							</div>
 						</div>
 					</div>
@@ -171,161 +182,39 @@ $(document).ready(function(){
 			</div>
 
 			<div class="tab-pane fade" id="speparam">
-				<div class="col-sm-3">
+				<div class="col-sm-12">
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart">
-									<i class="fa fa-shopping-cart"></i>Add to cart
-								</button>
+								还没有编辑规格参数
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="tab-pane fade active in" id="reviews">
+			<div class="tab-pane fade" id="reviews">
 				<div class="col-sm-12">
-					<ul>
-						<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-						<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC
-								2014</a></li>
-					</ul>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore et dolore magna
-						aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco
-						laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu
-						fugiat nulla pariatur.</p>
-					<p>
-						<b>Write Your Review</b>
-					</p>
-
-					<form action="#">
-						<span> <input type="text" placeholder="Your Name" /> <input
-							type="email" placeholder="Email Address" />
-						</span>
-						<textarea name=""></textarea>
-						<b>Rating: </b> <img src="<s:property value='#request.product_detail[0].imgUrl'/>"
-							alt="" />
-						<button type="button" class="btn btn-default pull-right">
-							Submit</button>
-					</form>
+					<div class="productinfo text-center">
+						暂无评论
+					</div>
+<!-- 					<ul> -->
+<!-- 						<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li> -->
+<!-- 						<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li> -->
+<!-- 						<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li> -->
+<!-- 					</ul> -->
+<!-- 					<p>评论内容</p> -->
+<!-- 					<p> -->
+<!-- 						<b>Write Your Review/写下你的评论</b> -->
+<!-- 					</p> -->
+<!-- 					<form action="#"> -->
+<%-- 						<b>Rating: </b> <img src="<s:property value='#productInfo.imgurl'/>" alt="" /> --%>
+<!-- 						<button type="button" class="btn btn-default pull-right"> -->
+<!-- 							Submit</button> -->
+<!-- 					</form> -->
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<!--/category-tab-->
-
-	<div class="recommended_items">
-		<!--recommended_items-->
-		<h2 class="title text-center">recommended items</h2>
-
-		<div id="recommended-item-carousel" class="carousel slide"
-			data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="item active">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="<s:property value='#request.product_detail[0].imgUrl'/>" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart">
-										<i class="fa fa-shopping-cart"></i>Add to cart
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a class="left recommended-item-control"
-				href="#recommended-item-carousel" data-slide="prev"> <i
-				class="fa fa-angle-left"></i>
-			</a> <a class="right recommended-item-control"
-				href="#recommended-item-carousel" data-slide="next"> <i
-				class="fa fa-angle-right"></i>
-			</a>
-		</div>
-	</div>
-	<!--/recommended_items-->
 </div>

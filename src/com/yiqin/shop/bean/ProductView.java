@@ -1,7 +1,7 @@
 package com.yiqin.shop.bean;
 
 /**
- * 用于产品详情、列表展示
+ * 用于产品列表展示
  * 
  * @author LiuJun
  * 
@@ -10,6 +10,7 @@ public class ProductView {
 	private String productId;// 产品ID
 	private String productName; // 名称
 	private String price; // 价格
+	private String color;// 颜色
 	private String imgUrl; // 图片链接
 
 	public String getProductId() {
@@ -34,6 +35,14 @@ public class ProductView {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public String getImgUrl() {

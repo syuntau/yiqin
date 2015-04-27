@@ -1088,7 +1088,7 @@ h2.title {
   overflow: hidden;
 }
 
-.category-tab ul {
+.category-tab-ul {
   background: #40403E;
   border-bottom: 1px solid #FE980F;
   list-style: none outside none;
@@ -2721,4 +2721,21 @@ h2.title {
 	background-color: #FE980F;
 	border-color: #FE980F;
 	color: #FFFFFF;
+}
+
+.p-parameter-list {
+	padding: 20px 0 15px;
+	border-top: 1px dotted #ddd;
+	margin-top: -1px;
+	overflow: hidden;
+	_zoom: 1;
+}
+
+.p-parameter-list li {
+	width: 250px;
+	padding-left: 42px;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
