@@ -165,6 +165,10 @@
 	</definition>
 
 	<definition name="sa.product.attribute" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/attribute.jsp" />
+	</definition>
+
+	<definition name="sa.product.item" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/product.jsp" />
 	</definition>
 </tiles-definitions>
