@@ -152,9 +152,9 @@ public class EditAttribute extends ActionSupport {
 				return null;
 			} else {
 				try {
-					Attribute attribute = productManager.saveAttribute(attr);
-
-					JSONObject json = JSONObject.fromObject(attribute);
+					int attrId = productManager.saveAttribute(attr);
+					attr.setId(attrId);
+					JSONObject json = JSONObject.fromObject(attr);
 					result = json.toString();
 					out.print(result);
 				} catch(DataAccessException dbe) {

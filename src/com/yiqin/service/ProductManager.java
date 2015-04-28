@@ -104,7 +104,7 @@ public interface ProductManager {
 
 	public void saveAttribute(List<Attribute> list) throws DataAccessException;
 
-	public Attribute saveAttribute(Attribute attribute)
+	public int saveAttribute(Attribute attribute)
 			throws DataAccessException;
 
 	public void updateAttribute(Attribute attribute) throws DataAccessException;

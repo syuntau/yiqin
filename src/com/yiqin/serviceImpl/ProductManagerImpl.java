@@ -241,7 +241,7 @@ public class ProductManagerImpl implements ProductManager {
 		productDao.saveAttribute(list);
 	}
 
-	public Attribute saveAttribute(Attribute attribute) throws DataAccessException {
+	public int saveAttribute(Attribute attribute) throws DataAccessException {
 		return productDao.saveAttribute(attribute);
 	}
 

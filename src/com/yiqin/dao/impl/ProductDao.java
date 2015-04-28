@@ -111,8 +111,8 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	}
 
 	@Override
-	public Attribute saveAttribute(Attribute attribute) throws DataAccessException {
-		return (Attribute) getHibernateTemplate().save(attribute);
+	public int saveAttribute(Attribute attribute) throws DataAccessException {
+		return (Integer) getHibernateTemplate().save(attribute);
 	}
 
 	public void editAttribute(Attribute attribute) throws DataAccessException {

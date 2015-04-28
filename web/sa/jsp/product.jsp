@@ -351,29 +351,28 @@ var pro_att = {
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal attr-form" id="attrForm" action="editAttribute_saveAttr" method="post">' +
+	            		'<form class="form-horizontal attr-form" method="post">' +
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrNameId" name="nameId" type="text" placeholder="name id" class="form-control input-md">' +
+	            					'<input id="attrNameId" name="attr.nameId" type="text" placeholder="name id" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrName">name</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrName" name="name" type="text" placeholder="name..." class="form-control input-md">' +
+	            					'<input id="attrName" name="attr.name" type="text" placeholder="name..." class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrValue">value</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrValue" name="value" type="text" placeholder="value" class="form-control input-md">' +
+	            					'<input id="attrValue" name="attr.value" type="text" placeholder="value" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrCategoryId">category id</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrCategoryId" name="categoryId" type="text" placeholder="category id" class="form-control input-md">' +
+	            					'<input id="attrCategoryId" name="attr.categoryId" type="hidden" value="' + $('.third-category select').find('option:selected').val() + '"class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
@@ -381,10 +380,10 @@ var pro_att = {
 	            				'<div class="col-md-7">' +
 	            					'<div class="radio">' +
 	            						'<label class="radio-inline" for="attrFilter0">' +
-	            							'<input type="radio" name="filter" id="attrFilter0" value="0" checked="checked"> 非筛选项' +
+	            							'<input type="radio" name="attr.filter" id="attrFilter0" value="0" checked="checked"> 非筛选项' +
 	            						'</label>' +
 	            						'<label class="radio-inline" for="attrFilter1">' +
-	            							'<input type="radio" name="filter" id="attrFilter1" value="1"> 筛选项' +
+	            							'<input type="radio" name="attr.filter" id="attrFilter1" value="1"> 筛选项' +
 	            						'</label>' +
 	            					'</div>' +
 	            				'</div>' +
@@ -394,16 +393,16 @@ var pro_att = {
 	            				'<div class="col-md-7">' +
 	            					'<div class="radio">' +
 	            						'<label class="radio-inline" for="attrFilterType0">' +
-	            							'<input type="radio" name="filterType" id="attrFilterType0" value="0" checked="checked"> 无类型' +
+	            							'<input type="radio" name="attr.filterType" id="attrFilterType0" value="0" checked="checked"> 无类型' +
 	            						'</label>' +
 	            						'<label class="radio-inline" for="attrFilterType1">' +
-	            							'<input type="radio" name="filterType" id="attrFilterType1" value="1"> 组合型' +
+	            							'<input type="radio" name="attr.filterType" id="attrFilterType1" value="1"> 组合型' +
 	            						'</label>' +
 	            						'<label class="radio-inline" for="attrFilterType2">' +
-	            							'<input type="radio" name="filterType" id="attrFilterType2" value="2"> 价格型' +
+	            							'<input type="radio" name="attr.filterType" id="attrFilterType2" value="2"> 价格型' +
 	            						'</label>' +
 	            						'<label class="radio-inline" for="attrFilterType3">' +
-	            							'<input type="radio" name="filterType" id="attrFilterType3" value="3"> 连续型' +
+	            							'<input type="radio" name="attr.filterType" id="attrFilterType3" value="3"> 连续型' +
 	            						'</label>' +
 	            					'</div>' +
 	            				'</div>' +
@@ -411,7 +410,7 @@ var pro_att = {
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrShowValue">show value</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrShowValue" name="showValue" type="text" placeholder="show value" class="form-control input-md">' +
+	            					'<input id="attrShowValue" name="attr.showValue" type="text" placeholder="show value" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
@@ -419,15 +418,14 @@ var pro_att = {
 	            				'<div class="col-md-7">' +
 	            					'<div class="radio">' +
 	            						'<label class="radio-inline" for="attrSort0">' +
-	            							'<input type="radio" name="sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
+	            							'<input type="radio" name="attr.sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
 	            						'</label>' +
 	            						'<label class="radio-inline" for="attrSort1">' +
-	            							'<input type="radio" name="sort" id="attrSort1" value="1"> 排序项' +
+	            							'<input type="radio" name="attr.sort" id="attrSort1" value="1"> 排序项' +
 	            						'</label>' +
 	            					'</div>' +
 	            				'</div>' +
 	            			'</div>' +
-	            			'<input type="submit" value="Submit Comment" />' +
 	            		'</form>' +
 	            	'</div>' +
 	            '</div>',
@@ -444,66 +442,60 @@ var pro_att = {
                     label: "<s:text name='sa.btn.save' />",
                     className: "btn-success",
                     callback: function () {
-                    	var successFlag = true;
                     	var options = {
-                  		    url: 'editAttribute_saveAttr',
-                  		    dataType: 'json',
-                  		    beforeSubmit : function() {
-           		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
-                  		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
-                  		    },
-                  		    success:    function(data) {
-    							if (data=='1') {
-    								alert("<span><s:text name='msg.err.param'></s:text>");
-    							} else if (data=='3') {
-    								alert("<s:text name='msg.err.db'></s:text>");
-    							} else {
-    								var $attrDiv = $('.attr-section');
-    						   		var $tbody = $attrDiv.find('tbody');
-
-    						   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
-   									var _id = $(pro_att.conf.td).html(data.id);
-   									var _nameId = $(pro_att.conf.td).html(data.nameId);
-   									var _name = $(pro_att.conf.td).html(data.name);
-   									var _value = $(pro_att.conf.td).html(data.value);
-   									var _categoryId = $(pro_att.conf.td).html(data.categoryId);
-   									var _filter = $(pro_att.conf.td).html(data.filter);
-   									var _filterType = $(pro_att.conf.td).html(data.filterType);
-   									var _showValue = $(pro_att.conf.td).html(data.showValue);
-   									var _sort = $(pro_att.conf.td).html(data.sort);
-   									var $iRemove = $(pro_att.conf.i_remove);
-   									$iRemove.on('click', function() {
-   										pro_att.removeAttr(data.id, data.name);
-   									});
-   									var $iEdit = $(pro_att.conf.i_edit);
-   									$iEdit.on('click', function() {
-   										pro_att.modifyAttr(data.id);
-   									});
-   									var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
-
-   									$tr.append(_id).append(_nameId).append(_name).append(_value)
-   										.append(_categoryId).append(_filter).append(_filterType)
-   										.append(_showValue).append(_sort).append(_setting);
-
-   									$tbody.append($tr);
-
-    							   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-    							}
-           		        		$('.bootbox.modal .modal-footer').find('span').remove();
-                  		    },
-           		        	error: function() {
-           		        		$('.bootbox.modal .modal-footer').find('span').remove();
-           		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-           		        	}
-                  		};
-                    	console.log('111...');
-                    	console.log('form : ' + $('#attrForm'));
-						$('#attrForm').submit(function() {
-							console.log("222....");
-							$(this).ajaxSubmit(options);
-							return false;
-						});
-						console.log("333....");
+                		    url : 'editAttribute_saveAttr',
+                		    dataType : 'json',
+                		    beforeSubmit : function() {
+              	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+                		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
+                		    },
+                		    success : function(data) {
+	              				if (data=='1') {
+	              					alert("<span><s:text name='msg.err.param'></s:text>");
+	              				} else if (data=='3') {
+	              					alert("<s:text name='msg.err.db'></s:text>");
+	              				} else {
+	              					var $attrDiv = $('.attr-section');
+	              			   		var $tbody = $attrDiv.find('tbody');
+	
+	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
+	           						var _id = $(pro_att.conf.td).html(data.id);
+	           						var _nameId = $(pro_att.conf.td).html(data.nameId);
+	           						var _name = $(pro_att.conf.td).html(data.name);
+	           						var _value = $(pro_att.conf.td).html(data.value);
+	           						var _categoryId = $(pro_att.conf.td).html(data.categoryId);
+	           						var _filter = $(pro_att.conf.td).html(data.filter);
+	           						var _filterType = $(pro_att.conf.td).html(data.filterType);
+	           						var _showValue = $(pro_att.conf.td).html(data.showValue);
+	           						var _sort = $(pro_att.conf.td).html(data.sort);
+	           						var $iRemove = $(pro_att.conf.i_remove);
+	           						$iRemove.on('click', function() {
+	           							pro_att.removeAttr(data.id, data.name);
+	           						});
+	           						var $iEdit = $(pro_att.conf.i_edit);
+	           						$iEdit.on('click', function() {
+	           							pro_att.modifyAttr(data.id);
+	           						});
+	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+	
+	           						$tr.append(_id).append(_nameId).append(_name).append(_value)
+	           							.append(_categoryId).append(_filter).append(_filterType)
+	           							.append(_showValue).append(_sort).append(_setting);
+	
+	           						$tbody.append($tr);
+	
+	              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+	              				}
+              	        		$('.bootbox.modal .modal-footer').find('span').remove();
+              	        		$('.bootbox.modal').modal('hide');
+                		    },
+              	        	error: function() {
+              	        		$('.bootbox.modal .modal-footer').find('span').remove();
+              	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+              	        	}
+                		};
+	              		$('.attr-form').ajaxSubmit(options);
+	              		return false;
                     }
                 }
             }
@@ -516,6 +508,7 @@ var pro_att = {
 $(document).ready(function() {
 	pro_att.initCategory();
 	pro_att.changeCategory();
+
 });
 </script>
         <div id="page-wrapper">
