@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>  
 <script type="text/javascript">
 var pro_att = {
 	conf : {
@@ -347,7 +347,7 @@ var pro_att = {
 	},
 	addAttr : function() {
 		bootbox.dialog({
-            title: "<s:text name='sa.pd.item.lbl.add' />",
+            title: "<s:text name='sa.pd.attr.lbl.add' />",
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
@@ -505,7 +505,7 @@ var pro_att = {
 		var $tr = $('.tr_'+id);
 		var $tdArr = $tr.children();
 		bootbox.dialog({
-            title: "<s:text name='sa.pd.item.lbl.edit' />",
+            title: "<s:text name='sa.pd.attr.lbl.edit' />",
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
@@ -666,12 +666,13 @@ var pro_att = {
 $(document).ready(function() {
 	pro_att.initCategory();
 	pro_att.changeCategory();
+
 });
 </script>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><s:text name="sa.pd.item.title" /></h3>
+                    <h3 class="page-header"><s:text name="sa.pd.attr.title" /></h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -706,9 +707,9 @@ $(document).ready(function() {
                 <div class="col-lg-12">
                     <div class="panel panel-default attr-panel display-off">
                         <div class="panel-heading">
-                            <s:text name="sa.pd.item.list.title" />
-                            <button type="button" class="btn btn-link btn-remove-all-attr"><s:text name="sa.pd.item.btn.remove.all" /></button>
-                            <button type="button" class="btn btn-link btn-add-attr"><s:text name="sa.pd.item.btn.add" /></button>
+                            <s:text name="sa.pd.attr.list.title" />
+                            <button type="button" class="btn btn-link btn-remove-all-attr"><s:text name="sa.pd.attr.btn.remove.all" /></button>
+                            <button type="button" class="btn btn-link btn-add-attr"><s:text name="sa.pd.attr.btn.add" /></button>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

@@ -16,7 +16,7 @@
 		</action>
 
 		<action name="login" class="com.yiqin.sa.action.LoginAction">
-			<result type="tiles">sa.index</result>
+			<result type="tiles">sa.welcome</result>
 		</action>
 
 		<action name="getCategoryList_*" class="com.yiqin.sa.action.GetCategoryListAction" method="{1}"></action>
@@ -25,7 +25,8 @@
 		<action name="editAttribute_*" class="com.yiqin.sa.action.EditAttribute" method="{1}"></action>
 		
 		<action name="dispatcher" class="com.yiqin.sa.action.SANavDispatcherAction">
-			<result name="order" type="tiles">sa.order</result>
+			<result name="order-manager" type="tiles">sa.order</result>
+			<result name="order-detail" type="tiles">sa.order.detail</result>
 			<result name="user-sa" type="tiles">sa.user.sa</result>
 			<result name="user-admin" type="tiles">sa.user.admin</result>
 			<result name="product-attribute" type="tiles">sa.product.attribute</result>

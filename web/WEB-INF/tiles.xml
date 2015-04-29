@@ -152,11 +152,15 @@
 		<put-attribute name="include" value="/sa/jsp/common/common.jsp" />
 	</definition>
 
-	<definition name="sa.index" extends="sa.template">
-		<put-attribute name="body" value="/sa/jsp/index.jsp" />
+	<definition name="sa.welcome" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/welcome.jsp" />
 	</definition>
 
 	<definition name="sa.order" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/index.jsp" />
+	</definition>
+
+	<definition name="sa.order.detail" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/index.jsp" />
 	</definition>
 
@@ -165,6 +169,10 @@
 	</definition>
 
 	<definition name="sa.product.attribute" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/attribute.jsp" />
+	</definition>
+
+	<definition name="sa.product.item" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/product.jsp" />
 	</definition>
 </tiles-definitions>
