@@ -86,4 +86,7 @@ public interface IProductDao {
 	public void editAttribute(Attribute attribute) throws DataAccessException;
 	public void deleteAttributeById(String id) throws DataAccessException;
 	public void deleteAttributeByCategoryId(String categoryId) throws DataAccessException;
+	public void deleteProductByCategoryId(String categoryId) throws DataAccessException;
+	public void deleteProductById(String id) throws DataAccessException;
+	public void saveProduct(List<Product> list) throws DataAccessException;
 }

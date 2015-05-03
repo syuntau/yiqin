@@ -64,7 +64,7 @@ public class ProductManagerImpl implements ProductManager {
 			pidSet.add(product.getProductId());
 		}
 		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
-		Map<Integer, String> id_nameid= new HashMap<Integer, String>();
+		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
 		
 		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
 		for (String pid : pidSet) {
@@ -84,7 +84,47 @@ public class ProductManagerImpl implements ProductManager {
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()), entrysub.getValue());
+				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), entrysub.getValue());
+			}
+		}
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Map<String, List<String>>> findProductByIds(String pid) {
+		if (Util.isEmpty(pid)) {
+			return null;
+		}
+		List<Product> productList = productDao.findProductInfoById(pid);
+		if(Util.isEmpty(productList)){
+			return null;
+		}
+		Map<String,Map<String, List<String>>> resultMap = new HashMap<String,Map<String,List<String>>>();
+		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
+		
+		Map<String,Map<Integer, List<String>>> productMap = new HashMap<String,Map<Integer,List<String>>>();
+		Map<Integer,List<String>> attrid_pvalue = new HashMap<Integer,List<String>>();
+		productMap.put(pid, attrid_pvalue);
+		for(Product product : productList){
+			if (pid.equals(product.getProductId())) {
+				List<String> list = new ArrayList<String>();
+				list.add(product.getValue());
+				list.add(String.valueOf(product.getId()));
+				attrid_pvalue.put(product.getAttributeId(), list);
+			}
+		}
+		for (Map.Entry<String,Map<Integer,List<String>>> entry : productMap.entrySet()) {
+			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
+			id_nameid = initAttributeToMap(categoryId);
+			
+			Map<Integer,List<String>> attrid_pvalueMap = entry.getValue();
+			Map<String,List<String>> nameid_pvalue = new HashMap<String,List<String>>();
+			resultMap.put(entry.getKey(), nameid_pvalue);
+			for(Map.Entry<Integer, List<String>> entrysub : attrid_pvalueMap.entrySet()){
+				List<String> list = new ArrayList<String>();
+				list.add( id_nameid.get(entrysub.getKey()).get(1));
+				list.addAll(entrysub.getValue());
+				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), list);
 			}
 		}
 		return resultMap;
@@ -101,7 +141,7 @@ public class ProductManagerImpl implements ProductManager {
 			pidSet.add(product.getProductId());
 		}
 		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
-		Map<Integer, String> id_nameid= new HashMap<Integer, String>();
+		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
 		
 		if (categorys.length() >= 4) {
 			id_nameid = initAttributeToMap(Integer.valueOf(categorys));
@@ -126,7 +166,7 @@ public class ProductManagerImpl implements ProductManager {
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()), entrysub.getValue());
+				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), entrysub.getValue());
 			}
 		}
 		return resultMap;
@@ -158,13 +198,16 @@ public class ProductManagerImpl implements ProductManager {
 	 * 
 	 * @param categoryId
 	 *            分类ID
-	 * @return Map<Integer, String> key=id value=nameID
+	 * @return Map<Integer, List<String>> key=id value=attibute list(0:nameId, 1:name)
 	 */
-	private Map<Integer, String> initAttributeToMap(int categoryId) {
-		Map<Integer, String> map = new HashMap<Integer, String>();
+	private Map<Integer, List<String>> initAttributeToMap(int categoryId) {
+		Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();
 		List<Attribute> attrList = productDao.findAttributeByCategoryId(categoryId);
 		for (Attribute attr : attrList) {
-			map.put(attr.getId(), attr.getNameId());
+			List<String> list = new ArrayList<String>();
+			list.add(attr.getNameId());
+			list.add(attr.getName());
+			map.put(attr.getId(), list);
 		}
 		return map;
 	}
@@ -241,20 +284,39 @@ public class ProductManagerImpl implements ProductManager {
 		productDao.saveAttribute(list);
 	}
 
+	@Override
 	public int saveAttribute(Attribute attribute) throws DataAccessException {
 		return productDao.saveAttribute(attribute);
 	}
 
+	@Override
 	public void updateAttribute(Attribute attribute) throws DataAccessException {
 		productDao.editAttribute(attribute);
 	}
 
+	@Override
 	public void deleteAttribute(String id) throws DataAccessException {
 		productDao.deleteAttributeById(id);
 	}
 
+	@Override
 	public void deleteAllAttribute(String categoryId) throws DataAccessException {
 		productDao.deleteAttributeByCategoryId(categoryId);
+	}
+
+	@Override
+	public void deleteAllProduct(String categoryId) throws DataAccessException {
+		productDao.deleteProductByCategoryId(categoryId);
+	}
+
+	@Override
+	public void deleteProduct(String productId) throws DataAccessException {
+		productDao.deleteProductById(productId);
+	}
+
+	@Override
+	public void saveProduct(List<Product> list) throws DataAccessException {
+		productDao.saveProduct(list);
 	}
 
 	@Override

@@ -20,8 +20,13 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.yiqin.dao.IProductDao;
+import com.yiqin.dao.impl.ProductDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.User;
+import com.yiqin.service.ProductManager;
+import com.yiqin.serviceImpl.ProductManagerImpl;
+import com.yiqin.shop.bean.ProductView;
 
 public class Util {
 
@@ -56,6 +61,14 @@ public class Util {
 			return false;
 		}
 		return true;
+	}
+
+	public static void sortProductView(List<ProductView> list) {
+		Collections.sort(list, new Comparator<ProductView>() {
+            public int compare(ProductView arg0, ProductView arg1) {
+                return arg0.getProductId().compareTo(arg1.getProductId());
+            }
+        });
 	}
 
 	/**

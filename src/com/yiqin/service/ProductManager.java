@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.Category;
+import com.yiqin.pojo.Product;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 
@@ -28,6 +29,8 @@ public interface ProductManager {
 	 * @return 对应商品 key=productId value={key=nameid value=pvalue}
 	 */
 	public Map<String, Map<String, String>> findProductAllInfoByIds(String pids);
+
+	public Map<String, Map<String, List<String>>> findProductByIds(String pid);
 
 	/**
 	 * 查询指定分类下的列表展示商品信息
@@ -104,13 +107,17 @@ public interface ProductManager {
 
 	public void saveAttribute(List<Attribute> list) throws DataAccessException;
 
-	public int saveAttribute(Attribute attribute)
-			throws DataAccessException;
+	public int saveAttribute(Attribute attribute) throws DataAccessException;
 
 	public void updateAttribute(Attribute attribute) throws DataAccessException;
 
 	public void deleteAttribute(String id) throws DataAccessException;
 
-	public void deleteAllAttribute(String categoryId)
-			throws DataAccessException;
+	public void deleteAllAttribute(String categoryId) throws DataAccessException;
+
+	public void deleteAllProduct(String categoryId) throws DataAccessException;
+
+	public void deleteProduct(String productId) throws DataAccessException;
+
+	public void saveProduct(List<Product> list) throws DataAccessException;
 }

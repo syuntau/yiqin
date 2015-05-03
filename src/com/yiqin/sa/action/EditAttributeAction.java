@@ -16,7 +16,7 @@ import com.yiqin.service.ProductManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
-public class EditAttribute extends ActionSupport {
+public class EditAttributeAction extends ActionSupport {
 
 	private static final long serialVersionUID = 6703674908055877022L;
 	private ProductManager productManager;
@@ -63,7 +63,7 @@ public class EditAttribute extends ActionSupport {
 				try {
 					productManager.deleteAllAttribute(categoryId);
 				} catch(DataAccessException dbe) {
-					System.out.println("error in RemoveAttribute.removeAll for db exception");
+					System.out.println("error in EditAttributeAction.removeAll for db exception");
 					dbe.printStackTrace();
 					out.print(UtilKeys.CODE_ERR_DB);
 					return null;
@@ -73,7 +73,7 @@ public class EditAttribute extends ActionSupport {
 				out.print(result);
 			}
 		} catch (IOException e1) {
-			System.out.println("error in RemoveAttribute.removeAll for io exception");
+			System.out.println("error in EditAttributeAction.removeAll for io exception");
 			e1.printStackTrace();
 		}
 		return null;
@@ -93,7 +93,7 @@ public class EditAttribute extends ActionSupport {
 				try {
 					productManager.deleteAttribute(attrId);
 				} catch(DataAccessException dbe) {
-					System.out.println("error in RemoveAttribute.removeAttr for db exception");
+					System.out.println("error in EditAttributeAction.removeAttr for db exception");
 					dbe.printStackTrace();
 					out.print(UtilKeys.CODE_ERR_DB);
 					return null;
@@ -103,7 +103,7 @@ public class EditAttribute extends ActionSupport {
 				out.print(result);
 			}
 		} catch (IOException e1) {
-			System.out.println("error in RemoveAttribute.removeAttr for io exception");
+			System.out.println("error in EditAttributeAction.removeAttr for io exception");
 			e1.printStackTrace();
 		}
 		return null;
@@ -123,7 +123,7 @@ public class EditAttribute extends ActionSupport {
 				try {
 					productManager.updateAttribute(attr);
 				} catch(DataAccessException dbe) {
-					System.out.println("error in RemoveAttribute.editAttr for db exception");
+					System.out.println("error in EditAttributeAction.editAttr for db exception");
 					dbe.printStackTrace();
 					out.print(UtilKeys.CODE_ERR_DB);
 					return null;
@@ -134,7 +134,7 @@ public class EditAttribute extends ActionSupport {
 				out.print(result);
 			}
 		} catch (IOException e1) {
-			System.out.println("error in RemoveAttribute.editAttr for io exception");
+			System.out.println("error in EditAttributeAction.editAttr for io exception");
 			e1.printStackTrace();
 		}
 		return null;
@@ -158,14 +158,14 @@ public class EditAttribute extends ActionSupport {
 					result = json.toString();
 					out.print(result);
 				} catch(DataAccessException dbe) {
-					System.out.println("error in RemoveAttribute.saveAttr for db exception");
+					System.out.println("error in EditAttributeAction.saveAttr for db exception");
 					dbe.printStackTrace();
 					out.print(UtilKeys.CODE_ERR_DB);
 					return null;
 				}
 			}
 		} catch (IOException e1) {
-			System.out.println("error in RemoveAttribute.saveAttr for io exception");
+			System.out.println("error in EditAttributeAction.saveAttr for io exception");
 			e1.printStackTrace();
 		}
 		return null;

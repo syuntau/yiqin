@@ -124,6 +124,39 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		getHibernateTemplate().saveOrUpdateAll(list);
 	}
 
+	public List<Product> findProductByCategorys(String cateId) {
+		if (null == cateId) {
+			return null;
+		}
+		StringBuilder queryString = new StringBuilder();
+		queryString.append("from Product where substring(productId,0,4) = ?");
+		List<?> list = getHibernateTemplate().find(queryString.toString(), cateId);
+		if (Util.isNotEmpty(list)) {
+			return (List<Product>) list;
+		}
+		return null;
+	}
+	@Override
+	public void deleteProductByCategoryId(String categoryId) throws DataAccessException {
+		List<Product> list = findProductByCategorys(categoryId);
+		if (Util.isNotEmpty(list)) {
+			getHibernateTemplate().deleteAll(list);
+		}
+	}
+
+	@Override
+	public void deleteProductById(String id) throws DataAccessException {
+		List<Product> list = findProductInfoById(id);
+		if (Util.isNotEmpty(list)) {
+			getHibernateTemplate().deleteAll(list);
+		}
+	}
+
+	@Override
+	public void saveProduct(List<Product> list) throws DataAccessException {
+		getHibernateTemplate().saveOrUpdateAll(list);
+	}
+
 	@Override
 	public List<Product> findProductInfo(int attrId, String value) {
 		String queryString = "from Product where attributeId = ? and value = ?";

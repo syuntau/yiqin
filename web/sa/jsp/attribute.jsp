@@ -25,7 +25,7 @@ var pro_att = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='2') {
-	           		$firstCategory.html("<s:text name='msg.no.item'><s:param name='msg.param.category'></s:param></s:text>");
+	           		$firstCategory.html("<s:text name='msg.no.item'><s:param><s:text name='msg.param.category' /></s:param></s:text>");
 	           	 } else {
 	           		var $firstCategorySelect = $firstCategory.find('select');
 					$.each(data, function(i, val) {
@@ -60,7 +60,7 @@ var pro_att = {
 	           		$categoryDiv.append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 		           	pro_att.hideCategory(type);
-		           	$categoryDiv.append("<span><s:text name='msg.no.item'><s:param name='msg.param.category'></s:param></s:text></span>");
+		           	$categoryDiv.append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.category' /></s:param></s:text></span>");
 	           	 } else {
 	           		$categoryDiv.find('span').remove();
 	           		var $categoryDivSelect = $categoryDiv.find('select');
@@ -136,7 +136,7 @@ var pro_att = {
 	           		$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 					$('.upload-attr').removeClass('display-off');
-		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param name='msg.param.attribute'></s:param></s:text></span>");
+		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
 	           	 } else {
 	           		pro_att.editAttrTbl(data);
 	           	 }
@@ -189,7 +189,7 @@ var pro_att = {
 	           		$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
 					$('.upload-attr').removeClass('display-off');
-		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param name='msg.param.attribute'></s:param></s:text></span>");
+		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
 	           	 } else {
 	           		pro_att.editAttrTbl(data);
 	           	}

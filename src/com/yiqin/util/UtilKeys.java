@@ -18,6 +18,7 @@ public class UtilKeys {
 	public final static String CODE_ERR_PARAM = "1";
 	public final static String CODE_NO_RESULT = "2";
 	public final static String CODE_ERR_DB = "3";
+	public final static String CODE_ERR_EXCEPTION = "4";
 	public final static String CODE_SUCCESS = "100";
 	
 	public static final String MAIL_SERVER_HOST = "mail.smtpServerHost";
