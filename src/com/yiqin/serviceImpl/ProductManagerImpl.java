@@ -124,7 +124,7 @@ public class ProductManagerImpl implements ProductManager {
 				List<String> list = new ArrayList<String>();
 				list.add( id_nameid.get(entrysub.getKey()).get(1));
 				list.addAll(entrysub.getValue());
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), list);
+				nameid_pvalue.put(String.valueOf(entrysub.getKey()), list);
 			}
 		}
 		return resultMap;

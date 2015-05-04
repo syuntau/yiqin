@@ -213,7 +213,7 @@ var pro_att = {
 			var _name = $(pro_att.conf.td).html(val.productName);
 			var $iRemove = $(pro_att.conf.i_remove);
 			$iRemove.on('click', function() {
-				pro_att.removeAttr(val.productId, val.name);
+				pro_att.removeAttr(val.productId, val.productName);
 			});
 			var $iEdit = $(pro_att.conf.i_edit);
 			$iEdit.on('click', function() {
@@ -514,16 +514,20 @@ var pro_att = {
 					var $tr = $('.tr_'+id);
 					var $tdArr = $tr.children();
 					var formItem = "";
-					$.each(data[0], function(i, val) {console.log(" i : " + i + ", val : " + val[0] + val[1] + val[2]);
-// 						var item = 
-// 						'<input name="pList["' + i + '"].id" type="hidden" value="' + val. + '" class="form-control input-md">' +
-//             			'<div class="form-group">' +
-// 	        				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
-// 	        				'<div class="col-md-7">' +
-// 	        					'<input id="attrNameId" name="pList[i].nameId" type="text" value="' + $tdArr.eq(1).html() + '" placeholder="name id" class="form-control input-md">' +
-// 	        				'</div>' +
-// 	        			'</div>';
-	        			
+					var idx= 0;
+					$.each(data[0], function(i, val) {
+						var item = 
+						'<input name="pList[' + idx + '].id" type="hidden" value="' + val[2] + '" class="form-control input-md">' +
+						'<input name="pList[' + idx + '].productId" type="hidden" value="' + id + '" class="form-control input-md">' +
+						'<input name="pList[' + idx + '].attributeId" type="hidden" value="' + i + '" class="form-control input-md">' +
+            			'<div class="form-group">' +
+	        				'<label class="col-md-3 control-label" for="' + i + '">' + val[0] + '</label>' +
+	        				'<div class="col-md-7">' +
+	        					'<input id="' + i + '" name="pList[' + idx + '].value" type="text" value="' + val[1] + '" placeholder="' + val[0] + '" class="form-control input-md">' +
+	        				'</div>' +
+	        			'</div>';
+	        			formItem += item;
+	        			++idx;
 					});
 					
 					bootbox.dialog({
@@ -531,15 +535,7 @@ var pro_att = {
 			            message: 
 				            '<div class="row">' +
 				            	'<div class="col-md-12">' +
-				            		'<form class="form-horizontal attr-form" method="post">' +
-				            			'<input name="pList[i].id" type="hidden" value="' +$tdArr.eq(0).html() + '" class="form-control input-md">' +
-				            			'<div class="form-group">' +
-				            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
-				            				'<div class="col-md-7">' +
-				            					'<input id="attrNameId" name="pList[i].nameId" type="text" value="' + $tdArr.eq(1).html() + '" placeholder="name id" class="form-control input-md">' +
-				            				'</div>' +
-				            			'</div>' +
-				            		'</form>' +
+				            		'<form class="form-horizontal attr-form" method="post">' + formItem + '</form>' +
 				            	'</div>' +
 				            '</div>',
 			            buttons: {
@@ -556,7 +552,7 @@ var pro_att = {
 			                    className: "btn-success",
 			                    callback: function () {
 			                    	var options = {
-			                		    url : 'editAttribute_updateAttr',
+			                		    url : 'editProduct_saveProduct',
 			                		    dataType : 'json',
 			                		    beforeSubmit : function() {
 			              	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
@@ -570,30 +566,20 @@ var pro_att = {
 				              				} else {
 				              					var $itemDiv = $('.item-section');
 				              			   		var $tbody = $itemDiv.find('tbody');
-				
-				              			   		var $tr = $tbody.find('.tr_'+data.id);
-				           						var _id = $(pro_att.conf.td).html(data.id);
-				           						var _nameId = $(pro_att.conf.td).html(data.nameId);
-				           						var _name = $(pro_att.conf.td).html(data.name);
-				           						var _value = $(pro_att.conf.td).html(data.value);
-				           						var _categoryId = $(pro_att.conf.td).html(data.categoryId);
-				           						var _filter = $(pro_att.conf.td).html(data.filter);
-				           						var _filterType = $(pro_att.conf.td).html(data.filterType);
-				           						var _showValue = $(pro_att.conf.td).html(data.showValue);
-				           						var _sort = $(pro_att.conf.td).html(data.sort);
+
+				              					var _id = $(pro_att.conf.td).html(data.productId);
+				              					var _name = $(pro_att.conf.td).html(data.productName);
 				           						var $iRemove = $(pro_att.conf.i_remove);
 				           						$iRemove.on('click', function() {
-				           							pro_att.removeAttr(data.id, data.name);
+				           							pro_att.removeAttr(data.productId, data.productName);
 				           						});
 				           						var $iEdit = $(pro_att.conf.i_edit);
 				           						$iEdit.on('click', function() {
-				           							pro_att.modifyAttr(data.id);
+				           							pro_att.modifyAttr(data.productId);
 				           						});
 				           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
 				
-				           						$tr.empty().append(_id).append(_nameId).append(_name).append(_value)
-				           							.append(_categoryId).append(_filter).append(_filterType)
-				           							.append(_showValue).append(_sort).append(_setting);
+				           						$tr.empty().append(_id).append(_name).append(_setting);
 				
 				              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 				              				}

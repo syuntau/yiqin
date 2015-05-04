@@ -2,6 +2,7 @@ package com.yiqin.sa.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,11 +45,11 @@ public class EditProductAction extends ActionSupport {
 		this.pId = pId;
 	}
 
-	public List<Product> getpList() {
+	public List<Product> getPList() {
 		return pList;
 	}
 
-	public void setpList(List<Product> pList) {
+	public void setPList(List<Product> pList) {
 		this.pList = pList;
 	}
 
@@ -176,19 +177,25 @@ public class EditProductAction extends ActionSupport {
 		}
 	}
 
-	public String saveProduct() {
+	public String saveProduct() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
-			if (pList == null) {
+			if (Util.isEmpty(pList)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
 				return null;
 			} else {
 				try {
-					productManager.saveProduct(pList);
+					List<Product> list = new ArrayList<Product>();
+					for (Product pro : pList) {
+						if (Util.isNotEmpty(pro.getValue())) {
+							list.add(pro);
+						}
+					}
+					productManager.saveProduct(list);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditProductAction.saveProduct for db exception");
 					dbe.printStackTrace();
