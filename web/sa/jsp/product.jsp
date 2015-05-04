@@ -513,8 +513,17 @@ var pro_att = {
 				} else {
 					var $tr = $('.tr_'+id);
 					var $tdArr = $tr.children();
-					$.each(data, function(i, val) {
-						////////////////////// 517
+					var formItem = "";
+					$.each(data[0], function(i, val) {console.log(" i : " + i + ", val : " + val[0] + val[1] + val[2]);
+// 						var item = 
+// 						'<input name="pList["' + i + '"].id" type="hidden" value="' + val. + '" class="form-control input-md">' +
+//             			'<div class="form-group">' +
+// 	        				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
+// 	        				'<div class="col-md-7">' +
+// 	        					'<input id="attrNameId" name="pList[i].nameId" type="text" value="' + $tdArr.eq(1).html() + '" placeholder="name id" class="form-control input-md">' +
+// 	        				'</div>' +
+// 	        			'</div>';
+	        			
 					});
 					
 					bootbox.dialog({
