@@ -17,6 +17,7 @@ import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 public class ProductManagerImpl implements ProductManager {
 
@@ -120,10 +121,23 @@ public class ProductManagerImpl implements ProductManager {
 			Map<Integer,List<String>> attrid_pvalueMap = entry.getValue();
 			Map<String,List<String>> nameid_pvalue = new HashMap<String,List<String>>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
-			for(Map.Entry<Integer, List<String>> entrysub : attrid_pvalueMap.entrySet()){
+			for(Map.Entry<Integer, List<String>> entrysub : id_nameid.entrySet()){
 				List<String> list = new ArrayList<String>();
-				list.add( id_nameid.get(entrysub.getKey()).get(1));
-				list.addAll(entrysub.getValue());
+				list.add(entrysub.getValue().get(1));
+				List<String> proList = attrid_pvalueMap.get(entrysub.getKey());
+				if (Util.isEmpty(proList)) {
+					// 如果商品尚未设定 属性，则做一套空记录
+					proList = new ArrayList<String>();
+					proList.add(UtilKeys.BLANK);
+					proList.add(UtilKeys.BLANK_ZERO);
+				}
+				list.addAll(proList);
+				// map 构造：
+				// key 为 属性ID（即：attribute 的 nameId）
+				// value 为List，List 目前有3个值：
+				// 属性名称（即：attribute 的 name）
+				// 商品对应属性的值（例如：属性为 颜色 的时候，对应值为：黑色）
+				// 商品记录在Product表中的ID，此ID用于更新Product表时使用，如果ID为"empty"，表示商品尚未设定该属性
 				nameid_pvalue.put(String.valueOf(entrysub.getKey()), list);
 			}
 		}

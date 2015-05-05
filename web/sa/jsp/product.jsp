@@ -251,7 +251,7 @@ var pro_att = {
        				$.ajax({
        		            type: "post",
        		            url: "editProduct_removeAll",
-       		            data: 'categoryId='+catetoryId,
+       		            data: 'cId='+catetoryId,
        		            dataType: "json",
        		            success: function(data) {
        			           	if (data=='1') {
@@ -301,7 +301,7 @@ var pro_att = {
        				$.ajax({
        		            type: "post",
        		            url: "editProduct_removeItem",
-       		            data: 'pId='+pId,
+       		            data: 'pId='+itemId,
        		            dataType: "json",
        		            success: function(data) {
 							if (data=='1') {
@@ -340,83 +340,129 @@ var pro_att = {
 		});
 	},
 	addItem : function() {
-		bootbox.dialog({
-            title: "<s:text name='sa.pd.item.lbl.add' />",
-            message: 
-	            '<div class="row">' +
-	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal item-form" method="post">' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrNameId" name="attr.nameId" type="text" placeholder="name id" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            		'</form>' +
-	            	'</div>' +
-	            '</div>',
-            buttons: {
-                reset: {
-                    label: "<s:text name='sa.btn.reset' />",
-                    className: "btn-default",
-                    callback: function () {
-                        $('.item-form')[0].reset();
-                        return false;
-                    }
-                },
-                success: {
-                    label: "<s:text name='sa.btn.save' />",
-                    className: "btn-success",
-                    callback: function () {
-                    	var options = {
-                		    url : 'editProduct_saveProduct',
-                		    dataType : 'json',
-                		    beforeSubmit : function() {
-              	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
-                		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
-                		    },
-                		    success : function(data) {
-	              				if (data=='1') {
-	              					alert("<s:text name='msg.err.param'></s:text>");
-	              				} else if (data=='3') {
-	              					alert("<s:text name='msg.err.db'></s:text>");
-	              				} else {
-	              					var $itemDiv = $('.item-section');
-	              			   		var $tbody = $itemDiv.find('tbody');
-	
-	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
-	           						var _id = $(pro_att.conf.td).html(data.id);
-	           						var _name = $(pro_att.conf.td).html(data.name);
-	           						var $iRemove = $(pro_att.conf.i_remove);
-	           						$iRemove.on('click', function() {
-	           							pro_att.removeItem(data.id, data.name);
-	           						});
-	           						var $iEdit = $(pro_att.conf.i_edit);
-	           						$iEdit.on('click', function() {
-	           							pro_att.modifyItem(data.id);
-	           						});
-	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
-	
-	           						$tr.append(_id).append(_name).append(_setting);
-	
-	           						$tbody.append($tr);
-	
-	              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-	              				}
-              	        		$('.bootbox.modal .modal-footer').find('span').remove();
-              	        		$('.bootbox.modal').modal('hide');
-                		    },
-              	        	error: function() {
-              	        		$('.bootbox.modal .modal-footer').find('span').remove();
-              	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-              	        	}
-                		};
-	              		$('.item-form').ajaxSubmit(options);
-	              		return false;
-                    }
-                }
-            }
-        });
+		var catetoryId = $('.third-category select').find('option:selected').val();
+		if (catetoryId && isNaN(catetoryId)) {
+			alert("<s:text name='msg.err.param'></s:text>");
+			return ;
+		}
+		var $itemDiv = $('.item-section');
+
+		$.ajax({
+            type: "post",
+            url: "getAttribute_getList",
+            data: 'cId='+catetoryId,
+            dataType: "json",
+            success: function(data) {
+	           	 if (data=='1') {
+	           		$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
+	           	 } else if (data=='2') {
+					$('.upload-attr').removeClass('display-off');
+		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
+	           	 } else {
+					var formItem = "";
+	         		$.each(data, function(i, val) {
+						var item = 
+						'<input name="products[' + i + '].productId" type="hidden" class="item-product-id">' +
+						'<input name="products[' + i + '].attributeId" type="hidden" value="' + val.id + '" >' +
+            			'<div class="form-group">' +
+	        				'<label class="col-md-3 control-label" for="' + val.nameId + '">' + val.name + '</label>' +
+	        				'<div class="col-md-7">' +
+	        					'<input id="' + val.nameId + '" name="products[' + i + '].value" type="text" placeholder="' + val.name + '" class="form-control input-md">' +
+	        				'</div>' +
+	        			'</div>';
+	        			formItem += item;
+	         		});
+	         		bootbox.dialog({
+	                    title: "<s:text name='sa.pd.item.lbl.add' /><span style='font-size:14px'>（Product Id : " + catetoryId + "<input type='text' id='addProductId'>）</span>",
+	                    message: 
+	        	            '<div class="row">' +
+	        	            	'<div class="col-md-12">' +
+	        	            		'<form class="form-horizontal item-form" method="post">' + formItem + '</form>' +
+	        	            	'</div>' +
+	        	            '</div>',
+	                    buttons: {
+	                        reset: {
+	                            label: "<s:text name='sa.btn.reset' />",
+	                            className: "btn-default",
+	                            callback: function () {
+	                                $('.item-form')[0].reset();
+	                                return false;
+	                            }
+	                        },
+	                        success: {
+	                            label: "<s:text name='sa.btn.save' />",
+	                            className: "btn-success",
+	                            callback: function () {
+	                            	var pId = $('#addProductId').val();
+	                            	if (pId == "" || pId.length != 4) {
+	                            		alert("<s:text name='msg.err.wrong.product.id' />");
+	                            		return false;
+	                            	}
+	                            	pId = catetoryId + pId;
+	                            	$('.item-product-id').val(pId);
+	                            	var options = {
+	                        		    url : 'editProduct_saveProduct',
+	                        		    dataType : 'json',
+	                        		    data : {pId : pId},
+	                        		    beforeSubmit : function() {
+	                      	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+	                        		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
+	                        		    },
+	                        		    success : function(data) {
+	        	              				if (data=='1') {
+	        	              					alert("<s:text name='msg.err.param'></s:text>");
+	        	              				} else if (data=='3') {
+	        	              					alert("<s:text name='msg.err.db'></s:text>");
+	        	              				} else {
+	        	              					var $itemDiv = $('.item-section');
+	        	              			   		var $tbody = $itemDiv.find('tbody');
+	        	
+	        	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.productId);
+	        	           						var _id = $(pro_att.conf.td).html(data.productId);
+	        	           						var _name = $(pro_att.conf.td).html(data.productName);
+	        	           						var $iRemove = $(pro_att.conf.i_remove);
+	        	           						$iRemove.on('click', function() {
+	        	           							pro_att.removeItem(data.productId, data.productName);
+	        	           						});
+	        	           						var $iEdit = $(pro_att.conf.i_edit);
+	        	           						$iEdit.on('click', function() {
+	        	           							pro_att.modifyItem(data.productId);
+	        	           						});
+	        	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+	        	
+	        	           						$tr.append(_id).append(_name).append(_setting);
+	        	
+	        	           						$tbody.append($tr);
+	        	
+	        	              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+	        	              				}
+	                      	        		$('.bootbox.modal .modal-footer').find('span').remove();
+	                      	        		$('.bootbox.modal').modal('hide');
+	                        		    },
+	                      	        	error: function() {
+	                      	        		$('.bootbox.modal .modal-footer').find('span').remove();
+	                      	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+	                      	        	}
+	                        		};
+	        	              		$('.item-form').ajaxSubmit(options);
+	        	              		return false;
+	                            }
+	                        }
+	                    }
+	                });
+	           	 }
+            },
+            beforeSend: function() {
+            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+            	$itemDiv.find('.panel-heading').append($loadingTextIcon);
+        	},
+        	error: function() {
+        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
+        	},
+        	complete: function() {
+        		$itemDiv.find('span').remove();
+        	}
+		});
 	},
 	modifyItem : function(id) {
 		var $itemDiv = $('.item-section');
@@ -439,8 +485,12 @@ var pro_att = {
 					var formItem = "";
 					var idx= 0;
 					$.each(data[0], function(i, val) {
-						var item = 
-						'<input name="products[' + idx + '].id" type="hidden" value="' + val[2] + '" >' +
+						var item = "";
+						var tId = '<input name="products[' + idx + '].id" type="hidden" value="' + val[2] + '" >';
+						if (val[2] != "0") {
+							item += tId;
+						}
+						item +=
 						'<input name="products[' + idx + '].productId" type="hidden" value="' + id + '" >' +
 						'<input name="products[' + idx + '].attributeId" type="hidden" value="' + i + '" >' +
             			'<div class="form-group">' +

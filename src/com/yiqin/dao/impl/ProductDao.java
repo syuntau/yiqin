@@ -129,8 +129,9 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			return null;
 		}
 		StringBuilder queryString = new StringBuilder();
-		queryString.append("from Product where substring(productId,0,4) = ?");
-		List<?> list = getHibernateTemplate().find(queryString.toString(), cateId);
+		queryString.append("from Product where productId like '");
+		queryString.append(cateId).append("%'");
+		List<?> list = getHibernateTemplate().find(queryString.toString());
 		if (Util.isNotEmpty(list)) {
 			return (List<Product>) list;
 		}

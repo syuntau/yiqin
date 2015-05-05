@@ -12,6 +12,7 @@ public class UtilKeys {
 	public final static String REQ_SHOP_NAV = "req_shop_nav";
 	
 	public final static String BLANK = "";
+	public final static String BLANK_ZERO = "0";
 	public final static String BLANK_HASH = "#";
 	public final static String UPLOAD_PATH = "/upload";
 
