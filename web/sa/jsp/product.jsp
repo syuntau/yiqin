@@ -517,13 +517,13 @@ var pro_att = {
 					var idx= 0;
 					$.each(data[0], function(i, val) {
 						var item = 
-						'<input name="pList[' + idx + '].id" type="hidden" value="' + val[2] + '" class="form-control input-md">' +
-						'<input name="pList[' + idx + '].productId" type="hidden" value="' + id + '" class="form-control input-md">' +
-						'<input name="pList[' + idx + '].attributeId" type="hidden" value="' + i + '" class="form-control input-md">' +
+						'<input name="products[' + idx + '].id" type="hidden" value="' + val[2] + '" class="form-control input-md">' +
+						'<input name="products[' + idx + '].productId" type="hidden" value="' + id + '" class="form-control input-md">' +
+						'<input name="products[' + idx + '].attributeId" type="hidden" value="' + i + '" class="form-control input-md">' +
             			'<div class="form-group">' +
 	        				'<label class="col-md-3 control-label" for="' + i + '">' + val[0] + '</label>' +
 	        				'<div class="col-md-7">' +
-	        					'<input id="' + i + '" name="pList[' + idx + '].value" type="text" value="' + val[1] + '" placeholder="' + val[0] + '" class="form-control input-md">' +
+	        					'<input id="' + i + '" name="products[' + idx + '].value" type="text" value="' + val[1] + '" placeholder="' + val[0] + '" class="form-control input-md">' +
 	        				'</div>' +
 	        			'</div>';
 	        			formItem += item;
@@ -554,6 +554,7 @@ var pro_att = {
 			                    	var options = {
 			                		    url : 'editProduct_saveProduct',
 			                		    dataType : 'json',
+			                		    data : {pId : id},
 			                		    beforeSubmit : function() {
 			              	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
 			                		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);

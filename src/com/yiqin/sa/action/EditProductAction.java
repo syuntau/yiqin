@@ -26,7 +26,7 @@ public class EditProductAction extends ActionSupport {
 	private static final long serialVersionUID = -9120713921648008287L;
 	private String cId;
 	private String pId;
-	private List<Product> pList;
+	private List<Product> products;
 	private ProductManager productManager;
 
 	public String getCId() {
@@ -45,12 +45,12 @@ public class EditProductAction extends ActionSupport {
 		this.pId = pId;
 	}
 
-	public List<Product> getPList() {
-		return pList;
+	public List<Product> getProducts() {
+		return products;
 	}
 
-	public void setPList(List<Product> pList) {
-		this.pList = pList;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	public ProductManager getProductManager() {
@@ -183,14 +183,14 @@ public class EditProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
-			if (Util.isEmpty(pList)) {
+			if (Util.isEmpty(products)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
 				return null;
 			} else {
 				try {
 					List<Product> list = new ArrayList<Product>();
-					for (Product pro : pList) {
+					for (Product pro : products) {
 						if (Util.isNotEmpty(pro.getValue())) {
 							list.add(pro);
 						}
