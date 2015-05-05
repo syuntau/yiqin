@@ -14,8 +14,8 @@ var pro_att = {
 		pro_att.loadFirstCategory();
 		pro_att.initSubmitCategory();
 		pro_att.initUploadSubmit();
-		pro_att.initRemoveAllAttr();
-		pro_att.initAddAttr();
+		pro_att.initRemoveAllItem();
+		pro_att.initAddItem();
 	},
 	loadFirstCategory : function() {
 		var $firstCategory = $('.first-category');
@@ -39,7 +39,7 @@ var pro_att = {
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideAttr();
+            	pro_att.hideItem();
             	$firstCategory.prepend($(com_conf.loading_icon));
         	},
             complete: function() {
@@ -77,7 +77,7 @@ var pro_att = {
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideAttr();
+            	pro_att.hideItem();
             	var $loadingIcon = $(com_conf.loading_icon);
             	$categoryDiv.prepend($loadingIcon);
         	},
@@ -95,7 +95,7 @@ var pro_att = {
        		$('.btn-category-submit').addClass('display-off');
 		}
 	},
-	hideAttr : function() {
+	hideItem : function() {
 		$('.item-hr').addClass('display-off');
 		$('.upload-item').addClass('display-off');
 		$('.item-section .item-panel').addClass('display-off');
@@ -185,7 +185,7 @@ var pro_att = {
     	
 		$.ajaxFileUpload({
             url: "uploadAttribute",
-            fileElementId: 'attributeFile',
+            fileElementId: 'itemFile',
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
@@ -213,11 +213,11 @@ var pro_att = {
 			var _name = $(pro_att.conf.td).html(val.productName);
 			var $iRemove = $(pro_att.conf.i_remove);
 			$iRemove.on('click', function() {
-				pro_att.removeAttr(val.productId, val.productName);
+				pro_att.removeItem(val.productId, val.productName);
 			});
 			var $iEdit = $(pro_att.conf.i_edit);
 			$iEdit.on('click', function() {
-				pro_att.modifyAttr(val.productId);
+				pro_att.modifyItem(val.productId);
 			});
 			var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
 
@@ -227,12 +227,12 @@ var pro_att = {
 		});
 		$itemDiv.find('.item-panel').removeClass('display-off');
 	},
-	initRemoveAllAttr : function() {
-		$('.btn-remove-all-attr').on('click', function() {
-			pro_att.removeAllAttr();
+	initRemoveAllItem : function() {
+		$('.btn-remove-all-item').on('click', function() {
+			pro_att.removeAllItem();
 		});
 	},
-	removeAllAttr : function() {
+	removeAllItem : function() {
 		var catetoryId = $('.third-category select').find('option:selected').val();
 		if (catetoryId && isNaN(catetoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
@@ -281,8 +281,8 @@ var pro_att = {
        	    }
        	})
 	},
-	removeAttr : function(attrId, attrName) {
-		if (attrId && isNaN(attrId)) {
+	removeItem : function(itemId, itemName) {
+		if (itemId && isNaN(itemId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
@@ -290,7 +290,7 @@ var pro_att = {
 		var $itemHR = $('.item-hr');
 		var $itemDiv = $('.item-section');
 		var alertMsg = "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.item.' /></s:param></s:text>";
-		alertMsg = alertMsg.replace(/attrName/, attrName);
+		alertMsg = alertMsg.replace(/itemName/, itemName);
 
        	bootbox.confirm({
        	    size: 'small',
@@ -300,8 +300,8 @@ var pro_att = {
        	    	if (result) {
        				$.ajax({
        		            type: "post",
-       		            url: "editAttribute_removeAttr",
-       		            data: 'attrId='+attrId,
+       		            url: "editProduct_removeItem",
+       		            data: 'pId='+pId,
        		            dataType: "json",
        		            success: function(data) {
 							if (data=='1') {
@@ -311,7 +311,7 @@ var pro_att = {
 							} else {
 							   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
 				           		var $tbody = $itemDiv.find('tbody');
-				           		$tbody.find('.tr_'+attrId).remove();
+				           		$tbody.find('.tr_'+itemId).remove();
 				           		var trCnt = $tbody.children().length;
 				           		if (trCnt == 0) {
 					           		$itemHR.addClass('display-off');
@@ -334,90 +334,22 @@ var pro_att = {
        	    }
        	})
 	},
-	initAddAttr : function() {
-		$('.btn-add-attr').on('click', function() {
-			pro_att.addAttr();
+	initAddItem : function() {
+		$('.btn-add-item').on('click', function() {
+			pro_att.addItem();
 		});
 	},
-	addAttr : function() {
+	addItem : function() {
 		bootbox.dialog({
             title: "<s:text name='sa.pd.item.lbl.add' />",
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal attr-form" method="post">' +
+	            		'<form class="form-horizontal item-form" method="post">' +
 	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
 	            				'<div class="col-md-7">' +
 	            					'<input id="attrNameId" name="attr.nameId" type="text" placeholder="name id" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrName">name</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrName" name="attr.name" type="text" placeholder="name..." class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrValue">value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrValue" name="attr.value" type="text" placeholder="value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrCategoryId" name="attr.categoryId" type="hidden" value="' + $('.third-category select').find('option:selected').val() + '"class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilter0">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter0" value="0" checked="checked"> 非筛选项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilter1">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter1" value="1"> 筛选项' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter type</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilterType0">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType0" value="0" checked="checked"> 无类型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType1">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType1" value="1"> 组合型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType2">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType2" value="2"> 价格型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType3">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType3" value="3"> 连续型' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrShowValue">show value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrShowValue" name="attr.showValue" type="text" placeholder="show value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="sort">sort</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrSort0">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrSort1">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort1" value="1"> 排序项' +
-	            						'</label>' +
-	            					'</div>' +
 	            				'</div>' +
 	            			'</div>' +
 	            		'</form>' +
@@ -428,7 +360,7 @@ var pro_att = {
                     label: "<s:text name='sa.btn.reset' />",
                     className: "btn-default",
                     callback: function () {
-                        $('.attr-form')[0].reset();
+                        $('.item-form')[0].reset();
                         return false;
                     }
                 },
@@ -437,7 +369,7 @@ var pro_att = {
                     className: "btn-success",
                     callback: function () {
                     	var options = {
-                		    url : 'editAttribute_saveAttr',
+                		    url : 'editProduct_saveProduct',
                 		    dataType : 'json',
                 		    beforeSubmit : function() {
               	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
@@ -454,27 +386,18 @@ var pro_att = {
 	
 	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
 	           						var _id = $(pro_att.conf.td).html(data.id);
-	           						var _nameId = $(pro_att.conf.td).html(data.nameId);
 	           						var _name = $(pro_att.conf.td).html(data.name);
-	           						var _value = $(pro_att.conf.td).html(data.value);
-	           						var _categoryId = $(pro_att.conf.td).html(data.categoryId);
-	           						var _filter = $(pro_att.conf.td).html(data.filter);
-	           						var _filterType = $(pro_att.conf.td).html(data.filterType);
-	           						var _showValue = $(pro_att.conf.td).html(data.showValue);
-	           						var _sort = $(pro_att.conf.td).html(data.sort);
 	           						var $iRemove = $(pro_att.conf.i_remove);
 	           						$iRemove.on('click', function() {
-	           							pro_att.removeAttr(data.id, data.name);
+	           							pro_att.removeItem(data.id, data.name);
 	           						});
 	           						var $iEdit = $(pro_att.conf.i_edit);
 	           						$iEdit.on('click', function() {
-	           							pro_att.modifyAttr(data.id);
+	           							pro_att.modifyItem(data.id);
 	           						});
 	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
 	
-	           						$tr.append(_id).append(_nameId).append(_name).append(_value)
-	           							.append(_categoryId).append(_filter).append(_filterType)
-	           							.append(_showValue).append(_sort).append(_setting);
+	           						$tr.append(_id).append(_name).append(_setting);
 	
 	           						$tbody.append($tr);
 	
@@ -488,14 +411,14 @@ var pro_att = {
               	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
               	        	}
                 		};
-	              		$('.attr-form').ajaxSubmit(options);
+	              		$('.item-form').ajaxSubmit(options);
 	              		return false;
                     }
                 }
             }
         });
 	},
-	modifyAttr : function(id) {
+	modifyItem : function(id) {
 		var $itemDiv = $('.item-section');
 		
 		$.ajax({
@@ -517,9 +440,9 @@ var pro_att = {
 					var idx= 0;
 					$.each(data[0], function(i, val) {
 						var item = 
-						'<input name="products[' + idx + '].id" type="hidden" value="' + val[2] + '" class="form-control input-md">' +
-						'<input name="products[' + idx + '].productId" type="hidden" value="' + id + '" class="form-control input-md">' +
-						'<input name="products[' + idx + '].attributeId" type="hidden" value="' + i + '" class="form-control input-md">' +
+						'<input name="products[' + idx + '].id" type="hidden" value="' + val[2] + '" >' +
+						'<input name="products[' + idx + '].productId" type="hidden" value="' + id + '" >' +
+						'<input name="products[' + idx + '].attributeId" type="hidden" value="' + i + '" >' +
             			'<div class="form-group">' +
 	        				'<label class="col-md-3 control-label" for="' + i + '">' + val[0] + '</label>' +
 	        				'<div class="col-md-7">' +
@@ -535,7 +458,7 @@ var pro_att = {
 			            message: 
 				            '<div class="row">' +
 				            	'<div class="col-md-12">' +
-				            		'<form class="form-horizontal attr-form" method="post">' + formItem + '</form>' +
+				            		'<form class="form-horizontal item-form" method="post">' + formItem + '</form>' +
 				            	'</div>' +
 				            '</div>',
 			            buttons: {
@@ -543,7 +466,7 @@ var pro_att = {
 			                    label: "<s:text name='sa.btn.reset' />",
 			                    className: "btn-default",
 			                    callback: function () {
-			                        $('.attr-form')[0].reset();
+			                        $('.item-form')[0].reset();
 			                        return false;
 			                    }
 			                },
@@ -572,11 +495,11 @@ var pro_att = {
 				              					var _name = $(pro_att.conf.td).html(data.productName);
 				           						var $iRemove = $(pro_att.conf.i_remove);
 				           						$iRemove.on('click', function() {
-				           							pro_att.removeAttr(data.productId, data.productName);
+				           							pro_att.removeItem(data.productId, data.productName);
 				           						});
 				           						var $iEdit = $(pro_att.conf.i_edit);
 				           						$iEdit.on('click', function() {
-				           							pro_att.modifyAttr(data.productId);
+				           							pro_att.modifyItem(data.productId);
 				           						});
 				           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
 				
@@ -592,15 +515,11 @@ var pro_att = {
 			              	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 			              	        	}
 			                		};
-				              		$('.attr-form').ajaxSubmit(options);
+				              		$('.item-form').ajaxSubmit(options);
 				              		return false;
 			                    }
 			                }
 			            }
-			        }).on('shown.bs.modal', function() {
-			        	$("#attrFilter" + $tdArr.eq(5).html()).attr("checked",true);
-			        	$("#attrFilterType" + $tdArr.eq(6).html()).attr("checked",true);
-			        	$("#attrSort" + $tdArr.eq(8).html()).attr("checked",true);
 			        });
 				}
             },
@@ -609,7 +528,7 @@ var pro_att = {
             	$itemDiv.find('.panel-heading').append($loadingTextIcon);
         	},
         	error: function() {
-        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
+        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
         	},
         	complete: function() {
         		$itemDiv.find('span').remove();
@@ -646,7 +565,7 @@ $(document).ready(function() {
                         
                         <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
                         <div class="form-group" style="padding-left:20px">
-                            <input type="file" id="attributeFile" name="attributeFile" class="upload-item-file upload-item display-off">
+                            <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item display-off">
                         </div>
                         <button type="button" class="btn btn-info btn-upload upload-item display-off"><s:text name="sa.btn.upload" /></button>
                     </form>
@@ -661,8 +580,8 @@ $(document).ready(function() {
                     <div class="panel panel-default item-panel display-off">
                         <div class="panel-heading">
                             <s:text name="sa.pd.item.list.title" />
-                            <button type="button" class="btn btn-link btn-remove-all-attr"><s:text name="sa.pd.item.btn.remove.all" /></button>
-                            <button type="button" class="btn btn-link btn-add-attr"><s:text name="sa.pd.item.btn.add" /></button>
+                            <button type="button" class="btn btn-link btn-remove-all-item"><s:text name="sa.pd.item.btn.remove.all" /></button>
+                            <button type="button" class="btn btn-link btn-add-item"><s:text name="sa.pd.item.btn.add" /></button>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

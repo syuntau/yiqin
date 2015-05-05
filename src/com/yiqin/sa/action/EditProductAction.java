@@ -131,7 +131,7 @@ public class EditProductAction extends ActionSupport {
 				return null;
 			} else {
 				try {
-					productManager.deleteAttribute(pId);
+					productManager.deleteProduct(pId);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditProductAction.removeItem for db exception");
 					dbe.printStackTrace();
