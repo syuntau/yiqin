@@ -62,6 +62,7 @@ public class EditAttributeAction extends ActionSupport {
 			} else {
 				try {
 					productManager.deleteAllAttribute(categoryId);
+					productManager.deleteAllProduct(categoryId);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditAttributeAction.removeAll for db exception");
 					dbe.printStackTrace();
@@ -92,6 +93,7 @@ public class EditAttributeAction extends ActionSupport {
 			} else {
 				try {
 					productManager.deleteAttribute(attrId);
+					productManager.deleteProductByAttributeId(attrId);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditAttributeAction.removeAttr for db exception");
 					dbe.printStackTrace();

@@ -120,4 +120,6 @@ public interface ProductManager {
 	public void deleteProduct(String productId) throws DataAccessException;
 
 	public void saveProduct(List<Product> list) throws DataAccessException;
+
+	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 }

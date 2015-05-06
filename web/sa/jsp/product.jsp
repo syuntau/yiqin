@@ -184,16 +184,20 @@ var pro_att = {
     	$itemDiv.prepend($loadingIcon);
     	
 		$.ajaxFileUpload({
-            url: "uploadAttribute",
+            url: "uploadItem",
             fileElementId: 'itemFile',
+            additionalData: {cId : catetoryId},
             dataType: "json",
             success: function(data) {
-	           	 if (data=='1') {
+	           	if (data=='1') {
 	           		$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
-	           	 } else if (data=='2') {
+	           	} else if (data=='2') {
 					$('.upload-item').removeClass('display-off');
 		           	$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.item' /></s:param></s:text></span>");
-	           	 } else {
+	           	} else if (data=='3') {
+					$('.upload-item').removeClass('display-off');
+			        $itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.db'></s:text></span>");
+		        } else {
 	           		pro_att.editItemsTbl(data);
 	           	}
 	           	$itemDiv.find('.fa-refresh').parent().remove();

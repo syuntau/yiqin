@@ -29,15 +29,6 @@ public class UploadAttributeAction extends ActionSupport {
 	private File attributeFile;
 	private String attributeFileFileName;
 	private ProductManager productManager;
-	private String attributeList;
-
-	public String getAttributeList() {
-		return attributeList;
-	}
-
-	public void setAttributeList(String attributeList) {
-		this.attributeList = attributeList;
-	}
 
 	public File getAttributeFile() {
 		return attributeFile;
@@ -79,7 +70,7 @@ public class UploadAttributeAction extends ActionSupport {
 				OutputStream output = null;
 		        InputStream input = null;
 		        String path = ServletActionContext.getServletContext().getRealPath(UtilKeys.UPLOAD_PATH);
-		        String fileName = new StringBuilder().append(path).append("\\").append(attributeFileFileName).toString();
+		        String fileName = new StringBuilder().append(path).append(UtilKeys.FILE_SEPARATOR).append(attributeFileFileName).toString();
 				System.out.println("###################### fileName : " + fileName);
 		        try{
 		            output = new FileOutputStream(fileName);  

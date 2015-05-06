@@ -15,6 +15,7 @@ public class UtilKeys {
 	public final static String BLANK_ZERO = "0";
 	public final static String BLANK_HASH = "#";
 	public final static String UPLOAD_PATH = "/upload";
+	public final static String FILE_SEPARATOR = System.getProperty("file.separator");
 
 	public final static String CODE_ERR_PARAM = "1";
 	public final static String CODE_NO_RESULT = "2";
