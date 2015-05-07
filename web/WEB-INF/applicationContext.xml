@@ -56,6 +56,7 @@
 				<value>com/yiqin/pojo/Product.hbm.xml</value>
 				<value>com/yiqin/pojo/User.hbm.xml</value>
 				<value>com/yiqin/pojo/UserConf.hbm.xml</value>
+				<value>com/yiqin/pojo/BestProduct.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
