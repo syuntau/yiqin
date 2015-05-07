@@ -65,26 +65,26 @@ $(document).ready(function(){
 		<!--product-details-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="<s:property value='#productInfo.imgurl'/>" width="329" height="380"/>
+				<img src="<s:property value='#productInfo.imageUrl'/>" width="329" height="380"/>
 				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
 					<div class="item active">
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgurl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
 					</div>
 				</div>
 				<!-- Controls -->
@@ -116,7 +116,7 @@ $(document).ready(function(){
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
 						<a href="#none" title="<s:property value='#productInfo.color'/>" class="none-detail-a">
-							<img src="<s:property value='#productInfo.imgurl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
+							<img src="<s:property value='#productInfo.imageUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
 							<i><s:property value='#productInfo.color'/></i>
 						</a>
 					</div>
@@ -159,7 +159,7 @@ $(document).ready(function(){
 									</li>
 									<li>		
 										<label>品牌：</label>
-										<span><s:property value='#productInfo.brand'/></span>
+										<span><s:property value='#productInfo.brandId'/></span>
 									</li>
 									<li>
 										<label>颜色：</label>
@@ -167,14 +167,14 @@ $(document).ready(function(){
 									</li>
 									<li>
 										<label>产地：</label>
-										<span><s:property value='#productInfo.producer'/></span>
+										<span><s:property value='#productInfo.madeIn'/></span>
 									</li>
 									<li>	
 										<label>类别：</label>
 										<span><s:property value='#productInfo.category'/></span>
 									</li>
 								</ul>
-								<img src="<s:property value='#productInfo.imgurl'/>" alt="" />
+								<img src="<s:property value='#productInfo.imageUrl'/>" alt="" />
 							</div>
 						</div>
 					</div>
@@ -208,7 +208,7 @@ $(document).ready(function(){
 <!-- 						<b>Write Your Review/写下你的评论</b> -->
 <!-- 					</p> -->
 <!-- 					<form action="#"> -->
-<%-- 						<b>Rating: </b> <img src="<s:property value='#productInfo.imgurl'/>" alt="" /> --%>
+<%-- 						<b>Rating: </b> <img src="<s:property value='#productInfo.imageUrl'/>" alt="" /> --%>
 <!-- 						<button type="button" class="btn btn-default pull-right"> -->
 <!-- 							Submit</button> -->
 <!-- 					</form> -->
