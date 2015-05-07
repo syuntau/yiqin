@@ -200,7 +200,7 @@ public class ProductManagerImpl implements ProductManager {
 			productView.setProductName(nameid_pvalue.get("name"));
 			productView.setPrice(nameid_pvalue.get("price"));
 			productView.setColor(nameid_pvalue.get("color"));
-			productView.setImgUrl(nameid_pvalue.get("imgurl"));
+			productView.setImgUrl(nameid_pvalue.get("imageUrl"));
 			
 			pViewList.add(productView);
 		}
@@ -442,7 +442,7 @@ public class ProductManagerImpl implements ProductManager {
 		if(!Util.isEmpty(list)){
 			for(Attribute attr : list){
 				String nameId = attr.getNameId();
-				if("brand".equals(nameId) || "price".equals(nameId) || "color".equals(nameId)){
+				if("brandId".equals(nameId) || "price".equals(nameId) || "color".equals(nameId)){
 					tempList.add(attr);
 				}
 			}
