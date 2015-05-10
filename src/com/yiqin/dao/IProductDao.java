@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.yiqin.pojo.Attribute;
+import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 
@@ -76,6 +77,15 @@ public interface IProductDao {
 	 * @return Attribute
 	 */
 	public Attribute findProductAttr(String attrNameId, int cateId);
+	
+	/**
+	 * 查询推荐的快速购物商品
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @return BestProduct
+	 */
+	public BestProduct findBestProductByUserId(String userId);
 
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 

@@ -22,6 +22,29 @@ public interface ProductManager {
 	public List<ProductView> findProductInfoById(String pids);
 	
 	/**
+	 * 查询快速购物商品
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param offset
+	 *            第一条记录索引
+	 * @param pageSize
+	 *            每页显示的数量
+	 * @return 商品集合
+	 */
+	public List<ProductView> findBestProductInfo(String userId, int offset,
+			int pageSize);
+	
+	/**
+	 * 查询快速购物商品总数
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @return 总数
+	 */
+	public int findBestProductCount(String userId);
+	
+	/**
 	 * 通过ID查询商品所有信息
 	 * 
 	 * @param pids
@@ -31,6 +54,15 @@ public interface ProductManager {
 	public Map<String, Map<String, String>> findProductAllInfoByIds(String pids);
 
 	public Map<String, Map<String, List<String>>> findProductByIds(String pid);
+	
+	/**
+	 * 查询商品详细的属性和属性值
+	 * 
+	 * @param pids
+	 *            商品ID
+	 * @return 对应商品 key=productId value={key=name value=pvalue}
+	 */
+	public Map<String, Map<String, String>> findProductDetailByIds(String pids);
 
 	/**
 	 * 查询指定分类下的列表展示商品信息

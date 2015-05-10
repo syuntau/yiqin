@@ -78,7 +78,7 @@ var yiqin_category_action = function(){
 		 var $category_list = $('#accordian');
 		 $category_list.empty();
 		 var currentNav = "<s:property value='#session.se_shop_nav' />";
-		 if("top_home"==currentNav){
+		 if("top_home"==currentNav || "top_quick_shopping"==currentNav){
 			 $.each(data, function(i, val){
 				 appendTo(val.subCategoryList,$category_list);				 
 			 });

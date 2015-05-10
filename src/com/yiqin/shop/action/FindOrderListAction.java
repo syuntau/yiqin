@@ -13,8 +13,10 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.OrderView;
+import com.yiqin.util.Configuration;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 查询订单列表
@@ -27,7 +29,7 @@ public class FindOrderListAction extends ActionSupport {
 	private static final long serialVersionUID = 4175224246287224080L;
 
 	// 每页显示的条目数目
-	public static final int MAXITEMINPAGE = 5;
+	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_ORDER_MAX_PAGE_SIZE));
 	// 搜索关键词
 	private String searchName;
 	// 订单状态

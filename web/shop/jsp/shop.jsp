@@ -67,7 +67,11 @@ var yiqin_shoplist_action = function(){
 					$filter_a.addClass('select-filter-a');
 				}
 				$filter_a.click(function(){
-					filterProduct(nameId, id+"_"+arr);
+					if($(this).hasClass('select-filter-a')){
+						filterProduct(nameId, "");
+					}else{
+						filterProduct(nameId, id+"_"+arr);
+					}
 				});
 				$filter_span.append($filter_a);
 			});
@@ -85,7 +89,7 @@ var filterProduct = function(filterType,filterVal){
 		color = "<s:property value='color'/>",
 		price = "<s:property value='price'/>",
 		pageIndex = 1;
-	if(filterType=='brand'){
+	if(filterType=='brandId'){
 		brand = filterVal;
 	}else if(filterType=='price'){
 		price = filterVal;

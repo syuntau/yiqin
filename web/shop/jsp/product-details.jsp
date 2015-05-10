@@ -8,6 +8,12 @@
 </s:iterator>
 
 <script type="text/javascript">
+var pro_detail_temp = {
+	prodet_li : '<li></li>',
+	prodet_label : '<label></label>',
+	prodet_span : '<span></span>'
+};
+
 var yiqin_product_detail = function(){
 	var action = {
 		initProductDetail : function(){
@@ -50,6 +56,54 @@ var yiqin_product_detail = function(){
 			$("#select_product_info a").click();
 		},
 		
+		findProductAttrDetail : function(){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findProductDetail",
+	             dataType: "json",
+	             data : "productId=<s:property value='#productId'/>",
+	             success: function(data){
+	            	 var $details = $("#details").find("ul");
+	            	 if(data=='1'){
+	            		 $details.empty();
+	            		 $details.append("暂无产品详细信息！");
+	            	 }else if(data=='2'){
+	            		 $details.empty();
+	            		 $details.append("产品详细信息加载失败！");
+	            	 }else{
+	            		 appendToProductDetail(data);
+	            	 }
+              },
+              beforeSend: function(){},
+              complete: function(){},
+              error: function(){}
+	         });
+		},
+	};
+	
+	var appendToProductDetail = function(data){
+		var $details = $("#details").find("ul");
+		$details.empty();
+		
+		$.each(data,function(key,val){
+			if(val==null||val==""||val.length==0){
+				$details.append("暂无产品详细信息！");
+				return;
+			}
+			$.each(val,function(k,v){
+				if(v.indexOf('images')==-1){
+					var $prodet_li = $(pro_detail_temp.prodet_li),
+						$prodet_label = $(pro_detail_temp.prodet_label),
+						$prodet_span = $(pro_detail_temp.prodet_span);
+					
+					$prodet_li.append($prodet_label).append($prodet_span);
+					$prodet_label.append(k).append("：");
+					$prodet_span.append(v);
+					$details.append($prodet_li);
+				}
+			});
+		});
 	};
 	
 	return action;
@@ -57,6 +111,7 @@ var yiqin_product_detail = function(){
 
 $(document).ready(function(){
 	yiqin_product_detail.initProductDetail();
+	yiqin_product_detail.findProductAttrDetail();
 });
 </script>
 
@@ -134,12 +189,12 @@ $(document).ready(function(){
 				<li class="active">
 					<a href="#details" data-toggle="tab"><s:text name="shop.product.details.details"></s:text></a>
 				</li>
-				<li>
-					<a href="#speparam" data-toggle="tab"><s:text name="shop.product.details.spe.parameters"></s:text></a>
-				</li>
-				<li>
-					<a href="#reviews" data-toggle="tab"><s:text name="shop.product.details.reviews"></s:text></a>
-				</li>
+<!-- 				<li> -->
+<%-- 					<a href="#speparam" data-toggle="tab"><s:text name="shop.product.details.spe.parameters"></s:text></a> --%>
+<!-- 				</li> -->
+<!-- 				<li> -->
+<%-- 					<a href="#reviews" data-toggle="tab"><s:text name="shop.product.details.reviews"></s:text></a> --%>
+<!-- 				</li> -->
 			</ul>
 		</div>
 		<div class="tab-content">
@@ -148,33 +203,7 @@ $(document).ready(function(){
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo">
-								<ul class="p-parameter-list">
-									<li>
-										<label>商品名称：</label>
-										<span><s:property value='#productInfo.name'/></span>
-									</li>
-									<li>	
-										<label>商品编号：</label>
-										<span><s:property value='#productId'/></span>
-									</li>
-									<li>		
-										<label>品牌：</label>
-										<span><s:property value='#productInfo.brandId'/></span>
-									</li>
-									<li>
-										<label>颜色：</label>
-										<span><s:property value='#productInfo.color'/></span>
-									</li>
-									<li>
-										<label>产地：</label>
-										<span><s:property value='#productInfo.madeIn'/></span>
-									</li>
-									<li>	
-										<label>类别：</label>
-										<span><s:property value='#productInfo.category'/></span>
-									</li>
-								</ul>
-								<img src="<s:property value='#productInfo.imageUrl'/>" alt="" />
+								<ul class="p-parameter-list"></ul>
 							</div>
 						</div>
 					</div>

@@ -35,4 +35,8 @@ public class UtilKeys {
 	
 	public static final String VERIFY_CODE_EXPIRED_TIME_MINUTE = "verify.code.expired.time.minute";
 	
+	public static final String SHOP_ORDER_MAX_PAGE_SIZE = "shop.order.list.max.page.size";
+	public static final String SHOP_FILTER_PRODUCT_MAX_PAGE_SIZE = "shop.filter.product.list.max.page.size";
+	public static final String SHOP_BEST_PRODUCT_MAX_PAGE_SIZE = "shop.best.product.list.max.page.size";
+	
 }

@@ -1,6 +1,7 @@
 package com.yiqin.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
+import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.service.ProductManager;
@@ -41,6 +43,39 @@ public class ProductManagerImpl implements ProductManager {
 	public List<ProductView> findProductInfo(String categorys) {
 		Map<String,Map<String,String>> productMap = findProductAllInfo(categorys);
 		return productToProductView(productMap);
+	}
+	
+	@Override
+	public List<ProductView> findBestProductInfo(String userId, int offset, int pageSize) {
+		Set<String> pidSet = findProductIdsByUserId(userId);
+		List<ProductView> result = new ArrayList<ProductView>();
+		if (pidSet != null && pidSet.size() > 0) {
+			List<String> pidList = new ArrayList(pidSet);
+			int beginCount = offset + 1;
+			if (beginCount > pidSet.size()) {
+				return null;
+			}
+			if ((beginCount + pageSize) <= pidSet.size()) {
+				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
+			} else if ((beginCount + pageSize) > pidSet.size()) {
+				pidList = pidList.subList(beginCount - 1, pidList.size());
+			}
+			StringBuilder pids = new StringBuilder();
+			for (String pid : pidList) {
+				pids.append(pid).append(",");
+			}
+			result = findProductInfoById(pids.toString());
+		}
+		return result;
+	}
+	
+	@Override
+	public int findBestProductCount(String userId) {
+		Set<String> pidSet = findProductIdsByUserId(userId);
+		if(pidSet != null){
+			return pidSet.size();
+		}
+		return 0;
 	}
 	
 	@Override
@@ -86,6 +121,54 @@ public class ProductManagerImpl implements ProductManager {
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
 				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), entrysub.getValue());
+			}
+		}
+		return resultMap;
+	}
+	
+	@Override
+	public Map<String, Map<String, String>> findProductDetailByIds(String pids) {
+		if (Util.isEmpty(pids)) {
+			return null;
+		}
+		if (pids.contains(",")) {
+			if (pids.startsWith(",")) {
+				pids = pids.substring(1);
+			}
+			if (pids.endsWith(",")) {
+				pids = pids.substring(0, pids.length() - 1);
+			}
+		}
+		List<Product> productList = productDao.findProductInfoById(pids);
+		if(Util.isEmpty(productList)){
+			return null;
+		}
+		Set<String> pidSet = new HashSet<String>();
+		for (Product product : productList) {
+			pidSet.add(product.getProductId());
+		}
+		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
+		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
+		
+		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
+		for (String pid : pidSet) {
+			Map<Integer,String> attrid_pvalue = new HashMap<Integer,String>();
+			productMap.put(pid, attrid_pvalue);
+			for(Product product : productList){
+				if (pid.equals(product.getProductId())) {
+					attrid_pvalue.put(product.getAttributeId(), product.getValue());
+				}
+			}
+		}
+		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
+			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
+			id_nameid = initAttributeToMap(categoryId);
+			
+			Map<Integer,String> attrid_pvalueMap = entry.getValue();
+			Map<String,String> nameid_pvalue = new HashMap<String,String>();
+			resultMap.put(entry.getKey(), nameid_pvalue);
+			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
+				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(1), entrysub.getValue());
 			}
 		}
 		return resultMap;
@@ -433,6 +516,30 @@ public class ProductManagerImpl implements ProductManager {
 			}
 		}
 		return setPid;
+	}
+	
+	private Set<String> findProductIdsByUserId(String userId){
+		if(Util.isEmpty(userId)){
+			return null;
+		}
+		BestProduct bestProduct = productDao.findBestProductByUserId(userId);
+		if(bestProduct != null){
+			String productIds = bestProduct.getProductId();
+			if(Util.isNotEmpty(productIds)){
+				 if (productIds.contains(",")) {
+					if (productIds.startsWith(",")) {
+						productIds = productIds.substring(1);
+					}
+					if (productIds.endsWith(",")) {
+						productIds = productIds.substring(0, productIds.length() - 1);
+					}
+				 }
+				 String[] ids = productIds.split(",");
+				 Set<String> set = new HashSet<>(Arrays.asList(ids));
+				 return set;
+			}
+		}
+		return null;
 	}
 
 	@Override

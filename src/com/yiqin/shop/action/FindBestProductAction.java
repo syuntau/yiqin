@@ -1,6 +1,5 @@
 package com.yiqin.shop.action;
 
-import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,33 +10,17 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.service.ProductManager;
-import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Configuration;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
-/**
- * 产品检索过滤
- * 
- * @author LiuJun
- * 
- */
-public class ProductFilterAction extends ActionSupport {
-
-	private static final long serialVersionUID = -1063703459420329225L;
+public class FindBestProductAction extends ActionSupport {
+	private static final long serialVersionUID = -8848208662911483212L;
 
 	// 每页显示的条目数目
-	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_FILTER_PRODUCT_MAX_PAGE_SIZE));
-	//分类ID
-	private String paramVal;
-	// 过滤品牌 attId_brand
-	private String brand;
-	// 过滤价格 attId_price
-	private String price;
-	// 过滤颜色 attId_color
-	private String color;
+	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_BEST_PRODUCT_MAX_PAGE_SIZE));
 	// 选中页号
 	private String pageIndex;
 	// 分页对象
@@ -63,66 +46,24 @@ public class ProductFilterAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
-			if(!Util.isEmpty(brand)){
-				brand = URLDecoder.decode(brand, "utf-8");
-			}
-			if(!Util.isEmpty(color)){
-				color = URLDecoder.decode(color, "utf-8");
-			}
-			
 			// 查询过滤总数
-			ProductFilter productFilter = new ProductFilter(paramVal, brand,
-					price, color, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+			String userId = Util.getLoginUser(request.getSession()).getId();
 			List<ProductView> productList = null;
-			int count = productManager.findProductCountByFilter(productFilter);
+			int count = productManager.findBestProductCount(userId);
 			if (count > 0) {
 				// 查询当前页信息
-				productList = productManager.findProductInfoByFilter(productFilter);
+				productList = productManager.findBestProductInfo(userId, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 			}
 
 			// 分页对象
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(productList);
 			
-			String shop_nav = "top_" + paramVal.substring(0, 1);
-			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();
 			return SUCCESS;
 		}
-	}
-	
-	public String getParamVal() {
-		return paramVal;
-	}
-	
-	public void setParamVal(String paramVal) {
-		this.paramVal = paramVal;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
 	}
 
 	public String getPageIndex() {

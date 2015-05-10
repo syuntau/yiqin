@@ -37,6 +37,11 @@
 		<put-attribute name="body" value="shop.search.body" />
 	</definition>
 	
+	<definition name="shop.quick.shopping" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="shop.quick.body" />
+	</definition>
+	
 	<definition name="shop.details" extends="shop.template">
 		<put-attribute name="title" value="shop.index.title"/>
 		<put-attribute name="body" value="shop.details.body" />
@@ -66,6 +71,11 @@
 	<definition name="shop.search.body" template="/shop/jsp/other.jsp">
 		<put-attribute name="left" value="shop.index.body.left" />
 		<put-attribute name="right" value="/shop/jsp/shop.jsp" />
+	</definition>
+	
+	<definition name="shop.quick.body" template="/shop/jsp/other.jsp">
+		<put-attribute name="left" value="shop.index.body.left" />
+		<put-attribute name="right" value="/shop/jsp/best_shop.jsp" />
 	</definition>
 	
 	<definition name="shop.details.body" template="/shop/jsp/other.jsp">

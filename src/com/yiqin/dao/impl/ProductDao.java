@@ -7,6 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
+import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.util.Util;
@@ -198,4 +199,16 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
+	@Override
+	public BestProduct findBestProductByUserId(String userId) {
+		if(Util.isEmpty(userId)){
+			return null;
+		}
+		String queryString = "from BestProduct where userId = ?";
+		List<?> list = getHibernateTemplate().find(queryString, userId);
+		if (Util.isNotEmpty(list)) {
+			return (BestProduct) list.get(0);
+		}
+		return null;
+	}
 }
