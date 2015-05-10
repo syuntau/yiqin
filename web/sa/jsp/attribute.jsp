@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>  
 <script type="text/javascript">
-var pro_att = {
+var pd_attr = {
 	conf : {
 		option : '<option></option>',
 		tr : '<tr></tr>',
@@ -11,11 +11,11 @@ var pro_att = {
 		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.attr.edit'></s:text>"></i>',
 	},
 	initCategory : function() {
-		pro_att.loadFirstCategory();
-		pro_att.initSubmitCategory();
-		pro_att.initUploadSubmit();
-		pro_att.initRemoveAllAttr();
-		pro_att.initAddAttr();
+		pd_attr.loadFirstCategory();
+		pd_attr.initSubmitCategory();
+		pd_attr.initUploadSubmit();
+		pd_attr.initRemoveAllAttr();
+		pd_attr.initAddAttr();
 	},
 	loadFirstCategory : function() {
 		var $firstCategory = $('.first-category');
@@ -29,17 +29,17 @@ var pro_att = {
 	           	 } else {
 	           		var $firstCategorySelect = $firstCategory.find('select');
 					$.each(data, function(i, val) {
-						var $op = $(pro_att.conf.option);
+						var $op = $(pd_attr.conf.option);
 						$op.val(val.id).html(val.name);
 						$firstCategorySelect.append($op);
 					});
 					$firstCategory.find('option:first').attr('selected', true);
-					pro_att.loadCategory('second-category', $firstCategory.find('option:selected').val());
+					pd_attr.loadCategory('second-category', $firstCategory.find('option:selected').val());
 					$('.category-select').removeClass('display-off');
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideAttr();
+            	pd_attr.hideAttr();
             	$firstCategory.prepend($(com_conf.loading_icon));
         	},
             complete: function() {
@@ -56,28 +56,28 @@ var pro_att = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
-	           		pro_att.hideCategory(type);
+	           		pd_attr.hideCategory(type);
 	           		$categoryDiv.append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
-		           	pro_att.hideCategory(type);
+		           	pd_attr.hideCategory(type);
 		           	$categoryDiv.append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.category' /></s:param></s:text></span>");
 	           	 } else {
 	           		$categoryDiv.find('span').remove();
 	           		var $categoryDivSelect = $categoryDiv.find('select');
 					$.each(data, function(i, val) {
-						var $op = $(pro_att.conf.option);
+						var $op = $(pd_attr.conf.option);
 						$op.val(val.id).html(val.name);
 						$categoryDivSelect.append($op);
 					});
 					$categoryDivSelect.find('option:first').attr('selected', true);
 					if (type == 'second-category') {
-						pro_att.loadCategory('third-category', $('.second-category').find('option:selected').val());
+						pd_attr.loadCategory('third-category', $('.second-category').find('option:selected').val());
 					}
 					$('.category-select').removeClass('display-off');
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideAttr();
+            	pd_attr.hideAttr();
             	var $loadingIcon = $(com_conf.loading_icon);
             	$categoryDiv.prepend($loadingIcon);
         	},
@@ -105,17 +105,17 @@ var pro_att = {
 		$('.first-category').on('change', function() {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.second-category select, .third-category select').empty();
-			pro_att.loadCategory('second-category', selectCategoryId);
+			pd_attr.loadCategory('second-category', selectCategoryId);
 		});
 		$('.second-category').on('change', function() {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.third-category select').empty();
-			pro_att.loadCategory('third-category', selectCategoryId);
+			pd_attr.loadCategory('third-category', selectCategoryId);
 		});
 	},
 	initSubmitCategory : function() {
 		$('.btn-category-submit').on('click', function() {
-			pro_att.loadAttributeList();
+			pd_attr.loadAttributeList();
 		})
 	},
 	loadAttributeList : function() {
@@ -138,7 +138,7 @@ var pro_att = {
 					$('.upload-attr').removeClass('display-off');
 		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
 	           	 } else {
-	           		pro_att.editAttrTbl(data);
+	           		pd_attr.editAttrTbl(data);
 	           	 }
             },
             beforeSend: function() {
@@ -158,7 +158,7 @@ var pro_att = {
 	},
 	initUploadSubmit : function() {
 		$('.btn-upload').on('click', function() {
-			pro_att.uploadAttribute();
+			pd_attr.uploadAttribute();
 		});
 	},
 	uploadAttribute : function() {
@@ -191,7 +191,7 @@ var pro_att = {
 					$('.upload-attr').removeClass('display-off');
 		           	$attrDiv.find('.attr-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
 	           	 } else {
-	           		pro_att.editAttrTbl(data);
+	           		pd_attr.editAttrTbl(data);
 	           	}
 	           	$attrDiv.find('.fa-refresh').parent().remove();
             },
@@ -205,25 +205,25 @@ var pro_att = {
 		var $attrDiv = $('.attr-section');
    		var $tbody = $attrDiv.find('tbody');
 		$.each(data, function(i, val) {
-			var $tr = $(pro_att.conf.tr).addClass('tr_'+val.id);
-			var _id = $(pro_att.conf.td).html(val.id);
-			var _nameId = $(pro_att.conf.td).html(val.nameId);
-			var _name = $(pro_att.conf.td).html(val.name);
-			var _value = $(pro_att.conf.td).html(val.value);
-			var _categoryId = $(pro_att.conf.td).html(val.categoryId);
-			var _filter = $(pro_att.conf.td).html(val.filter);
-			var _filterType = $(pro_att.conf.td).html(val.filterType);
-			var _showValue = $(pro_att.conf.td).html(val.showValue);
-			var _sort = $(pro_att.conf.td).html(val.sort);
-			var $iRemove = $(pro_att.conf.i_remove);
+			var $tr = $(pd_attr.conf.tr).addClass('tr_'+val.id);
+			var _id = $(pd_attr.conf.td).html(val.id);
+			var _nameId = $(pd_attr.conf.td).html(val.nameId);
+			var _name = $(pd_attr.conf.td).html(val.name);
+			var _value = $(pd_attr.conf.td).html(val.value);
+			var _categoryId = $(pd_attr.conf.td).html(val.categoryId);
+			var _filter = $(pd_attr.conf.td).html(val.filter);
+			var _filterType = $(pd_attr.conf.td).html(val.filterType);
+			var _showValue = $(pd_attr.conf.td).html(val.showValue);
+			var _sort = $(pd_attr.conf.td).html(val.sort);
+			var $iRemove = $(pd_attr.conf.i_remove);
 			$iRemove.on('click', function() {
-				pro_att.removeAttr(val.id, val.name);
+				pd_attr.removeAttr(val.id, val.name);
 			});
-			var $iEdit = $(pro_att.conf.i_edit);
+			var $iEdit = $(pd_attr.conf.i_edit);
 			$iEdit.on('click', function() {
-				pro_att.modifyAttr(val.id);
+				pd_attr.modifyAttr(val.id);
 			});
-			var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+			var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
 
 			$tr.append(_id).append(_nameId).append(_name).append(_value)
 				.append(_categoryId).append(_filter).append(_filterType)
@@ -235,7 +235,7 @@ var pro_att = {
 	},
 	initRemoveAllAttr : function() {
 		$('.btn-remove-all-attr').on('click', function() {
-			pro_att.removeAllAttr();
+			pd_attr.removeAllAttr();
 		});
 	},
 	removeAllAttr : function() {
@@ -342,7 +342,7 @@ var pro_att = {
 	},
 	initAddAttr : function() {
 		$('.btn-add-attr').on('click', function() {
-			pro_att.addAttr();
+			pd_attr.addAttr();
 		});
 	},
 	addAttr : function() {
@@ -458,25 +458,25 @@ var pro_att = {
 	              					var $attrDiv = $('.attr-section');
 	              			   		var $tbody = $attrDiv.find('tbody');
 	
-	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.id);
-	           						var _id = $(pro_att.conf.td).html(data.id);
-	           						var _nameId = $(pro_att.conf.td).html(data.nameId);
-	           						var _name = $(pro_att.conf.td).html(data.name);
-	           						var _value = $(pro_att.conf.td).html(data.value);
-	           						var _categoryId = $(pro_att.conf.td).html(data.categoryId);
-	           						var _filter = $(pro_att.conf.td).html(data.filter);
-	           						var _filterType = $(pro_att.conf.td).html(data.filterType);
-	           						var _showValue = $(pro_att.conf.td).html(data.showValue);
-	           						var _sort = $(pro_att.conf.td).html(data.sort);
-	           						var $iRemove = $(pro_att.conf.i_remove);
+	              			   		var $tr = $(pd_attr.conf.tr).addClass('tr_'+data.id);
+	           						var _id = $(pd_attr.conf.td).html(data.id);
+	           						var _nameId = $(pd_attr.conf.td).html(data.nameId);
+	           						var _name = $(pd_attr.conf.td).html(data.name);
+	           						var _value = $(pd_attr.conf.td).html(data.value);
+	           						var _categoryId = $(pd_attr.conf.td).html(data.categoryId);
+	           						var _filter = $(pd_attr.conf.td).html(data.filter);
+	           						var _filterType = $(pd_attr.conf.td).html(data.filterType);
+	           						var _showValue = $(pd_attr.conf.td).html(data.showValue);
+	           						var _sort = $(pd_attr.conf.td).html(data.sort);
+	           						var $iRemove = $(pd_attr.conf.i_remove);
 	           						$iRemove.on('click', function() {
-	           							pro_att.removeAttr(data.id, data.name);
+	           							pd_attr.removeAttr(data.id, data.name);
 	           						});
-	           						var $iEdit = $(pro_att.conf.i_edit);
+	           						var $iEdit = $(pd_attr.conf.i_edit);
 	           						$iEdit.on('click', function() {
-	           							pro_att.modifyAttr(data.id);
+	           							pd_attr.modifyAttr(data.id);
 	           						});
-	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+	           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
 	
 	           						$tr.append(_id).append(_nameId).append(_name).append(_value)
 	           							.append(_categoryId).append(_filter).append(_filterType)
@@ -618,24 +618,24 @@ var pro_att = {
 	              			   		var $tbody = $attrDiv.find('tbody');
 	
 	              			   		var $tr = $tbody.find('.tr_'+data.id);
-	           						var _id = $(pro_att.conf.td).html(data.id);
-	           						var _nameId = $(pro_att.conf.td).html(data.nameId);
-	           						var _name = $(pro_att.conf.td).html(data.name);
-	           						var _value = $(pro_att.conf.td).html(data.value);
-	           						var _categoryId = $(pro_att.conf.td).html(data.categoryId);
-	           						var _filter = $(pro_att.conf.td).html(data.filter);
-	           						var _filterType = $(pro_att.conf.td).html(data.filterType);
-	           						var _showValue = $(pro_att.conf.td).html(data.showValue);
-	           						var _sort = $(pro_att.conf.td).html(data.sort);
-	           						var $iRemove = $(pro_att.conf.i_remove);
+	           						var _id = $(pd_attr.conf.td).html(data.id);
+	           						var _nameId = $(pd_attr.conf.td).html(data.nameId);
+	           						var _name = $(pd_attr.conf.td).html(data.name);
+	           						var _value = $(pd_attr.conf.td).html(data.value);
+	           						var _categoryId = $(pd_attr.conf.td).html(data.categoryId);
+	           						var _filter = $(pd_attr.conf.td).html(data.filter);
+	           						var _filterType = $(pd_attr.conf.td).html(data.filterType);
+	           						var _showValue = $(pd_attr.conf.td).html(data.showValue);
+	           						var _sort = $(pd_attr.conf.td).html(data.sort);
+	           						var $iRemove = $(pd_attr.conf.i_remove);
 	           						$iRemove.on('click', function() {
-	           							pro_att.removeAttr(data.id, data.name);
+	           							pd_attr.removeAttr(data.id, data.name);
 	           						});
-	           						var $iEdit = $(pro_att.conf.i_edit);
+	           						var $iEdit = $(pd_attr.conf.i_edit);
 	           						$iEdit.on('click', function() {
-	           							pro_att.modifyAttr(data.id);
+	           							pd_attr.modifyAttr(data.id);
 	           						});
-	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+	           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
 	
 	           						$tr.empty().append(_id).append(_nameId).append(_name).append(_value)
 	           							.append(_categoryId).append(_filter).append(_filterType)
@@ -664,8 +664,8 @@ var pro_att = {
 	}
 }
 $(document).ready(function() {
-	pro_att.initCategory();
-	pro_att.changeCategory();
+	pd_attr.initCategory();
+	pd_attr.changeCategory();
 
 });
 </script>

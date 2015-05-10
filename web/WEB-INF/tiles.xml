@@ -185,4 +185,8 @@
 	<definition name="sa.product.item" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/product.jsp" />
 	</definition>
+
+	<definition name="sa.quick.shopping" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/best_product.jsp" />
+	</definition>
 </tiles-definitions>

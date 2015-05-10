@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
-var pro_att = {
+var pd_item = {
 	conf : {
 		option : '<option></option>',
 		tr : '<tr></tr>',
@@ -11,11 +11,11 @@ var pro_att = {
 		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.pro.edit'></s:text>"></i>',
 	},
 	initCategory : function() {
-		pro_att.loadFirstCategory();
-		pro_att.initSubmitCategory();
-		pro_att.initUploadSubmit();
-		pro_att.initRemoveAllItem();
-		pro_att.initAddItem();
+		pd_item.loadFirstCategory();
+		pd_item.initSubmitCategory();
+		pd_item.initUploadSubmit();
+		pd_item.initRemoveAllItem();
+		pd_item.initAddItem();
 	},
 	loadFirstCategory : function() {
 		var $firstCategory = $('.first-category');
@@ -29,17 +29,17 @@ var pro_att = {
 	           	 } else {
 	           		var $firstCategorySelect = $firstCategory.find('select');
 					$.each(data, function(i, val) {
-						var $op = $(pro_att.conf.option);
+						var $op = $(pd_item.conf.option);
 						$op.val(val.id).html(val.name);
 						$firstCategorySelect.append($op);
 					});
 					$firstCategory.find('option:first').attr('selected', true);
-					pro_att.loadCategory('second-category', $firstCategory.find('option:selected').val());
+					pd_item.loadCategory('second-category', $firstCategory.find('option:selected').val());
 					$('.category-select').removeClass('display-off');
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideItem();
+            	pd_item.hideItem();
             	$firstCategory.prepend($(com_conf.loading_icon));
         	},
             complete: function() {
@@ -56,28 +56,28 @@ var pro_att = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
-	           		pro_att.hideCategory(type);
+	           		pd_item.hideCategory(type);
 	           		$categoryDiv.append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
-		           	pro_att.hideCategory(type);
+		           	pd_item.hideCategory(type);
 		           	$categoryDiv.append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.category' /></s:param></s:text></span>");
 	           	 } else {
 	           		$categoryDiv.find('span').remove();
 	           		var $categoryDivSelect = $categoryDiv.find('select');
 					$.each(data, function(i, val) {
-						var $op = $(pro_att.conf.option);
+						var $op = $(pd_item.conf.option);
 						$op.val(val.id).html(val.name);
 						$categoryDivSelect.append($op);
 					});
 					$categoryDivSelect.find('option:first').attr('selected', true);
 					if (type == 'second-category') {
-						pro_att.loadCategory('third-category', $('.second-category').find('option:selected').val());
+						pd_item.loadCategory('third-category', $('.second-category').find('option:selected').val());
 					}
 					$('.category-select').removeClass('display-off');
 	           	 }
             },
             beforeSend: function() {
-            	pro_att.hideItem();
+            	pd_item.hideItem();
             	var $loadingIcon = $(com_conf.loading_icon);
             	$categoryDiv.prepend($loadingIcon);
         	},
@@ -105,17 +105,17 @@ var pro_att = {
 		$('.first-category').on('change', function() {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.second-category select, .third-category select').empty();
-			pro_att.loadCategory('second-category', selectCategoryId);
+			pd_item.loadCategory('second-category', selectCategoryId);
 		});
 		$('.second-category').on('change', function() {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.third-category select').empty();
-			pro_att.loadCategory('third-category', selectCategoryId);
+			pd_item.loadCategory('third-category', selectCategoryId);
 		});
 	},
 	initSubmitCategory : function() {
 		$('.btn-category-submit').on('click', function() {
-			pro_att.loadProductList();
+			pd_item.loadProductList();
 		})
 	},
 	loadProductList : function() {
@@ -141,7 +141,7 @@ var pro_att = {
 					$('.upload-item').removeClass('display-off');
 					$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.fail.do'><s:param><s:text name='msg.param.query' /></s:param></s:text></span>");
 				} else {
-					pro_att.editItemsTbl(data);
+					pd_item.editItemsTbl(data);
 				}
             },
             beforeSend: function() {
@@ -161,7 +161,7 @@ var pro_att = {
 	},
 	initUploadSubmit : function() {
 		$('.btn-upload').on('click', function() {
-			pro_att.uploadProduct();
+			pd_item.uploadProduct();
 		});
 	},
 	uploadProduct : function() {
@@ -198,7 +198,7 @@ var pro_att = {
 					$('.upload-item').removeClass('display-off');
 			        $itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.db'></s:text></span>");
 		        } else {
-	           		pro_att.editItemsTbl(data);
+	           		pd_item.editItemsTbl(data);
 	           	}
 	           	$itemDiv.find('.fa-refresh').parent().remove();
             },
@@ -212,18 +212,18 @@ var pro_att = {
 		var $itemDiv = $('.item-section');
    		var $tbody = $itemDiv.find('tbody');
 		$.each(data, function(i, val) {
-			var $tr = $(pro_att.conf.tr).addClass('tr_'+val.productId);
-			var _id = $(pro_att.conf.td).html(val.productId);
-			var _name = $(pro_att.conf.td).html(val.productName);
-			var $iRemove = $(pro_att.conf.i_remove);
+			var $tr = $(pd_item.conf.tr).addClass('tr_'+val.productId);
+			var _id = $(pd_item.conf.td).html(val.productId);
+			var _name = $(pd_item.conf.td).html(val.productName);
+			var $iRemove = $(pd_item.conf.i_remove);
 			$iRemove.on('click', function() {
-				pro_att.removeItem(val.productId, val.productName);
+				pd_item.removeItem(val.productId, val.productName);
 			});
-			var $iEdit = $(pro_att.conf.i_edit);
+			var $iEdit = $(pd_item.conf.i_edit);
 			$iEdit.on('click', function() {
-				pro_att.modifyItem(val.productId);
+				pd_item.modifyItem(val.productId);
 			});
-			var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+			var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
 
 			$tr.append(_id).append(_name).append(_setting);
 
@@ -233,7 +233,7 @@ var pro_att = {
 	},
 	initRemoveAllItem : function() {
 		$('.btn-remove-all-item').on('click', function() {
-			pro_att.removeAllItem();
+			pd_item.removeAllItem();
 		});
 	},
 	removeAllItem : function() {
@@ -340,7 +340,7 @@ var pro_att = {
 	},
 	initAddItem : function() {
 		$('.btn-add-item').on('click', function() {
-			pro_att.addItem();
+			pd_item.addItem();
 		});
 	},
 	addItem : function() {
@@ -421,18 +421,18 @@ var pro_att = {
 	        	              					var $itemDiv = $('.item-section');
 	        	              			   		var $tbody = $itemDiv.find('tbody');
 	        	
-	        	              			   		var $tr = $(pro_att.conf.tr).addClass('tr_'+data.productId);
-	        	           						var _id = $(pro_att.conf.td).html(data.productId);
-	        	           						var _name = $(pro_att.conf.td).html(data.productName);
-	        	           						var $iRemove = $(pro_att.conf.i_remove);
+	        	              			   		var $tr = $(pd_item.conf.tr).addClass('tr_'+data.productId);
+	        	           						var _id = $(pd_item.conf.td).html(data.productId);
+	        	           						var _name = $(pd_item.conf.td).html(data.productName);
+	        	           						var $iRemove = $(pd_item.conf.i_remove);
 	        	           						$iRemove.on('click', function() {
-	        	           							pro_att.removeItem(data.productId, data.productName);
+	        	           							pd_item.removeItem(data.productId, data.productName);
 	        	           						});
-	        	           						var $iEdit = $(pro_att.conf.i_edit);
+	        	           						var $iEdit = $(pd_item.conf.i_edit);
 	        	           						$iEdit.on('click', function() {
-	        	           							pro_att.modifyItem(data.productId);
+	        	           							pd_item.modifyItem(data.productId);
 	        	           						});
-	        	           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+	        	           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
 	        	
 	        	           						$tr.append(_id).append(_name).append(_setting);
 	        	
@@ -545,17 +545,17 @@ var pro_att = {
 				              					var $itemDiv = $('.item-section');
 				              			   		var $tbody = $itemDiv.find('tbody');
 
-				              					var _id = $(pro_att.conf.td).html(data.productId);
-				              					var _name = $(pro_att.conf.td).html(data.productName);
-				           						var $iRemove = $(pro_att.conf.i_remove);
+				              					var _id = $(pd_item.conf.td).html(data.productId);
+				              					var _name = $(pd_item.conf.td).html(data.productName);
+				           						var $iRemove = $(pd_item.conf.i_remove);
 				           						$iRemove.on('click', function() {
-				           							pro_att.removeItem(data.productId, data.productName);
+				           							pd_item.removeItem(data.productId, data.productName);
 				           						});
-				           						var $iEdit = $(pro_att.conf.i_edit);
+				           						var $iEdit = $(pd_item.conf.i_edit);
 				           						$iEdit.on('click', function() {
-				           							pro_att.modifyItem(data.productId);
+				           							pd_item.modifyItem(data.productId);
 				           						});
-				           						var _setting = $(pro_att.conf.td).append($iRemove).append(" ").append($iEdit);
+				           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
 				
 				           						$tr.empty().append(_id).append(_name).append(_setting);
 				
@@ -591,8 +591,8 @@ var pro_att = {
 	}
 }
 $(document).ready(function() {
-	pro_att.initCategory();
-	pro_att.changeCategory();
+	pd_item.initCategory();
+	pd_item.changeCategory();
 });
 </script>
         <div id="page-wrapper">

@@ -11,6 +11,9 @@
         <property name="userId" type="string">
             <column name="user_id" length="20" />
         </property>
+        <property name="categoryId" type="java.lang.Integer">
+            <column name="category_id" />
+        </property>
         <property name="productId" type="string">
             <column name="product_id" length="20" />
         </property>
