@@ -75,4 +75,9 @@ public class UserManagerImpl implements UserManager {
 	public boolean deleteUserConf(String userId, String attribute) {
 		return userDao.deleteUserConf(userId, attribute);
 	}
+
+	@Override
+	public List<User> findAll() {
+		return userDao.findAll();
+	}
 }

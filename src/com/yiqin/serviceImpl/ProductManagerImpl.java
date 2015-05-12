@@ -15,6 +15,7 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
+import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
@@ -522,22 +523,17 @@ public class ProductManagerImpl implements ProductManager {
 		if(Util.isEmpty(userId)){
 			return null;
 		}
-		BestProduct bestProduct = productDao.findBestProductByUserId(userId);
-		if(bestProduct != null){
-			String productIds = bestProduct.getProductId();
-			if(Util.isNotEmpty(productIds)){
-				 if (productIds.contains(",")) {
-					if (productIds.startsWith(",")) {
-						productIds = productIds.substring(1);
-					}
-					if (productIds.endsWith(",")) {
-						productIds = productIds.substring(0, productIds.length() - 1);
-					}
-				 }
-				 String[] ids = productIds.split(",");
-				 Set<String> set = new HashSet<>(Arrays.asList(ids));
-				 return set;
+		List<BestProduct> bestProductList = productDao.findBestProductByUserId(userId);
+		if(Util.isNotEmpty(bestProductList)){
+			Set<String> set = new HashSet<String>();
+			for (BestProduct bestProduct : bestProductList) {
+				String productIds = bestProduct.getProductId();
+				if(Util.isNotEmpty(productIds)){
+					 String[] ids = productIds.split(",");
+					 set.addAll(Arrays.asList(ids));
+				}
 			}
+			 return set;
 		}
 		return null;
 	}
@@ -558,5 +554,31 @@ public class ProductManagerImpl implements ProductManager {
 			Util.sort(tempList);
 		}
 		return tempList;
+	}
+
+	@Override
+	public List<User> findUserList() {
+		
+		return null;
+	}
+
+	@Override
+	public Map<String, List<String>> findBestProductByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, List<String>> findBestProductByCategoryId(String userId,
+			String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveBestProduct(BestProduct bestProduct)
+			throws DataAccessException {
+		// TODO Auto-generated method stub
+		
 	}
 }

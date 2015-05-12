@@ -85,7 +85,7 @@ public interface IProductDao {
 	 *            用户ID
 	 * @return BestProduct
 	 */
-	public BestProduct findBestProductByUserId(String userId);
+//	public BestProduct findBestProductByUserId(String userId);
 
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 
@@ -101,8 +101,8 @@ public interface IProductDao {
 	public void saveProduct(List<Product> list) throws DataAccessException;
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
-//	public void deleteBestProductByUserId(String userId) throws DataAccessException;
+	public void deleteBestProductByUserId(String userId) throws DataAccessException;
 	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException;
-//	public List<BestProduct> findBestProductByUserId(String userId);
+	public List<BestProduct> findBestProductByUserId(String userId);
 	public List<BestProduct> findBestProductByCategoryId(String userId, String categoryId);
 }

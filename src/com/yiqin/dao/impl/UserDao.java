@@ -108,4 +108,14 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 			return false;
 		}
 	}
+
+	@Override
+	public List<User> findAll() {
+		String sql = "from User";
+		List<?> list = getHibernateTemplate().find(sql);
+		if (list != null) {
+			return (List<User>) list;
+		}
+		return null;
+	}
 }

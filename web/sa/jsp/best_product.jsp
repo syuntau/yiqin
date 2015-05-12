@@ -93,7 +93,6 @@ var best_pd = {
 	},
 	hideItem : function() {
 		$('.item-hr').addClass('display-off');
-		$('.upload-item').addClass('display-off');
 		$('.item-section .item-panel').addClass('display-off');
 		$('.item-section .item-panel').parent().find('span').remove();
 	},
@@ -120,6 +119,7 @@ var best_pd = {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
+		$('.btn-select-all').removeClass('btn-info').addClass('btn-default');
 		var $itemHR = $('.item-hr');
 		var $itemDiv = $('.item-section');
 		$.ajax({
@@ -187,12 +187,48 @@ var best_pd = {
 				$('.btn-circle').removeClass('btn-info').addClass('btn-default');
 			}
 		});
+	},
+	hideBestPd : function() {
+		$('.best-product-hr').addClass('display-off');
+		$('.best-product-section .best-product-panel').addClass('display-off');
+		$('.best-product-section .best-product-panel').parent().find('span').remove();
+	},
+	load_user : function() {
+		//editBestProduct_
+		var $userList = $('.user-list');
+		$.ajax({
+            type: "post",
+            url: "editBestProduct_getUserList",
+            dataType: "json",
+            success: function(data) {
+	           	 if (data=='2') {
+	           		$userList.html("<s:text name='msg.no.item'><s:param><s:text name='msg.param.user' /></s:param></s:text>");
+	           	 } else {
+	           		var $userListSelect = $userList.find('select');
+					$.each(data, function(i, val) {
+						var $op = $(best_pd.conf.option);
+						$op.val(val.id).html(val.name);
+						$userListSelect.append($op);
+					});
+					$userList.find('option:first').attr('selected', true);
+					$('.user-select').removeClass('display-off');
+	           	 }
+            },
+            beforeSend: function() {
+            	best_pd.hideBestPd();
+            	$userList.prepend($(com_conf.loading_icon));
+        	},
+            complete: function() {
+            	$userList.find('span').remove();
+            }
+		});
 	}
 }
 $(document).ready(function() {
 	best_pd.initCategory();
 	best_pd.changeCategory();
 	best_pd.select_all();
+	best_pd.load_user();
 });
 </script>
         <div id="page-wrapper">
@@ -207,12 +243,43 @@ $(document).ready(function() {
                 <div class="col-lg-5" >
                     <form role="form" class="form-inline user-form" >
                         <div class="form-group user-list">
-                            <label class="category-select  display-off"><s:text name="sa.pd.lbl.select.category" /></label>
-                            <select class="form-control category-select display-off"></select>
+                            <label class="user-select display-off"><s:text name="sa.pd.lbl.select.user" /></label>
+                            <select class="form-control user-select display-off"></select>
                         </div>
                         
-                        <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
+                        <button type="button" class="btn btn-info btn-user-submit user-select display-off"><s:text name="sa.btn.query" /></button>
                     </form>
+		            <hr class="best-product-hr display-off">
+		            <div class="row best-product-section">
+		                <div class="col-lg-12">
+		                    <div class="panel panel-default best-product-panel display-off">
+		                        <div class="panel-heading">
+		                            <s:text name="sa.best.pd.list.title" />
+		                        </div>
+		                        <!-- /.panel-heading -->
+		                        <div class="panel-body">
+		                            <div class="table-responsive">
+		                                <table class="table table-hover best-product-table">
+		                                    <thead>
+		                                        <tr>
+		                                        	<th>Category Id</th>
+		                                            <th>Category Name</th>
+		                                            <th>Product Name</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                    </tbody>
+		                                </table>
+		                            </div>
+		                            <!-- /.table-responsive -->
+		                        </div>
+		                        <!-- /.panel-body -->
+		                    </div>
+		                    <!-- /.panel -->
+		                </div>
+		                <!-- /.col-lg-12 -->
+		            </div>
+		            <!-- /.row -->
                 </div>
                 <div class="col-lg-7">
                     <form role="form" class="form-inline category-form" enctype="multipart/form-data">
@@ -228,10 +295,6 @@ $(document).ready(function() {
                         </div>
                         
                         <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
-                        <div class="form-group" style="padding-left:20px">
-                            <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item display-off">
-                        </div>
-                        <button type="button" class="btn btn-info btn-upload upload-item display-off"><s:text name="sa.btn.upload" /></button>
                     </form>
 		            <hr class="item-hr display-off">
 		            <div class="row item-section">
@@ -268,7 +331,7 @@ $(document).ready(function() {
 		            </div>
 		            <!-- /.row -->
                 </div>
-                <!-- /.col-lg-6 -->
+                <!-- /.col-lg-7 -->
             </div>
             <!-- /.row -->
             

@@ -92,4 +92,6 @@ public interface UserManager {
 	 * @return 成功状态
 	 */
 	public boolean deleteUserConf(String userId, String attribute);
+
+	public List<User> findAll();
 }

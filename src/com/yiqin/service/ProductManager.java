@@ -6,8 +6,10 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.yiqin.pojo.Attribute;
+import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
+import com.yiqin.pojo.User;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 
@@ -154,4 +156,9 @@ public interface ProductManager {
 	public void saveProduct(List<Product> list) throws DataAccessException;
 
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
+
+	public List<User> findUserList();
+	public Map<String, List<String>> findBestProductByUserId(String userId);
+	public Map<String, List<String>> findBestProductByCategoryId(String userId, String categoryId);
+	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
 }

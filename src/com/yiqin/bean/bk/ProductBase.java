@@ -1,4 +1,4 @@
-package com.yiqin.shop.bean;
+package com.yiqin.bean.bk;
 
 import java.io.Serializable;
 import java.util.Date;

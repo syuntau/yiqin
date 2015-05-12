@@ -25,6 +25,7 @@
 		<action name="editAttribute_*" class="com.yiqin.sa.action.EditAttributeAction" method="{1}"></action>
 		<action name="editProduct_*" class="com.yiqin.sa.action.EditProductAction" method="{1}"></action>
 		<action name="uploadItem" class="com.yiqin.sa.action.UploadItemAction" method="uploadItems"></action>
+		<action name="editBestProduct_*" class="com.yiqin.sa.action.EditBestProductAction" method="{1}"></action>
 		
 		<action name="dispatcher" class="com.yiqin.sa.action.SANavDispatcherAction">
 			<result name="order-manager" type="tiles">sa.order</result>

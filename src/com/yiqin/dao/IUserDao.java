@@ -99,4 +99,5 @@ public interface IUserDao {
 	 */
 	public boolean deleteUserConf(String userId, String attribute);
 
+	public List<User> findAll();
 }

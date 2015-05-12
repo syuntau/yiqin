@@ -1,4 +1,4 @@
-package com.yiqin.shop.bean;
+package com.yiqin.bean.bk;
 
 import com.yiqin.util.Util;
 

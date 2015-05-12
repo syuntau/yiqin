@@ -361,6 +361,9 @@ table.dataTable thead .sorting:after {
 .attribute-form .display-off {
 	display: none;
 }
+.user-form .display-off {
+	display: none;
+}
 .display-off {
 	display: none;
 }

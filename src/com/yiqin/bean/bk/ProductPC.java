@@ -1,4 +1,5 @@
-package com.yiqin.shop.bean;
+package com.yiqin.bean.bk;
+
 
 public class ProductPC extends ProductBase {
 
