@@ -111,7 +111,7 @@ var best_pd = {
 	initSubmitCategory : function() {
 		$('.btn-category-submit').on('click', function() {
 			best_pd.loadProductList();
-		})
+		});
 	},
 	loadProductList : function() {
 		var catetoryId = $('.third-category select').find('option:selected').val();
@@ -223,7 +223,8 @@ var best_pd = {
             }
 		});
 	}
-}
+};
+
 $(document).ready(function() {
 	best_pd.initCategory();
 	best_pd.changeCategory();
