@@ -128,7 +128,8 @@ CREATE TABLE `cart` (
 CREATE TABLE `best_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `user_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
-  `product_id` varchar(20) DEFAULT NULL COMMENT '产品ID',
+  `category_id` int(11) DEFAULT NULL COMMENT '属性ID',
+  `product_id` varchar(1024) DEFAULT NULL COMMENT '产品ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 

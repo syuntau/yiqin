@@ -569,16 +569,13 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public Map<String, List<String>> findBestProductByCategoryId(String userId,
-			String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
+		return productDao.findBestProductByCategoryId(userId, categoryId);
 	}
 
 	@Override
 	public void saveBestProduct(BestProduct bestProduct)
 			throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		productDao.saveBestProduct(bestProduct);
 	}
 }

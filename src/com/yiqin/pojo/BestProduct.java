@@ -7,7 +7,7 @@ public class BestProduct implements java.io.Serializable {
 	private static final long serialVersionUID = -7902123023933462277L;
 	private Integer id; //自增主键
 	private String userId; // 用户名
-	private String categoryId; // 二级分类ID
+	private Integer categoryId; // 二级分类ID
 	private String productId; // 产品ID
 	public Integer getId() {
 		return id;
@@ -21,10 +21,10 @@ public class BestProduct implements java.io.Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getProductId() {

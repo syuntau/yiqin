@@ -159,6 +159,6 @@ public interface ProductManager {
 
 	public List<User> findUserList();
 	public Map<String, List<String>> findBestProductByUserId(String userId);
-	public Map<String, List<String>> findBestProductByCategoryId(String userId, String categoryId);
+	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
 }
