@@ -160,7 +160,7 @@ var best_pd = {
 			var _id = $(best_pd.conf.td).html(val.productId);
 			var _name = $(best_pd.conf.td).html(val.productName);
 			var $iCheck = $(best_pd.conf.i_check);
-			$iCheck.on('click', function() {
+			$iCheck.attr('idx', val.productId).on('click', function() {
 				if ($(this).hasClass('btn-default')) {
 					$(this).removeClass('btn-default').addClass('btn-info');
 					if ($('.btn-select-item.btn-default').length == 0) {
@@ -194,7 +194,6 @@ var best_pd = {
 		$('.best-product-section .best-product-panel').parent().find('span').remove();
 	},
 	load_user : function() {
-		//editBestProduct_
 		var $userList = $('.user-list');
 		$.ajax({
             type: "post",
@@ -222,6 +221,43 @@ var best_pd = {
             	$userList.find('span').remove();
             }
 		});
+	},
+	saveBestProduct : function() {
+		$('.btn-add-best-pd').on('click', function() {
+			var catetoryId = $('.third-category select').find('option:selected').val();
+			var userId = $('.user-list select').find('option:selected').val();;
+			var ids = '';
+			$('.btn-select-item.btn-info').each(function() {
+				var id = $(this).attr('idx');console.log(id);
+				ids = ',' + id + ids;
+			});
+			if (ids.length > 0) {
+				ids = ids.substring(1);
+			}
+
+			$.ajax({
+	        	type: "post",
+				url: "editBestProduct_saveBestProduct",
+				data: 'cId='+catetoryId + '&pIds=' + ids + '&userId=' + userId,
+				dataType: "json",
+				success: function(data) {
+					if (data=='1') {
+						alert("<s:text name='msg.err.param'></s:text>");
+					} else if (data=='3') {
+						alert("<s:text name='msg.err.db'></s:text>");
+					} else {
+						alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+					}
+	            },
+	            beforeSend: function() {
+		            var $loadingTextIcon = $(com_conf.loading_text_icon);
+   		            $('.best-product-section').find('.panel-heading').append($loadingTextIcon);
+	        	},
+	            complete: function() {
+	            	$('.best-product-section').find('span').remove();
+	            }
+			});
+		});
 	}
 }
 $(document).ready(function() {
@@ -229,6 +265,7 @@ $(document).ready(function() {
 	best_pd.changeCategory();
 	best_pd.select_all();
 	best_pd.load_user();
+	best_pd.saveBestProduct();
 });
 </script>
         <div id="page-wrapper">

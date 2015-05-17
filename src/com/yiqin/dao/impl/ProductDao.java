@@ -228,9 +228,9 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException {
-		List<BestProduct> list = findBestProductByCategoryId(userId, categoryId);
-		if (Util.isNotEmpty(list)) {
-			getHibernateTemplate().deleteAll(list);
+		BestProduct bestProduct = findBestProductByCategoryId(userId, categoryId);
+		if (bestProduct != null) {
+			getHibernateTemplate().delete(bestProduct);
 		}
 	}
 
@@ -245,11 +245,11 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	}
 
 	@Override
-	public List<BestProduct> findBestProductByCategoryId(String userId, String categoryId) {
+	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
 		String queryString = "from BestProduct where userId = ? and categoryId = ?";
-		List<?> list = getHibernateTemplate().find(queryString, new Object[]{userId, categoryId});
+		List<?> list = getHibernateTemplate().find(queryString, new Object[]{userId, Integer.parseInt(categoryId)});
 		if (Util.isNotEmpty(list)) {
-			return (List<BestProduct>) list;
+			return (BestProduct) list.get(0);
 		}
 		return null;
 	}

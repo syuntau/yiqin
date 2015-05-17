@@ -104,5 +104,5 @@ public interface IProductDao {
 	public void deleteBestProductByUserId(String userId) throws DataAccessException;
 	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException;
 	public List<BestProduct> findBestProductByUserId(String userId);
-	public List<BestProduct> findBestProductByCategoryId(String userId, String categoryId);
+	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 }
