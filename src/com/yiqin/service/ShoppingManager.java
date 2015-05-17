@@ -99,6 +99,19 @@ public interface ShoppingManager {
 	 * @return 提交成功状态
 	 */
 	public boolean submitOrder(Order order);
+	
+	/**
+	 * 修改订单状态
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param orderId
+	 *            订单ID
+	 * @param status
+	 *            订单状态
+	 * @return 成功状态
+	 */
+	public boolean updateOrderStatus(String userId, long orderId, int status);
 
 	/**
 	 * 订单信息查询

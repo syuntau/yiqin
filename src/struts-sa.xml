@@ -18,6 +18,10 @@
 		<action name="login" class="com.yiqin.sa.action.LoginAction">
 			<result type="tiles">sa.welcome</result>
 		</action>
+		<action name="findSAOrderList" class="com.yiqin.sa.action.FindSAOrderListAction">
+			<result type="tiles">sa.order</result>
+		</action>
+		<action name="updateOrderStatus" class="com.yiqin.sa.action.UpdateOrderStatusAction"></action>
 
 		<action name="getCategoryList_*" class="com.yiqin.sa.action.GetCategoryListAction" method="{1}"></action>
 		<action name="getAttribute_*" class="com.yiqin.sa.action.GetAttributeAction" method="{1}"></action>

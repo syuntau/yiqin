@@ -130,4 +130,22 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		Long count = (Long) getHibernateTemplate().iterate(queryString).next();
 		return count.intValue();
 	}
+
+	@Override
+	public boolean updateOrderStatus(String userId, long orderId, int status) {
+		try{
+			String queryString = "from Order where id=? and userId=?";
+			List<?> list = getHibernateTemplate().find(queryString, new Object[]{orderId,userId});
+			if(list != null){
+				Order tempOrder = (Order) list.get(0);
+				tempOrder.setStatus(Byte.valueOf(String.valueOf(status)));
+				getHibernateTemplate().saveOrUpdate(tempOrder);
+				return true;
+			}
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

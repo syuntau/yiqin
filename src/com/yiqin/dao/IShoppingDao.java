@@ -103,6 +103,19 @@ public interface IShoppingDao {
 	 * @return 成功状态
 	 */
 	public boolean insertOrder(Order order);
+	
+	/**
+	 * 修改订单状态
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @param orderId
+	 *            订单ID
+	 * @param status
+	 *            订单状态
+	 * @return 成功状态
+	 */
+	public boolean updateOrderStatus(String userId, long orderId, int status);
 
 	/**
 	 * 过滤查询订单

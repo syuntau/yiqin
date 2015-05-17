@@ -183,4 +183,9 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		}
 		return shoppingDao.findOrderCount(hql.toString());
 	}
+
+	@Override
+	public boolean updateOrderStatus(String userId, long orderId, int status) {
+		return shoppingDao.updateOrderStatus(userId, orderId, status);
+	}
 }
