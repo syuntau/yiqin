@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,10 +16,10 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
-import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.CategoryUtil;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
@@ -557,14 +558,26 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public List<User> findUserList() {
-		
-		return null;
-	}
-
-	@Override
 	public Map<String, List<String>> findBestProductByUserId(String userId) {
-		// TODO Auto-generated method stub
+		List<BestProduct> list = productDao.findBestProductByUserId(userId);
+		if (Util.isNotEmpty(list)) {
+			Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+			for (BestProduct bd : list) {
+				List<String> temp = new ArrayList<String>();
+				String categoryName = CategoryUtil.getCategoryName(bd.getCategoryId());
+				temp.add(categoryName);
+				List<ProductView> productList = findProductInfoById(bd.getProductId());
+				StringBuilder name = new StringBuilder();
+				for (ProductView pv : productList) {
+					name.append(",").append(pv.getProductName());
+				}
+				if (name.length() > 0) {
+					temp.add(name.substring(1));
+				}
+				result.put(String.valueOf(bd.getCategoryId()), temp);
+			}
+			return result;
+		}
 		return null;
 	}
 

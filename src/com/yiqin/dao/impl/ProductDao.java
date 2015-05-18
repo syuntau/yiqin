@@ -236,7 +236,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public List<BestProduct> findBestProductByUserId(String userId) {
-		String queryString = "from BestProduct where userId = ?";
+		String queryString = "from BestProduct where userId = ? order by categoryId";
 		List<?> list = getHibernateTemplate().find(queryString, userId);
 		if (Util.isNotEmpty(list)) {
 			return (List<BestProduct>) list;

@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.User;
@@ -65,6 +70,7 @@ public class EditBestProductAction extends ActionSupport {
 			List<User> userList = userManager.findAll();
 			if (Util.isEmpty(userList)) {
 				result = UtilKeys.CODE_NO_RESULT;
+				out.print(result);
 				return null;
 			}
 			List<UserView> showUserList = new ArrayList<UserView>();
@@ -119,5 +125,29 @@ public class EditBestProductAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public String getBestProductList() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			Map<String, List<String>> map = productManager.findBestProductByUserId(userId);
+			if (Util.isEmpty(map)) {
+				result = UtilKeys.CODE_NO_RESULT;
+				out.print(result);
+				return null;
+			}
+			JSONArray jsArray = JSONArray.fromObject(map);
+			result = jsArray.toString();
+			System.out.println("result : " + result);
+			out.print(result);
+			return null;
+		} catch (Exception e1) {
+			System.out.println("error in EditBestProductAction.getBestProductList for make printwriter");
+			e1.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -235,6 +235,7 @@ var best_pd = {
 				ids = ids.substring(1);
 			}
 
+			var $itemDiv = $('.item-section');
 			$.ajax({
 	        	type: "post",
 				url: "editBestProduct_saveBestProduct",
@@ -251,10 +252,50 @@ var best_pd = {
 	            },
 	            beforeSend: function() {
 		            var $loadingTextIcon = $(com_conf.loading_text_icon);
-   		            $('.best-product-section').find('.panel-heading').append($loadingTextIcon);
+   		            $itemDiv.find('.panel-heading').append($loadingTextIcon);
 	        	},
 	            complete: function() {
-	            	$('.best-product-section').find('span').remove();
+	            	$itemDiv.find('span').remove();
+	            }
+			});
+		});
+	},
+	loadBestProduct : function() {
+		$('.btn-user-submit').on('click', function() {
+			var userId = $('.user-list select').find('option:selected').val();
+			var $bpDiv = $('.best-product-section');
+	   		var $tbody = $bpDiv.find('tbody');
+			$.ajax({
+	        	type: "post",
+				url: "editBestProduct_getBestProductList",
+				data: '&userId=' + userId,
+				dataType: "json",
+				success: function(data) {console.log('data : ' + data);
+					if (data=='2') {
+						$bpDiv.find('.best-product-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.best.product' /></s:param></s:text></span>");
+					} else {
+				   		$.each(data[0], function(key, val) {
+							var $tr = $(best_pd.conf.tr).addClass('tr_'+key);
+							var _id = $(best_pd.conf.td).html(key);
+							var _cName = $(best_pd.conf.td).html(val[0]);
+							var _pName = $(best_pd.conf.td).html(val[1]);
+							$tr.append(_id).append(_cName).append(_pName);
+							$tbody.append($tr);
+						});
+
+						$bpDiv.find('.best-product-panel').removeClass('display-off');
+					}
+	            },
+	            beforeSend: function() {
+	            	$('.best-product-hr').removeClass('display-off');
+   	           		$bpDiv.find('span').remove();
+   	           		$bpDiv.find('.best-product-panel').addClass('display-off');
+   	           		$tbody.empty();
+   	            	var $loadingIcon = $(com_conf.loading_icon);
+   	            	$bpDiv.prepend($loadingIcon);
+	        	},
+	            complete: function() {
+	            	$bpDiv.find('.fa-refresh').parent().remove();
 	            }
 			});
 		});
@@ -267,6 +308,7 @@ $(document).ready(function() {
 	best_pd.select_all();
 	best_pd.load_user();
 	best_pd.saveBestProduct();
+	best_pd.loadBestProduct();
 });
 </script>
         <div id="page-wrapper">
@@ -278,7 +320,7 @@ $(document).ready(function() {
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-5" >
+                <div class="col-lg-6" >
                     <form role="form" class="form-inline user-form" >
                         <div class="form-group user-list">
                             <label class="user-select display-off"><s:text name="sa.pd.lbl.select.user" /></label>
@@ -300,9 +342,9 @@ $(document).ready(function() {
 		                                <table class="table table-hover best-product-table">
 		                                    <thead>
 		                                        <tr>
-		                                        	<th>Category Id</th>
-		                                            <th>Category Name</th>
-		                                            <th>Product Name</th>
+		                                        	<th>分类</th>
+		                                            <th>分类名</th>
+		                                            <th>产品名</th>
 		                                        </tr>
 		                                    </thead>
 		                                    <tbody>
@@ -319,7 +361,7 @@ $(document).ready(function() {
 		            </div>
 		            <!-- /.row -->
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <form role="form" class="form-inline category-form" enctype="multipart/form-data">
                         <div class="form-group category-list first-category">
                             <label class="category-select  display-off"><s:text name="sa.pd.lbl.select.category" /></label>

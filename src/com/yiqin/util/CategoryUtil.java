@@ -11,9 +11,10 @@ public class CategoryUtil {
 
 	private static boolean isInit = false;
 	private static List<Category> categoryList = new ArrayList<Category>();
-	private static List<CategorySimple> firstCategorySimpleList = new ArrayList<CategorySimple>();;
+	private static List<CategorySimple> firstCategorySimpleList = new ArrayList<CategorySimple>();
 	private static Map<String, List<Category>> categoryMap = new HashMap<String, List<Category>>();
 	private static Map<String, List<CategorySimple>> categorySimpleMap = new HashMap<String, List<CategorySimple>>();
+	private static Map<Integer, String> categoryItemMap = new HashMap<Integer, String>();
 
 	private CategoryUtil() { }
 
@@ -32,11 +33,16 @@ public class CategoryUtil {
 		return categorySimpleMap.get(categoryId);
 	}
 
+	public static String getCategoryName(Integer categoryId) {
+		return categoryItemMap.get(categoryId);
+	}
+
 	private static void setCategoryMap(List<Category> list) {
 		if (Util.isEmpty(list)) {
 			return ;
 		}
 		for (Category category : list) {
+			categoryItemMap.put(category.getId(), category.getName());
 			List<Category> subList = category.getSubCategoryList();
 			if (Util.isNotEmpty(subList)) {
 				categoryMap.put(String.valueOf(category.getId()), subList);
