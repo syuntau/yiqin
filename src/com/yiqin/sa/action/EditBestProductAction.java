@@ -150,4 +150,70 @@ public class EditBestProductAction extends ActionSupport {
 			return null;
 		}
 	}
+
+	public String removeAll() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			} else {
+				try {
+					productManager.deleteAllBestProduct(userId);
+				} catch(DataAccessException dbe) {
+					System.out.println("error in EditBestProductAction.removeAll for db exception");
+					dbe.printStackTrace();
+					out.print(UtilKeys.CODE_ERR_DB);
+					return null;
+				}
+
+				result = UtilKeys.CODE_SUCCESS;
+				out.print(result);
+			}
+		} catch (IOException e1) {
+			System.out.println("error in EditBestProductAction.removeAll for io exception");
+			e1.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("error in EditBestProductAction.removeAll for exception");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String removeItem() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(cId) || !Util.isNumeric(cId) || Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			} else {
+				try {
+					productManager.deleteBestProduct(userId, cId);
+				} catch(DataAccessException dbe) {
+					System.out.println("error in EditBestProductAction.removeItem for db exception");
+					dbe.printStackTrace();
+					out.print(UtilKeys.CODE_ERR_DB);
+					return null;
+				}
+
+				result = UtilKeys.CODE_SUCCESS;
+				out.print(result);
+			}
+		} catch (IOException e1) {
+			System.out.println("error in EditBestProductAction.removeItem for io exception");
+			e1.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("error in EditBestProductAction.removeItem for exception");
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

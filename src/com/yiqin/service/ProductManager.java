@@ -160,4 +160,6 @@ public interface ProductManager {
 	public Map<String, List<String>> findBestProductByUserId(String userId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
+	public void deleteAllBestProduct(String userId) throws DataAccessException;
+	public void deleteBestProduct(String userId, String categoryId) throws DataAccessException;
 }

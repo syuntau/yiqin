@@ -591,4 +591,15 @@ public class ProductManagerImpl implements ProductManager {
 			throws DataAccessException {
 		productDao.saveBestProduct(bestProduct);
 	}
+
+	@Override
+	public void deleteAllBestProduct(String userId) throws DataAccessException {
+		productDao.deleteBestProductByUserId(userId);
+	}
+
+	@Override
+	public void deleteBestProduct(String userId, String categoryId)
+			throws DataAccessException {
+		productDao.deleteBestProductBycategoryId(userId, categoryId);
+	}
 }
