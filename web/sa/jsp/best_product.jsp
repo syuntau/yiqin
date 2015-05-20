@@ -8,6 +8,7 @@ var best_pd = {
 		tr : '<tr></tr>',
 		td : '<td></td>',
 		i_check : '<button type="button" class="btn btn-default btn-select-item btn-circle btn-sm"><i class="fa fa-check"></i></button>',
+		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="<s:text name='msg.pro.remove'></s:text>"></i>',
 	},
 	initCategory : function() {
 		best_pd.loadFirstCategory();
@@ -294,6 +295,11 @@ var best_pd = {
 							var _id = $(best_pd.conf.td).html(key);
 							var _cName = $(best_pd.conf.td).html(val[0]);
 							var _pName = $(best_pd.conf.td).html(val[1]);
+       						var $iRemove = $(best_pd.conf.i_remove);
+       						$iRemove.on('click', function() {
+       							best_pd.removeItem(userId, data.productName);
+       						});
+							
 							$tr.append(_id).append(_cName).append(_pName);
 							$tbody.append($tr);
 						});
@@ -350,6 +356,7 @@ $(document).ready(function() {
 		                    <div class="panel panel-default best-product-panel display-off">
 		                        <div class="panel-heading">
 		                            <s:text name="sa.best.pd.list.title" />
+                           			 <button type="button" class="btn btn-link btn-remove-all-item"><s:text name="sa.pd.item.btn.remove.all" /></button>
 		                        </div>
 		                        <!-- /.panel-heading -->
 		                        <div class="panel-body">
@@ -360,6 +367,7 @@ $(document).ready(function() {
 		                                        	<th>分类</th>
 		                                            <th>分类名</th>
 		                                            <th>产品名</th>
+		                                            <th>设置</th>
 		                                        </tr>
 		                                    </thead>
 		                                    <tbody>
