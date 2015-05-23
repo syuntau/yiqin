@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IUserDao;
+import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.util.Util;
@@ -115,6 +116,17 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 		List<?> list = getHibernateTemplate().find(sql);
 		if (list != null) {
 			return (List<User>) list;
+		}
+		return null;
+	}
+
+	@Override
+	public SAUser isLoginSA(String userId, String password) {
+		String queryString = "from SAUser where userId=? and password=?";
+		List<?> list = getHibernateTemplate().find(queryString,
+				new Object[] { userId, password });
+		if (Util.isNotEmpty(list)) {
+			return (SAUser) list.get(0);
 		}
 		return null;
 	}

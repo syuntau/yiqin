@@ -10,6 +10,19 @@
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		<interceptors>
+			<interceptor name="loginSAInterceptor" class="com.yiqin.sa.interceptor.LoginSAInterceptor"></interceptor>
+			<interceptor-stack name="saStack">
+				<interceptor-ref name="loginSAInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="saStack"></default-interceptor-ref>
+
+		<!-- 定义一个全局的结果login-->
+		<global-results>
+			<result name="login">/sa/jsp/common/cenJump.jsp</result>
+		</global-results>
 		
 		<action name="toLogin" class="com.yiqin.sa.action.ToLoginAction">
 			<result type="tiles">sa.login</result>

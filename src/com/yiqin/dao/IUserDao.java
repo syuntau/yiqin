@@ -1,7 +1,9 @@
+
 package com.yiqin.dao;
 
 import java.util.List;
 
+import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 
@@ -100,4 +102,6 @@ public interface IUserDao {
 	public boolean deleteUserConf(String userId, String attribute);
 
 	public List<User> findAll();
+
+	public SAUser isLoginSA(String userId, String password);
 }
