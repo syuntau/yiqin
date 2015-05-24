@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%-- <script src="<%=basePath%>sa/js/plugins/morris/morris.min.js"></script> --%>
 <%-- <script src="<%=basePath%>sa/js/plugins/morris/morris-data.js"></script> --%>
 <script src="<%=basePath%>sa/js/sb-admin-2.js"></script>
+<script src="<%=basePath%>sa/js/sa-common.js"></script>
 <script type="text/javascript">
 var com_conf = {
 	loading_icon : '<span><i class="fa fa-refresh fa-spin fa-2x fa-fw"></i></span>',

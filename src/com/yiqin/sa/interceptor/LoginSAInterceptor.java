@@ -47,7 +47,7 @@ public class LoginSAInterceptor extends AbstractInterceptor {
 				if (COOKIE_REMEMBERME_KEY.equals(cookie.getName())) {
 					String value = cookie.getValue();
 					if (Util.isNotEmpty(value)) {
-						String[] split = value.split("==");
+						String[] split = value.split("||");
 						String userName = split[0];
 						String password = split[1];
 						
