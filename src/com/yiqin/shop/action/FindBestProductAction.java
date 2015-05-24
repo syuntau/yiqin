@@ -9,6 +9,7 @@ import org.apache.commons.validator.GenericValidator;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.BestProduct;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Configuration;
@@ -21,6 +22,8 @@ public class FindBestProductAction extends ActionSupport {
 
 	// 每页显示的条目数目
 	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_BEST_PRODUCT_MAX_PAGE_SIZE));
+	// 分类ID
+	private String paramVal;
 	// 选中页号
 	private String pageIndex;
 	// 分页对象
@@ -35,6 +38,7 @@ public class FindBestProductAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try{
+			String userId = Util.getLoginUser(request.getSession()).getId();
 			// 处理当前页号
 			if (GenericValidator.isBlankOrNull(pageIndex)
 					|| (!GenericValidator.isInt(pageIndex))) {
@@ -46,19 +50,27 @@ public class FindBestProductAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
+			if(Util.isEmpty(paramVal) || paramVal.length()==1){
+				List<BestProduct> bestProducts = productManager.findBestProducts(userId, paramVal);
+				if(Util.isNotEmpty(bestProducts)){
+					paramVal = String.valueOf(bestProducts.get(0).getCategoryId());
+				}
+			}
+			
 			// 查询过滤总数
-			String userId = Util.getLoginUser(request.getSession()).getId();
 			List<ProductView> productList = null;
-			int count = productManager.findBestProductCount(userId);
+			int count = productManager.findBestProductCount(userId,paramVal);
 			if (count > 0) {
 				// 查询当前页信息
-				productList = productManager.findBestProductInfo(userId, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+				productList = productManager.findBestProductInfo(userId,paramVal, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 			}
 
 			// 分页对象
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(productList);
 			
+			String shop_nav = "top_" + paramVal.substring(0, 1);
+			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -72,6 +84,14 @@ public class FindBestProductAction extends ActionSupport {
 
 	public void setPageIndex(String pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+
+	public String getParamVal() {
+		return paramVal;
+	}
+
+	public void setParamVal(String paramVal) {
+		this.paramVal = paramVal;
 	}
 
 	public Page getPage() {
