@@ -22,6 +22,16 @@ public interface IProductDao {
 	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo();
+	
+	/**
+	 * 查询分类信息
+	 * 
+	 * @param categoryIds
+	 *            分类ID ,号拼接
+	 * @return Category
+	 */
+	public List<Category> findCategoryInfoByCategoryId(String categoryIds);
+	
 	/**
 	 * 查询顶级分类下分类菜单
 	 * 
@@ -37,7 +47,7 @@ public interface IProductDao {
 	 * @return 分类集
 	 */
 	public List<Category> findTopCategoryInfo();
-
+	
 	/**
 	 * 通过ID查询商品信息
 	 * 
@@ -78,15 +88,6 @@ public interface IProductDao {
 	 */
 	public Attribute findProductAttr(String attrNameId, int cateId);
 	
-	/**
-	 * 查询推荐的快速购物商品
-	 * 
-	 * @param userId
-	 *            用户ID
-	 * @return BestProduct
-	 */
-//	public BestProduct findBestProductByUserId(String userId);
-
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 
 	public Attribute findAttributeById(int id);
@@ -104,5 +105,6 @@ public interface IProductDao {
 	public void deleteBestProductByUserId(String userId) throws DataAccessException;
 	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException;
 	public List<BestProduct> findBestProductByUserId(String userId);
+	public List<BestProduct> findBestProductByTopCateId(String userId, String topCategoryId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 }

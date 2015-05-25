@@ -12,6 +12,8 @@ var	category_temp = {
 	cate_li : '<li></li>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
 	cate_right_a : '<a data-toggle="tab"></a>',
+	
+	best_currentNav : "<s:property value='#session.se_shop_nav_best_product' />"
 };
 
 var yiqin_category_action = function(){
@@ -119,13 +121,21 @@ var yiqin_category_action = function(){
 	 					$cate_panel_a.attr('id',"two_"+nextSub.id);
 	 					$cate_ul.append($cate_li);
 	 					$cate_panel_a.click(function(){
-	 						yiqin_public_js.toTilesAction(nextSub.id, "/productFilter");
+	 						 if(category_temp.best_currentNav=="best_product_nav"){
+								 yiqin_public_js.toTilesAction(nextSub.id, "/findBestProduct");
+	 						 }else{
+	 							 yiqin_public_js.toTilesAction(nextSub.id, "/productFilter"); 
+	 						 }
 	 					});
 	 					$cate_li.append($cate_panel_a.append(nextSub.name));
 					});
 				 }else{
 					 $cate_panel_a.click(function(){
-						yiqin_public_js.toTilesAction(sub.id, "/productFilter");
+						 if(category_temp.best_currentNav=="best_product_nav"){
+							 yiqin_public_js.toTilesAction(sub.id, "/findBestProduct");
+						 }else{
+							 yiqin_public_js.toTilesAction(sub.id, "/productFilter");
+						 }
 					 });
 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
 				 }
@@ -150,7 +160,11 @@ var yiqin_category_action = function(){
 			$cate_panel_a = $(category_temp.cate_panel_a);
 			$cate_li.append($cate_panel_a);
 			$cate_panel_a.click(function(){
-				yiqin_public_js.toTilesAction(val.id, "/productFilter");
+				if(category_temp.best_currentNav=="best_product_nav"){
+					yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
+				}else{
+					yiqin_public_js.toTilesAction(val.id, "/productFilter");
+				}
 			});
 			$cate_panel_a.attr('class',"shop_header").append(val.name);
 			$cate_panel_a.attr('id',"top_"+val.id);

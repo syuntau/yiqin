@@ -14,6 +14,11 @@ public class ShopNavDispatcherAction extends ActionSupport {
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
 		String dispatcher = (String) session.get(UtilKeys.SE_SHOP_NAV);
+		if("top_quick_shopping".equals(dispatcher)){
+			session.put(UtilKeys.SE_SHOP_NAV_BEST_PRODUCT, "best_product_nav");
+		}else{
+			session.put(UtilKeys.SE_SHOP_NAV_BEST_PRODUCT, "");
+		}
 		return dispatcher;
 	}
 }

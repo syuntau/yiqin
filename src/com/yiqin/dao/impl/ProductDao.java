@@ -21,6 +21,23 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	}
 	
 	@Override
+	public List<Category> findCategoryInfoByCategoryId(String categoryIds) {
+		if (Util.isNotEmpty(categoryIds)) {
+			if (categoryIds.contains(",")) {
+				if (categoryIds.startsWith(",")) {
+					categoryIds = categoryIds.substring(1);
+				}
+				if (categoryIds.endsWith(",")) {
+					categoryIds = categoryIds.substring(0,categoryIds.length() - 1);
+				}
+			}
+			String queryString = "from Category where id in (" + categoryIds + ")";
+			return getHibernateTemplate().find(queryString);
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Category> findCategoryInfo(int topCateId) {
 		StringBuilder queryString = new StringBuilder();
 		queryString.append("from Category where parentId like '");
@@ -199,19 +216,6 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
-//	@Override
-//	public BestProduct findBestProductByUserId(String userId) {
-//		if(Util.isEmpty(userId)){
-//			return null;
-//		}
-//		String queryString = "from BestProduct where userId = ?";
-//		List<?> list = getHibernateTemplate().find(queryString, userId);
-//		if (Util.isNotEmpty(list)) {
-//			return (BestProduct) list.get(0);
-//		}
-//		return null;
-//	}
-
 	@Override
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException {
 		getHibernateTemplate().saveOrUpdate(bestProduct);
@@ -233,6 +237,27 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			getHibernateTemplate().delete(bestProduct);
 		}
 	}
+	
+	@Override
+	public List<BestProduct> findBestProductByTopCateId(String userId,
+			String topCategoryId) {
+		if (Util.isEmpty(userId)) {
+			return null;
+		}
+		StringBuilder queryString = new StringBuilder();
+		queryString.append("from BestProduct where userId = '");
+		queryString.append(userId).append("'");
+		if(Util.isNotEmpty(topCategoryId)){
+			queryString.append(" and categoryId like '");
+			queryString.append(topCategoryId).append("%'");
+		}
+		queryString.append(" order by categoryId");
+		List<?> list = getHibernateTemplate().find(queryString.toString());
+		if (Util.isNotEmpty(list)) {
+			return (List<BestProduct>) list;
+		}
+		return null;
+	}
 
 	@Override
 	public List<BestProduct> findBestProductByUserId(String userId) {
@@ -253,4 +278,5 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		}
 		return null;
 	}
+
 }

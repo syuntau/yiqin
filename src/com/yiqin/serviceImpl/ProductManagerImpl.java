@@ -48,8 +48,8 @@ public class ProductManagerImpl implements ProductManager {
 	}
 	
 	@Override
-	public List<ProductView> findBestProductInfo(String userId, int offset, int pageSize) {
-		Set<String> pidSet = findProductIdsByUserId(userId);
+	public List<ProductView> findBestProductInfo(String userId,String categoryId, int offset, int pageSize) {
+		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
 		List<ProductView> result = new ArrayList<ProductView>();
 		if (pidSet != null && pidSet.size() > 0) {
 			List<String> pidList = new ArrayList(pidSet);
@@ -72,8 +72,8 @@ public class ProductManagerImpl implements ProductManager {
 	}
 	
 	@Override
-	public int findBestProductCount(String userId) {
-		Set<String> pidSet = findProductIdsByUserId(userId);
+	public int findBestProductCount(String userId, String categoryId) {
+		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
 		if(pidSet != null){
 			return pidSet.size();
 		}
@@ -327,6 +327,31 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return tempCategory;
 	}
+	
+	@Override
+	public List<Category> findCategoryInfoForBest(String userId) {
+		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
+		if(Util.isNotEmpty(bestList)){
+			Set<String> topId = new HashSet<String>();
+			StringBuilder bestCateIds = new StringBuilder();
+			for(BestProduct bp : bestList){
+				bestCateIds.append(bp.getCategoryId()).append(",");
+				topId.add(bp.getCategoryId().toString().substring(0, 2));
+			}
+			StringBuilder cids = new StringBuilder();
+			for (String cid : topId) {
+				cids.append(cid).append(",");
+			}
+			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
+			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+			if(Util.isNotEmpty(bestCategorys)){
+				bestCategorys.addAll(categorytops);
+				handleSubCategory(bestCategorys, categorytops);
+			}
+			return categorytops;
+		}
+		return null;
+	}
 
 	private void handleSubCategory(List<Category> allCategoryList,
 			List<Category> superCategory) {
@@ -360,6 +385,36 @@ public class ProductManagerImpl implements ProductManager {
 			handleSubCategory(categoryList, tempCategory);
 		}
 		return tempCategory;
+	}
+	
+	@Override
+	public List<Category> findCategoryInfoForBest(int topCateId, String userId) {
+		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
+		if(Util.isNotEmpty(bestList)){
+			Set<String> topId = new HashSet<String>();
+			StringBuilder bestCateIds = new StringBuilder();
+			for(BestProduct bp : bestList){
+				if(bp.getCategoryId().toString().startsWith(String.valueOf(topCateId))){
+					bestCateIds.append(bp.getCategoryId()).append(",");
+					topId.add(String.valueOf(bp.getCategoryId()).substring(0, 2));
+				}
+			}
+			if(Util.isEmpty(bestCateIds.toString())){
+				return null;
+			}
+			StringBuilder cids = new StringBuilder();
+			for (String cid : topId) {
+				cids.append(cid).append(",");
+			}
+			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
+			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+			if(Util.isNotEmpty(bestCategorys)){
+				bestCategorys.addAll(categorytops);
+				handleSubCategory(bestCategorys, categorytops);
+			}
+			return categorytops;
+		}
+		return null;
 	}
 
 	@Override
@@ -520,19 +575,17 @@ public class ProductManagerImpl implements ProductManager {
 		return setPid;
 	}
 	
-	private Set<String> findProductIdsByUserId(String userId){
+	private Set<String> findProductIdsByUserId(String userId,String cateId){
 		if(Util.isEmpty(userId)){
 			return null;
 		}
-		List<BestProduct> bestProductList = productDao.findBestProductByUserId(userId);
-		if(Util.isNotEmpty(bestProductList)){
+		BestProduct bestProduct = productDao.findBestProductByCategoryId(userId,cateId);
+		if(bestProduct != null){
 			Set<String> set = new HashSet<String>();
-			for (BestProduct bestProduct : bestProductList) {
-				String productIds = bestProduct.getProductId();
-				if(Util.isNotEmpty(productIds)){
-					 String[] ids = productIds.split(",");
-					 set.addAll(Arrays.asList(ids));
-				}
+			String productIds = bestProduct.getProductId();
+			if(Util.isNotEmpty(productIds)){
+				 String[] ids = productIds.split(",");
+				 set.addAll(Arrays.asList(ids));
 			}
 			 return set;
 		}
@@ -555,6 +608,12 @@ public class ProductManagerImpl implements ProductManager {
 			Util.sort(tempList);
 		}
 		return tempList;
+	}
+	
+	@Override
+	public List<BestProduct> findBestProducts(String userId, String topCategoryId) {
+		List<BestProduct> list = productDao.findBestProductByTopCateId(userId, topCategoryId);
+		return list;
 	}
 
 	@Override
@@ -602,4 +661,5 @@ public class ProductManagerImpl implements ProductManager {
 			throws DataAccessException {
 		productDao.deleteBestProductBycategoryId(userId, categoryId);
 	}
+
 }

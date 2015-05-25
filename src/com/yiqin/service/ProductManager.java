@@ -9,7 +9,6 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
-import com.yiqin.pojo.User;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 
@@ -28,13 +27,15 @@ public interface ProductManager {
 	 * 
 	 * @param userId
 	 *            用户ID
+	 * @param categoryId
+	 *            分类ID
 	 * @param offset
 	 *            第一条记录索引
 	 * @param pageSize
 	 *            每页显示的数量
 	 * @return 商品集合
 	 */
-	public List<ProductView> findBestProductInfo(String userId, int offset,
+	public List<ProductView> findBestProductInfo(String userId, String categoryId, int offset,
 			int pageSize);
 	
 	/**
@@ -42,9 +43,11 @@ public interface ProductManager {
 	 * 
 	 * @param userId
 	 *            用户ID
+	 * @param categoryId
+	 *            分类ID
 	 * @return 总数
 	 */
-	public int findBestProductCount(String userId);
+	public int findBestProductCount(String userId, String categoryId);
 	
 	/**
 	 * 通过ID查询商品所有信息
@@ -108,6 +111,8 @@ public interface ProductManager {
 	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo();
+	
+	public List<Category> findCategoryInfoForBest(String userId);
 
 	/**
 	 * 查询顶级分类下分类菜单
@@ -118,7 +123,8 @@ public interface ProductManager {
 	 * @return 分类集
 	 */
 	public List<Category> findCategoryInfo(int topCateId);
-
+	
+	public List<Category> findCategoryInfoForBest(int topCateId, String userId);
 	/**
 	 * 查询顶级分类
 	 * 
@@ -157,6 +163,7 @@ public interface ProductManager {
 
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 
+	public List<BestProduct> findBestProducts(String userId, String topCategoryId);
 	public Map<String, List<String>> findBestProductByUserId(String userId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
