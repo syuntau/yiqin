@@ -122,7 +122,7 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 
 	@Override
 	public SAUser isLoginSA(String userId, String password) {
-		String queryString = "from SAUser where userId=? and password=?";
+		String queryString = "from SAUser where id=? and password=?";
 		List<?> list = getHibernateTemplate().find(queryString,
 				new Object[] { userId, password });
 		if (Util.isNotEmpty(list)) {
