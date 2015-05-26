@@ -30,8 +30,8 @@
 		</action>
 
 		<action name="login" class="com.yiqin.sa.action.LoginAction">
-			<result name="welcome" type="tiles">sa.welcome</result>
-			<result type="redirect">${goingToURL}</result>
+			<result type="tiles">sa.welcome</result>
+<!-- 			<result type="redirect">${goingToURL}</result> -->
 			<result name="input" type="tiles">sa.login</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>

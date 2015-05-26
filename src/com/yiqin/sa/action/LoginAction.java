@@ -101,15 +101,13 @@ public class LoginAction extends ActionSupport implements ServletResponseAware,
 			response.addCookie(cookie);
 		}
 		session.put(LoginSAInterceptor.USER_SESSION_KEY, user);
-		session.put("user_name", user.getName());
-		String goingToURL = (String) session.get(LoginSAInterceptor.GOING_TO_URL_KEY);
-		if (Util.isNotEmpty(goingToURL)) {
-			setGoingToURL(goingToURL);
-			session.remove(LoginSAInterceptor.GOING_TO_URL_KEY);
-			return SUCCESS;
-		} else {
-			setGoingToURL("");
-			return "welcome";
-		}
+//		String goingToURL = (String) session.get(LoginSAInterceptor.GOING_TO_URL_KEY);
+//		if (Util.isNotEmpty(goingToURL)) {
+//			setGoingToURL(goingToURL);
+//			session.remove(LoginSAInterceptor.GOING_TO_URL_KEY);
+//		} else {
+//			return "welcome";
+//		}
+		return SUCCESS;
 	}
 }
