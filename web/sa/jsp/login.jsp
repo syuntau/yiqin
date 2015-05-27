@@ -27,6 +27,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="User ID" name="userId" type="text" autofocus>
+                                    <p class="help-block">用户名密码均为：yiqinsa</p>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
