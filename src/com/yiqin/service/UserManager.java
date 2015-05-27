@@ -2,6 +2,7 @@ package com.yiqin.service;
 
 import java.util.List;
 
+import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 
@@ -94,4 +95,9 @@ public interface UserManager {
 	public boolean deleteUserConf(String userId, String attribute);
 
 	public List<User> findAll();
+	public SAUser findSAUser(String id, String password);
+	public String saveSAUser(SAUser user);
+	public boolean updateSAUser(SAUser user);
+	public boolean deleteSAUser(String id);
+	public List<SAUser> findAdmin(int role);
 }

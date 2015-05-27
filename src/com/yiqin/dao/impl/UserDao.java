@@ -1,7 +1,9 @@
 package com.yiqin.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IUserDao;
@@ -122,11 +124,42 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 
 	@Override
 	public SAUser isLoginSA(String userId, String password) {
-		String queryString = "from SAUser where id=? and password=?";
+		String queryString = "from SAUser where id=? and password=? and flag = 1";
 		List<?> list = getHibernateTemplate().find(queryString,
 				new Object[] { userId, password });
 		if (Util.isNotEmpty(list)) {
 			return (SAUser) list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public String saveSAUser(SAUser user) throws DataAccessException {
+		String id = (String) getHibernateTemplate().save(user);
+		return id;
+	}
+
+	@Override
+	public void updateSAUser(SAUser user) throws DataAccessException {
+		getHibernateTemplate().update(user);
+	}
+
+	@Override
+	public void deleteSAUser(String id) throws DataAccessException {
+		SAUser user = (SAUser) getHibernateTemplate().get(SAUser.class, id);
+		if (user != null) {
+			user.setFlag(2);
+			user.setUpdateDate(new Date());
+			getHibernateTemplate().update(user);
+		}
+	}
+
+	@Override
+	public List<SAUser> findAdmin(int role) throws DataAccessException {
+		String query =  "from SAUser where role=? and flag = 1";
+		List<?> list = getHibernateTemplate().find(query, role);
+		if (Util.isNotEmpty(list)) {
+			return (List<SAUser>) list;
 		}
 		return null;
 	}

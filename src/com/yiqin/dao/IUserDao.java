@@ -3,6 +3,8 @@ package com.yiqin.dao;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -104,4 +106,8 @@ public interface IUserDao {
 	public List<User> findAll();
 
 	public SAUser isLoginSA(String userId, String password);
+	public String saveSAUser(SAUser user) throws DataAccessException;
+	public void updateSAUser(SAUser user) throws DataAccessException;
+	public void deleteSAUser(String id) throws DataAccessException;
+	public List<SAUser> findAdmin(int role) throws DataAccessException;
 }

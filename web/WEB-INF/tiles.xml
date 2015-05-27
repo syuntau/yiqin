@@ -167,15 +167,15 @@
 	</definition>
 
 	<definition name="sa.order" extends="sa.template">
-		<put-attribute name="body" value="/sa/jsp/index.jsp" />
-	</definition>
-
-	<definition name="sa.order.detail" extends="sa.template">
-		<put-attribute name="body" value="/sa/jsp/index.jsp" />
+		<put-attribute name="body" value="/sa/jsp/order.jsp" />
 	</definition>
 
 	<definition name="sa.user.sa" extends="sa.template">
-		<put-attribute name="body" value="/sa/jsp/index.jsp" />
+		<put-attribute name="body" value="/sa/jsp/sa.jsp" />
+	</definition>
+
+	<definition name="sa.user.admin" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/admin.jsp" />
 	</definition>
 
 	<definition name="sa.product.attribute" extends="sa.template">

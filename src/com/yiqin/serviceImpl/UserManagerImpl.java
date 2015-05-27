@@ -3,6 +3,7 @@ package com.yiqin.serviceImpl;
 import java.util.List;
 
 import com.yiqin.dao.IUserDao;
+import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
@@ -80,4 +81,53 @@ public class UserManagerImpl implements UserManager {
 	public List<User> findAll() {
 		return userDao.findAll();
 	}
+
+	@Override
+	public String saveSAUser(SAUser user) {
+		try {
+			String id = userDao.saveSAUser(user);
+			return id;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean updateSAUser(SAUser user) {
+		try {
+			userDao.updateSAUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean deleteSAUser(String id) {
+		try {
+			userDao.deleteSAUser(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public List<SAUser> findAdmin(int role) {
+		try {
+			return userDao.findAdmin(role);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public SAUser findSAUser(String id, String password) {
+		return userDao.isLoginSA(id, password);
+	}
+
 }
