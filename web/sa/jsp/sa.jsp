@@ -28,27 +28,34 @@ var user_sa = {
 		var $tip = $(user_sa.tpl.tip);
 		var $msg = $('.msg-info');
 		if (oldPass == "" || newPass == "" || confirmNewPass == "") {
-			$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.no.pass'/>");
+			$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.no.pass'/>");
 			$msg.append($tip);
-			$tip.fadeOut(3000, function() {
-				$(this).remove();
-			});
+			window.setTimeout(function() {
+				$tip.fadeOut(300, function() {
+					$(this).remove();
+				});
+			},5000);
+			
 			return ;
 		} else {console.log("oldPass : "+oldPass+", newPass:"+newPass+", confirmPass : "+confirmNewPass);
 			if (newPass != confirmNewPass) {
-				$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.err.confirm.pass'/>");
+				$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.err.confirm.pass'/>");
 				$msg.append($tip);
-				$tip.fadeOut(3000, function() {
-					$(this).remove();
-				});
+				window.setTimeout(function() {
+					$tip.fadeOut(300, function() {
+						$(this).remove();
+					});
+				},5000);
 				return ;
 			} else {
 				if (!user_sa.test_pass(newPass)) {
-					$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.err.format.pass'/>");
+					$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.err.format.pass'/>");
 					$msg.append($tip);
-					$tip.fadeOut(3000, function() {
-						$(this).remove();
-					});
+					window.setTimeout(function() {
+						$tip.fadeOut(300, function() {
+							$(this).remove();
+						});
+					},5000);
 					return ;
 				}
 			}
@@ -60,14 +67,14 @@ var user_sa = {
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
-	     			$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.err.param'/>");
+	     			$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.err.param'/>");
 	           	 } else if (data=='5') {
-		     			$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.err.old.pass'/>");
+		     			$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.err.old.pass'/>");
 	           	 } else if (data=='100') {
-		     			$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
+		     			$tip.addClass(user_sa.conf.cls_done).find('strong').html("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 		    			$('.pass-item').val('');
 	           	 } else {
-		     			$tip.addClass(user_sa.conf.cls_warning).find('strong').html("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
+		     			$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 	           	 }
             },
             beforeSend: function() {
@@ -76,9 +83,11 @@ var user_sa = {
             complete: function() {
             	$msg.find('.fa-refresh').parent().remove();
 	    		$msg.append($tip);
-    			$tip.fadeOut(3000, function() {
-    				$(this).remove();
-    			});
+				window.setTimeout(function() {
+					$tip.fadeOut(300, function() {
+						$(this).remove();
+					});
+				},5000);
             }
 		});
 	}		
