@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
@@ -101,6 +102,7 @@ public class EditUserAction extends ActionSupport {
 				admin.setCreateDate(now);
 				admin.setUpdateDate(now);
 				admin.setFlag(1);
+				admin.setRole(100);
 				String id = userManager.saveSAUser(admin);
 				if (Util.isEmpty(id)) {
 					result = UtilKeys.CODE_ERR_EXCEPTION;
@@ -180,8 +182,8 @@ public class EditUserAction extends ActionSupport {
 			if (Util.isEmpty(list)) {
 				result = UtilKeys.CODE_NO_RESULT;
 			} else {
-				JSONObject json = JSONObject.fromObject(list);
-				result = json.toString();
+				JSONArray jsArray = JSONArray.fromObject(list);
+				result = jsArray.toString();
 			}
 			out.print(result);
 		} catch (Exception e) {
