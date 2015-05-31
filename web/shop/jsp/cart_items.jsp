@@ -10,6 +10,7 @@ var cart_template = {
 	cart_a : '<a href="javaScript:void(0);"></a>',
 	cart_i : '<i class="fa fa-times"></i>',
 	cart_p : '<p></p>',
+	cart_del: '<del></del>',
 	cart_img : '<img/>',
 	cart_div : '<div class="cart_quantity_button"></div>',
 	cart_input : '<input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="2"></input>',
@@ -153,6 +154,7 @@ var yiqin_cart_action = function(){
 				$cart_a = $(cart_template.cart_a),
 				$cart_i = $(cart_template.cart_i),
 				$cart_p = $(cart_template.cart_p),
+				$cart_del = $(cart_template.cart_del),
 				$cart_img = $(cart_template.cart_img),
 			 	$cart_div = $(cart_template.cart_div),
 			 	$cart_input = $(cart_template.cart_input);
@@ -181,6 +183,7 @@ var yiqin_cart_action = function(){
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_price");
  			$cart_td.append($cart_p.append(val.price));
+ 			$cart_td.append($cart_del.append(val.price));
  			$cart_tr.append($cart_td);
  			
  			$cart_td = $(cart_template.cart_td),

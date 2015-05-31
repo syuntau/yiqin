@@ -24,7 +24,7 @@ var findCartNum = function(){
 	       error: function(){}
 	    });
 	}
-}
+};
 
 $(document).ready(function(){
 	findCartNum();
@@ -44,7 +44,7 @@ $(document).ready(function(){
 			</div>
 			<div class="col-sm-6">
 				<div class="shop-menu pull-right">
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav" id="shop_header_ul">
 						<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
 						<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>
 						<li>

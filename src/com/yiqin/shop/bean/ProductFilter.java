@@ -19,9 +19,11 @@ public class ProductFilter {
 	private int offset;
 	// 每页显示的条目数目
 	private int pageSize;
-	
-	public ProductFilter(String categorys, String brand, String price,
-			String color, int offset, int pageSize) {
+	// 用户ID
+	private String userId;
+
+	public ProductFilter(String userId, String categorys, String brand,
+			String price, String color, int offset, int pageSize) {
 		super();
 		this.categorys = categorys;
 		this.brand = brand;
@@ -29,6 +31,7 @@ public class ProductFilter {
 		this.color = color;
 		this.offset = offset;
 		this.pageSize = pageSize;
+		this.userId = userId;
 	}
 
 	public String getCategorys() {
@@ -78,4 +81,13 @@ public class ProductFilter {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 }

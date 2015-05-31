@@ -2706,7 +2706,7 @@ h2.title {
 }
 
 .user_option a{
-	width: 80px;
+	margin-right: 30px;
 	display: inline-block;
 	text-overflow: ellipsis;
 	white-space: nowrap;

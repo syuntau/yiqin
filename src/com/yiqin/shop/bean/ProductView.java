@@ -10,6 +10,7 @@ public class ProductView {
 	private String productId;// 产品ID
 	private String productName; // 名称
 	private String price; // 价格
+	private String zhekouPrice;//折扣价格
 	private String color;// 颜色
 	private String imgUrl; // 图片链接
 
@@ -35,6 +36,14 @@ public class ProductView {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	
+	public String getZhekouPrice() {
+		return zhekouPrice;
+	}
+
+	public void setZhekouPrice(String zhekouPrice) {
+		this.zhekouPrice = zhekouPrice;
 	}
 
 	public String getColor() {

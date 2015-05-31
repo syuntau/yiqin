@@ -60,7 +60,7 @@ var yiqin_shoplist_action = function(){
 			$.each(showValueArr, function(n,arr){
 				$filter_a = $(shop_temp.filter_a);
 				$filter_a.append(arr);
-				if(nameId=='price'){
+				if(nameId=='price'||nameId=='brandId'){
 					arr = valueArr[n];
 				}
 				if(brand==id+"_"+arr || color==id+"_"+arr || price==id+"_"+arr){
@@ -148,9 +148,13 @@ $(document).ready(function(){
 									name="good_img" style="cursor: pointer;"
 									onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>,'toProductDetails')" />
 								<h2>
-									￥
-									<s:property value="#product.price" />
+									<s:text name="shop.product.label.zhekou.price"/>
+									<s:property value="#product.zhekouPrice" />
 								</h2>
+								<del>
+									<s:text name="shop.product.label.yuan.price"/>
+									<s:property value="#product.price" />
+								</del>
 								<p>
 									<s:property value="#product.productName" />
 								</p>

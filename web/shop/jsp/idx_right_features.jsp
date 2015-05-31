@@ -13,6 +13,7 @@
 		feature_h2_tile : '<h2 class="title text-center"><s:text name="shop.index.right.features.items" /></h2>',
 		feature_img : '<img alt=""/>',
 		feature_h2 : '<h2></h2>',
+		feature_del : '<del></del>',
 		feature_p : '<p></p>',
 		feature_a : '<a href="javaScript:void(0)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><s:text name="shop.add.to.cart" /></a>',
 	};
@@ -57,6 +58,7 @@
 					$feature_cont_div = $(index_feature_temp.feature_cont_div),
 					$feature_img = $(index_feature_temp.feature_img),
 					$feature_h2 = $(index_feature_temp.feature_h2),
+					$feature_del = $(index_feature_temp.feature_del),
 					$feature_p = $(index_feature_temp.feature_p),
 					$feature_a = $(index_feature_temp.feature_a);
 				
@@ -68,7 +70,8 @@
 				$feature_img.click(function(){
 					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 				});
-				$feature_info_div.append($feature_h2.append('￥'+val.price));
+				$feature_info_div.append($feature_h2.append('<s:text name="shop.product.label.zhekou.price"/>'+val.zhekouPrice));
+				$feature_info_div.append($feature_del.append('<s:text name="shop.product.label.yuan.price"/>'+val.price));
 				$feature_info_div.append($feature_p.append(val.productName));
 				$feature_info_div.append($feature_a.attr('id',val.productId));
 				$feature_a.click(function(){

@@ -101,6 +101,7 @@
 	
 	<bean id="productManager" class="com.yiqin.serviceImpl.ProductManagerImpl">
 		<property name="productDao"><ref bean="productDao"></ref></property>
+		<property name="userDao"><ref bean="userDao"></ref></property>
 	</bean>
 
 </beans>

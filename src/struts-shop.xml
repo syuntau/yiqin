@@ -129,6 +129,7 @@
 			<result name="top_quick_shopping" type="chain">findBestProduct</result>
 			<result name="top_cart" type="tiles">shop.cart</result>
 			<result name="top_login" type="tiles">shop.login</result>
+			<result name="top_register" type="tiles">shop.register</result>
 			<result name="top_home" type="tiles">shop.index</result>
 			<result name="top_logout" type="chain">logout</result>
 			<result name="footer_us" type="tiles">shop.contact.us</result>

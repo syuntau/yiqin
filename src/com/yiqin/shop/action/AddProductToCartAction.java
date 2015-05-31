@@ -89,16 +89,16 @@ public class AddProductToCartAction extends ActionSupport {
 				response.getWriter().print(result);
 				return null;
 			}
+			// 获取当前用户
+			User loninUser = Util.getLoginUser(session);
+						
 			// 查询商品
-			List<ProductView> productList = productManager.findProductInfoById(productId);
+			List<ProductView> productList = productManager.findProductInfoById(loninUser.getId(), productId);
 			if (Util.isEmpty(productList)) {
 				result = "none";
 				response.getWriter().print(result);
 				return null;
 			}
-			
-			// 获取当前用户
-			User loninUser = Util.getLoginUser(session);
 			
 			// 保存购物信息
 			ProductView product = productList.get(0);

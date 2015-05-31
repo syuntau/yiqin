@@ -20,12 +20,10 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.yiqin.dao.IProductDao;
-import com.yiqin.dao.impl.ProductDao;
 import com.yiqin.pojo.Attribute;
+import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
-import com.yiqin.service.ProductManager;
-import com.yiqin.serviceImpl.ProductManagerImpl;
+import com.yiqin.sa.interceptor.LoginSAInterceptor;
 import com.yiqin.shop.bean.ProductView;
 
 public class Util {
@@ -276,6 +274,15 @@ public class Util {
 		Object userObj = session.getAttribute("userInfo");
 		if (userObj != null) {
 			loninUser = (User) userObj;
+		}
+		return loninUser;
+	}
+	
+	public static SAUser getSALoginUser(HttpSession session) {
+		SAUser loninUser = null;
+		Object userObj = session.getAttribute(LoginSAInterceptor.USER_SESSION_KEY);
+		if (userObj != null) {
+			loninUser = (SAUser) userObj;
 		}
 		return loninUser;
 	}

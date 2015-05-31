@@ -17,6 +17,12 @@ import com.yiqin.util.Page;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
+/**
+ * 查询快速购物商品
+ * 
+ * @author LiuJun
+ * 
+ */
 public class FindBestProductAction extends ActionSupport {
 	private static final long serialVersionUID = -8848208662911483212L;
 

@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.validator.GenericValidator;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
@@ -50,6 +52,7 @@ public class ProductFilterAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpSession session = request.getSession();
 		response.setContentType("application/json;charset=UTF-8");
 		try{
 			// 处理当前页号
@@ -63,15 +66,17 @@ public class ProductFilterAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
-			if(!Util.isEmpty(brand)){
-				brand = URLDecoder.decode(brand, "utf-8");
-			}
 			if(!Util.isEmpty(color)){
 				color = URLDecoder.decode(color, "utf-8");
 			}
 			
 			// 查询过滤总数
-			ProductFilter productFilter = new ProductFilter(paramVal, brand,
+			User loginUser = Util.getLoginUser(session);
+			String userId = "";
+			if (loginUser != null) {
+				userId = loginUser.getId();
+			}
+			ProductFilter productFilter = new ProductFilter(userId, paramVal, brand,
 					price, color, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 			List<ProductView> productList = null;
 			int count = productManager.findProductCountByFilter(productFilter);
@@ -85,7 +90,7 @@ public class ProductFilterAction extends ActionSupport {
 			page.setResults(productList);
 			
 			String shop_nav = "top_" + paramVal.substring(0, 1);
-			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
+			session.setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();

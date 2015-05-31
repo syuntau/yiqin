@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
+import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.shop.bean.ProductFilter;
@@ -21,6 +22,7 @@ public interface ProductManager {
 	 * @return 对应商品
 	 */
 	public List<ProductView> findProductInfoById(String pids);
+	public List<ProductView> findProductInfoById(String userId, String pids);
 	
 	/**
 	 * 查询快速购物商品
@@ -77,6 +79,7 @@ public interface ProductManager {
 	 * @return 商品集合
 	 */
 	public List<ProductView> findProductInfo(String categorys);
+	public List<ProductView> findProductInfo(String userId, String categorys);
 	
 	/**
 	 * 查询指定分类查询商品所有信息
@@ -140,6 +143,20 @@ public interface ProductManager {
 	 * @return 属性集
 	 */
 	public List<Attribute> findFilterAttribute(int categoryId);
+	
+	/**
+	 * 查询品牌
+	 * 
+	 * @return Brand
+	 */
+	public Brand findProductBrandByBrandId(int brandId);
+	
+	/**
+	 * 查询所有品牌
+	 * 
+	 * @return List<Brand>
+	 */
+	public List<Brand> findAllBrand();
 
 	public List<Attribute> findAttributeByCategoryId(int categoryId);
 

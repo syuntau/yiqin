@@ -12,13 +12,17 @@ import java.util.Set;
 import org.springframework.dao.DataAccessException;
 
 import com.yiqin.dao.IProductDao;
+import com.yiqin.dao.IUserDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
+import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
+import com.yiqin.pojo.UserConf;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.BrandUtil;
 import com.yiqin.util.CategoryUtil;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
@@ -26,6 +30,8 @@ import com.yiqin.util.UtilKeys;
 public class ProductManagerImpl implements ProductManager {
 
 	private IProductDao productDao;
+	
+	private IUserDao userDao;
 
 	public IProductDao getProductDao() {
 		return productDao;
@@ -34,11 +40,31 @@ public class ProductManagerImpl implements ProductManager {
 	public void setProductDao(IProductDao productDao) {
 		this.productDao = productDao;
 	}
+	
+	public IUserDao getUserDao() {
+		return userDao;
+	}
 
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	@Override
+	public List<ProductView> findProductInfoById(String userId, String pids) {
+		Map<String,Map<String,String>> productMap = findProductAllInfoByIds(pids);
+		return productToProductView(userId, productMap);
+	}
+	
 	@Override
 	public List<ProductView> findProductInfoById(String pids) {
 		Map<String,Map<String,String>> productMap = findProductAllInfoByIds(pids);
 		return productToProductView(productMap);
+	}
+	
+	@Override
+	public List<ProductView> findProductInfo(String userId, String categorys) {
+		Map<String,Map<String,String>> productMap = findProductAllInfo(categorys);
+		return productToProductView(userId, productMap);
 	}
 	
 	@Override
@@ -66,7 +92,7 @@ public class ProductManagerImpl implements ProductManager {
 			for (String pid : pidList) {
 				pids.append(pid).append(",");
 			}
-			result = findProductInfoById(pids.toString());
+			result = findProductInfoById(userId,pids.toString());
 		}
 		return result;
 	}
@@ -122,10 +148,30 @@ public class ProductManagerImpl implements ProductManager {
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), entrysub.getValue());
+				String nameId = id_nameid.get(entrysub.getKey()).get(0);
+				String value = entrysub.getValue();
+				if("brandId".equals(nameId)){
+					value = getBrandShowName(Integer.valueOf(value));
+				}
+				nameid_pvalue.put(nameId, value);
 			}
 		}
 		return resultMap;
+	}
+	
+	private String getBrandShowName(Integer brandId) {
+		String value = "";
+		Brand brand = findProductBrandByBrandId(brandId);
+		String cnName = brand.getNameCn();
+		String enName = brand.getNameEn();
+		if (Util.isNotEmpty(cnName) && Util.isNotEmpty(enName)) {
+			value = cnName + "(" + enName + ")";
+		} else if (Util.isNotEmpty(cnName)) {
+			value = cnName;
+		} else {
+			value = enName;
+		}
+		return value;
 	}
 	
 	@Override
@@ -170,7 +216,12 @@ public class ProductManagerImpl implements ProductManager {
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(1), entrysub.getValue());
+				String name = id_nameid.get(entrysub.getKey()).get(1);
+				String value = entrysub.getValue();
+				if("厂商".equals(name)){
+					value = getBrandShowName(Integer.valueOf(value));
+				}
+				nameid_pvalue.put(name, value);
 			}
 		}
 		return resultMap;
@@ -265,17 +316,54 @@ public class ProductManagerImpl implements ProductManager {
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
-				nameid_pvalue.put(id_nameid.get(entrysub.getKey()).get(0), entrysub.getValue());
+				String nameId = id_nameid.get(entrysub.getKey()).get(0);
+				String value = entrysub.getValue();
+				if("brandId".equals(nameId)){
+					value = getBrandShowName(Integer.valueOf(value));
+				}
+				nameid_pvalue.put(nameId, value);
 			}
 		}
 		return resultMap;
 	}
 
+	private List<ProductView> productToProductView(String userId, Map<String,Map<String,String>> productMap){
+		List<ProductView> pViewList = new ArrayList<ProductView>();
+		if(Util.isEmpty(productMap)){
+			return pViewList;
+		}
+		float zhekou = (float) 1;
+		if(Util.isNotEmpty(userId)){
+			UserConf userConf = userDao.findUserConfInfo(userId, "zhekou");
+			if (userConf != null) {
+				zhekou =  Float.valueOf(userConf.getValue());
+			}
+		}
+		for (Map.Entry<String,Map<String,String>> entry : productMap.entrySet()) {
+			ProductView productView = new ProductView();
+			productView.setProductId(entry.getKey());
+			
+			Map<String,String> nameid_pvalue = entry.getValue();
+			String price = nameid_pvalue.get("price");
+			float zhekouPrice = Float.valueOf(price)*zhekou;
+			
+			productView.setProductName(nameid_pvalue.get("name"));
+			productView.setPrice(price);
+			productView.setColor(nameid_pvalue.get("color"));
+			productView.setZhekouPrice(String.valueOf(zhekouPrice));
+			productView.setImgUrl(nameid_pvalue.get("imageUrl"));
+			
+			pViewList.add(productView);
+		}
+		return pViewList;
+	}
+	
 	private List<ProductView> productToProductView(Map<String,Map<String,String>> productMap){
 		List<ProductView> pViewList = new ArrayList<ProductView>();
 		if(Util.isEmpty(productMap)){
 			return pViewList;
 		}
+		
 		for (Map.Entry<String,Map<String,String>> entry : productMap.entrySet()) {
 			ProductView productView = new ProductView();
 			productView.setProductId(entry.getKey());
@@ -501,7 +589,7 @@ public class ProductManagerImpl implements ProductManager {
 			for (String pid : pidList) {
 				pids.append(pid).append(",");
 			}
-			result = findProductInfoById(pids.toString());
+			result = findProductInfoById(productFilter.getUserId(), pids.toString());
 		}
 		return result;
 	}
@@ -600,6 +688,19 @@ public class ProductManagerImpl implements ProductManager {
 			for(Attribute attr : list){
 				String nameId = attr.getNameId();
 				if("brandId".equals(nameId) || "price".equals(nameId) || "color".equals(nameId)){
+					if("brandId".equals(nameId)){
+						String showValue = attr.getShowValue();
+						String [] svArr = showValue.split(",");
+						StringBuilder sb = new StringBuilder();
+						for(String sv : svArr){
+							String bName = getBrandShowName(Integer.valueOf(sv));
+							sb.append(bName).append(",");
+						}
+						if(Util.isNotEmpty(sb.toString())){
+							showValue = sb.substring(0,sb.length()-1);
+						}
+						attr.setShowValue(showValue);
+					}
 					tempList.add(attr);
 				}
 			}
@@ -625,7 +726,7 @@ public class ProductManagerImpl implements ProductManager {
 				List<String> temp = new ArrayList<String>();
 				String categoryName = CategoryUtil.getCategoryName(bd.getCategoryId());
 				temp.add(categoryName);
-				List<ProductView> productList = findProductInfoById(bd.getProductId());
+				List<ProductView> productList = findProductInfoById(userId, bd.getProductId());
 				StringBuilder name = new StringBuilder();
 				for (ProductView pv : productList) {
 					name.append(",").append(pv.getProductName());
@@ -660,6 +761,28 @@ public class ProductManagerImpl implements ProductManager {
 	public void deleteBestProduct(String userId, String categoryId)
 			throws DataAccessException {
 		productDao.deleteBestProductBycategoryId(userId, categoryId);
+	}
+
+	@Override
+	public Brand findProductBrandByBrandId(int brandId) {
+		BrandUtil brandUtil = new BrandUtil();
+		Brand brand = brandUtil.getBrand(brandId);
+		if (brand == null) {
+			brandUtil.init(productDao);
+			brand = brandUtil.getBrand(brandId);
+		}
+		return brand;
+	}
+
+	@Override
+	public List<Brand> findAllBrand() {
+		BrandUtil brandUtil = new BrandUtil();
+		List<Brand> brandList = brandUtil.getBrandList();
+		if (Util.isEmpty(brandList)) {
+			brandUtil.init(productDao);
+			brandList = brandUtil.getBrandList();
+		}
+		return brandList;
 	}
 
 }

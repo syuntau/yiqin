@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yiqin.dao.IProductDao;
 import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
+import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.util.Util;
@@ -277,6 +278,12 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			return (BestProduct) list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Brand> findAllBrand() {
+		String queryString = "from Brand";
+		return getHibernateTemplate().find(queryString);
 	}
 
 }
