@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.yiqin.dao.IShoppingDao;
+import com.yiqin.dao.IUserDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.pojo.UserConf;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.OrderView;
 import com.yiqin.util.Util;
@@ -14,12 +16,22 @@ import com.yiqin.util.Util;
 public class ShoppingManagerImpl implements ShoppingManager {
 	private IShoppingDao shoppingDao;
 
+	private IUserDao userDao;
+
 	public IShoppingDao getShoppingDao() {
 		return shoppingDao;
 	}
 
 	public void setShoppingDao(IShoppingDao shoppingDao) {
 		this.shoppingDao = shoppingDao;
+	}
+
+	public IUserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
 	}
 
 	@Override
@@ -52,7 +64,19 @@ public class ShoppingManagerImpl implements ShoppingManager {
 
 	@Override
 	public List<Cart> findCartListInfo(String userName) {
-		return shoppingDao.findCartListInfo(userName);
+		UserConf userConf = userDao.findUserConfInfo(userName, "zhekou");
+		List<Cart> cartList = shoppingDao.findCartListInfo(userName);
+		float zhekou = 1;
+		if (userConf != null) {
+			zhekou =  Float.valueOf(userConf.getValue());
+			if(Util.isNotEmpty(cartList)){
+				for(Cart cart : cartList){
+					cart.setZhekouPrice(zhekou*cart.getPrice());
+					//shoppingDao.updateCart(cart);
+				}
+			}
+		}
+		return cartList;
 	}
 
 	@Override
@@ -62,7 +86,17 @@ public class ShoppingManagerImpl implements ShoppingManager {
 
 	@Override
 	public Cart findCartInfo(String userName, String productId) {
-		return shoppingDao.findCartInfo(userName, productId);
+		UserConf userConf = userDao.findUserConfInfo(userName, "zhekou");
+		Cart cart = shoppingDao.findCartInfo(userName, productId);
+		float zhekou = 1;
+		if (userConf != null) {
+			zhekou =  Float.valueOf(userConf.getValue());
+			if(cart != null){
+				cart.setZhekouPrice(zhekou*cart.getPrice());
+				//shoppingDao.updateCart(cart);
+			}
+		}
+		return cart;
 	}
 
 	@Override
@@ -82,7 +116,19 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		} else {
 			return null;
 		}
-		return shoppingDao.findCartsByProductIds(userName, productIds);
+		UserConf userConf = userDao.findUserConfInfo(userName, "zhekou");
+		List<Cart> cartList = shoppingDao.findCartsByProductIds(userName, productIds);
+		float zhekou = 1;
+		if (userConf != null) {
+			zhekou =  Float.valueOf(userConf.getValue());
+			if(Util.isNotEmpty(cartList)){
+				for(Cart cart : cartList){
+					cart.setZhekouPrice(zhekou*cart.getPrice());
+					//shoppingDao.updateCart(cart);
+				}
+			}
+		}
+		return cartList;
 	}
 
 	@Override

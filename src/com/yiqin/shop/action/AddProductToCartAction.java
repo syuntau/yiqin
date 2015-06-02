@@ -109,6 +109,7 @@ public class AddProductToCartAction extends ActionSupport {
 			cart.setPrice(Float.valueOf(product.getPrice()));
 			cart.setImgUrl(product.getImgUrl());
 			cart.setCount(num);
+			cart.setZhekouPrice(Float.valueOf(product.getZhekouPrice()));
 			cart.setProductInfo(product.getColor());
 			boolean flag = shoppingManager.addProductToCart(cart);
 			if(!flag){

@@ -54,6 +54,8 @@ public interface IShoppingDao {
 	 */
 	public boolean updateCartProductsNum(String userId, String productId,
 			int pNum);
+	
+	public boolean updateCart(Cart cart);
 
 	/**
 	 * 查询用户购物车信息

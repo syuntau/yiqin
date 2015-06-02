@@ -163,10 +163,10 @@ var yiqin_cart_check = function(){
 				<s:iterator value="#request.settlement_products">
 					var $check_li = $(cart_check_temp.check_li),
     					$check_span = $(cart_check_temp.check_span),
-    					toPrice = "<s:property value='count'/>"*"<s:property value='price'/>";
+    					toPrice = "<s:property value='count'/>"*"<s:property value='zhekouPrice'/>";
 					
 					$totalUl.append($check_li.append("<s:property value='productName'/>"));
-					$check_li.append($check_span.append("<s:property value='count'/>×<s:property value='price'/> = "+toPrice));
+					$check_li.append($check_span.append("<s:property value='count'/>×<s:property value='zhekouPrice'/> = "+toPrice));
 					totalPrice += parseInt(toPrice);
 				</s:iterator>
 				

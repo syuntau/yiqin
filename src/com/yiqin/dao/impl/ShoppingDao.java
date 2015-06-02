@@ -55,6 +55,17 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean updateCart(Cart cart) {
+		try {
+			getHibernateTemplate().save(cart);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	@Override
 	public List<Cart> findCartListInfo(String userId) {

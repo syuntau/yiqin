@@ -106,12 +106,19 @@ public class SubmitOrderAction extends ActionSupport {
 					user.getId(), productIds);
 			if (Util.isNotEmpty(cartList)) {
 				int totalPrice = 0;
+				int totalYuanjia = 0;
 				for (Cart cart : cartList) {
-					totalPrice += cart.getCount() * cart.getPrice();
+					totalPrice += cart.getCount() * cart.getZhekouPrice();
+					totalYuanjia += cart.getCount() * cart.getPrice();
 				}
 				order.setZongjia((float) totalPrice);
-				order.setYuanjia((float) totalPrice);
-				order.setZhekou((float) 0);
+				order.setYuanjia((float) totalYuanjia);
+				UserConf userConf = userManager.findUserConfInfo(user.getId(),"zhekou");
+				if (userConf != null) {
+					order.setZhekou(Float.valueOf(userConf.getValue()));
+				}else{
+					order.setZhekou((float) 1);
+				}
 				order.setProductList(cartList.toString());
 			}
 

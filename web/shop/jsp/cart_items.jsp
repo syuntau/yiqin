@@ -182,7 +182,7 @@ var yiqin_cart_action = function(){
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_price");
- 			$cart_td.append($cart_p.append(val.price));
+ 			$cart_td.append($cart_p.append(val.zhekouPrice));
  			$cart_td.append($cart_del.append(val.price));
  			$cart_tr.append($cart_td);
  			
@@ -209,7 +209,7 @@ var yiqin_cart_action = function(){
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_total").append($cart_p);
- 			$cart_p.attr('class',"cart_total_price").append(val.count*val.price);
+ 			$cart_p.attr('class',"cart_total_price").append(val.count*val.zhekouPrice);
  			$cart_tr.append($cart_td);
  			$cart_td = $(cart_template.cart_td),
  			$cart_a = $(cart_template.cart_a);
@@ -220,7 +220,7 @@ var yiqin_cart_action = function(){
 			});
  			$cart_tr.append($cart_td);
  			
- 			$cart_tr.data(i+"_price",val.price);
+ 			$cart_tr.data(i+"_price",val.zhekouPrice);
  			$cart_tr.data(i+"_productNum",val.count);
  			$cart_tr.data("_productId",val.productId);
  			$cart_tr.attr('id',i+'_product');
