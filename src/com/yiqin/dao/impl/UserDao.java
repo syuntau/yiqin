@@ -124,7 +124,7 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 
 	@Override
 	public SAUser isLoginSA(String userId, String password) {
-		String queryString = "from SAUser where id=? and password=? and flag = 1";
+		String queryString = "from SAUser where id=? and password=?";
 		List<?> list = getHibernateTemplate().find(queryString,
 				new Object[] { userId, password });
 		if (Util.isNotEmpty(list)) {
@@ -148,18 +148,25 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 	public void deleteSAUser(String id) throws DataAccessException {
 		SAUser user = (SAUser) getHibernateTemplate().get(SAUser.class, id);
 		if (user != null) {
-			user.setFlag(2);
-			user.setUpdateDate(new Date());
-			getHibernateTemplate().update(user);
+			getHibernateTemplate().delete(user);
 		}
 	}
 
 	@Override
 	public List<SAUser> findAdmin(int role) throws DataAccessException {
-		String query =  "from SAUser where role=? and flag = 1";
+		String query =  "from SAUser where role=?";
 		List<?> list = getHibernateTemplate().find(query, role);
 		if (Util.isNotEmpty(list)) {
 			return (List<SAUser>) list;
+		}
+		return null;
+	}
+
+	@Override
+	public SAUser findAdminById(String id) throws DataAccessException {
+		SAUser user = (SAUser) getHibernateTemplate().get(SAUser.class, id);
+		if (user != null) {
+			return user;
 		}
 		return null;
 	}

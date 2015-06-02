@@ -101,7 +101,6 @@ public class EditUserAction extends ActionSupport {
 				Date now = new Date();
 				admin.setCreateDate(now);
 				admin.setUpdateDate(now);
-				admin.setFlag(1);
 				admin.setRole(100);
 				String id = userManager.saveSAUser(admin);
 				if (Util.isEmpty(id)) {
@@ -130,13 +129,21 @@ public class EditUserAction extends ActionSupport {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
 			} else {
-				Date now = new Date();
-				admin.setUpdateDate(now);
-				boolean flag = userManager.updateSAUser(admin);
-				if (flag) {
-					result = UtilKeys.CODE_SUCCESS;
-				} else {
+				SAUser user = userManager.findAdminById(admin.getId());
+				if (user == null) {
 					result = UtilKeys.CODE_ERR_EXCEPTION;
+				} else {
+					Date now = new Date();
+					user.setName(admin.getName());
+					user.setPassword(admin.getPassword());
+					user.setUpdateDate(now);
+					boolean flag = userManager.updateSAUser(user);
+					if (flag) {
+						JSONObject json = JSONObject.fromObject(user);
+						result = json.toString();
+					} else {
+						result = UtilKeys.CODE_ERR_EXCEPTION;
+					}
 				}
 				out.print(result);
 			}

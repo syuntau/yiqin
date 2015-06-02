@@ -133,3 +133,14 @@ CREATE TABLE `best_product` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+/* 后台管理用户表 */
+CREATE TABLE `sa_user` (
+  `id` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户ID',
+  `name` varchar(40) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '密码',
+  `role` int(11) unsigned DEFAULT NULL COMMENT '管理权限，100开头的:管理员，200开头的：高级管理员',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_date` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+

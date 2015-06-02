@@ -22,8 +22,5 @@
         <property name="updateDate" type="java.util.Date">
             <column name="update_date"></column>
         </property>
-        <property name="flag" type="java.lang.Integer">
-            <column name="flag"></column>
-        </property>
     </class>
 </hibernate-mapping>

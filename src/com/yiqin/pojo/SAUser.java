@@ -11,7 +11,6 @@ public class SAUser implements java.io.Serializable {
 	private int role;
 	private Date createDate;
 	private Date updateDate;
-	private int flag;
 	public String getId() {
 		return id;
 	}
@@ -47,12 +46,6 @@ public class SAUser implements java.io.Serializable {
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
-	}
-	public int getFlag() {
-		return flag;
-	}
-	public void setFlag(int flag) {
-		this.flag = flag;
 	}
 
 }

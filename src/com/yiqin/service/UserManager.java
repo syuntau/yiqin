@@ -100,4 +100,5 @@ public interface UserManager {
 	public boolean updateSAUser(SAUser user);
 	public boolean deleteSAUser(String id);
 	public List<SAUser> findAdmin(int role);
+	public SAUser findAdminById(String id);
 }

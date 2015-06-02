@@ -130,4 +130,14 @@ public class UserManagerImpl implements UserManager {
 		return userDao.isLoginSA(id, password);
 	}
 
+	@Override
+	public SAUser findAdminById(String id) {
+		try {
+			return userDao.findAdminById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
