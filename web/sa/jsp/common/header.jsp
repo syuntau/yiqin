@@ -95,6 +95,9 @@ $(document).ready(function() {
                             <li>
                                 <a href="#" class="side-menu-a" val="user-admin"><s:text name="sa.header.user.admin" /></a>
                             </li>
+                            <li>
+                                <a href="#" val="customer-manage" class="side-menu-a"><s:text name="sa.header.customer.manage" /></a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
