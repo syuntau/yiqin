@@ -4,6 +4,6 @@
 
 	<div class="col-sm-9 padding-right">
 		<tiles:insertAttribute name="features" />
-		<tiles:insertAttribute name="category" />
+<%-- 		<tiles:insertAttribute name="category" /> --%>
 <%-- 		<tiles:insertAttribute name="recommend" /> --%>
 	</div>

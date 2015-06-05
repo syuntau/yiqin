@@ -10,7 +10,7 @@
 	<definition name="shop.header" template="/shop/jsp/common/header.jsp">
 		<put-attribute name="header.top" value="/shop/jsp/common/header-top.jsp" />
 		<put-attribute name="header.middle" value="/shop/jsp/common/header-middle.jsp" />
-		<put-attribute name="header.bottom" value="/shop/jsp/common/header-bottom.jsp" />
+<!-- 		<put-attribute name="header.bottom" value="/shop/jsp/common/header-bottom.jsp" /> -->
 	</definition>
 
 	<definition name="shop.footer" template="/shop/jsp/common/footer.jsp">
@@ -91,7 +91,7 @@
 
 	<definition name="shop.index.body.right" template="/shop/jsp/idx_right.jsp">
 		<put-attribute name="features" value="/shop/jsp/idx_right_features.jsp" />
-		<put-attribute name="category" value="/shop/jsp/idx_right_category.jsp" />
+<!-- 		<put-attribute name="category" value="/shop/jsp/idx_right_category.jsp" /> -->
 <!-- 		<put-attribute name="recommend" value="/shop/jsp/idx_right_recommend.jsp" /> -->
 	</definition>
 	
