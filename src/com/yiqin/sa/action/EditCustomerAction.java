@@ -2,10 +2,14 @@ package com.yiqin.sa.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
@@ -64,17 +68,12 @@ public class EditCustomerAction extends ActionSupport {
 					return null;
 				}
 				try {
-					UserConf zhekou = userManager.findUserConfInfo(userId, UtilKeys.USRE_CONF_ZHE_KOU);
-					if (zhekou == null) {
-						zhekou = new UserConf();
-						zhekou.setUserId(userId);
-						zhekou.setAttribute(UtilKeys.USRE_CONF_ZHE_KOU);
-						zhekou.setValue(zheKou);
-					} else {
-						zhekou.setValue(zheKou);
+					boolean flag = userManager.saveOrUpdateUserZheKou(result, Float.parseFloat(zheKou));
+					if(flag){
+						result = UtilKeys.CODE_SUCCESS;
+					}else{
+						result = UtilKeys.CODE_ERR_PARAM;
 					}
-					userManager.updateUserConf(zhekou);
-					result = UtilKeys.CODE_SUCCESS;
 					out.print(result);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditCustomerAction.addZheKou for db exception");

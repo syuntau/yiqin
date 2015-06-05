@@ -10,6 +10,7 @@ import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 public class UserManagerImpl implements UserManager {
 
@@ -144,7 +145,7 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean saveOrUpdateUserZheKou(String userId, float zhekou) {
-		UserConf userConf = findUserConfInfo(userId, "zhekou");
+		UserConf userConf = findUserConfInfo(userId, UtilKeys.USRE_CONF_ZHE_KOU);
 		boolean flag = false;
 		if(userConf != null){
 			userConf.setValue(String.valueOf(zhekou));
@@ -152,7 +153,7 @@ public class UserManagerImpl implements UserManager {
 		}else{
 			UserConf temp = new UserConf();
 			temp.setUserId(userId);
-			temp.setAttribute("zhekou");
+			temp.setAttribute(UtilKeys.USRE_CONF_ZHE_KOU);
 			temp.setValue(String.valueOf(zhekou));
 			flag = updateUserConf(temp);
 		}
@@ -170,7 +171,7 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean deleteUserZheKou(String userId) {
-		boolean flag =  userDao.deleteUserConf(userId, "zhekou");
+		boolean flag =  userDao.deleteUserConf(userId, UtilKeys.USRE_CONF_ZHE_KOU);
 		if(flag){
 			List<Cart> cartList = shoppingDao.findCartListInfo(userId);
 			if(Util.isNotEmpty(cartList)){

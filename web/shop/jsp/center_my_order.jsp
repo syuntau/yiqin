@@ -149,7 +149,14 @@ $(document).ready(function(){
 											<p><s:text name="cart.item.product.color"/><s:property value="#product.productInfo"/></p>
 										</td>
 										<td class="cart_price" style="text-align:center;">
-											<p><s:property value="#product.price"/></p>
+											<p><s:property value="#product.zhekouPrice"/></p>
+											<p style="font-size:14px;color:#FE980F">
+												<s:text name="shop.product.label.zhekou"/>
+												<s:property value="#order.zhekou"/>
+											</p>
+											<del><s:text name="shop.product.label.yuan.price"/>
+												 <s:property value="#product.price" />
+											</del>
 										</td>
 										<td style="text-align:center;">
 											<p><s:property value="#product.count"/></p>

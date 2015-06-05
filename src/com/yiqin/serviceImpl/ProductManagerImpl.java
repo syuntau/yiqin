@@ -345,7 +345,7 @@ public class ProductManagerImpl implements ProductManager {
 			
 			Map<String,String> nameid_pvalue = entry.getValue();
 			String price = nameid_pvalue.get("price");
-			float zhekouPrice = Float.valueOf(price)*zhekou;
+			int zhekouPrice = (int) (Float.valueOf(price)*zhekou);
 			
 			productView.setProductName(nameid_pvalue.get("name"));
 			productView.setPrice(price);

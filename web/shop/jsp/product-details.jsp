@@ -3,8 +3,8 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 <s:iterator value="#request.product_detail" var="product">
-	<s:set name="productInfo" value="#product.value"></s:set>
-	<s:set name="productId" value="#product.key"></s:set>
+	<s:set name="productInfo" value="#product"></s:set>
+	<s:set name="productId" value="#product.productId"></s:set>
 </s:iterator>
 
 <script type="text/javascript">
@@ -120,26 +120,26 @@ $(document).ready(function(){
 		<!--product-details-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="<s:property value='#productInfo.imageUrl'/>" width="329" height="380"/>
+				<img src="<s:property value='#productInfo.imgUrl'/>" width="329" height="380"/>
 				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
 					<div class="item active">
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imageUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 				</div>
 				<!-- Controls -->
@@ -150,13 +150,19 @@ $(document).ready(function(){
 		<div class="col-sm-7">
 			<div class="product-information">
 				<!--/product-information-->
-				<h2><s:property value='#productInfo.name'/></h2>
+				<h2><s:property value='#productInfo.productName'/></h2>
 				<p>
 					<s:text name="shop.product.details.productId" />
 					<s:property value='#productId'/>
 				</p>
 				<span>
-					<span><s:property value='#productInfo.price'/></span>
+					<span><s:property value='#productInfo.zhekouPrice'/><br>
+						<p><del style="font-size:14px">
+								<s:text name="shop.product.label.yuan.price"/>
+							 	<s:property value="#productInfo.price" />
+						   </del>
+						</p>
+					</span>
 					<label><s:text name="cart.item.quantity" />:</label>
 					<input type="text" value="1" />
 					<button type="button" class="btn btn-fefault cart" id="detail_add_cart">
@@ -171,7 +177,7 @@ $(document).ready(function(){
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
 						<a href="#none" title="<s:property value='#productInfo.color'/>" class="none-detail-a">
-							<img src="<s:property value='#productInfo.imageUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
+							<img src="<s:property value='#productInfo.imgUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
 							<i><s:property value='#productInfo.color'/></i>
 						</a>
 					</div>
@@ -237,7 +243,7 @@ $(document).ready(function(){
 <!-- 						<b>Write Your Review/写下你的评论</b> -->
 <!-- 					</p> -->
 <!-- 					<form action="#"> -->
-<%-- 						<b>Rating: </b> <img src="<s:property value='#productInfo.imageUrl'/>" alt="" /> --%>
+<%-- 						<b>Rating: </b> <img src="<s:property value='#productInfo.imgUrl'/>" alt="" /> --%>
 <!-- 						<button type="button" class="btn btn-default pull-right"> -->
 <!-- 							Submit</button> -->
 <!-- 					</form> -->

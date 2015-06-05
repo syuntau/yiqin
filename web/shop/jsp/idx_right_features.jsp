@@ -70,7 +70,7 @@
 				$feature_img.click(function(){
 					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 				});
-				$feature_info_div.append($feature_h2.append('<s:text name="shop.product.label.zhekou.price"/>'+val.zhekouPrice));
+				$feature_info_div.append($feature_h2.append('￥'+val.zhekouPrice));
 				$feature_info_div.append($feature_del.append('<s:text name="shop.product.label.yuan.price"/>'+val.price));
 				$feature_info_div.append($feature_p.append(val.productName));
 				$feature_info_div.append($feature_a.attr('id',val.productId));

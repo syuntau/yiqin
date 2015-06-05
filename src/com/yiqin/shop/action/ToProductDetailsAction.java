@@ -1,13 +1,15 @@
 package com.yiqin.shop.action;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
@@ -48,7 +50,12 @@ public class ToProductDetailsAction extends ActionSupport {
 				return null;
 			}
 			HttpServletRequest request = ServletActionContext.getRequest();
-			Map<String,Map<String,String>> product = productManager.findProductAllInfoByIds(paramVal);
+			User loginUser = Util.getLoginUser(request.getSession());
+			String userId = "";
+			if (loginUser != null) {
+				userId = loginUser.getId();
+			}
+			List<ProductView> product = productManager.findProductInfoById(userId, paramVal);	
 			request.setAttribute("product_detail", product);
 			String shop_nav = "top_" + paramVal.substring(0, 1);
 			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
