@@ -68,7 +68,7 @@ public class EditCustomerAction extends ActionSupport {
 					return null;
 				}
 				try {
-					boolean flag = userManager.saveOrUpdateUserZheKou(result, Float.parseFloat(zheKou));
+					boolean flag = userManager.saveOrUpdateUserZheKou(userId, Float.parseFloat(zheKou));
 					if(flag){
 						result = UtilKeys.CODE_SUCCESS;
 					}else{

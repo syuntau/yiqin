@@ -145,6 +145,9 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean saveOrUpdateUserZheKou(String userId, float zhekou) {
+		if (Util.isEmpty(userId)) {
+			return false;
+		}
 		UserConf userConf = findUserConfInfo(userId, UtilKeys.USRE_CONF_ZHE_KOU);
 		boolean flag = false;
 		if(userConf != null){
@@ -161,7 +164,9 @@ public class UserManagerImpl implements UserManager {
 			List<Cart> cartList = shoppingDao.findCartListInfo(userId);
 			if(Util.isNotEmpty(cartList)){
 				for(Cart cart : cartList){
-					cart.setZhekouPrice(cart.getPrice()*zhekou);
+					float value = cart.getPrice()*zhekou;
+					String zkp = String.valueOf(value).split("\\.")[0];
+					cart.setZhekouPrice(Float.parseFloat(zkp));
 					shoppingDao.updateCart(cart);
 				}
 			}
