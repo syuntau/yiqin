@@ -93,11 +93,11 @@
 
 	<bean id="userManager" class="com.yiqin.serviceImpl.UserManagerImpl">
 		<property name="userDao"><ref bean="userDao"></ref></property>
+		<property name="shoppingDao"><ref bean="shoppingDao"></ref></property>
 	</bean>
 	
 	<bean id="shoppingManager" class="com.yiqin.serviceImpl.ShoppingManagerImpl">
 		<property name="shoppingDao"><ref bean="shoppingDao"></ref></property>
-		<property name="userDao"><ref bean="userDao"></ref></property>
 	</bean>
 	
 	<bean id="productManager" class="com.yiqin.serviceImpl.ProductManagerImpl">

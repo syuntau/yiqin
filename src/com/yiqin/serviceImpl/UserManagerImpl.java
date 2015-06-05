@@ -2,7 +2,9 @@ package com.yiqin.serviceImpl;
 
 import java.util.List;
 
+import com.yiqin.dao.IShoppingDao;
 import com.yiqin.dao.IUserDao;
+import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -12,13 +14,23 @@ import com.yiqin.util.Util;
 public class UserManagerImpl implements UserManager {
 
 	private IUserDao userDao;
-
+	
+	private IShoppingDao shoppingDao;
+	
 	public IUserDao getUserDao() {
 		return userDao;
 	}
 
 	public void setUserDao(IUserDao userDao) {
 		this.userDao = userDao;
+	}
+	
+	public IShoppingDao getShoppingDao() {
+		return shoppingDao;
+	}
+
+	public void setShoppingDao(IShoppingDao shoppingDao) {
+		this.shoppingDao = shoppingDao;
 	}
 
 	@Override
@@ -130,6 +142,47 @@ public class UserManagerImpl implements UserManager {
 		return userDao.isLoginSA(id, password);
 	}
 
+	@Override
+	public boolean saveOrUpdateUserZheKou(String userId, float zhekou) {
+		UserConf userConf = findUserConfInfo(userId, "zhekou");
+		boolean flag = false;
+		if(userConf != null){
+			userConf.setValue(String.valueOf(zhekou));
+			flag = updateUserConf(userConf);
+		}else{
+			UserConf temp = new UserConf();
+			temp.setUserId(userId);
+			temp.setAttribute("zhekou");
+			temp.setValue(String.valueOf(zhekou));
+			flag = updateUserConf(temp);
+		}
+		if(flag){
+			List<Cart> cartList = shoppingDao.findCartListInfo(userId);
+			if(Util.isNotEmpty(cartList)){
+				for(Cart cart : cartList){
+					cart.setZhekouPrice(cart.getPrice()*zhekou);
+					shoppingDao.updateCart(cart);
+				}
+			}
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteUserZheKou(String userId) {
+		boolean flag =  userDao.deleteUserConf(userId, "zhekou");
+		if(flag){
+			List<Cart> cartList = shoppingDao.findCartListInfo(userId);
+			if(Util.isNotEmpty(cartList)){
+				for(Cart cart : cartList){
+					cart.setZhekouPrice(cart.getPrice());
+					shoppingDao.updateCart(cart);
+				}
+			}
+		}
+		return flag;
+	}
+	
 	@Override
 	public SAUser findAdminById(String id) {
 		try {

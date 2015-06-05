@@ -28,8 +28,12 @@ var toIndexPage = function(pageIndex){
 									onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>,'toProductDetails')" />
 								<h2>
 									￥
-									<s:property value="#product.price" />
+									<s:property value="#product.zhekouPrice" />
 								</h2>
+								<del>
+									<s:text name="shop.product.label.yuan.price"/>
+									<s:property value="#product.price" />
+								</del>
 								<p>
 									<s:property value="#product.productName" />
 								</p>

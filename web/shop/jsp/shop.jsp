@@ -148,7 +148,7 @@ $(document).ready(function(){
 									name="good_img" style="cursor: pointer;"
 									onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>,'toProductDetails')" />
 								<h2>
-									<s:text name="shop.product.label.zhekou.price"/>
+									￥
 									<s:property value="#product.zhekouPrice" />
 								</h2>
 								<del>

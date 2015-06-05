@@ -59,7 +59,7 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 	@Override
 	public boolean updateCart(Cart cart) {
 		try {
-			getHibernateTemplate().save(cart);
+			getHibernateTemplate().saveOrUpdate(cart);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
