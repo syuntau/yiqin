@@ -6592,6 +6592,21 @@ th.hidden-lg, td.hidden-lg {
 	float: left;
 	width: 85%;
 }
+.center-left-yiqin {
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	float: left;
+	width: 15%;
+	margin-bottom: 20px;
+}
+.center-right-yiqin {
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	float: left;
+	width: 85%;
+}
 
 select{
 	-webkit-appearance: menulist;

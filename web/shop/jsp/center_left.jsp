@@ -22,9 +22,9 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="center-left">
+<div class="center-left-yiqin">
 	<div class="left-sidebar">
-		<h2>订单中心</h2>
+		<h3>订单中心</h3>
 		<div class="brands-name">
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="javaScript:;" id="my_order_left">我的订单</a></li>
@@ -33,7 +33,7 @@ $(document).ready(function(){
 	</div>
 
 	<div class="brands_products">
-		<h2>设置</h2>
+		<h3>设置</h3>
 		<div class="brands-name">
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="javaScript:;" id="my_set_info">个人信息</a></li>

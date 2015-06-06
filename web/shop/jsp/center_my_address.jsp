@@ -181,7 +181,7 @@ var yiqin_my_address = function(){
        			
        			$list_div.attr('class',"row");
        			$list_div_col = $(address_list_temp.list_div);
-       			$list_div_col.attr({"class":"col-sm-6","style":"width:90%"});
+       			$list_div_col.attr({"class":"col-sm-6","style":"width:100%"});
        			$list_div.append($list_div_col);
        			$list_div_area = $(address_list_temp.list_div);
        			$list_div_area.attr("class","chose_area");
@@ -205,7 +205,7 @@ var yiqin_my_address = function(){
        			$list_ul.append($list_li);
        			
        			$list_div_set = $(address_list_temp.list_div);
-       			$list_div_set.attr("style","margin-left:800px;");
+//        			$list_div_set.attr("style","margin-left:800px;");
        			if(val.attribute=="address_def"){
        				$list_span = $(address_list_temp.list_span);
        				$list_div_set.append($list_span.append("默认地址").attr("class","ftx-04"));
@@ -313,13 +313,13 @@ $(document).ready(function(){
 	yiqin_my_address.findUserAddress();
 });
 </script>
-<div class="center-right padding-right">
+<div class="center-right-yiqin">
 	<section id="address_list">
 		<div style="margin-bottom:10px" id="add_list_btn">
 			<a class="btn btn-default check_out" data-toggle="modal" data-target="#address_list_alert" style="vertical-align: middle;">新增收货地址</a>
-			<span style="vertical-align: middle;"></span>
+			<span style="vertical-align: middle;padding-left:20px;"></span>
 		</div>
-		<div class="container" id="my_address_list"></div>
+		<div id="my_address_list"></div>
 	</section>
 	
 	<!-- alert modal -->

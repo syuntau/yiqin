@@ -9,15 +9,13 @@
 				<h2 class="title text-center">
 					<s:text name="shop.footer.widget.about.yiqin"></s:text>
 				</h2>
-				<div class="row" style="text-align: center;">
-					<div class="col-sm-8" style="width: 100%">
-						<div class="contact-form">
-							<img alt="" src="/shop/images/home/logo.jpg" height="200px" width="700px">
+				<div class="row">
+					<div class="col-sm-6" >
+						<div class="contact-form" style="text-align: left;">
+							<img src="/shop/images/home/logo.jpg" height="282px" width="400px">
 						</div>
 					</div>
-				</div>
-				<div class="row" style="margin-top:30px;">
-					<div class="col-sm-4" style="width: 100%">
+					<div class="col-sm-6" >
 						<div class="contact-info">
 							<address>
 								<p>依勤（ELECTTE）创立于2015年5月1日，隶属于北京依勤商贸有限公司（以下简称：北京依勤），是一家致力于企业办公的网站，通过为企业提供一站式办公采购服务。</p>
