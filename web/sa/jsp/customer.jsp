@@ -122,7 +122,8 @@ $(document).ready(function() {
                     </form>
 		            <hr class="customer-hr display-off">
 		            <div class="row customer-section display-off">
-		                <div class="col-lg-12">
+                		<s:if test="%{#roles.indexOf('12301')>-1}">
+		                <div class="col-lg-12" style="margin: 10px 0px;">
 		                    <form role="form" class="form-inline zhekou-form" >
 		                        <div class="form-group">
 	                                <label><s:text name="sa.customer.zhekou" /></label>
@@ -132,6 +133,7 @@ $(document).ready(function() {
 		                        <button type="button" class="btn btn-info btn-customer-zhekou"><s:text name="sa.btn.save" /></button>
 		                    </form>
 		                </div>
+		                </s:if>
 		                <!-- /.col-lg-12 -->
 		            </div>
 		            <!-- /.row -->

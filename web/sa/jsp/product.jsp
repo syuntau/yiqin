@@ -9,6 +9,7 @@ var pd_item = {
 		td : '<td></td>',
 		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="<s:text name='msg.pro.remove'></s:text>"></i>',
 		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.pro.edit'></s:text>"></i>',
+		roles : '<s:property value="#session.yiqin_sa_user_roles" />',
 	},
 	initCategory : function() {
 		pd_item.loadFirstCategory();
@@ -215,17 +216,28 @@ var pd_item = {
 			var $tr = $(pd_item.conf.tr).addClass('tr_'+val.productId);
 			var _id = $(pd_item.conf.td).html(val.productId);
 			var _name = $(pd_item.conf.td).html(val.productName);
-			var $iRemove = $(pd_item.conf.i_remove);
-			$iRemove.on('click', function() {
-				pd_item.removeItem(val.productId, val.productName);
-			});
-			var $iEdit = $(pd_item.conf.i_edit);
-			$iEdit.on('click', function() {
-				pd_item.modifyItem(val.productId);
-			});
-			var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
+			$tr.append(_id).append(_name);
 
-			$tr.append(_id).append(_name).append(_setting);
+			var roles = pd_item.conf.roles;
+			var $iRemove = '';
+			if (roles.indexOf('13203') > -1) {
+				$iRemove = $(pd_item.conf.i_remove);
+				$iRemove.on('click', function() {
+					pd_item.removeItem(val.productId, val.productName);
+				});
+			}
+			var $iEdit = '';
+			if (roles.indexOf('13204') > -1) {
+				$iEdit = $(pd_item.conf.i_edit);
+				$iEdit.on('click', function() {
+					pd_item.modifyItem(val.productId);
+				});
+			}
+			
+			if ($iRemove.length > 0 || $iEdit.length > 0) {
+				var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
+				$tr.append(_setting);
+			}
 
 			$tbody.append($tr);
 		});
@@ -424,17 +436,28 @@ var pd_item = {
 	        	              			   		var $tr = $(pd_item.conf.tr).addClass('tr_'+data.productId);
 	        	           						var _id = $(pd_item.conf.td).html(data.productId);
 	        	           						var _name = $(pd_item.conf.td).html(data.productName);
-	        	           						var $iRemove = $(pd_item.conf.i_remove);
-	        	           						$iRemove.on('click', function() {
-	        	           							pd_item.removeItem(data.productId, data.productName);
-	        	           						});
-	        	           						var $iEdit = $(pd_item.conf.i_edit);
-	        	           						$iEdit.on('click', function() {
-	        	           							pd_item.modifyItem(data.productId);
-	        	           						});
-	        	           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
-	        	
-	        	           						$tr.append(_id).append(_name).append(_setting);
+	        	           						$tr.append(_id).append(_name);
+
+	        	           						var roles = pd_item.conf.roles;
+	        	           						var $iRemove = '';
+	        	           						if (roles.indexOf('13203') > -1) {
+		        	           						$iRemove = $(pd_item.conf.i_remove);
+		        	           						$iRemove.on('click', function() {
+		        	           							pd_item.removeItem(data.productId, data.productName);
+		        	           						});
+	        	           						}
+	        	           						var $iEdit = '';
+	        	           						if (roles.indexOf('13204') > -1) {
+		        	           						$iEdit = $(pd_item.conf.i_edit);
+		        	           						$iEdit.on('click', function() {
+		        	           							pd_item.modifyItem(data.productId);
+		        	           						});
+	        	           						}
+
+	        	           						if ($iRemove.length > 0 || $iEdit.length > 0) {
+		        	           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
+		        	           						$tr.append(_id).append(_name).append(_setting);
+	        	           						}
 	        	
 	        	           						$tbody.append($tr);
 	        	
@@ -547,17 +570,28 @@ var pd_item = {
 
 				              					var _id = $(pd_item.conf.td).html(data.productId);
 				              					var _name = $(pd_item.conf.td).html(data.productName);
-				           						var $iRemove = $(pd_item.conf.i_remove);
-				           						$iRemove.on('click', function() {
-				           							pd_item.removeItem(data.productId, data.productName);
-				           						});
-				           						var $iEdit = $(pd_item.conf.i_edit);
-				           						$iEdit.on('click', function() {
-				           							pd_item.modifyItem(data.productId);
-				           						});
-				           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
-				
-				           						$tr.empty().append(_id).append(_name).append(_setting);
+				              					$tr.empty().append(_id).append(_name);
+
+	        	           						var roles = pd_item.conf.roles;
+	        	           						var $iRemove = '';
+	        	           						if (roles.indexOf('13203') > -1) {
+					           						$iRemove = $(pd_item.conf.i_remove);
+					           						$iRemove.on('click', function() {
+					           							pd_item.removeItem(data.productId, data.productName);
+					           						});
+	        	           						}
+	        	           						var $iEdit = '';
+	        	           						if (roles.indexOf('13204') > -1) {
+					           						$iEdit = $(pd_item.conf.i_edit);
+					           						$iEdit.on('click', function() {
+					           							pd_item.modifyItem(data.productId);
+					           						});
+	        	           						}
+
+	        	           						if ($iRemove.length > 0 || $iEdit.length > 0) {
+		        	           						var _setting = $(pd_item.conf.td).append($iRemove).append(" ").append($iEdit);
+		        	           						$tr.append(_setting);
+	        	           						}
 				
 				              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 				              				}
@@ -634,8 +668,12 @@ $(document).ready(function() {
                     <div class="panel panel-default item-panel display-off">
                         <div class="panel-heading">
                             <s:text name="sa.pd.item.list.title" />
+                			<s:if test="%{#roles.indexOf('13201')>-1}">
                             <button type="button" class="btn btn-link btn-remove-all-item"><s:text name="sa.pd.item.btn.remove.all" /></button>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('13202')>-1}">
                             <button type="button" class="btn btn-link btn-add-item"><s:text name="sa.pd.item.btn.add" /></button>
+                            </s:if>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -645,7 +683,9 @@ $(document).ready(function() {
                                         <tr>
                                             <th>Product Id</th>
                                             <th>Product Name</th>
+                							<s:if test="%{#roles.indexOf('13203')>-1 || #roles.indexOf('13204')>-1}">
                                             <th>setting</th>
+                                            </s:if>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -148,6 +148,7 @@ var user_admin = {
 			                        			$tbody.append($tr);
 
 				              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+				              				   	$adminList.find('.panel').removeClass('display-off');
 
 				              	        		$('.bootbox.modal').modal('hide');
 			                  				}

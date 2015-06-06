@@ -9,6 +9,7 @@ var pd_attr = {
 		td : '<td></td>',
 		i_remove : '<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="<s:text name='msg.attr.remove'></s:text>"></i>',
 		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.attr.edit'></s:text>"></i>',
+		roles : '<s:property value="#session.yiqin_sa_user_roles" />',
 	},
 	initCategory : function() {
 		pd_attr.loadFirstCategory();
@@ -215,19 +216,30 @@ var pd_attr = {
 			var _filterType = $(pd_attr.conf.td).html(val.filterType);
 			var _showValue = $(pd_attr.conf.td).html(val.showValue);
 			var _sort = $(pd_attr.conf.td).html(val.sort);
-			var $iRemove = $(pd_attr.conf.i_remove);
-			$iRemove.on('click', function() {
-				pd_attr.removeAttr(val.id, val.name);
-			});
-			var $iEdit = $(pd_attr.conf.i_edit);
-			$iEdit.on('click', function() {
-				pd_attr.modifyAttr(val.id);
-			});
-			var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
 
 			$tr.append(_id).append(_nameId).append(_name).append(_value)
 				.append(_categoryId).append(_filter).append(_filterType)
-				.append(_showValue).append(_sort).append(_setting);
+				.append(_showValue).append(_sort);
+
+			var roles = pd_attr.conf.roles;
+			var $iRemove = '';
+			if (roles.indexOf('13103') > -1) {
+				$iRemove = $(pd_attr.conf.i_remove);
+				$iRemove.on('click', function() {
+					pd_attr.removeAttr(val.id, val.name);
+				});
+			}
+			var $iEdit = '';
+			if (roles.indexOf('13104') > -1) {
+				$iEdit = $(pd_attr.conf.i_edit);
+				$iEdit.on('click', function() {
+					pd_attr.modifyAttr(val.id);
+				});
+			}
+			if ($iRemove.length > 0 || $iEdit.length > 0) {
+				var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
+				$tr.append(_setting);
+			}
 
 			$tbody.append($tr);
 		});
@@ -468,19 +480,29 @@ var pd_attr = {
 	           						var _filterType = $(pd_attr.conf.td).html(data.filterType);
 	           						var _showValue = $(pd_attr.conf.td).html(data.showValue);
 	           						var _sort = $(pd_attr.conf.td).html(data.sort);
-	           						var $iRemove = $(pd_attr.conf.i_remove);
-	           						$iRemove.on('click', function() {
-	           							pd_attr.removeAttr(data.id, data.name);
-	           						});
-	           						var $iEdit = $(pd_attr.conf.i_edit);
-	           						$iEdit.on('click', function() {
-	           							pd_attr.modifyAttr(data.id);
-	           						});
-	           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
-	
 	           						$tr.append(_id).append(_nameId).append(_name).append(_value)
 	           							.append(_categoryId).append(_filter).append(_filterType)
-	           							.append(_showValue).append(_sort).append(_setting);
+	           							.append(_showValue).append(_sort);
+
+	           						var roles = pd_attr.conf.roles;
+	           						var $iRemove = '';
+	           						if (roles.indexOf('13103') > -1) {
+		           						$iRemove = $(pd_attr.conf.i_remove);
+		           						$iRemove.on('click', function() {
+		           							pd_attr.removeAttr(data.id, data.name);
+		           						});
+	           						}
+	           						var $iEdit = '';
+	           						if (roles.indexOf('13104') > -1) {
+		           						$iEdit = $(pd_attr.conf.i_edit);
+		           						$iEdit.on('click', function() {
+		           							pd_attr.modifyAttr(data.id);
+		           						});
+	           						}
+	           						if ($iRemove.length > 0 || $iEdit.length > 0) {
+		           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
+		           						$tr.append(_setting);
+	           						}
 	
 	           						$tbody.append($tr);
 	
@@ -627,19 +649,30 @@ var pd_attr = {
 	           						var _filterType = $(pd_attr.conf.td).html(data.filterType);
 	           						var _showValue = $(pd_attr.conf.td).html(data.showValue);
 	           						var _sort = $(pd_attr.conf.td).html(data.sort);
-	           						var $iRemove = $(pd_attr.conf.i_remove);
-	           						$iRemove.on('click', function() {
-	           							pd_attr.removeAttr(data.id, data.name);
-	           						});
-	           						var $iEdit = $(pd_attr.conf.i_edit);
-	           						$iEdit.on('click', function() {
-	           							pd_attr.modifyAttr(data.id);
-	           						});
-	           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
-	
 	           						$tr.empty().append(_id).append(_nameId).append(_name).append(_value)
 	           							.append(_categoryId).append(_filter).append(_filterType)
-	           							.append(_showValue).append(_sort).append(_setting);
+	           							.append(_showValue).append(_sort);
+
+	           						var roles = pd_attr.conf.roles;
+	           						var $iRemove = '';
+	           						if (roles.indexOf('13103') > -1) {
+		           						$iRemove = $(pd_attr.conf.i_remove);
+		           						$iRemove.on('click', function() {
+		           							pd_attr.removeAttr(data.id, data.name);
+		           						});
+	           						}
+	           						var $iEdit = '';
+	           						if (roles.indexOf('13104') > -1) {
+		           						$iEdit = $(pd_attr.conf.i_edit);
+		           						$iEdit.on('click', function() {
+		           							pd_attr.modifyAttr(data.id);
+		           						});
+	           						}
+
+	           						if ($iRemove.length > 0 || $iEdit.length > 0) {
+		           						var _setting = $(pd_attr.conf.td).append($iRemove).append(" ").append($iEdit);
+		           						$tr.append(_setting);
+	           						}
 	
 	              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
 	              				}
@@ -708,8 +741,12 @@ $(document).ready(function() {
                     <div class="panel panel-default attr-panel display-off">
                         <div class="panel-heading">
                             <s:text name="sa.pd.attr.list.title" />
+                			<s:if test="%{#roles.indexOf('13101')>-1}">
                             <button type="button" class="btn btn-link btn-remove-all-attr"><s:text name="sa.pd.attr.btn.remove.all" /></button>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('13102')>-1}">
                             <button type="button" class="btn btn-link btn-add-attr"><s:text name="sa.pd.attr.btn.add" /></button>
+                            </s:if>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -726,7 +763,9 @@ $(document).ready(function() {
                                             <th>filterType</th>
                                             <th>showValue</th>
                                             <th>sort</th>
+                							<s:if test="%{#roles.indexOf('13103')>-1 || #roles.indexOf('13104')>-1}">
                                             <th>setting</th>
+                                            </s:if>
                                         </tr>
                                     </thead>
                                     <tbody>

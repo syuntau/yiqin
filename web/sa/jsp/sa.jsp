@@ -37,7 +37,7 @@ var user_sa = {
 			},5000);
 			
 			return ;
-		} else {console.log("oldPass : "+oldPass+", newPass:"+newPass+", confirmPass : "+confirmNewPass);
+		} else {
 			if (newPass != confirmNewPass) {
 				$tip.addClass(user_sa.conf.cls_danger).find('strong').html("<s:text name='msg.err.confirm.pass'/>");
 				$msg.append($tip);
@@ -100,7 +100,14 @@ $(document).ready(function() {
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"><s:text name="sa.header.user.sa" /></h1>
+                    <h1 class="page-header">
+                		<s:if test="%{#roles.indexOf('12100')>-1}">
+                    	<s:text name="sa.header.user.sa" />
+                    	</s:if>
+                		<s:if test="%{#roles.indexOf('12400')>-1}">
+                    	<s:text name="sa.header.user.admin" />
+                		</s:if>
+                    </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -108,7 +115,10 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><s:text name="sa.user.lbl.sa" /><span class="msg-info" style="margin-left:50px;"></span></div>
+                        <div class="panel-heading">
+                        	<s:text name="sa.user.lbl.sa" />
+                        	<span class="msg-info" style="margin-left:50px;"></span>
+                        </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">

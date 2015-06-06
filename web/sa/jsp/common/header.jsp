@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+
+<s:set name="roles" value="#session.yiqin_sa_user_roles"/>
 <script type="text/javascript">
 var template = {
 	dispatcher : '/sa/dispatcher',
@@ -71,51 +73,62 @@ $(document).ready(function() {
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
+                	<s:if test="%{#roles.indexOf('11000')>-1}">
                     <li>
                         <a href="#" class="side-menu-a" val="order-manager"><i class="fa fa-table fa-fw"></i> <s:text name="sa.header.order" /></a>
                     </li>
-<!--                     <li class="side-menu-li"> -->
-<%--                         <a href="#"><i class="fa fa-table fa-fw"></i> <s:text name="sa.header.order" /><span class="fa arrow"></span></a> --%>
-<!--                         <ul class="nav nav-second-level"> -->
-<!--                             <li> -->
-<%--                                 <a href="#" class="side-menu-a" val="order-manager"><s:text name="sa.header.order" /></a> --%>
-<!--                             </li> -->
-<!--                             <li> -->
-<%--                                 <a href="#" class="side-menu-a" val="order-detail"><s:text name="sa.header.order.detail" /></a> --%>
-<!--                             </li> -->
-<!--                         </ul> -->
-                        <!-- /.nav-second-level -->
-                    </li>
+                    </s:if>
+                	<s:if test="%{#roles.indexOf('12000')>-1}">
                     <li class="side-menu-li">
                         <a href="#"><i class="fa fa-user fa-fw"></i> <s:text name="sa.header.user" /><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                			<s:if test="%{#roles.indexOf('12100')>-1}">
                             <li>
                                 <a href="#" class="side-menu-a" val="user-sa"><s:text name="sa.header.user.sa" /></a>
                             </li>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('12200')>-1}">
                             <li>
                                 <a href="#" class="side-menu-a" val="user-admin"><s:text name="sa.header.user.admin" /></a>
                             </li>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('12400')>-1}">
+                            <li>
+                                <a href="#" class="side-menu-a" val="user-sa"><s:text name="sa.header.user.admin" /></a>
+                            </li>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('12300')>-1}">
                             <li>
                                 <a href="#" val="customer-manage" class="side-menu-a"><s:text name="sa.header.customer.manage" /></a>
                             </li>
+                            </s:if>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    </s:if>
+                	<s:if test="%{#roles.indexOf('13000')>-1}">
                     <li class="side-menu-li">
                         <a href="#"><i class="fa fa-qrcode fa-fw"></i> <s:text name="sa.header.product" /><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                			<s:if test="%{#roles.indexOf('13100')>-1}">
                             <li>
                                 <a href="#" class="side-menu-a" val="product-attribute"><s:text name="sa.header.product.attribute" /></a>
                             </li>
+                            </s:if>
+                			<s:if test="%{#roles.indexOf('13200')>-1}">
                             <li>
                                 <a href="#" class="side-menu-a" val="product-item"><s:text name="sa.header.product.item" /></a>
                             </li>
+                            </s:if>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    </s:if>
+                	<s:if test="%{#roles.indexOf('14000')>-1}">
                     <li>
                         <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-shopping-cart fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
                     </li>
+                    </s:if>
 <!--                     <li class="side-menu-li"> -->
 <%--                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> <s:text name="sa.header.inventory" /><span class="fa arrow"></span></a> --%>
 <!--                         <ul class="nav nav-second-level"> -->

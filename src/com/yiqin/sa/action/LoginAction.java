@@ -101,6 +101,8 @@ public class LoginAction extends ActionSupport implements ServletResponseAware,
 			response.addCookie(cookie);
 		}
 		session.put(LoginSAInterceptor.USER_SESSION_KEY, user);
+		String roles = getText("sa.role." + user.getRole());
+		session.put("yiqin_sa_user_roles", roles);
 //		String goingToURL = (String) session.get(LoginSAInterceptor.GOING_TO_URL_KEY);
 //		if (Util.isNotEmpty(goingToURL)) {
 //			setGoingToURL(goingToURL);
