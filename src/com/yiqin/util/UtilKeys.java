@@ -31,6 +31,7 @@ public class UtilKeys {
 	public static final String FROM_EMAIL_PASSWORD = "from.email.password";
 	public static final String SEND_NAME_EMAIL = "send.name.email";
 	
+	public static final String NEW_ADD_ORDER_TITLE = "new.add.order.title";
 	public static final String MODIFY_PWD_TITLE = "modify.passowrd.title";
 	public static final String MODIFY_EMAIL_TITLE = "modify.email.title";
 	public static final String VERIFICATION_EMAIL_TITLE = "verification.email.title";

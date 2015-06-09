@@ -15,6 +15,8 @@ import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.service.UserManager;
+import com.yiqin.util.Configuration;
+import com.yiqin.util.MailUtil;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
@@ -137,6 +139,8 @@ public class SubmitOrderAction extends ActionSupport {
 			if (flag) {
 				//删除购物车记录
 				shoppingManager.deleteCartProduct(cartList);
+				// 发送提醒邮件
+				toMailOrderInfo(order, cartList);
 			} else {
 				return ERROR;
 			}
@@ -146,5 +150,45 @@ public class SubmitOrderAction extends ActionSupport {
 			e.printStackTrace();
 			return ERROR;
 		}
+	}
+	
+	private void toMailOrderInfo(Order order,List<Cart> cartList) throws Exception{
+		// 收件人地址
+		String toEmail = "lj520qz@qq.com";//Configuration.getProperty(UtilKeys.FROM_EMAIL);
+		// 发件人名称
+		String senderName = Configuration.getProperty(UtilKeys.SEND_NAME_EMAIL);
+		// 发件人地址
+		String fromEmail = Configuration.getProperty(UtilKeys.FROM_EMAIL);
+		// 发件密码
+		String fromPwd = Configuration.getProperty(UtilKeys.FROM_EMAIL_PASSWORD);
+		// 邮件服务器
+		String smtpServer = Configuration.getProperty(UtilKeys.MAIL_SERVER_HOST);
+		// 邮件主题
+		String emailTitle = Configuration.getProperty(UtilKeys.NEW_ADD_ORDER_TITLE);
+		// 邮件内容
+		String emailContent = getHtmlString(order, cartList);
+
+		MailUtil mail = new MailUtil(smtpServer, fromEmail, senderName, fromEmail, fromPwd, toEmail, emailTitle, emailContent);
+		mail.sendMessage();
+	}
+	
+	private String getHtmlString(Order order,List<Cart> cartList) {
+		StringBuilder content = new StringBuilder();
+		content.append("新增订单提醒：<br/>");
+		if(order != null){
+			content.append("<div>　订单号：").append(order.getId()).append("　客服ID：").append(order.getUserId());
+			content.append("　联系电话：").append(order.getMobile()).append("　订单折扣：").append(order.getZhekou());
+			content.append("　订单总价：").append(order.getZongjia()).append("元<br/>");
+			content.append("　送货地址：").append(order.getAddress()).append("</div><br/>");
+			
+			if(Util.isNotEmpty(cartList)){
+				content.append("<div>所购商品详细信息：<br/>");
+				for(Cart cart : cartList){
+					content.append("　商品ID：").append(cart.getProductId()).append("　名称：").append(cart.getProductName());
+					content.append("　数量：").append(cart.getCount()).append("　总价：").append(cart.getZhekouPrice()).append("<br/>");
+				}
+			}
+		}
+		return content.toString();
 	}
 }
