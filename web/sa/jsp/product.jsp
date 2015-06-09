@@ -98,7 +98,7 @@ var pd_item = {
 	},
 	hideItem : function() {
 		$('.item-hr').addClass('display-off');
-		$('.upload-item').addClass('display-off');
+// 		$('.upload-item').addClass('display-off');
 		$('.item-section .item-panel').addClass('display-off');
 		$('.item-section .item-panel').parent().find('span').remove();
 	},
@@ -136,10 +136,10 @@ var pd_item = {
 				if (data=='1') {
 					$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 				} else if (data=='2') {
-					$('.upload-item').removeClass('display-off');
+// 					$('.upload-item').removeClass('display-off');
 					$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.item' /></s:param></s:text></span>");
 				} else if (data=='4') {
-					$('.upload-item').removeClass('display-off');
+// 					$('.upload-item').removeClass('display-off');
 					$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.fail.do'><s:param><s:text name='msg.param.query' /></s:param></s:text></span>");
 				} else {
 					pd_item.editItemsTbl(data);
@@ -148,7 +148,7 @@ var pd_item = {
             beforeSend: function() {
             	$itemHR.removeClass('display-off');
            		$itemDiv.find('span').remove();
-				$('.upload-item').addClass('display-off');
+// 				$('.upload-item').addClass('display-off');
            		$itemDiv.find('.item-panel').addClass('display-off');
            		var $tbody = $itemDiv.find('tbody');
            		$tbody.empty();
@@ -157,6 +157,7 @@ var pd_item = {
         	},
             complete: function() {
             	$itemDiv.find('.fa-refresh').parent().remove();
+            	$('.upload-item').removeClass('display-off');
             }
 		});
 	},
@@ -193,19 +194,21 @@ var pd_item = {
 	           	if (data=='1') {
 	           		$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	} else if (data=='2') {
-					$('.upload-item').removeClass('display-off');
+// 					$('.upload-item').removeClass('display-off');
 		           	$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.item' /></s:param></s:text></span>");
 	           	} else if (data=='3') {
-					$('.upload-item').removeClass('display-off');
+// 					$('.upload-item').removeClass('display-off');
 			        $itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.err.db'></s:text></span>");
 		        } else {
 	           		pd_item.editItemsTbl(data);
 	           	}
 	           	$itemDiv.find('.fa-refresh').parent().remove();
+				$('.upload-item').removeClass('display-off');
             },
             error : function(data,status,e) {
             	alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.upload' /></s:param></s:text>");
 	           	$itemDiv.find('.fa-refresh').parent().remove();
+	           	$('.upload-item').removeClass('display-off');
             }
 		});
 	},
@@ -653,9 +656,9 @@ $(document).ready(function() {
                         
                         <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
                         <div class="form-group" style="padding-left:20px">
-                            <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item display-off">
+                            <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item ">
                         </div>
-                        <button type="button" class="btn btn-info btn-upload upload-item display-off"><s:text name="sa.btn.upload" /></button>
+                        <button type="button" class="btn btn-info btn-upload upload-item "><s:text name="sa.btn.upload" /></button>
                     </form>
                 </div>
                 <!-- /.col-lg-12 -->

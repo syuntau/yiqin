@@ -98,12 +98,15 @@ public class UploadItemAction extends ActionSupport {
 					String categoryId = String.valueOf(header.get(0));
 					header = header.subList(1, header.size());
 					list = list.subList(2, list.size());
+					StringBuilder sb = new StringBuilder();
 					for (List<Object> attrList : list) {
 						String productId = String.valueOf(attrList.get(0));
+						sb.append(",").append("'").append(productId).append("'");
 						attrList = attrList.subList(1, attrList.size());
 						int i = 0;
 						for (Object attr : attrList) {
 							if (UtilKeys.BLANK_HASH.equals(attr)) {
+								i++;
 								continue;
 							}
 							Product item = new Product();
@@ -115,6 +118,7 @@ public class UploadItemAction extends ActionSupport {
 					}
 
 					try {
+						productManager.deleteProducts(sb.substring(1));
 						productManager.saveProduct(pList);
 					} catch(DataAccessException dbe) {
 						System.out.println("error in UploadItemAction.uploadItems for db exception");

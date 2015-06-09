@@ -165,6 +165,14 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	}
 
 	@Override
+	public void deleteProductByIds(String pids) throws DataAccessException {
+		List<Product> list = findProductInfoById(pids);
+		if (Util.isNotEmpty(list)) {
+			getHibernateTemplate().deleteAll(list);
+		}
+	}
+
+	@Override
 	public void deleteProductById(String id) throws DataAccessException {
 		List<Product> list = findProductInfoById(id);
 		if (Util.isNotEmpty(list)) {
