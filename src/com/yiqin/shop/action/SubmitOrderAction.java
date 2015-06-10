@@ -154,7 +154,7 @@ public class SubmitOrderAction extends ActionSupport {
 	
 	private void toMailOrderInfo(Order order,List<Cart> cartList) throws Exception{
 		// 收件人地址
-		String toEmail = "lj520qz@qq.com";//Configuration.getProperty(UtilKeys.FROM_EMAIL);
+		String toEmail = Configuration.getProperty(UtilKeys.FROM_EMAIL);
 		// 发件人名称
 		String senderName = Configuration.getProperty(UtilKeys.SEND_NAME_EMAIL);
 		// 发件人地址
