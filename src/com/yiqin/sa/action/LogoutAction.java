@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.sa.interceptor.LoginSAInterceptor;
 
 public class LogoutAction extends ActionSupport implements ServletRequestAware,	ServletResponseAware {
+	
+	private static final long serialVersionUID = 8899556798776026251L;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 

@@ -15,7 +15,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.dao.IUserDao;
 import com.yiqin.pojo.SAUser;
 import com.yiqin.sa.interceptor.LoginSAInterceptor;
-import com.yiqin.util.Util;
 
 public class LoginAction extends ActionSupport implements ServletResponseAware,
 		ServletRequestAware, SessionAware, CookiesAware {
