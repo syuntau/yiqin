@@ -164,7 +164,7 @@ public class SubmitOrderAction extends ActionSupport {
 		// 邮件服务器
 		String smtpServer = Configuration.getProperty(UtilKeys.MAIL_SERVER_HOST);
 		// 邮件主题
-		String emailTitle = Configuration.getProperty(UtilKeys.NEW_ADD_ORDER_TITLE);
+		String emailTitle = "客户("+order.getId()+")"+Configuration.getProperty(UtilKeys.NEW_ADD_ORDER_TITLE);
 		// 邮件内容
 		String emailContent = getHtmlString(order, cartList);
 

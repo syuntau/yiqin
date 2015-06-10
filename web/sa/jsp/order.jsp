@@ -100,6 +100,10 @@ var sa_order = function(){
 			 $('#order_search_btn').on('click', function() {
 				 sa_order.orderSearch();
 			 });
+			 
+			 $('#order_export_btn').on('click', function() {
+				 sa_order.exportOrderExcel();
+			 });
 		},
 			
 		orderSearch : function(){
@@ -110,6 +114,16 @@ var sa_order = function(){
 			window.location.href = "findSAOrderList?startTime="+startTime+"&endTime="+endTime+"&userId="+userId;
 		},
 		
+		exportOrderExcel : function(){
+			<s:if test="page.results==null">
+				alert("没有要导出的订单数据");
+				return;
+			</s:if>
+			var startTime = "<s:property value='startTime'/>",
+				endTime = "<s:property value='endTime'/>",
+				userId = "<s:property value='userId'/>";
+			window.location.href = "exportOrderExcel?startTime="+startTime+"&endTime="+endTime+"&userId="+userId;
+		},
 	};
 	
 	var toIndexPage = function(pageIndex){
@@ -153,6 +167,8 @@ $(document).ready(function(){
                             <input type="text" class="form-control" name="endTime"  onclick="WdatePicker()"></input>
                         </div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
+                        
+                        <button type="button" style="margin-left:130px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
                     </form>
                 </div>
 				<table class="table table-condensed">

@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -42,6 +43,7 @@ public class FindSAOrderListAction extends ActionSupport {
 
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpServletRequest request = ServletActionContext.getRequest();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			Date startDate = null;
@@ -96,6 +98,7 @@ public class FindSAOrderListAction extends ActionSupport {
 			// 分页对象
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(orderList);
+			request.getSession().setAttribute("export_order", page);
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
