@@ -175,6 +175,7 @@ public interface ProductManager {
 	public void deleteAllProduct(String categoryId) throws DataAccessException;
 
 	public void deleteProduct(String productId) throws DataAccessException;
+	public void deleteProducts(String pids) throws DataAccessException;
 
 	public void saveProduct(List<Product> list) throws DataAccessException;
 

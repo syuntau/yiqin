@@ -557,6 +557,11 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
+	public void deleteProducts(String pids) throws DataAccessException {
+		productDao.deleteProductByIds(pids);
+	}
+
+	@Override
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException {
 		productDao.deleteProductByAttributeId(attributeId);
 	}
