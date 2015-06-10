@@ -221,7 +221,7 @@ var yiqin_my_set = function(){
 			name = $modal.find("input[name=name]").val().replace(REX, ""),
 			telephone = $modal.find("input[name=telephone]").val().replace(REX, ""),
 			company = $modal.find("input[name=company]").val().replace(REX, ""),
-			role_type = $("input:checked[name=role_type]").val();
+			role_type = 1;//$("input:checked[name=role_type]").val();
 			if (!checkName(name)) {
 				$modal.find("input[name='name']").focus();
 				msg = "真实姓名不能包含特殊字符";
@@ -327,32 +327,38 @@ $(document).ready(function(){
 						<a href="javaScript:;" data-toggle="modal" data-target="#modify_email_alert">修改</a>
 						<span class="ftx-03" id="email_verify_type"></span>
 					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-sm-6">
-			<h5><b>用户类型</b></h5>
-			<div class="chose_area">
-				<ul class="user_option">
 					<li>
-						<input type="radio" name="role_type" value="1" checked="checked">
-						<label>个人用户</label>
-					</li>
-					<li>
-						<input type="radio" name="role_type" value="2">
-						<label>企业用户</label>
+						<label>公司地址：</label>
+						<input type="text" name="company" value="<s:property value="#session.userInfo.company"/>">
 					</li>
 				</ul>
 			</div>
-			<ul class="user_option" style="margin-top: 30px;">
-				<li>
-					<label>公司地址：</label>
-					<input type="text" name="company" value="<s:property value="#session.userInfo.company"/>">
-				</li>
-			</ul>
+			<a style="margin-left:300px;" class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a>
+			<span style="color:red" id="receive_error_normal"></span>
 		</div>
-		<a class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a>
-		<span style="color:red" id="receive_error_normal"></span>
+<!-- 		<div class="col-sm-6"> -->
+<!-- 			<h5><b>用户类型</b></h5> -->
+<!-- 			<div class="chose_area"> -->
+<!-- 				<ul class="user_option"> -->
+<!-- 					<li> -->
+<!-- 						<input type="radio" name="role_type" value="1" checked="checked"> -->
+<!-- 						<label>个人用户</label> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<input type="radio" name="role_type" value="2"> -->
+<!-- 						<label>企业用户</label> -->
+<!-- 					</li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<ul class="user_option" style="margin-top: 30px;"> -->
+<!-- 				<li> -->
+<!-- 					<label>公司地址：</label> -->
+<%-- 					<input type="text" name="company" value="<s:property value="#session.userInfo.company"/>"> --%>
+<!-- 				</li> -->
+<!-- 			</ul> -->
+<!-- 		</div> -->
+<!-- 		<a class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a> -->
+<%-- 		<span style="color:red" id="receive_error_normal"></span> --%>
 	</div> 
 </div>
 
