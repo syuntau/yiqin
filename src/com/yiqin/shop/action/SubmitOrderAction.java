@@ -174,18 +174,19 @@ public class SubmitOrderAction extends ActionSupport {
 	
 	private String getHtmlString(Order order,List<Cart> cartList) {
 		StringBuilder content = new StringBuilder();
-		content.append("新增订单提醒：<br/>");
+		String pBeg = "<span style=\"font-size:14px;font-weight:bold;\">", pEnd = "</span>";
+		content.append("新增订单信息：<br/>");
 		if(order != null){
-			content.append("<div>　订单号：").append(order.getId()).append("　客服ID：").append(order.getUserId());
-			content.append("　联系电话：").append(order.getMobile()).append("　订单折扣：").append(order.getZhekou());
-			content.append("　订单总价：").append(order.getZongjia()).append("元<br/>");
-			content.append("　送货地址：").append(order.getAddress()).append("</div><br/>");
+			content.append("<div>").append(pBeg).append("　订单号：").append(pEnd).append(order.getId()).append(pBeg).append("　客服ID：").append(pEnd).append(order.getUserId());
+			content.append(pBeg).append("　联系电话：").append(pEnd).append(order.getMobile()).append(pBeg).append("　订单折扣：").append(pEnd).append(order.getZhekou());
+			content.append(pBeg).append("　订单总价：").append(pEnd).append(order.getZongjia()).append("元<br/>");
+			content.append(pBeg).append("　送货地址：").append(pEnd).append(order.getAddress()).append("</div><br/>");
 			
 			if(Util.isNotEmpty(cartList)){
 				content.append("<div>所购商品详细信息：<br/>");
 				for(Cart cart : cartList){
-					content.append("　商品ID：").append(cart.getProductId()).append("　名称：").append(cart.getProductName());
-					content.append("　数量：").append(cart.getCount()).append("　总价：").append(cart.getZhekouPrice()).append("<br/>");
+					content.append(pBeg).append("　商品ID：").append(pEnd).append(cart.getProductId()).append(pBeg).append("　名称：").append(pEnd).append(cart.getProductName());
+					content.append(pBeg).append("　数量：").append(pEnd).append(cart.getCount()).append(pBeg).append("　总价：").append(pEnd).append(cart.getZhekouPrice()).append("<br/>");
 				}
 			}
 		}
