@@ -41,7 +41,8 @@ var yiqin_category_action = function(){
                 	if(categoryId != null && categoryId != ""){
                 		if(categoryId.length>=4){
                 			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
-                			$("#two_"+categoryId.substring(0,4)).css('color','#fdb45e');
+//                 			$("#two_"+categoryId.substring(0,4)).css('color','#fdb45e');
+                			$("#two_"+categoryId.substring(0,4)).css('color','#953408').css('font-weight','800');
                 			$("#shop_filter_div b").html($("#two_"+categoryId.substring(0,4)).html());
                 		}else{
                 			if(categoryId.length==2){
@@ -103,8 +104,9 @@ var yiqin_category_action = function(){
 			 	 $cate_li = $(category_temp.cate_li),
 			 	 $cate_panel_a = $(category_temp.cate_panel_a);
 			 
-				 $cate_div.attr('class','panel panel-default');
-				 $cate_div_heading.attr('class','panel-heading').append($cate_h4);
+				 $cate_div.attr('class','panel panel-default').css('background-color','#FE980F');
+				 $cate_div_heading.attr('class','panel-heading').css('background-color','#FE980F');
+				 $cate_div_heading.append($cate_h4);
 				 $cate_div.append($cate_div_heading);
 				 
 				 if(sub.subCategoryList.length>0){
@@ -191,5 +193,5 @@ $(document).ready(function() {
 	}
 });
 </script>
-<h2><s:text name="shop.index.left.category"/></h2>
-<div class="panel-group category-products" id="accordian"><!--category-productsr--></div><!--/category-products-->
+<h2 style="position: static;color: #FFFFFF;margin: 10px auto;"><s:text name="shop.index.left.category"/></h2>
+<div class="panel-group category-products" id="accordian" style="border: 0px;"><!--category-productsr--></div><!--/category-products-->

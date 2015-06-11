@@ -771,28 +771,28 @@ ul.sub-menu {
   z-index:3;
 }
 
-.left-sidebar h2:after, h2.title:after, .left-sidebar h3:after{
-	content: " ";
-	position: absolute;
-	border: 1px solid #f5f5f5;
-	bottom:8px;
-	left: 0;
-	width: 100%;
-	height: 0;
-	z-index: -2;
-}
+/* .left-sidebar h2:after, h2.title:after, .left-sidebar h3:after{ */
+/* 	content: " "; */
+/* 	position: absolute; */
+/* 	border: 1px solid #f5f5f5; */
+/* 	bottom:8px; */
+/* 	left: 0; */
+/* 	width: 100%; */
+/* 	height: 0; */
+/* 	z-index: -2; */
+/* } */
 
-.left-sidebar h2:before, .left-sidebar h3:before{
-	content: " ";
-	position: absolute;
-	background: #fff;
-	bottom: -6px;
-	width: 130px;
-	height: 30px;
-	z-index: -1;
-	left: 50%;
-	margin-left: -65px;
-}
+/* .left-sidebar h2:before, .left-sidebar h3:before{ */
+/* 	content: " "; */
+/* 	position: absolute; */
+/* 	background: #fff; */
+/* 	bottom: -6px; */
+/* 	width: 130px; */
+/* 	height: 30px; */
+/* 	z-index: -1; */
+/* 	left: 50%; */
+/* 	margin-left: -65px; */
+/* } */
 
 h2.title:before{
 	content: " ";
@@ -822,7 +822,8 @@ h2.title:before{
 }
 
 .category-products .panel-default .panel-heading .panel-title a {
-  color: #696763;
+/*   color: #696763; */
+  color: #FFFFFF;
   font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 14px;
   text-decoration: none;
@@ -836,7 +837,8 @@ h2.title:before{
 .category-products .badge {
   background:none;
   border-radius: 10px;
-  color: #696763;
+/*   color: #696763; */
+  color: #FFFFFF;
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
@@ -854,7 +856,8 @@ h2.title:before{
 
 
 .panel-body ul li a {
-  color: #696763;
+/*   color: #696763; */
+  color: #FFFFFF;
   font-family: Microsoft YaHei, 'Roboto', sans-serif;
   font-size: 12px;
   text-transform: uppercase;
