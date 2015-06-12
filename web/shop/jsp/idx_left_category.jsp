@@ -46,7 +46,8 @@ var yiqin_category_action = function(){
                 			$("#shop_filter_div b").html($("#two_"+categoryId.substring(0,4)).html());
                 		}else{
                 			if(categoryId.length==2){
-                				$("#first_"+categoryId).css('color','#fdb45e');
+                				//$("#first_"+categoryId).css('color','#953408');
+                				$("#aname_first_"+categoryId).css('color','#953408');
                 			}
                 		}
                 	}
@@ -110,9 +111,24 @@ var yiqin_category_action = function(){
 				 $cate_div.append($cate_div_heading);
 				 
 				 if(sub.subCategoryList.length>0){
+// 					 $cate_div.append($cate_div_coll);
+// 					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
+// 					 $cate_coll_a.append($cate_span_i).append(sub.name);
+// 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
+// 					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
+// 					 $cate_div_coll.append($cate_div_body);
+					 
 					 $cate_div.append($cate_div_coll);
+					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"aname_first_"+sub.id));
+					 $cate_panel_a.click(function(){
+						 if(category_temp.best_currentNav=="best_product_nav"){
+							 yiqin_public_js.toTilesAction(sub.id, "/findBestProduct");
+						 }else{
+							 yiqin_public_js.toTilesAction(sub.id, "/productFilter");
+						 }
+					 });
 					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
-					 $cate_coll_a.append($cate_span_i).append(sub.name);
+					 $cate_coll_a.append($cate_span_i);
 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
 					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
 					 $cate_div_coll.append($cate_div_body);
@@ -139,7 +155,8 @@ var yiqin_category_action = function(){
 							 yiqin_public_js.toTilesAction(sub.id, "/productFilter");
 						 }
 					 });
-					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
+					 //$cate_h4.append($cate_panel_a.append(sub.name).attr('id',"first_"+sub.id));
+					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"aname_first_"+sub.id));
 				 }
 				 cate_accordian.append($cate_div);
 			 });

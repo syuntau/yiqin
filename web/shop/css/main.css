@@ -1274,10 +1274,10 @@ h2.title {
   position: relative;
 }
 
-.view-product img {
+.view-product img { 
   border: 1px solid #F7F7F0;
-  height: 380px;
-  width: 100%;
+  height: 350px;
+  width: 350px;
 }
 
 .view-product h3 {

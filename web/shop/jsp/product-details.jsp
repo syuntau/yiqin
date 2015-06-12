@@ -19,11 +19,12 @@ var yiqin_product_detail = function(){
 		initProductDetail : function(){
 			$("#detail_add_cart").click(function(){
 				var productId = "<s:property value='#productId'/>",
-					customNum = $(this).prev().val(),
+					//customNum = $(this).prev().val(),
+					customNum = $("#custom_num_input").val(),
 					selName = $("#select_product_info").find("a[class*=select-a]").attr("title"),
 					REX_NUM = /^(0|[1-9][0-9]*)$/;
 					if(customNum==null || customNum=="" || !REX_NUM.test(customNum) || customNum <=0){
-						$(this).prev().val(1);
+						$("#custom_num_input").val(1);
 						return;
 					}
 					if($.type(selName)=="null" || $.type(selName)=="" || $.type(selName)=="undefined"){
@@ -33,7 +34,7 @@ var yiqin_product_detail = function(){
 				yiqin_public_js.addProductToCart(productId, customNum);
 			});
 			
-			$("#detail_add_cart").prev().bind("blur focus",function(){
+			$("#custom_num_input").bind("blur focus",function(){
 				var REX_NUM = /^(0|[1-9][0-9]*)$/,
 					customNum = $(this).val();
 				if(customNum==null || customNum=="" || !REX_NUM.test(customNum) || customNum <=0){
@@ -120,26 +121,26 @@ $(document).ready(function(){
 		<!--product-details-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="<s:property value='#productInfo.imgUrl'/>" width="329" height="380"/>
+				<img src="<s:property value='#productInfo.imgUrl'/>"/>
 				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
 					<div class="item active">
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 					<div class="item">
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href=""><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
+						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
 					</div>
 				</div>
 				<!-- Controls -->
@@ -164,11 +165,11 @@ $(document).ready(function(){
 						</p>
 					</span>
 					<label><s:text name="cart.item.quantity" />:</label>
-					<input type="text" value="1" />
-					<button type="button" class="btn btn-fefault cart" id="detail_add_cart">
-						<i class="fa fa-shopping-cart"></i>
-						<s:text name="shop.add.to.cart" />
-					</button>
+					<input type="text" value="1" id="custom_num_input"/>
+<!-- 					<button type="button" class="btn btn-fefault cart" id="detail_add_cart"> -->
+<!-- 						<i class="fa fa-shopping-cart"></i> -->
+<%-- 						<s:text name="shop.add.to.cart" /> --%>
+<!-- 					</button> -->
 				</span>
 				<div id="select_product_info">
 					<p>
@@ -183,6 +184,10 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
+			<button type="button" class="btn btn-fefault cart" id="detail_add_cart" style="margin-left:50px;">
+				<i class="fa fa-shopping-cart"></i>
+				<s:text name="shop.add.to.cart" />
+			</button>
 			<!--/product-information-->
 		</div>
 	</div>
