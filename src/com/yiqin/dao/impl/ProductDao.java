@@ -210,11 +210,11 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			if(value.contains("-")){
 				String[] prices = value.split("-");
 				if(prices.length==2){
-					queryString = "from Product where attributeId = ? and value between ? and ?";
-					param = new Object[]{attrId, prices[0], prices[1]};
+					queryString = "from Product where attributeId = ? and value >= "+prices[0]+" and value <= "+prices[1];
+					param = new Object[]{attrId};
 				}else{
-					queryString = "from Product where attributeId = ? and value >= ?";
-					param = new Object[]{attrId, prices[0]};
+					queryString = "from Product where attributeId = ? and value >= "+prices[0];
+					param = new Object[]{attrId};
 				}
 			}
 		}

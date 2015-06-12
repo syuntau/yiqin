@@ -638,7 +638,10 @@ public class ProductManagerImpl implements ProductManager {
 		if (productFilter == null) {
 			return null;
 		}
-		Set<String> setPid = new HashSet<String>();
+		Set<String> resultPid = new HashSet<String>();
+		Set<String> brandPid = new HashSet<String>();
+		Set<String> colorPid = new HashSet<String>();
+		Set<String> pricePid = new HashSet<String>();
 		List<Product> resultList = new ArrayList<Product>();
 		boolean flag = false;
 		// 品牌
@@ -649,7 +652,7 @@ public class ProductManagerImpl implements ProductManager {
 				return null;
 			}
 			for (Product p : resultList) {
-				setPid.add(p.getProductId());
+				brandPid.add(p.getProductId());
 			}
 			flag = true;
 		}
@@ -661,7 +664,7 @@ public class ProductManagerImpl implements ProductManager {
 				return null;
 			}
 			for (Product p : resultList) {
-				setPid.add(p.getProductId());
+				colorPid.add(p.getProductId());
 			}
 			flag = true;
 		}
@@ -673,9 +676,41 @@ public class ProductManagerImpl implements ProductManager {
 				return null;
 			}
 			for (Product p : resultList) {
-				setPid.add(p.getProductId());
+				pricePid.add(p.getProductId());
 			}
 			flag = true;
+		}
+		
+		if(brandPid.size() > 0 && colorPid.size() > 0 && pricePid.size() > 0){
+			for (String pid : brandPid) {
+				if(colorPid.contains(pid) && pricePid.contains(pid)){
+					resultPid.add(pid);
+				}
+			}
+		}else if(brandPid.size() > 0 && colorPid.size() >0){
+			for (String pid : brandPid) {
+				if(colorPid.contains(pid)){
+					resultPid.add(pid);
+				}
+			}
+		}else if(brandPid.size() > 0 && pricePid.size() > 0){
+			for (String pid : brandPid) {
+				if(pricePid.contains(pid)){
+					resultPid.add(pid);
+				}
+			}
+		}else if(colorPid.size() > 0 && pricePid.size() > 0){
+			for (String pid : colorPid) {
+				if(pricePid.contains(pid)){
+					resultPid.add(pid);
+				}
+			}
+		}else if(brandPid.size() > 0){
+			resultPid = brandPid;
+		}else if(colorPid.size() > 0){
+			resultPid = colorPid;
+		}else if(pricePid.size() > 0){
+			resultPid = pricePid;
 		}
 		
 		// 分类
@@ -685,10 +720,10 @@ public class ProductManagerImpl implements ProductManager {
 				return null;
 			}
 			for (Product p : resultList) {
-				setPid.add(p.getProductId());
+				resultPid.add(p.getProductId());
 			}
 		}
-		return setPid;
+		return resultPid;
 	}
 	
 	private Set<String> findProductIdsByUserId(String userId,String cateId){
