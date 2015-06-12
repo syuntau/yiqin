@@ -130,19 +130,22 @@ public class ProductManagerImpl implements ProductManager {
 		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
 		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
 		
+		Set<String> cateId4wei = new HashSet<String>();
 		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
 		for (String pid : pidSet) {
 			Map<Integer,String> attrid_pvalue = new HashMap<Integer,String>();
 			productMap.put(pid, attrid_pvalue);
+			cateId4wei.add(pid.substring(0, 4));
 			for(Product product : productList){
 				if (pid.equals(product.getProductId())) {
 					attrid_pvalue.put(product.getAttributeId(), product.getValue());
 				}
 			}
 		}
+		Map<String, Map<Integer, List<String>>> attrMap = getAttributeMapByCategory4WeiId(cateId4wei);
+		
 		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
-			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
-			id_nameid = initAttributeToMap(categoryId);
+			id_nameid = attrMap.get(entry.getKey().substring(0, 4));
 			
 			Map<Integer,String> attrid_pvalueMap = entry.getValue();
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
@@ -157,6 +160,17 @@ public class ProductManagerImpl implements ProductManager {
 			}
 		}
 		return resultMap;
+	}
+	
+	private Map<String, Map<Integer, List<String>>> getAttributeMapByCategory4WeiId(Set<String> cate4WeiId) {
+		Map<String, Map<Integer, List<String>>> map = new HashMap<String, Map<Integer, List<String>>>();
+		if (cate4WeiId == null || cate4WeiId.size() == 0) {
+			return map;
+		}
+		for (String c4id : cate4WeiId) {
+			map.put(c4id, initAttributeToMap(Integer.valueOf(c4id)));
+		}
+		return map;
 	}
 	
 	private String getBrandShowName(Integer brandId) {
@@ -198,19 +212,23 @@ public class ProductManagerImpl implements ProductManager {
 		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
 		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
 		
+		Set<String> cateId4wei = new HashSet<String>();
 		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
 		for (String pid : pidSet) {
 			Map<Integer,String> attrid_pvalue = new HashMap<Integer,String>();
 			productMap.put(pid, attrid_pvalue);
+			cateId4wei.add(pid.substring(0, 4));
 			for(Product product : productList){
 				if (pid.equals(product.getProductId())) {
 					attrid_pvalue.put(product.getAttributeId(), product.getValue());
 				}
 			}
 		}
+		Map<String, Map<Integer, List<String>>> attrMap = getAttributeMapByCategory4WeiId(cateId4wei);
 		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
-			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
-			id_nameid = initAttributeToMap(categoryId);
+			id_nameid = attrMap.get(entry.getKey().substring(0, 4));
+//			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
+//			id_nameid = initAttributeToMap(categoryId);
 			
 			Map<Integer,String> attrid_pvalueMap = entry.getValue();
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
@@ -293,25 +311,30 @@ public class ProductManagerImpl implements ProductManager {
 		Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
 		Map<Integer, List<String>> id_nameid= new HashMap<Integer, List<String>>();
 		
-		if (categorys.length() >= 4) {
-			id_nameid = initAttributeToMap(Integer.valueOf(categorys));
-		}
+//		if (categorys.length() >= 4) {
+//			id_nameid = initAttributeToMap(Integer.valueOf(categorys));
+//		}
 		
+		Set<String> cateId4wei = new HashSet<String>();
 		Map<String,Map<Integer,String>> productMap = new HashMap<String,Map<Integer,String>>();
 		for (String pid : pidSet) {
 			Map<Integer,String> attrid_pvalue = new HashMap<Integer,String>();
 			productMap.put(pid, attrid_pvalue);
+			cateId4wei.add(pid.substring(0, 4));
 			for(Product product : productList){
 				if (pid.equals(product.getProductId())) {
 					attrid_pvalue.put(product.getAttributeId(), product.getValue());
 				}
 			}
 		}
+		Map<String, Map<Integer, List<String>>> attrMap = getAttributeMapByCategory4WeiId(cateId4wei);
+		
 		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
-			if (categorys.length() < 4) {
-				int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
-				id_nameid = initAttributeToMap(categoryId);
-			}
+			id_nameid = attrMap.get(entry.getKey().substring(0, 4));
+//			if (categorys.length() < 4) {
+//				int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
+//				id_nameid = initAttributeToMap(categoryId);
+//			}
 			Map<Integer,String> attrid_pvalueMap = entry.getValue();
 			Map<String,String> nameid_pvalue = new HashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);

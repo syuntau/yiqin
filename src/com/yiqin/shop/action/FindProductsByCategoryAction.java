@@ -12,8 +12,11 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
+import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.Configuration;
 import com.yiqin.util.Util;
+import com.yiqin.util.UtilKeys;
 
 /**
  * 根据分类ID查询商品
@@ -24,7 +27,10 @@ import com.yiqin.util.Util;
 public class FindProductsByCategoryAction extends ActionSupport {
 
 	private static final long serialVersionUID = -6676005768684862992L;
-
+	// 每页显示的条目数目
+	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_FILTER_PRODUCT_MAX_PAGE_SIZE));
+	// 当前页号
+	private int pageNo = 0;
 	// 分类ID
 	private String categoryId;
 
@@ -61,7 +67,16 @@ public class FindProductsByCategoryAction extends ActionSupport {
 				if (loginUser != null) {
 					userId = loginUser.getId();
 				}
-				List<ProductView> product = productManager.findProductInfo(userId, categoryId);
+				//List<ProductView> product = productManager.findProductInfo(userId, categoryId);
+				// 查询过滤总数
+				ProductFilter productFilter = new ProductFilter(userId, categoryId, null,
+						null, null, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+				List<ProductView> product = null;
+				int count = productManager.findProductCountByFilter(productFilter);
+				if (count > 0) {
+					// 查询当前页信息
+					product = productManager.findProductInfoByFilter(productFilter);
+				}
 				if (Util.isEmpty(product)) {
 					result = "1";
 				} else {
