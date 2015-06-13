@@ -81,6 +81,30 @@ var yiqin_product_detail = function(){
               error: function(){}
 	         });
 		},
+		
+		initImage : function() {
+			var imageUrls = "<s:property value='#productInfo.imgUrl'/>";
+			var imgArr = imageUrls.split(",");
+			$('.view-product img').attr('src', imgArr[0]);
+			var cnt = 0;
+			var $imgNavDiv = $('#similar-product .carousel-inner');
+			var $div = $('<div class="item">');
+			for (var i in imgArr) {
+				if (cnt % 3 == 0) {
+					$div = $('<div class="item">');
+					$imgNavDiv.append($div);
+				}
+				var $img = $('<a style="cursor:pointer;"><img width="84" height="84"></a>');
+				$img.attr('val', imgArr[i]);
+				$img.find('img').attr('src', imgArr[i]);
+				$img.on('click', function() {
+					$('.view-product img').attr('src', $(this).attr('val'));
+				});
+				$div.append($img);
+				cnt++;
+			}
+			$imgNavDiv.find('.item:first').addClass('active');
+		}
 	};
 	
 	var appendToProductDetail = function(data){
@@ -113,6 +137,7 @@ var yiqin_product_detail = function(){
 $(document).ready(function(){
 	yiqin_product_detail.initProductDetail();
 	yiqin_product_detail.findProductAttrDetail();
+	yiqin_product_detail.initImage();
 });
 </script>
 
@@ -121,27 +146,12 @@ $(document).ready(function(){
 		<!--product-details-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="<s:property value='#productInfo.imgUrl'/>"/>
+				<img />
 				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
-					<div class="item active">
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-					</div>
-					<div class="item">
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-					</div>
-					<div class="item">
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-						<a href="#none"><img src="<s:property value='#productInfo.imgUrl'/>" width="84" height="84"></a>
-					</div>
 				</div>
 				<!-- Controls -->
 				<a class="left item-control" href="#similar-product" data-slide="prev"> <i class="fa fa-angle-left"></i></a>
@@ -178,8 +188,8 @@ $(document).ready(function(){
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
 						<a href="#none" title="<s:property value='#productInfo.color'/>" class="none-detail-a">
-							<img src="<s:property value='#productInfo.imgUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/>
-							<i><s:property value='#productInfo.color'/></i>
+<%-- 							<img src="<s:property value='#productInfo.imgUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/> --%>
+							<i style="font-size: 16px;"><s:property value='#productInfo.color'/></i>
 						</a>
 					</div>
 				</div>
