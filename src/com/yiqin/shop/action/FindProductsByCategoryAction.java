@@ -67,15 +67,23 @@ public class FindProductsByCategoryAction extends ActionSupport {
 				if (loginUser != null) {
 					userId = loginUser.getId();
 				}
-				//List<ProductView> product = productManager.findProductInfo(userId, categoryId);
-				// 查询过滤总数
-				ProductFilter productFilter = new ProductFilter(userId, categoryId, null,
-						null, null, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+				
 				List<ProductView> product = null;
-				int count = productManager.findProductCountByFilter(productFilter);
-				if (count > 0) {
-					// 查询当前页信息
-					product = productManager.findProductInfoByFilter(productFilter);
+				String productIds = Configuration.getProperty(UtilKeys.SHOP_INDEX_PAGE_SHOW_PRODUCT_IDS);
+				if(Util.isNotEmpty(productIds)){
+					if(productIds.endsWith(",")){
+						productIds = productIds.substring(0, productIds.length()-1);
+					}
+					product = productManager.findProductInfoById(userId, productIds);
+				}else{
+					// 查询过滤总数
+					ProductFilter productFilter = new ProductFilter(userId, categoryId, null,
+							null, null, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+					int count = productManager.findProductCountByFilter(productFilter);
+					if (count > 0) {
+						// 查询当前页信息
+						product = productManager.findProductInfoByFilter(productFilter);
+					}
 				}
 				if (Util.isEmpty(product)) {
 					result = "1";
