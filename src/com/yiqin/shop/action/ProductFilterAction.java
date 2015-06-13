@@ -83,6 +83,9 @@ public class ProductFilterAction extends ActionSupport {
 			if (count > 0) {
 				// 查询当前页信息
 				productList = productManager.findProductInfoByFilter(productFilter);
+				for (ProductView pv : productList) {
+					pv.setImgUrl(pv.getImgUrl().split(",")[0]);
+				}
 			}
 
 			// 分页对象

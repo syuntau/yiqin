@@ -69,6 +69,9 @@ public class FindBestProductAction extends ActionSupport {
 			if (count > 0) {
 				// 查询当前页信息
 				productList = productManager.findBestProductInfo(userId,paramVal, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+				for (ProductView pv : productList) {
+					pv.setImgUrl(pv.getImgUrl().split(",")[0]);
+				}
 			}
 
 			// 分页对象

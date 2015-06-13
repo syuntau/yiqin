@@ -11,9 +11,10 @@ var toIndexPage = function(pageIndex){
 <div class="col-sm-9 padding-right" style="width: 921px">
 	<div class="features_items" id="fenlei_product_items">
 		<!--features_items-->
-<!-- 		<h2 class="title text-center"> -->
+		<h2 class="title text-center">
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
-<!-- 		</h2> -->
+        快速下单列表
+		</h2>
 		<s:if test="page.results==null">
 			还没有生成您经常购买的商品哦！
 		</s:if>

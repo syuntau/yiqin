@@ -144,7 +144,7 @@ $(document).ready(function(){
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="<s:property value='#product.imgUrl'/>" width="255px"
+								<img src="<s:property value='#product.imgUrl'/>" width="255px" height="255px"
 									name="good_img" style="cursor: pointer;"
 									onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>,'toProductDetails')" />
 								<h2>

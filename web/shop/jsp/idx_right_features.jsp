@@ -64,8 +64,7 @@
 				
 				$feature_col_div.append($feature_img_div.append($feature_single_div));
 				$feature_single_div.append($feature_info_div);
-				
-				$feature_info_div.append($feature_img.attr({'src':val.imgUrl,'width':'255px','name':"good_img"}));
+				$feature_info_div.append($feature_img.attr({'src':val.imgUrl.split(',')[0],'width':'255px','height':'255px','name':"good_img"}));
 				$feature_img.css('cursor','pointer');
 				$feature_img.click(function(){
 					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
