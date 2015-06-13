@@ -115,8 +115,8 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="col-sm-9 padding-right">
-	<div class="container" id="shop_filter_div">
+<div class="col-sm-9 padding-right" style="width: 921px">
+	<div id="shop_filter_div">
 		<div class="s-title">
 			<h4>
 				<b></b><em>&nbsp;商品筛选</em>
@@ -132,9 +132,9 @@ $(document).ready(function(){
 	</div>
 	<div class="features_items" id="fenlei_product_items">
 		<!--features_items-->
-		<h2 class="title text-center">
-			<s:text name="shop.index.right.features.items" />
-		</h2>
+<!-- 		<h2 class="title text-center"> -->
+<%-- 			<s:text name="shop.index.right.features.items" /> --%>
+<!-- 		</h2> -->
 		<s:if test="page.results==null">
 			没有找到任何商品
 		</s:if>

@@ -16,7 +16,8 @@
   }
 </style>
 	<div class="col-sm-3" id="left-category-nav" style="width: 234px;background-color: #FE980F;padding-left: 5px;padding-right: 5px;">
-		<div class="left-sidebar" data-spy="affix" data-offset-top="116" data-offset-bottom="240" >
+<!-- 		<div class="left-sidebar" data-spy="affix" data-offset-top="116" data-offset-bottom="240" > -->
+		<div class="left-sidebar" >
 			<tiles:insertAttribute name="category" />
 <%-- 			<tiles:insertAttribute name="brands" /> --%>
 <%-- 			<tiles:insertAttribute name="ad" /> --%>

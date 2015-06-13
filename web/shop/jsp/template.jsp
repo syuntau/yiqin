@@ -9,8 +9,8 @@
 	<title><s:text name="%{#attr['title']}" /></title>
 	<tiles:insertAttribute name="include" />
 </head>
-<body data-spy="scroll" data-target="#left-category-nav">
-
+<!-- <body data-spy="scroll" data-target="#left-category-nav"> -->
+<body>
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="body" />
 	<tiles:insertAttribute name="footer" />	

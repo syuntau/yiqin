@@ -116,7 +116,7 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="col-sm-9 padding-right">
+<div class="col-sm-9 padding-right" style="width: 921px">
 	<div class="product-details">
 		<!--product-details-->
 		<div class="col-sm-5">
@@ -184,7 +184,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<button type="button" class="btn btn-fefault cart" id="detail_add_cart" style="margin-left:50px;">
+			<button type="button" class="btn btn-fefault cart" id="detail_add_cart" style="margin-left:50px;font-size:20px;height:50px;width:180px">
 				<i class="fa fa-shopping-cart"></i>
 				<s:text name="shop.add.to.cart" />
 			</button>
