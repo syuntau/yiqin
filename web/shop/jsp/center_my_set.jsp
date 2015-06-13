@@ -333,7 +333,7 @@ $(document).ready(function(){
 					</li>
 				</ul>
 			</div>
-			<a style="margin-left:300px;" class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a>
+			<a style="margin-left:50px;font-size:16px;width:100px;height:35px;margin-bottom: 10px" class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a>
 			<span style="color:red" id="receive_error_normal"></span>
 		</div>
 <!-- 		<div class="col-sm-6"> -->
