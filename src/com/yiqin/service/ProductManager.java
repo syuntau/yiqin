@@ -181,7 +181,6 @@ public interface ProductManager {
 
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 
-	public List<BestProduct> findBestProducts(String userId, String topCategoryId);
 	public Map<String, List<String>> findBestProductByUserId(String userId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;

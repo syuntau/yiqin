@@ -9,7 +9,6 @@ import org.apache.commons.validator.GenericValidator;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.pojo.BestProduct;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.Configuration;
@@ -56,12 +55,12 @@ public class FindBestProductAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
-			if(Util.isEmpty(paramVal) || paramVal.length()==1){
-				List<BestProduct> bestProducts = productManager.findBestProducts(userId, paramVal);
-				if(Util.isNotEmpty(bestProducts)){
-					paramVal = String.valueOf(bestProducts.get(0).getCategoryId());
-				}
-			}
+//			if(Util.isEmpty(paramVal) || paramVal.length()==1){
+//				List<BestProduct> bestProducts = productManager.findBestProducts(userId, paramVal);
+//				if(Util.isNotEmpty(bestProducts)){
+//					paramVal = String.valueOf(bestProducts.get(0).getCategoryId());
+//				}
+//			}
 			
 			// 查询过滤总数
 			List<ProductView> productList = null;
@@ -78,7 +77,10 @@ public class FindBestProductAction extends ActionSupport {
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(productList);
 			
-			String shop_nav = "top_" + paramVal.substring(0, 1);
+			String shop_nav = "";
+			if(Util.isNotEmpty(paramVal)){
+				shop_nav = "top_" + paramVal.substring(0, 1);
+			}
 			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
 			return SUCCESS;
 		}catch(Exception e){

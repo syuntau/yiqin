@@ -730,15 +730,17 @@ public class ProductManagerImpl implements ProductManager {
 		if(Util.isEmpty(userId)){
 			return null;
 		}
-		BestProduct bestProduct = productDao.findBestProductByCategoryId(userId,cateId);
-		if(bestProduct != null){
+		List<BestProduct> bestProducts = productDao.findBestProductByTopCateId(userId, cateId);
+		if(Util.isNotEmpty(bestProducts)){
 			Set<String> set = new HashSet<String>();
-			String productIds = bestProduct.getProductId();
-			if(Util.isNotEmpty(productIds)){
-				 String[] ids = productIds.split(",");
-				 set.addAll(Arrays.asList(ids));
+			for(BestProduct bp : bestProducts){
+				String productIds = bp.getProductId();
+				if(Util.isNotEmpty(productIds)){
+					 String[] ids = productIds.split(",");
+					 set.addAll(Arrays.asList(ids));
+				}
 			}
-			 return set;
+			return set;
 		}
 		return null;
 	}
@@ -774,12 +776,6 @@ public class ProductManagerImpl implements ProductManager {
 		return tempList;
 	}
 	
-	@Override
-	public List<BestProduct> findBestProducts(String userId, String topCategoryId) {
-		List<BestProduct> list = productDao.findBestProductByTopCateId(userId, topCategoryId);
-		return list;
-	}
-
 	@Override
 	public Map<String, List<String>> findBestProductByUserId(String userId) {
 		List<BestProduct> list = productDao.findBestProductByUserId(userId);
