@@ -194,7 +194,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<button type="button" class="btn btn-fefault cart" id="detail_add_cart" style="margin-left:50px;font-size:20px;height:50px;width:180px">
+			<button type="button" class="btn btn-fefault cart" id="detail_add_cart" style="margin-left:50px;font-size:20px;height:50px;width:180px;margin-top:60px">
 				<i class="fa fa-shopping-cart"></i>
 				<s:text name="shop.add.to.cart" />
 			</button>

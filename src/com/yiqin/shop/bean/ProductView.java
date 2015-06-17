@@ -13,6 +13,7 @@ public class ProductView {
 	private String zhekouPrice;//折扣价格
 	private String color;// 颜色
 	private String imgUrl; // 图片链接
+	private String check;
 
 	public String getProductId() {
 		return productId;
@@ -60,5 +61,13 @@ public class ProductView {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getCheck() {
+		return check;
+	}
+
+	public void setCheck(String check) {
+		this.check = check;
 	}
 }

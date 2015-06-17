@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.service.UserManager;
+import com.yiqin.shop.bean.ProductView;
 import com.yiqin.shop.bean.UserView;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
@@ -125,6 +127,52 @@ public class EditBestProductAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public String getItems() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		String result = "";
+		try {
+			if (Util.isEmpty(cId) || !Util.isNumeric(cId) || Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+			} else {
+				// 查询对应分类产品
+				List<ProductView> productlist = productManager.findProductInfo(cId);
+				
+				if (Util.isEmpty(productlist)) {
+					result = UtilKeys.CODE_NO_RESULT;
+				} else {
+					Map<String, List<String>> map = productManager.findBestProductByUserId(userId);
+					List<String> pdList = map.get(cId);
+					if (!Util.isEmpty(pdList)) {
+						Map<String, Integer> temp = new HashMap<String, Integer>();
+						int i = 0;
+						for (ProductView pv : productlist) {
+							temp.put(pv.getProductName(), i++);
+							pv.setCheck("off");
+						}
+						String[] pdArr = pdList.get(1).split(",");
+						for (String name : pdArr) {
+							Integer idx = temp.get(name);
+							if (idx != null) {
+								productlist.get(idx).setCheck("on");
+							}
+						}
+					}
+					Util.sortProductView(productlist);
+					JSONArray jsonArray = JSONArray.fromObject(productlist);
+					result = jsonArray.toString();
+				}
+			}
+			response.getWriter().print(result);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = UtilKeys.CODE_ERR_EXCEPTION;
+			response.getWriter().print(result);
+			return null;
+		}
 	}
 
 	public String getBestProductList() {

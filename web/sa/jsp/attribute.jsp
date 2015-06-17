@@ -400,7 +400,7 @@ var pd_attr = {
 	            					'</div>' +
 	            				'</div>' +
 	            			'</div>' +
-	            			'<div class="form-group">' +
+	            			'<div class="form-group" style="display:none">' +
 	            				'<label class="col-md-3 control-label" for="filter">filter type</label>' +
 	            				'<div class="col-md-7">' +
 	            					'<div class="radio">' +

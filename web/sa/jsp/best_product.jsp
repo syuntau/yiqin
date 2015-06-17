@@ -116,6 +116,7 @@ var best_pd = {
 	},
 	loadProductList : function() {
 		var catetoryId = $('.third-category select').find('option:selected').val();
+		var userId = $('.user-list select').find('option:selected').val();
 		if (catetoryId && isNaN(catetoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
@@ -125,8 +126,8 @@ var best_pd = {
 		var $itemDiv = $('.item-section');
 		$.ajax({
         	type: "post",
-			url: "editProduct_getItems",
-			data: 'cId='+catetoryId,
+			url: "editBestProduct_getItems",
+			data: 'cId='+catetoryId + "&userId=" + userId,
 			dataType: "json",
 			success: function(data) {
 				if (data=='1') {
@@ -156,11 +157,16 @@ var best_pd = {
 	editItemsTbl : function(data) {
 		var $itemDiv = $('.item-section');
    		var $tbody = $itemDiv.find('tbody');
+   		var cnt = 0;
 		$.each(data, function(i, val) {
 			var $tr = $(best_pd.conf.tr).addClass('tr_'+val.productId);
 			var _id = $(best_pd.conf.td).html(val.productId);
 			var _name = $(best_pd.conf.td).html(val.productName);
 			var $iCheck = $(best_pd.conf.i_check);
+			if (val.check == 'on') {
+				$iCheck.removeClass('btn-default').addClass('btn-info');
+				cnt++;
+			}
 			$iCheck.attr('idx', val.productId).on('click', function() {
 				if ($(this).hasClass('btn-default')) {
 					$(this).removeClass('btn-default').addClass('btn-info');
@@ -178,6 +184,9 @@ var best_pd = {
 
 			$tbody.append($tr);
 		});
+		if (data.length == cnt) {
+			$('.btn-select-all').removeClass('btn-default').addClass('btn-info');
+		}
 		$itemDiv.find('.item-panel').removeClass('display-off');
 	},
 	select_all : function() {
