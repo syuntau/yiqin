@@ -253,7 +253,7 @@ $(document).ready(function() {
 				</thead>
 				<tbody id="cart_info_list"></tbody>
 			</table>
-			<button type="button" id="to_check_btn" class="btn btn-fefault pull-right">去结算</button>
+			<button type="button" id="to_check_btn" style="margin-top:20px;margin-bottom:20px;width:150px" class="btn btn-fefault pull-right">去结算</button>
 		</div>
 	</div>
 </section>
