@@ -40,11 +40,12 @@ var yiqin_shoplist_action = function(){
 	
 	var appendToFilter = function(data){
 		var $shop_filter_ul = $("#shop_filter_ul"),
-			brand = "<s:property value='brand'/>",
-			color = "<s:property value='color'/>",
-			price = "<s:property value='price'/>";
+			filterStr = "<s:property value='filterStr'/>",
+			filterArr = new Array();
+		if(filterStr.length > 0){
+			filterArr = filterStr.split(",");
+		}
 		$shop_filter_ul.empty();
-			
 		$.each(data, function(i,val){
 			var $filter_li = $(shop_temp.filter_li),
 				$filter_label = $(shop_temp.filter_label),
@@ -63,12 +64,12 @@ var yiqin_shoplist_action = function(){
 				if(nameId=='price'||nameId=='brandId'){
 					arr = valueArr[n];
 				}
-				if(brand==id+"_"+arr || color==id+"_"+arr || price==id+"_"+arr){
+				if($.inArray(id+"_"+arr, filterArr) > -1){
 					$filter_a.addClass('select-filter-a');
 				}
 				$filter_a.click(function(){
 					if($(this).hasClass('select-filter-a')){
-						filterProduct(nameId, "");
+						filterProduct(nameId, id+"_");
 					}else{
 						filterProduct(nameId, id+"_"+arr);
 					}
@@ -83,22 +84,43 @@ var yiqin_shoplist_action = function(){
 	return action;
 }();
 
+//重新组合过滤条件
+var handleProductFilter = function(filterType,filterVal){
+	var filterStr = "<s:property value='filterStr'/>";
+	if(filterType!='page'){
+		if(filterStr.length > 0){
+			var clickfArr = filterVal.split("_");
+			var newFilter = "";
+			var filterArr = filterStr.split(",");
+			for(var i=0;i<filterArr.length;i++){
+				var fvArr = filterArr[i].split("_");
+				if(clickfArr[0]!=fvArr[0]){
+					newFilter += ","+filterArr[i];
+				}
+			}
+			if(clickfArr[1]!=null && clickfArr[1].length>0){
+				newFilter += ","+filterVal;
+			}
+			if(newFilter.length>0){
+				newFilter = newFilter.substring(1);
+			}
+			return newFilter;
+		}else{
+			return filterVal;
+		}
+	}else{
+		return filterStr;
+	}
+}
+
 var filterProduct = function(filterType,filterVal){
 	var paramVal = "<s:property value='paramVal'/>",
-		brand = "<s:property value='brand'/>",
-		color = "<s:property value='color'/>",
-		price = "<s:property value='price'/>",
 		pageIndex = 1;
-	if(filterType=='brandId'){
-		brand = filterVal;
-	}else if(filterType=='price'){
-		price = filterVal;
-	}else if(filterType=='color'){
-		color = filterVal;
-	}else if(filterType=='page'){
+	var filterStr = handleProductFilter(filterType, filterVal);
+	if(filterType=='page'){
 		pageIndex = filterVal;
 	}
-	window.location.href = "productFilter?paramVal="+paramVal+"&brand="+encodeURIComponent(encodeURIComponent(brand))+"&color="+encodeURIComponent(encodeURIComponent(color))+"&price="+price+"&pageIndex="+pageIndex;
+	window.location.href = "productFilter?paramVal="+paramVal+"&filterStr="+encodeURIComponent(encodeURIComponent(filterStr))+"&pageIndex="+pageIndex;
 };
 
 var toIndexPage = function(pageIndex){

@@ -39,8 +39,8 @@ var yiqin_category_action = function(){
                 complete: function(){
                 	var categoryId = "<s:property value='paramVal'/>";
                 	if(categoryId != null && categoryId != ""){
+                		$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
                 		if(categoryId.length>=4){
-                			$("a[href='#first_"+categoryId.substring(0,2)+"']").click();
 //                 			$("#two_"+categoryId.substring(0,4)).css('color','#fdb45e');
                 			$("#two_"+categoryId.substring(0,4)).css('color','#953408').css('font-weight','800');
                 			$("#shop_filter_div b").html($("#two_"+categoryId.substring(0,4)).html());

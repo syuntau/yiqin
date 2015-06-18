@@ -634,85 +634,63 @@ public class ProductManagerImpl implements ProductManager {
 		return 0;
 	}
 	
+	private Set<String> jiaoJiProductId(Set<String> prevPid, Set<String> nextPid){
+		Set<String> result = new HashSet<String>();
+		if(prevPid.size() > 0 && nextPid.size() >0){
+			for (String pid : prevPid) {
+				if(nextPid.contains(pid)){
+					result.add(pid);
+				}
+			}
+		}
+		return result;
+	}
+	
 	private Set<String> findProductIdByFilter(ProductFilter productFilter){
 		if (productFilter == null) {
 			return null;
 		}
 		Set<String> resultPid = new HashSet<String>();
-		Set<String> brandPid = new HashSet<String>();
-		Set<String> colorPid = new HashSet<String>();
-		Set<String> pricePid = new HashSet<String>();
+		Set<String> prevPid = new HashSet<String>();
 		List<Product> resultList = new ArrayList<Product>();
 		boolean flag = false;
-		// 品牌
-		if (!Util.isEmpty(productFilter.getBrand())) {
-			String[] brandArr = productFilter.getBrand().split("_");
-			resultList = productDao.findProductInfo(Integer.valueOf(brandArr[0]), brandArr[1]);
-			if (Util.isEmpty(resultList)) {
-				return null;
-			}
-			for (Product p : resultList) {
-				brandPid.add(p.getProductId());
-			}
-			flag = true;
-		}
-		// 颜色
-		if (!Util.isEmpty(productFilter.getColor())) {
-			String[] colorArr = productFilter.getColor().split("_");
-			resultList = productDao.findProductInfo(Integer.valueOf(colorArr[0]), colorArr[1]);
-			if (Util.isEmpty(resultList)) {
-				return null;
-			}
-			for (Product p : resultList) {
-				colorPid.add(p.getProductId());
-			}
-			flag = true;
-		}
-		// 价格
-		if (!Util.isEmpty(productFilter.getPrice())) {
-			String[] priceArr = productFilter.getPrice().split("_");
-			resultList = productDao.findProductInfo(Integer.valueOf(priceArr[0]), priceArr[1]);
-			if (Util.isEmpty(resultList)) {
-				return null;
-			}
-			for (Product p : resultList) {
-				pricePid.add(p.getProductId());
-			}
-			flag = true;
-		}
 		
-		if(brandPid.size() > 0 && colorPid.size() > 0 && pricePid.size() > 0){
-			for (String pid : brandPid) {
-				if(colorPid.contains(pid) && pricePid.contains(pid)){
-					resultPid.add(pid);
+		String filterStr = productFilter.getFilterStr();
+		if(Util.isNotEmpty(filterStr)){
+			flag = true;
+			String[] filterArr = filterStr.split(",");
+			int fcount = filterArr.length;
+			
+			//首先用第一个条件去查询结果
+			String[] firstArr = filterArr[0].split("_");
+			resultList = productDao.findProductInfo(Integer.valueOf(firstArr[0]), firstArr[1]);
+			if (Util.isEmpty(resultList)) {
+				return null;
+			}
+			for (Product p : resultList) {
+				prevPid.add(p.getProductId());
+			}
+			
+			//从第二个条件开始循环去查询，并同时和上一次的取交集
+			if(fcount > 1){
+				for (int i = 1; i < fcount; i++) {
+					String[] filter = filterArr[i].split("_");
+					resultList = productDao.findProductInfo(Integer.valueOf(filter[0]), filter[1]);
+					if (Util.isEmpty(resultList)) {
+						return null;
+					}
+					Set<String> nextPid = new HashSet<String>();
+					for (Product p : resultList) {
+						nextPid.add(p.getProductId());
+					}
+					prevPid = jiaoJiProductId(prevPid, nextPid);
+					if (prevPid.size() <= 0) {
+						return null;
+					}
 				}
 			}
-		}else if(brandPid.size() > 0 && colorPid.size() >0){
-			for (String pid : brandPid) {
-				if(colorPid.contains(pid)){
-					resultPid.add(pid);
-				}
-			}
-		}else if(brandPid.size() > 0 && pricePid.size() > 0){
-			for (String pid : brandPid) {
-				if(pricePid.contains(pid)){
-					resultPid.add(pid);
-				}
-			}
-		}else if(colorPid.size() > 0 && pricePid.size() > 0){
-			for (String pid : colorPid) {
-				if(pricePid.contains(pid)){
-					resultPid.add(pid);
-				}
-			}
-		}else if(brandPid.size() > 0){
-			resultPid = brandPid;
-		}else if(colorPid.size() > 0){
-			resultPid = colorPid;
-		}else if(pricePid.size() > 0){
-			resultPid = pricePid;
+			resultPid = prevPid;
 		}
-		
 		// 分类
 		if(!flag){
 			resultList = productDao.findProductInfoByCategorys(productFilter.getCategorys());
@@ -751,8 +729,8 @@ public class ProductManagerImpl implements ProductManager {
 		List<Attribute> tempList = new ArrayList<Attribute>();
 		if(!Util.isEmpty(list)){
 			for(Attribute attr : list){
-				String nameId = attr.getNameId();
-				if("brandId".equals(nameId) || "price".equals(nameId) || "color".equals(nameId)){
+				if (attr.getFilter() == 1) {
+					String nameId = attr.getNameId();
 					if("brandId".equals(nameId)){
 						String showValue = attr.getShowValue();
 						String [] svArr = showValue.split(",");

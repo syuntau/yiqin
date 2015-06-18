@@ -77,8 +77,7 @@ public class FindProductsByCategoryAction extends ActionSupport {
 					product = productManager.findProductInfoById(userId, productIds);
 				}else{
 					// 查询过滤总数
-					ProductFilter productFilter = new ProductFilter(userId, categoryId, null,
-							null, null, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+					ProductFilter productFilter = new ProductFilter(userId, categoryId, null, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 					int count = productManager.findProductCountByFilter(productFilter);
 					if (count > 0) {
 						// 查询当前页信息

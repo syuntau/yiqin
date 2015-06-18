@@ -34,12 +34,8 @@ public class ProductFilterAction extends ActionSupport {
 	public static final int MAXITEMINPAGE = Integer.valueOf(Configuration.getProperty(UtilKeys.SHOP_FILTER_PRODUCT_MAX_PAGE_SIZE));
 	//分类ID
 	private String paramVal;
-	// 过滤品牌 attId_brand
-	private String brand;
-	// 过滤价格 attId_price
-	private String price;
-	// 过滤颜色 attId_color
-	private String color;
+	// 过滤参数集合 attId_value 多个过滤参数，号拼接
+	private String filterStr;
 	// 选中页号
 	private String pageIndex;
 	// 分页对象
@@ -66,8 +62,8 @@ public class ProductFilterAction extends ActionSupport {
 				pageNo = 0;
 			}
 			
-			if(!Util.isEmpty(color)){
-				color = URLDecoder.decode(color, "utf-8");
+			if(!Util.isEmpty(filterStr)){
+				filterStr = URLDecoder.decode(filterStr, "utf-8");
 			}
 			
 			// 查询过滤总数
@@ -76,8 +72,7 @@ public class ProductFilterAction extends ActionSupport {
 			if (loginUser != null) {
 				userId = loginUser.getId();
 			}
-			ProductFilter productFilter = new ProductFilter(userId, paramVal, brand,
-					price, color, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+			ProductFilter productFilter = new ProductFilter(userId, paramVal,filterStr, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 			List<ProductView> productList = null;
 			int count = productManager.findProductCountByFilter(productFilter);
 			if (count > 0) {
@@ -109,28 +104,12 @@ public class ProductFilterAction extends ActionSupport {
 		this.paramVal = paramVal;
 	}
 
-	public String getBrand() {
-		return brand;
+	public String getFilterStr() {
+		return filterStr;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+	public void setFilterStr(String filterStr) {
+		this.filterStr = filterStr;
 	}
 
 	public String getPageIndex() {

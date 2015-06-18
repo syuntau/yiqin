@@ -9,12 +9,8 @@ package com.yiqin.shop.bean;
 public class ProductFilter {
 	// 分类ID
 	private String categorys;
-	// 过滤品牌 attId_brand
-	private String brand;
-	// 过滤价格 attId_price
-	private String price;
-	// 过滤颜色 attId_color
-	private String color;
+	// 过滤参数集合 attId_value 多个过滤参数，号拼接
+	private String filterStr;
 	// 第一条记录索引
 	private int offset;
 	// 每页显示的条目数目
@@ -22,13 +18,11 @@ public class ProductFilter {
 	// 用户ID
 	private String userId;
 
-	public ProductFilter(String userId, String categorys, String brand,
-			String price, String color, int offset, int pageSize) {
+	public ProductFilter(String userId, String categorys, String filterStr,
+			int offset, int pageSize) {
 		super();
 		this.categorys = categorys;
-		this.brand = brand;
-		this.price = price;
-		this.color = color;
+		this.filterStr = filterStr;
 		this.offset = offset;
 		this.pageSize = pageSize;
 		this.userId = userId;
@@ -42,28 +36,12 @@ public class ProductFilter {
 		this.categorys = categorys;
 	}
 
-	public String getBrand() {
-		return brand;
+	public String getFilterStr() {
+		return filterStr;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+	public void setFilterStr(String filterStr) {
+		this.filterStr = filterStr;
 	}
 
 	public int getOffset() {
