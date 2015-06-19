@@ -104,12 +104,12 @@ $(document).ready(function(){
 						<tr class="cart_menu">
 							<td class="image" width="40%">订单信息</td>
 							<td width="10%" style="text-align:center;">单价</td>
-							<td width="8%" style="text-align:center;">数量</td>
-							<td width="10%" style="text-align:center;">实付款</td>
-							<td width="15%" style="text-align:center;">
+							<td width="11%" style="text-align:center;">数量</td>
+							<td width="10%" style="text-align:center;">总价</td>
+							<td width="18%" style="text-align:center;">
 								<select id="submitDate"></select>
 							</td>
-							<td width="13%" style="text-align:center;">
+							<td width="10%" style="text-align:center;">
 								<select id="submitStatus">
 									<option value="10">全部状态</option>
 									<option value="1">等待付款</option>
@@ -132,12 +132,23 @@ $(document).ready(function(){
 					<s:else>
 						<s:iterator value="page.results" var="order">
 							<tbody>
-								<tr style="background-color: #F0F0E9;">
-									<td colspan="6">
+								<tr style="background-color: #F0F0E9;font-weight:bold;">
+									<td>
 										<div class="summary" style="margin-left:20px">
-											 <span>订单号：<s:property value="#order.id"/></span>
-											 <span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
-										 </div>
+											<span>订单号：<s:property value="#order.id"/></span>
+											<span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
+										</div>
+									</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td style="text-align:center;">
+										<span><s:property value='#order.zongjia'/></span>
+									</td>
+									<td style="text-align:center;">
+										<span><s:property value='#order.crateDate'/></span>
+									</td>
+									<td style="text-align:center;">
+										<span><s:property value='#order.status'/></span>
 									</td>
 								</tr>
 								<s:iterator value="#order.productList" var="product" status="st">
@@ -149,7 +160,7 @@ $(document).ready(function(){
 											<p><s:text name="cart.item.product.color"/><s:property value="#product.productInfo"/></p>
 										</td>
 										<td class="cart_price" style="text-align:center;">
-											<p><s:property value="#product.zhekouPrice"/></p>
+											<p><s:property value='#product.zhekouPrice'/></p>
 											<p style="font-size:14px;color:#FE980F">
 												<s:text name="shop.product.label.zhekou"/>
 												<s:property value="#order.zhekou"/>
@@ -161,20 +172,14 @@ $(document).ready(function(){
 										<td style="text-align:center;">
 											<p><s:property value="#product.count"/></p>
 										</td>
-										<s:if test="#st.index==0">
-											<td style="text-align:center;">
-												<p><s:property value='#order.zongjia'/></p>
-											</td>
-											<td style="text-align:center;">
-												<p><s:property value='#order.crateDate'/></p>
-											</td>
-											<td style="text-align:center;">
-												<p><s:property value='#order.status'/></p>
-											</td>
-										</s:if>
-										<s:else>
-											<td colspan="3"></td>
-										</s:else>
+										<td style="text-align:center;">
+											<p>
+												<script type="text/javascript">
+													document.write(<s:property value="#product.zhekouPrice"/>*<s:property value="#product.count"/>);
+												</script>
+											</p>
+										</td>
+										<td colspan="2"></td>
 									</tr>
 								</s:iterator>
 							</tbody>

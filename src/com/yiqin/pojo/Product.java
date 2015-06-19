@@ -7,6 +7,7 @@ package com.yiqin.pojo;
  */
 public class Product implements java.io.Serializable {
 
+	private static final long serialVersionUID = -1348985720027238095L;
 	private Integer id;// 自增主键
 	private String productId;// 产品ID
 	private Integer attributeId;// 属性ID

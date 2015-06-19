@@ -7,7 +7,7 @@
 var shop_temp = {
 	filter_li : '<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;"></li>',
 	filter_label : '<label></label>',
-	filter_span : '<span style="margin-left:30px;"></span>',
+	filter_span : '<span></span>',
 	filter_a : '<a></a>',
 };
 
@@ -56,6 +56,19 @@ var yiqin_shoplist_action = function(){
 			
 			$filter_li.append($filter_label);
 			$filter_label.append(val.name).append("：");
+			
+			$filter_a = $(shop_temp.filter_a);
+			$filter_a.append("全部").attr('style','margin-left:10px');
+			$filter_li.append($filter_a);
+			$filter_a.click(function(){
+				if(!$(this).hasClass('select-filter-a')){
+					filterProduct(nameId, id+"_");
+				}
+			});
+			if(filterStr.length == 0 || filterStr.indexOf(id)==-1){
+				$filter_a.addClass('select-filter-a');
+			}
+			
 			var showValueArr = showValue.split(",");
 			var valueArr = val.value.split(",");
 			$.each(showValueArr, function(n,arr){

@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class Order implements java.io.Serializable {
 
+	private static final long serialVersionUID = 4005154186169390676L;
 	private long id;// 订单号
 	private Byte status;// 订单状态
 	private String userId;// 用户ID

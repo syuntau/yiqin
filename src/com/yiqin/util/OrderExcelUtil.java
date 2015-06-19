@@ -136,6 +136,17 @@ public class OrderExcelUtil {
 		String value = "";
 		Class<Cart> docClass = Cart.class;
 		try {
+			if("pTotalPrice".equals(headCode)){
+				Field fieldzhekoup = docClass.getDeclaredField("zhekouPrice");
+				fieldzhekoup.setAccessible(true);
+				Field fieldcount = docClass.getDeclaredField("count");
+				fieldcount.setAccessible(true);
+				Float zhekouPrice = (Float) fieldzhekoup.get(cart);
+				int count = (int) fieldcount.get(cart);
+				int totalPrice = (int) (zhekouPrice*count);
+				value = String.valueOf(totalPrice);
+				return value;
+			}
 			Field field = docClass.getDeclaredField(headCode);
 			field.setAccessible(true);
 			if (null == field.get(cart)) {

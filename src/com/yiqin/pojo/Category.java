@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Category implements java.io.Serializable {
 
+	private static final long serialVersionUID = -9216804619788434742L;
 	private int id;// 分类ID
 	private String name;// 名称
 	private Integer level;// 排序号

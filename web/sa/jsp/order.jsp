@@ -97,6 +97,12 @@ var sa_order = function(){
 			 var endTime = "<s:property value='endTime'/>";
 			 $("input[name=endTime]").val(endTime);
 			 
+			 var filterStatus = "<s:property value='status'/>";
+			 if(filterStatus==null || filterStatus==""){
+				 filterStatus = 10;
+			 }
+			 $("#submitStatus").val(filterStatus);
+			 
 			 $('#order_search_btn').on('click', function() {
 				 sa_order.orderSearch();
 			 });
@@ -110,8 +116,9 @@ var sa_order = function(){
 			$("#order_search_btn").after($(com_conf.loading_icon));
 			var userId= $("#user_select").val(),
 				startTime = $("input[name=startTime]").val(),
-				endTime = $("input[name=endTime]").val();
-			window.location.href = "findSAOrderList?startTime="+startTime+"&endTime="+endTime+"&userId="+userId;
+				endTime = $("input[name=endTime]").val(),
+				status = $("#submitStatus").val();
+			window.location.href = "findSAOrderList?startTime="+startTime+"&endTime="+endTime+"&userId="+userId+"&status="+status;
 		},
 		
 		exportOrderExcel : function(){
@@ -129,8 +136,9 @@ var sa_order = function(){
 	var toIndexPage = function(pageIndex){
 		var startTime = "<s:property value='startTime'/>",
 			endTime = "<s:property value='endTime'/>",
-			userId = "<s:property value='userId'/>";
-		window.location.href = "findSAOrderList?startTime="+startTime+"&endTime="+endTime+"&userId="+userId+"&pageIndex="+pageIndex;
+			userId = "<s:property value='userId'/>",
+			status = "<s:property value='status'/>";
+		window.location.href = "findSAOrderList?startTime="+startTime+"&endTime="+endTime+"&userId="+userId+"&status="+status+"&pageIndex="+pageIndex;
 	};
 	
 	return action;	
@@ -159,27 +167,35 @@ $(document).ready(function(){
                             <label class="user-select display-off"><s:text name="sa.pd.lbl.select.user" /></label>
                             <select class="form-control user-select display-off" id="user_select"></select>
                         </div>
-                    </form>
-                     <form role="form" class="form-inline user-form" style="float: left;margin-left:50px;">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-left:10px;">
                             <label class="user-select display-off">选择时间</label>
                             <input type="text" class="form-control" name="startTime" onclick="WdatePicker()"></input>至
                             <input type="text" class="form-control" name="endTime"  onclick="WdatePicker()"></input>
                         </div>
+                        <div class="form-group" style="margin-left:10px;">
+	                        <label class="user-select display-off">订单状态</label>
+							<select id="submitStatus" class="form-control">
+								<option value="10">全部状态</option>
+								<option value="1">等待付款</option>
+								<option value="2">等待收货</option>
+								<option value="3">已完成</option>
+								<option value="0">已取消</option>
+							</select>
+						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
                         
-                        <button type="button" style="margin-left:130px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
+                        <button type="button" style="margin-left:100px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
                     </form>
                 </div>
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image" width="32%">订单信息</td>
+							<td class="image" width="35%">订单信息</td>
 							<td width="10%" style="text-align:center;">单价</td>
 							<td width="8%" style="text-align:center;">数量</td>
-							<td width="10%" style="text-align:center;">实付款</td>
-							<td width="15%" style="text-align:center;">订单时间</td>
-							<td width="13%" style="text-align:center;">订单状态</td>
+							<td width="10%" style="text-align:center;">总价</td>
+							<td width="18%" style="text-align:center;">订单时间</td>
+							<td width="10%" style="text-align:center;">订单状态</td>
 							<td width="8%" style="text-align:center;">订单修改</td>
 						</tr>
 					</thead>
@@ -195,15 +211,28 @@ $(document).ready(function(){
 					<s:else>
 					<s:iterator value="page.results" var="order">
 						<tbody>
-							<tr style="background-color: #F0F0E9;">
-								<td colspan="7">
+							<tr style="background-color: #F0F0E9;font-weight:bold;">
+								<td>
 									<div class="summary" style="margin-left:20px">
 										 <span>订单号：<s:property value="#order.id"/></span>
 										 <span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
-										 <span style="float:right;margin-right:30px;" onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>');">
-										 	<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
-										 </span>
 									</div>
+								</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td style="text-align:center;">
+									<span><s:property value='#order.zongjia'/></span>
+								</td>
+								<td style="text-align:center;">
+									<span><s:property value='#order.crateDate'/></span>
+								</td>
+								<td style="text-align:center;">
+									<span><s:property value='#order.status'/></span>
+								</td>
+								<td style="text-align:center;">
+									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>');">
+										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
+									</span>
 								</td>
 							</tr>
 							<s:iterator value="#order.productList" var="product" status="st">
@@ -227,20 +256,14 @@ $(document).ready(function(){
 									<td style="text-align:center;">
 										<p><s:property value="#product.count"/></p>
 									</td>
-									<s:if test="#st.index==0">
-										<td style="text-align:center;">
-											<p><s:property value='#order.zongjia'/></p>
-										</td>
-										<td style="text-align:center;">
-											<p><s:property value='#order.crateDate'/></p>
-										</td>
-										<td style="text-align:center;">
-											<p><s:property value='#order.status'/></p>
-										</td>
-									</s:if>
-									<s:else>
-										<td colspan="4"></td>
-									</s:else>
+									<td style="text-align:center;">
+										<p>
+											<script type="text/javascript">
+												document.write(<s:property value="#product.zhekouPrice"/>*<s:property value="#product.count"/>);
+											</script>
+										</p>
+									</td>
+									<td colspan="3"></td>
 								</tr>
 							</s:iterator>
 						</tbody>

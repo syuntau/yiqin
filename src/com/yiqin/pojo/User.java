@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class User implements java.io.Serializable {
 
+	private static final long serialVersionUID = -5949164722592490913L;
 	private String id;// 用户名（唯一）
 	private String password;// 密码
 	private String email; // 邮箱

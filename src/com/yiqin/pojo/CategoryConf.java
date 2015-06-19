@@ -7,6 +7,7 @@ package com.yiqin.pojo;
  */
 public class CategoryConf implements java.io.Serializable {
 
+	private static final long serialVersionUID = -2913107995179856239L;
 	private Integer id;// 自增主键
 	private Integer categoryId;// 分类ID
 	private String attribute;// 分类配置属性

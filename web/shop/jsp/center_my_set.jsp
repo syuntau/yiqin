@@ -218,7 +218,7 @@ var yiqin_my_set = function(){
 			return "modifyType=vem&verification_code="+verification_code;
 		}else if(ptype=="normal"){
 			var $modal = $("#my_info_list_normal"),
-			name = $modal.find("input[name=name]").val().replace(REX, ""),
+			name = "";//$modal.find("input[name=name]").val().replace(REX, ""),
 			telephone = $modal.find("input[name=telephone]").val().replace(REX, ""),
 			company = $modal.find("input[name=company]").val().replace(REX, ""),
 			role_type = 1;//$("input:checked[name=role_type]").val();
@@ -314,8 +314,9 @@ $(document).ready(function(){
 						<a href="javaScript:;" data-toggle="modal" data-target="#modify_pwd_alert">修改</a>
 					</li>
 					<li style="margin-bottom:10px;">
-						<label>真实姓名：</label>
-						<input type="text" name="name" value="<s:property value="#session.userInfo.name"/>">
+						<label>公司名称：</label>
+						<input type="text" style="width:300px;" name="company" value="<s:property value="#session.userInfo.company"/>">
+<%-- 						<input type="text" name="name" value="<s:property value="#session.userInfo.name"/>"> --%>
 					</li>
 					<li style="margin-bottom:10px;">
 						<label>移动电话：</label>
@@ -327,10 +328,10 @@ $(document).ready(function(){
 						<a href="javaScript:;" data-toggle="modal" data-target="#modify_email_alert">修改</a>
 						<span class="ftx-03" id="email_verify_type"></span>
 					</li>
-					<li>
-						<label>公司地址：</label>
-						<input type="text" name="company" value="<s:property value="#session.userInfo.company"/>">
-					</li>
+<!-- 					<li> -->
+<!-- 						<label>公司地址：</label> -->
+<%-- 						<input type="text" name="company" value="<s:property value="#session.userInfo.company"/>"> --%>
+<!-- 					</li> -->
 				</ul>
 			</div>
 			<a style="margin-left:50px;font-size:16px;width:100px;height:35px;margin-bottom: 10px" class="btn btn-default check_out" href="javaScript:yiqin_my_set.modifyUserInfo('normal');">提交</a>

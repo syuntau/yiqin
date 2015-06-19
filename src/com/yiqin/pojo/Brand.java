@@ -7,6 +7,7 @@ package com.yiqin.pojo;
  */
 public class Brand implements java.io.Serializable {
 
+	private static final long serialVersionUID = 239922977410480995L;
 	private Integer id;// 品牌ID
 	private String nameEn;// 品牌英文名
 	private String nameCn;// 品牌中文名

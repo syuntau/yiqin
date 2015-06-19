@@ -344,70 +344,75 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-sm-6"> -->
+<%-- 				<h5><b><s:text name="cart.check.zhifu"></s:text></b></h5> --%>
+<!-- 				<div class="chose_area"> -->
+<!-- 					<ul class="user_option"> -->
+<!-- 						<li> -->
+<!-- 							<input type="radio" name="zhi_fu" value="1" checked="checked"> -->
+<!-- 							<label>货到付款</label> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<input type="radio" name="zhi_fu" value="2"> -->
+<!-- 							<label>公司转账</label> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<input type="radio" name="zhi_fu" value="3"> -->
+<!-- 							<label>邮局汇款</label> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-sm-6"> -->
+<%-- 				<h5><b><s:text name="cart.check.peisong"></s:text></b></h5> --%>
+<!-- 				<div class="chose_area"> -->
+<!-- 					<ul class="user_option"> -->
+<!-- 						<li> -->
+<!-- 							<input type="radio" name="pei_song" value="1" checked="checked"> -->
+<!-- 							<label>依勤送货</label> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<input type="radio" name="pei_song" value="2"> -->
+<!-- 							<label>上门自提</label> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="row">
-			<div class="col-sm-6">
-				<h5><b><s:text name="cart.check.zhifu"></s:text></b></h5>
+			<div class="col-sm-100">
+				<h5><b><s:text name="cart.check.fapiao"></s:text></b></h5>
 				<div class="chose_area">
 					<ul class="user_option">
 						<li>
-							<input type="radio" name="zhi_fu" value="1" checked="checked">
-							<label>货到付款</label>
+							<label>发票类型：</label>
+							<span><input type="radio" name="fapiao_lx" value="1">&nbsp;&nbsp;普通发票</span>
+							<span><input type="radio" name="fapiao_lx" value="2">&nbsp;&nbsp;专用发票</span>
 						</li>
 						<li>
-							<input type="radio" name="zhi_fu" value="2">
-							<label>公司转账</label>
+							<label>发票抬头：</label>
+							<input type="text" name="fapiaotaitou" style="width:300px;" value="<s:property value='#session.userInfo.company'/>">
 						</li>
 						<li>
-							<input type="radio" name="zhi_fu" value="3">
-							<label>邮局汇款</label>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<h5><b><s:text name="cart.check.peisong"></s:text></b></h5>
-				<div class="chose_area">
-					<ul class="user_option">
-						<li>
-							<input type="radio" name="pei_song" value="1" checked="checked">
-							<label>依勤送货</label>
-						</li>
-						<li>
-							<input type="radio" name="pei_song" value="2">
-							<label>上门自提</label>
+							<label>开票项目：</label>
+							<input type="text" name="fapiaomingxi" style="width:300px;" value="">
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6">
-				<h5><b><s:text name="cart.check.fapiao"></s:text></b></h5>
-				<div class="chose_area">
-					<ul class="user_option">
-						<li>
-							<label>发票类型：</label>
-							<span>普通发票</span>
-						</li>
-						<li>
-							<label>发票抬头：</label>
-							<input type="text" name="fapiaotaitou" value="个人">
-						</li>
-						<li>
-							<label>发票明细：</label>
-							<input type="text" name="fapiaomingxi" value="办公用品">
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.product.list"></s:text></b></h5>
 				<div class="total_area">
 					<ul></ul>
-					<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.submitOrder();">提交订单</a>
 				</div>
 			</div>
-		</div> 
+		</div>
+		<div class="row">
+			<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.submitOrder();">提交订单</a>
+		</div>
 	</div>
 	
 	<!-- alert modal -->
@@ -430,7 +435,7 @@ $(document).ready(function(){
 						</li>
 						<li>
 							<label>收货地址：</label>
-							<input type="text" name="receive_area">
+							<input type="text" name="receive_area" style="width:300px;">
 						</li>
 						<li>
 							<label>是否设置为默认地址 </label>

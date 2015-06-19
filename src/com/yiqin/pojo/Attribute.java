@@ -9,6 +9,7 @@ import com.yiqin.util.Util;
  */
 public class Attribute implements java.io.Serializable {
 
+	private static final long serialVersionUID = 998266825867991309L;
 	private Integer id;// 属性ID，自增主键
 	private String nameId;// 属性标识符，例如：价格 为 price
 	private String name;// 属性名称

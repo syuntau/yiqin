@@ -9,6 +9,8 @@ import com.yiqin.util.Util;
  */
 public class Cart implements java.io.Serializable {
 
+	private static final long serialVersionUID = -7239706944458267524L;
+	
 	private Integer id;// 自增主键
 	private String useId;// 用户名
 	private String productId;// 商品ID

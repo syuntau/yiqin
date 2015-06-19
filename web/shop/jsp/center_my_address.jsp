@@ -342,7 +342,7 @@ $(document).ready(function(){
 						</li>
 						<li>
 							<label>收货地址：</label>
-							<input type="text" name="receive_area">
+							<input type="text" name="receive_area" style="width:300px;">
 						</li>
 						<li>
 							<label>是否设置为默认地址 </label>

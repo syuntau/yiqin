@@ -32,6 +32,8 @@ public class FindSAOrderListAction extends ActionSupport {
 	private String startTime;
 	// 结束时间
 	private String endTime;
+	// 订单状态
+	private String status;
 	// 选中页号
 	private String pageIndex;
 	// 分页对象
@@ -62,6 +64,13 @@ public class FindSAOrderListAction extends ActionSupport {
 			if (pageNo < 0) {
 				pageNo = 0;
 			}
+			
+			// 订单状态
+			if (!GenericValidator.isBlankOrNull(status)) {
+				status = status.trim();
+			} else {
+				status = "10";
+			}
 
 			// 开始时间、结束时间
 			Date  currDate =  Util.getCurrentStartTime();
@@ -87,11 +96,11 @@ public class FindSAOrderListAction extends ActionSupport {
 			// 查询过滤总数
 			List<OrderView> orderList = null;
 			int count = shoppingManager.findOrderCount(userId, startDate,
-					endDate, 10, 0, "", "");
+					endDate, Integer.valueOf(status), 0, "", "");
 			if (count > 0) {
 				// 查询当前页信息
 				orderList = shoppingManager.findOrderList(userId, startDate,
-						endDate, 10, 0, "", "", pageNo * MAXITEMINPAGE,
+						endDate, Integer.valueOf(status), 0, "", "", pageNo * MAXITEMINPAGE,
 						MAXITEMINPAGE);
 			}
 
@@ -128,6 +137,14 @@ public class FindSAOrderListAction extends ActionSupport {
 	
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getPageIndex() {
