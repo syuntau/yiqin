@@ -24,12 +24,18 @@ var yiqin_cart_check = function(){
 		submitOrder : function(){
 			if(confirm("请确认订单信息是否正确，是否确认提交订单？")){
 				var addressAttr = $("input:checked[name=accept_info]").val(),
-					zhifu = $("input:checked[name=zhi_fu]").val(),
-					peisong = $("input:checked[name=pei_song]").val(),  
+					zhifu = 1,//$("input:checked[name=zhi_fu]").val(),
+					peisong = 1,//$("input:checked[name=pei_song]").val(), 
+					fapiaolx = $("input:checked[name=fapiao_lx]").val(),
 					fapiaotaitou = $("input[name=fapiaotaitou]").val().replace(REX, ""),
 					fapiaomingxi = $("input[name=fapiaomingxi]").val().replace(REX, ""),
 					productIds = "<s:property value='#request.submit_ProductIds'/>",
 					$check_from = $(cart_check_temp.check_from);
+					
+				if(fapiaomingxi==""){
+					alert("请填写开票项目信息！");
+					return;
+				}
 					
 				var $check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','addressAttr').val(addressAttr));
@@ -37,6 +43,8 @@ var yiqin_cart_check = function(){
 					$check_from.append($check_input_hidden.attr('name','zhifu').val(zhifu));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','peisong').val(peisong));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','fapiaolx').val(fapiaolx));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','fapiaotaitou').val(fapiaotaitou));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
@@ -156,24 +164,16 @@ var yiqin_cart_check = function(){
 		totalSelCartInfo : function(){
 			var selCart = "<s:property value='#request.settlement_products'/>";
 			if(selCart != null && selCart != ""){
-				var $totalUl = $(".total_area ul"),
+				var $totalli = $("#total_area_price"),
 					totalPrice = 0;
-				$totalUl.empty();
+				$totalli.empty();
 				
 				<s:iterator value="#request.settlement_products">
-					var $check_li = $(cart_check_temp.check_li),
-    					$check_span = $(cart_check_temp.check_span),
-    					toPrice = "<s:property value='count'/>"*"<s:property value='zhekouPrice'/>";
-					
-					$totalUl.append($check_li.append("<s:property value='productName'/>"));
-					$check_li.append($check_span.append("<s:property value='count'/>×<s:property value='zhekouPrice'/> = "+toPrice));
+    				var	toPrice = "<s:property value='count'/>"*"<s:property value='zhekouPrice'/>";
 					totalPrice += parseInt(toPrice);
 				</s:iterator>
 				
-				var $check_li = $(cart_check_temp.check_li),
-    				$check_span = $(cart_check_temp.check_span);
-				$totalUl.append($check_li.append("总价"));
-				$check_li.append($check_span.append(totalPrice+" 元"));
+				$totalli.append("订单总价：").append(totalPrice+" 元");
 			}
 		},
 	};
@@ -336,7 +336,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.receiver.information"></s:text></b></h5>
-				<div class="chose_area">
+				<div class="chose_area" style="margin-bottom:10px;">
 					<ul class="user_option" id="user_acc_info"></ul>
 					<button class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo">添加</button>
 					<button class="btn btn-default update" id="address_update" data-toggle="modal" data-target="#EditReceiveInfo">修改</button>
@@ -383,11 +383,11 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.fapiao"></s:text></b></h5>
-				<div class="chose_area">
+				<div class="chose_area" style="margin-bottom:10px;">
 					<ul class="user_option">
 						<li>
 							<label>发票类型：</label>
-							<span><input type="radio" name="fapiao_lx" value="1">&nbsp;&nbsp;普通发票</span>
+							<span><input type="radio" name="fapiao_lx" value="1" checked="checked">&nbsp;&nbsp;普通发票</span>
 							<span><input type="radio" name="fapiao_lx" value="2">&nbsp;&nbsp;专用发票</span>
 						</li>
 						<li>
@@ -405,13 +405,61 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.product.list"></s:text></b></h5>
-				<div class="total_area">
-					<ul></ul>
+				<div class="total_area" style="margin-bottom:10px;padding:0px;">
+					<div class="container">
+						<div class="table-responsive cart_info">
+							<table class="table table-condensed">
+								<thead style="background-color:#FE980F;font-weight:bold;">
+									<tr class="cart_menu">
+										<td></td>
+										<td><s:text name="cart.item.product"/></td>
+										<td><s:text name="cart.item.price"/></td>
+										<td><s:text name="cart.item.quantity"/></td>
+										<td><s:text name="cart.item.total"/></td>
+									</tr>
+								</thead>
+								<tbody>
+									<s:if test="#request.settlement_products==null">
+										没有要提交的购物清单信息								
+									</s:if>
+									<s:else>
+										<s:iterator value="#request.settlement_products">
+											<tr>
+												<td class="cart_product"><img src="<s:property value='imgUrl'/>" width="110px"></td>
+												<td class="cart_description">
+													<h4><s:property value='productName'/></h4>
+													<p>商品ID：<s:property value='productId'/></p>
+													<p>颜色：<s:property value='productInfo'/></p>
+												</td>
+												<td class="cart_price">
+													<p><s:property value="zhekouPrice"/></p>
+													<del><s:property value='price'/></del>
+												</td>
+												<td class="cart_quantity">
+													<p><s:property value='count'/></p>
+												</td>
+												<td class="cart_total">
+													<p>
+														<script type="text/javascript">
+															document.write(<s:property value="zhekouPrice"/>*<s:property value="count"/>);
+														</script>
+													</p>
+												</td>
+											</tr>
+										</s:iterator>
+									</s:else>
+								</tbody>
+							</table>
+							<ul style="font-weight:bold;">
+								<li style="float:right;" id="total_area_price"></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.submitOrder();">提交订单</a>
+			<a style="float:right;margin-right:50px;" class="btn btn-default check_out" href="javaScript:yiqin_cart_check.submitOrder();">提交订单</a>
 		</div>
 	</div>
 	

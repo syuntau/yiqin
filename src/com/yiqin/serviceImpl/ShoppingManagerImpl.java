@@ -135,6 +135,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			ov.setCrateDate(Util.format(order.getCrateDate(), "yyyy-MM-dd HH:mm:ss"));
 			ov.setDeleteFlag(order.getDeleteFlag());
 			ov.setEmail(order.getEmail());
+			ov.setFapiaolx(order.getFapiaolx());
 			ov.setFapiaomingxi(order.getFapiaomingxi());
 			ov.setFapiaotaitou(order.getFapiaotaitou());
 			ov.setId(order.getId());

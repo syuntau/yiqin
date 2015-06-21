@@ -243,6 +243,16 @@ public class Util {
 		}
 		return peisongfangshi;
 	}
+	
+	public static String faPiaoLx(String fplx){
+		String fapiaolx = "普通发票";
+		if ("1".equals(fplx)) {
+			fapiaolx = "普通发票";
+		} else if ("2".equals(fplx)) {
+			fapiaolx = "专用发票";
+		}
+		return fapiaolx;
+	}
 
 	public static String orderStatusStr(Byte status) {
 		String statusStr = "全部状态";

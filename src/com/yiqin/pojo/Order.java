@@ -21,6 +21,7 @@ public class Order implements java.io.Serializable {
 	private Float yunfei; // 运费
 	private String songhuoriqi;// 送货日期
 	private String peisongfangshi;// 配送方式
+	private String fapiaolx;//发票类型
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
 	private String productList; // cart对象list 
@@ -40,7 +41,7 @@ public class Order implements java.io.Serializable {
 
 	public Order(long id, Byte status, String userId, String name,
 			String address, String mobile, String email, Byte zhifu,
-			Float yunfei, String songhuoriqi, String peisongfangshi,
+			Float yunfei, String songhuoriqi, String peisongfangshi,String fapiaolx,
 			String fapiaotaitou, String fapiaomingxi, String productList,
 			Float yuanjia, Float zhekou, Float zongjia, Date crateDate,
 			Date updateDate, Byte deleteFlag) {
@@ -55,6 +56,7 @@ public class Order implements java.io.Serializable {
 		this.yunfei = yunfei;
 		this.songhuoriqi = songhuoriqi;
 		this.peisongfangshi = peisongfangshi;
+		this.fapiaolx = fapiaolx;
 		this.fapiaotaitou = fapiaotaitou;
 		this.fapiaomingxi = fapiaomingxi;
 		this.productList = productList;
@@ -156,6 +158,14 @@ public class Order implements java.io.Serializable {
 
 	public String getFapiaotaitou() {
 		return this.fapiaotaitou;
+	}
+
+	public String getFapiaolx() {
+		return fapiaolx;
+	}
+
+	public void setFapiaolx(String fapiaolx) {
+		this.fapiaolx = fapiaolx;
 	}
 
 	public void setFapiaotaitou(String fapiaotaitou) {

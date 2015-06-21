@@ -40,6 +40,10 @@
             <column name="yunfei" precision="9" scale="3">
             </column>
         </property>
+        <property name="fapiaolx" type="string">
+            <column name="fapiaolx" length="20">
+            </column>
+        </property>
         <property name="songhuoriqi" type="string">
             <column name="songhuoriqi" length="20">
             </column>

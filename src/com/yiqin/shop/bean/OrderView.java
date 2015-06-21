@@ -22,6 +22,7 @@ public class OrderView {
 	private Float yunfei; // 运费
 	private String songhuoriqi;// 送货日期
 	private String peisongfangshi;// 配送方式
+	private String fapiaolx;//发票类型
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
 	private List<Cart> productList; // 商品记录
@@ -130,6 +131,14 @@ public class OrderView {
 
 	public String getFapiaomingxi() {
 		return fapiaomingxi;
+	}
+
+	public String getFapiaolx() {
+		return fapiaolx;
+	}
+
+	public void setFapiaolx(String fapiaolx) {
+		this.fapiaolx = fapiaolx;
 	}
 
 	public void setFapiaomingxi(String fapiaomingxi) {

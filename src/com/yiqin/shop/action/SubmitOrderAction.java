@@ -35,6 +35,8 @@ public class SubmitOrderAction extends ActionSupport {
 	private Byte zhifu;
 	// 配送方式
 	private String peisong;
+	// 发票类型
+	private String fapiaolx;
 	// 发票抬头
 	private String fapiaotaitou;
 	// 发票明细
@@ -56,6 +58,14 @@ public class SubmitOrderAction extends ActionSupport {
 
 	public void setPeisong(String peisong) {
 		this.peisong = peisong;
+	}
+
+	public String getFapiaolx() {
+		return fapiaolx;
+	}
+
+	public void setFapiaolx(String fapiaolx) {
+		this.fapiaolx = fapiaolx;
 	}
 
 	public void setFapiaotaitou(String fapiaotaitou) {
@@ -83,7 +93,7 @@ public class SubmitOrderAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
-			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
+			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong) || Util.isEmpty(fapiaolx)
 					|| Util.isEmpty(fapiaotaitou) || Util.isEmpty(fapiaomingxi)
 					|| Util.isEmpty(productIds) || zhifu == null) {
 				return ERROR;
@@ -95,6 +105,7 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setUserId(user.getId());
 			order.setEmail(user.getEmail());
 			order.setZhifu(zhifu);
+			order.setFapiaolx(Util.faPiaoLx(fapiaolx));
 			order.setFapiaotaitou(fapiaotaitou);
 			order.setFapiaomingxi(fapiaomingxi);
 			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
