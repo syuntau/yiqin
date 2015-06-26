@@ -118,7 +118,7 @@ var yiqin_product_detail = function(){
 			}
 			$.each(val,function(k,v){
 				if(v.indexOf('images')==-1){
-					var $prodet_li = $(pro_detail_temp.prodet_li).css('width','100%'),
+					var $prodet_li = $(pro_detail_temp.prodet_li),
 						$prodet_label = $(pro_detail_temp.prodet_label),
 						$prodet_span = $(pro_detail_temp.prodet_span);
 					
