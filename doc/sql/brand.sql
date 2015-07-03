@@ -100,3 +100,7 @@ insert into brand (name_en, name_cn) values
  ('YONEX', '尤尼克斯'),
  ('adidas', '阿迪达斯'),
  ('SPALDING', '斯伯丁');
+ 
+ ('WD', '西部数据'),
+ ('Seagate', '希捷');
+ 
