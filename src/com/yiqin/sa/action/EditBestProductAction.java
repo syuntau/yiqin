@@ -144,19 +144,21 @@ public class EditBestProductAction extends ActionSupport {
 					result = UtilKeys.CODE_NO_RESULT;
 				} else {
 					Map<String, List<String>> map = productManager.findBestProductByUserId(userId);
-					List<String> pdList = map.get(cId);
-					if (!Util.isEmpty(pdList)) {
-						Map<String, Integer> temp = new HashMap<String, Integer>();
-						int i = 0;
-						for (ProductView pv : productlist) {
-							temp.put(pv.getProductName(), i++);
-							pv.setCheck("off");
-						}
-						String[] pdArr = pdList.get(1).split(",");
-						for (String name : pdArr) {
-							Integer idx = temp.get(name);
-							if (idx != null) {
-								productlist.get(idx).setCheck("on");
+					if (!Util.isEmpty(map)) {
+						List<String> pdList = map.get(cId);
+						if (!Util.isEmpty(pdList)) {
+							Map<String, Integer> temp = new HashMap<String, Integer>();
+							int i = 0;
+							for (ProductView pv : productlist) {
+								temp.put(pv.getProductName(), i++);
+								pv.setCheck("off");
+							}
+							String[] pdArr = pdList.get(1).split(",");
+							for (String name : pdArr) {
+								Integer idx = temp.get(name);
+								if (idx != null) {
+									productlist.get(idx).setCheck("on");
+								}
 							}
 						}
 					}
