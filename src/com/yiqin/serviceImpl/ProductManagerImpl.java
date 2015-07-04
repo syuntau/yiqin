@@ -236,7 +236,7 @@ public class ProductManagerImpl implements ProductManager {
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
 				String name = id_nameid.get(entrysub.getKey()).get(1);
 				String value = entrysub.getValue();
-				if("厂商".equals(name)){
+				if("品牌".equals(name)){
 					value = getBrandShowName(Integer.valueOf(value));
 				}
 				nameid_pvalue.put(name, value);
