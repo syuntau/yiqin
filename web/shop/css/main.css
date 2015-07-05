@@ -989,7 +989,8 @@ h2.title {
 }
 
 .productinfo img{
-  width: auto;
+  width: 255px;
+  height: 255px;
 }
 
 .productinfo{
