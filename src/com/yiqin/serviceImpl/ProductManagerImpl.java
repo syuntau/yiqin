@@ -231,7 +231,8 @@ public class ProductManagerImpl implements ProductManager {
 //			id_nameid = initAttributeToMap(categoryId);
 			
 			Map<Integer,String> attrid_pvalueMap = entry.getValue();
-			Map<String,String> nameid_pvalue = new HashMap<String,String>();
+			attrid_pvalueMap = Util.sort(attrid_pvalueMap);
+			Map<String,String> nameid_pvalue = new LinkedHashMap<String,String>();
 			resultMap.put(entry.getKey(), nameid_pvalue);
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
 				String name = id_nameid.get(entrysub.getKey()).get(1);

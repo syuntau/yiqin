@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -321,6 +322,21 @@ public class Util {
 			}
 		});
 		return list;
+	}
+	
+	public static Map<Integer, String> sort(Map<Integer, String> attrid_pvalueMap) {
+		if (Util.isEmpty(attrid_pvalueMap)) {
+			return null;
+		}
+		Map<Integer, String> sortMap = new TreeMap<Integer, String>(
+				new Comparator<Integer>() {
+					@Override
+					public int compare(Integer key1, Integer key2) {
+						return key1.compareTo(key2);
+					}
+				});
+		sortMap.putAll(attrid_pvalueMap);
+		return sortMap;
 	}
 
 	/** 文件类型 */
