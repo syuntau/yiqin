@@ -169,8 +169,8 @@ var yiqin_cart_action = function(){
 			 $cart_a = $(cart_template.cart_a),
 			 $cart_img = $(cart_template.cart_img);
 			 $cart_td.attr('class',"cart_description");
-			 $cart_td.append($cart_h4).append($cart_p.css('margin-top', '10px'));
-			 $cart_h4.append($cart_a.append(val.productName).css('width', '457px'));
+			 $cart_td.append($cart_h4).append($cart_p.css('margin-top', '10px')).css('width', '457px');
+			 $cart_h4.append($cart_a.append(val.productName));
 			 $cart_p.append('<s:text name="shop.product.details.productId"/>'+val.productId);
 			 $cart_p = $(cart_template.cart_p);
 			 $cart_p.append('<s:text name="cart.item.product.color"/>'+val.productInfo);
