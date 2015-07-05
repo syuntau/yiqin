@@ -426,9 +426,9 @@ $(document).ready(function(){
 										<s:iterator value="#request.settlement_products">
 											<tr>
 												<td class="cart_product"><img src="<s:property value='imgUrl'/>" width="110px"></td>
-												<td class="cart_description">
+												<td class="cart_description" style="width:457px">
 													<h4><s:property value='productName'/></h4>
-													<p>商品ID：<s:property value='productId'/></p>
+													<p style="margin-top:10px">商品ID：<s:property value='productId'/></p>
 													<p>颜色：<s:property value='productInfo'/></p>
 												</td>
 												<td class="cart_price">
