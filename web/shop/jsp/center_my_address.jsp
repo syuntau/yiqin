@@ -154,6 +154,10 @@ var yiqin_my_address = function(){
 		if(data == '1'){
 			$add_list_btn.find("span").empty().append("您已创建<span class='ftx-02'>0</span>个收货地址，最多可创建<span class='ftx-02'>10</span>个");
 			$my_address_list.append("您还没有收货地址信息，请添加！");
+			$add_list_btn.find("a").click(function(){
+   				address_list_temp.saveOrUpdate = "save";
+				emptyReceiveModal();
+   			});
        	}else if(data == '2'){
        		$my_address_list.append("收货地址信息加载失败，请刷新页面再试");
        	}else{
