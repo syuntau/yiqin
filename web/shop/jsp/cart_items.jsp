@@ -82,7 +82,7 @@ var yiqin_cart_action = function(){
 			if(touchType=="custom"){
 				if(customNum==null || customNum=="" || !REX_NUM.test(customNum) || customNum <=0 || customNum==pNum){
 					$productInput.val(pNum);
-					return false;
+					return;
 				}
 				pNum = customNum;
 			}else{
@@ -92,11 +92,11 @@ var yiqin_cart_action = function(){
 					if(pNum > 0){
 						if((pNum-1) <= 0){
 							$productInput.val(pNum);
-							return false;
+							return;
 						}
 						pNum = pNum-1;
 					}else{
-						return false;
+						return;
 					}
 				}
 			}

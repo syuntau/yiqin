@@ -93,9 +93,10 @@ public class SubmitOrderAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
-			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong) || Util.isEmpty(fapiaolx)
-					|| Util.isEmpty(fapiaotaitou) || Util.isEmpty(fapiaomingxi)
+			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
+					|| Util.isEmpty(fapiaolx) || Util.isEmpty(fapiaomingxi)
 					|| Util.isEmpty(productIds) || zhifu == null) {
+				request.setAttribute("submitOrderError", "订单必填项不能为空，请填写完整！");
 				return ERROR;
 			}
 			// 登录用户
@@ -153,12 +154,14 @@ public class SubmitOrderAction extends ActionSupport {
 				// 发送提醒邮件
 				toMailOrderInfo(order, cartList);
 			} else {
+				request.setAttribute("submitOrderError", "订单提交失败，请稍后再试！");
 				return ERROR;
 			}
 			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, "top_account");
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.setAttribute("submitOrderError", "订单提交失败，请稍后再试！");
 			return ERROR;
 		}
 	}

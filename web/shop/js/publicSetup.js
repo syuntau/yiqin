@@ -20,15 +20,15 @@ var yiqin_public_js = function(){
 	var action = {
 		//top状态提交设置
 		postFormToTopAction	: function(top_value){
-			 var form = $('<form></form>');  
-		     form.attr('action', "/shop/index");  
-		     form.attr('method', 'post');  
-		     form.attr('target', '_self');
-		     var my_input = $('<input type="text" name="home" />');
-		     my_input.attr('value', top_value);  
-		     form.append(my_input);  
-		     form.submit();  
-		     return false;  
+			 var $form = $('<form></form>');  
+			 $form.attr('action', "/shop/index");
+			 $form.attr('method', 'post');  
+			 $form.attr('target', '_self');
+		     var $my_input = $('<input type="hidden" name="home" />');
+		     $my_input.val(top_value);
+		     $form.append($my_input);  
+		     $(document.body).append($form);
+		     $form.submit();
 		},
 		
 		//跳转去tiles
@@ -36,9 +36,8 @@ var yiqin_public_js = function(){
 			var $form = $(tempForm.form),
 				$param_input = $(tempForm.param_input);
 			$form.attr('action', url).append($param_input.val(param));
-			$('body').append($form);
+			$(document.body).append($form);
 			$form.submit();
-			return false;
 		},
 		
 		//添加到购物车

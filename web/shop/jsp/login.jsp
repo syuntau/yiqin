@@ -171,7 +171,7 @@ var yiqin_login_action = function(){
 							<input type="password" name="login_password" id="login_password_id" placeholder="<s:text name='login.user.password' />"/>
 							<span id="loginError" style="COLOR: red;text-align: left;">${requestScope.loginError}</span><br>
 							<span>
-								<input type="checkbox" class="checkbox"> 
+								<input type="checkbox" class="checkbox" style="padding-left:1px;"> 
 								<s:text name="login.keep.logining"></s:text>
 							</span>
 							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.loginCheck();return false;"><s:text name="login.btn.login"></s:text></button>

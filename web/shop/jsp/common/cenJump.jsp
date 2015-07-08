@@ -24,6 +24,12 @@
 		alert(msg);
 		yiqin_public_js.postFormToTopAction("top_login");
 	}
+	
+	var somsg = "${requestScope.submitOrderError}";
+	if (somsg != "") {
+		alert(somsg);
+		yiqin_public_js.postFormToTopAction("top_cart");
+	}
 </script>
 </head>
 </html>

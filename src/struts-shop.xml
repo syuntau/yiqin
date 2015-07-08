@@ -85,7 +85,7 @@
 		
 		<action name="submitOrder" class="com.yiqin.shop.action.SubmitOrderAction">
 			<result name="success" type="redirectAction">dispatcher</result>
-			<result name="error"></result>
+			<result name="error">/shop/jsp/common/cenJump.jsp</result>
 		</action>
 		
 		<action name="findOrderList" class="com.yiqin.shop.action.FindOrderListAction">

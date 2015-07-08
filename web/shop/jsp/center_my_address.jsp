@@ -67,7 +67,7 @@ var yiqin_my_address = function(){
 		saveOrUpdateAddress : function(){
 			var dataParm = checkReceiveAddress();
 			if(!dataParm){
-				return false;
+				return;
 			}
 			dataParm = dataParm + "&saveOrUpdate="+address_list_temp.saveOrUpdate;
 			$.ajax({
@@ -79,19 +79,21 @@ var yiqin_my_address = function(){
 	             success: function(data){
 	            	 if(data=='1'){
 	            		 $("#receive_error").html("信息填写不正确，请再次填写！");
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='2'){
 	            		 $("#receive_error").html("保存失败，请稍后重试！");
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='3'){
 	            		 yiqin_my_address.findUserAddress();
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='4'){
 	            		 $("#receive_error").html("地址数量超出最大数量10个");
-	            		 return false;
+	            		 return;
 	            	 }
 	             },
-	             beforeSend: function(){},
+	             beforeSend: function(){
+	            	 $("#receive_error").html("");
+	             },
 	             complete: function(){
 	            	 $('#address_list_alert').modal('hide');
 	             },
@@ -110,10 +112,10 @@ var yiqin_my_address = function(){
 	             success: function(data){
 	            	if(data=='2'){
 	            		 alert("设置默认地址失败，请稍后重试！");
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='3'){
 	            		 yiqin_my_address.findUserAddress();
-	            		 return false;
+	            		 return;
 	            	 }
 	             },
 	             beforeSend: function(){},

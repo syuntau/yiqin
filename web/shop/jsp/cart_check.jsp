@@ -13,6 +13,10 @@ var cart_check_temp = {
 	check_defType : '&nbsp;&nbsp;&nbsp;&nbsp;默认地址',
 	saveOrUpdate : "",
 	
+	add_address_btn : '<button class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo">添加</button>',
+	upt_address_btn : '<button class="btn btn-default update" id="address_update" data-toggle="modal" data-target="#EditReceiveInfo">修改</button>',
+	del_address_btn : '<button class="btn btn-default update" id="address_delete">删除</button>',
+	
 	check_from : '<form method="post" action="submitOrder"></form>',
 	check_input_hidden : '<input type="hidden"/>',
 };
@@ -23,7 +27,7 @@ var yiqin_cart_check = function(){
 	var action = {
 		submitOrder : function(){
 			if(confirm("请确认订单信息是否正确，是否确认提交订单？")){
-				var addressAttr = $("input:checked[name=accept_info]").val(),
+				var addressAttr = $("input:checked[name=accept_info]"),
 					zhifu = 1,//$("input:checked[name=zhi_fu]").val(),
 					peisong = 1,//$("input:checked[name=pei_song]").val(), 
 					fapiaolx = $("input:checked[name=fapiao_lx]").val(),
@@ -32,6 +36,12 @@ var yiqin_cart_check = function(){
 					productIds = "<s:property value='#request.submit_ProductIds'/>",
 					$check_from = $(cart_check_temp.check_from);
 					
+				if(addressAttr==""||addressAttr.length==0){
+					alert("您还没有配送地址信息，请先添加！");
+					return;
+				}
+				addressAttr = addressAttr.val();
+				
 				if(fapiaomingxi==""){
 					alert("请填写开票项目信息！");
 					return;
@@ -51,6 +61,7 @@ var yiqin_cart_check = function(){
 					$check_from.append($check_input_hidden.attr('name','fapiaomingxi').val(fapiaomingxi));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','productIds').val(productIds));
+					$(document.body).append($check_from);
 					$check_from.submit();
 			}
 		},
@@ -105,7 +116,7 @@ var yiqin_cart_check = function(){
 		saveOrUpdateAddress : function(){
 			var dataParm = checkReceiveAddress();
 			if(!dataParm){
-				return false;
+				return;
 			}
 			dataParm = dataParm + "&saveOrUpdate="+cart_check_temp.saveOrUpdate;
 			$.ajax({
@@ -117,19 +128,21 @@ var yiqin_cart_check = function(){
 	             success: function(data){
 	            	 if(data=='1'){
 	            		 $("#receive_error").html("信息填写不正确，请再次填写！");
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='2'){
 	            		 $("#receive_error").html("保存失败，请稍后重试！");
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='3'){
 	            		 yiqin_cart_check.findUserAddress();
-	            		 return false;
+	            		 return;
 	            	 }else if(data=='4'){
 	            		 $("#receive_error").html("地址数量超出最大数量10个");
-	            		 return false;
+	            		 return;
 	            	 }
 	             },
-	             beforeSend: function(){},
+	             beforeSend: function(){
+	            	 $("#receive_error").html("");
+	             },
 	             complete: function(){
 	            	 $('#EditReceiveInfo').modal('hide');
 	             },
@@ -179,32 +192,43 @@ var yiqin_cart_check = function(){
 	};
 	
 	var appendToAddress = function(data){
-		var $user_acc_info = $("#user_acc_info"),
-			$check_li = $(cart_check_temp.check_li);
-			$user_acc_info.empty();
-			$("#address_add").click(function(){
-				cart_check_temp.saveOrUpdate = "save";
-				emptyReceiveModal();
-			});
+		var $user_acc_info = $('<ul class="user_option" id="user_acc_info"></ul>'),
+			$acc_info_div = $("#acc_info_div"),
+			$check_li = $(cart_check_temp.check_li),
+			$add_address_btn = $(cart_check_temp.add_address_btn),
+			$upt_address_btn = $(cart_check_temp.upt_address_btn),
+			$del_address_btn = $(cart_check_temp.del_address_btn);
+			$acc_info_div.empty();
+			
+			$acc_info_div.append($user_acc_info);
 		if(data == '1'){
 			$user_acc_info.append($check_li);
 			$check_li.append("您还没有配送地址信息，请点击添加按钮添加");
-			$("#address_update").remove();
-			$("#address_delete").remove();
+			$acc_info_div.append($add_address_btn);
+			$add_address_btn.click(function(){
+				cart_check_temp.saveOrUpdate = "save";
+				emptyReceiveModal();
+			});
        	}else if(data == '2'){
        		$user_acc_info.append($check_li);
 			$check_li.append("配送地址信息加载失败，请刷新页面再试");
        	}else{
-       		if(data.length>=10){
-       			$("#address_add").remove();
+       		if(data.length<10){
+       			$acc_info_div.append($add_address_btn);
+    			$add_address_btn.click(function(){
+    				cart_check_temp.saveOrUpdate = "save";
+    				emptyReceiveModal();
+    			});
        		}
-			$("#address_update").click(function(){
+       		$acc_info_div.append($upt_address_btn);
+       		$acc_info_div.append($del_address_btn);
+       		$upt_address_btn.click(function(){
 				cart_check_temp.saveOrUpdate = "update";
 				emptyReceiveModal();
 				var type = $("input:checked[name=accept_info]").val();
 				yiqin_cart_check.editAddressByAttr(type);
 			});
-			$("#address_delete").click(function(){
+       		$del_address_btn.click(function(){
 				var type = $("input:checked[name=accept_info]").val();
 				yiqin_cart_check.deleteUserAddress(type);
 			});
@@ -336,11 +360,11 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-sm-100">
 				<h5><b><s:text name="cart.check.receiver.information"></s:text></b></h5>
-				<div class="chose_area" style="margin-bottom:10px;">
-					<ul class="user_option" id="user_acc_info"></ul>
-					<button class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo">添加</button>
-					<button class="btn btn-default update" id="address_update" data-toggle="modal" data-target="#EditReceiveInfo">修改</button>
-					<button class="btn btn-default update" id="address_delete">删除</button>
+				<div class="chose_area" style="margin-bottom:10px;" id="acc_info_div">
+<!-- 					<ul class="user_option" id="user_acc_info"></ul> -->
+<!-- 					<button style="display:none" class="btn btn-default update" id="address_add" data-toggle="modal" data-target="#EditReceiveInfo">添加</button> -->
+<!-- 					<button style="display:none" class="btn btn-default update" id="address_update" data-toggle="modal" data-target="#EditReceiveInfo">修改</button> -->
+<!-- 					<button style="display:none" class="btn btn-default update" id="address_delete">删除</button> -->
 				</div>
 			</div>
 		</div>

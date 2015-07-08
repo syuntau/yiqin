@@ -76,7 +76,7 @@ var yiqin_my_set = function(){
 			$("#receive_error_"+ptype).html("");
 			var dataParam = checkModifyParam(ptype);
 			if(!dataParam){
-				return false;
+				return;
 			}
 			$.ajax({
 			    type: "POST",
