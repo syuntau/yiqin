@@ -28,7 +28,7 @@ insert into brand (name_en, name_cn) values
  ('Uni','三菱'),
  ('SUNWOOD','三木'),
  ('Maped','马培德'),
- ('SnowWhite','白雪'),
+ ('Snowhite','白雪'),
  ('BAOKE','宝克'),
  ('PILOT','百乐'),
  ('ZEBRA','斑马'),
@@ -127,5 +127,6 @@ insert into brand (name_en, name_cn) values
  ('ELECTTE','依勤'),
  ('','龙安'),
  ('Gigaset','集怡嘉'),
- ('BBK','步步高');
+ ('BBK','步步高'),
+ ('','文正');
  
