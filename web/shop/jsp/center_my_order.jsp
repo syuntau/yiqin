@@ -153,7 +153,7 @@ $(document).ready(function(){
 								</tr>
 								<s:iterator value="#order.productList" var="product" status="st">
 									 <tr>
-										<td class="cart_product">
+										<td class="cart_product" style="margin-left:10px;margin-right:-10px;">
 											<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
 											<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
 											<p><s:text name="shop.product.details.productId"/><s:property value="#product.productId"/></p>
