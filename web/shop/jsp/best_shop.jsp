@@ -4,7 +4,8 @@
 
 <script type="text/javascript">
 var toIndexPage = function(pageIndex){
-	window.location.href = "findBestProduct?pageIndex="+pageIndex;
+	var paramVal = "<s:property value='paramVal'/>";
+	window.location.href = "findBestProduct?pageIndex="+pageIndex+"&paramVal="+paramVal;
 };
 </script>
 
