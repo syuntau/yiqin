@@ -183,7 +183,7 @@ var yiqin_cart_check = function(){
 				
 				<s:iterator value="#request.settlement_products">
     				var	toPrice = "<s:property value='count'/>"*"<s:property value='zhekouPrice'/>";
-					totalPrice += parseInt(toPrice);
+					totalPrice += toPrice;
 				</s:iterator>
 				
 				$totalli.append("订单总价：").append(totalPrice+" 元");

@@ -1,5 +1,6 @@
 package com.yiqin.serviceImpl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -369,12 +370,12 @@ public class ProductManagerImpl implements ProductManager {
 			
 			Map<String,String> nameid_pvalue = entry.getValue();
 			String price = nameid_pvalue.get("price");
-			int zhekouPrice = (int) (Float.valueOf(price)*zhekou);
+			String zhekouPrice = new DecimalFormat("#########.##").format(Float.valueOf(price)*zhekou);
 			
 			productView.setProductName(nameid_pvalue.get("name"));
 			productView.setPrice(price);
 			productView.setColor(nameid_pvalue.get("color"));
-			productView.setZhekouPrice(String.valueOf(zhekouPrice));
+			productView.setZhekouPrice(zhekouPrice);
 			productView.setImgUrl(nameid_pvalue.get("imageUrl"));
 			
 			pViewList.add(productView);

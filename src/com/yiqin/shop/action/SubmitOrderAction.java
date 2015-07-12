@@ -1,5 +1,6 @@
 package com.yiqin.shop.action;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -119,14 +120,14 @@ public class SubmitOrderAction extends ActionSupport {
 			List<Cart> cartList = shoppingManager.findCartsByProductIds(
 					user.getId(), productIds);
 			if (Util.isNotEmpty(cartList)) {
-				int totalPrice = 0;
-				int totalYuanjia = 0;
+				float totalPrice = 0;
+				float totalYuanjia = 0;
 				for (Cart cart : cartList) {
 					totalPrice += cart.getCount() * cart.getZhekouPrice();
 					totalYuanjia += cart.getCount() * cart.getPrice();
 				}
-				order.setZongjia((float) totalPrice);
-				order.setYuanjia((float) totalYuanjia);
+				order.setZongjia(Float.valueOf(new DecimalFormat("#########.##").format(totalPrice)));
+				order.setYuanjia(Float.valueOf(new DecimalFormat("#########.##").format(totalYuanjia)));
 				UserConf userConf = userManager.findUserConfInfo(user.getId(),"zhekou");
 				if (userConf != null) {
 					order.setZhekou(Float.valueOf(userConf.getValue()));

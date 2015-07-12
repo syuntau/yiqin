@@ -158,7 +158,7 @@ var yiqin_cart_action = function(){
 				$cart_img = $(cart_template.cart_img),
 			 	$cart_div = $(cart_template.cart_div),
 			 	$cart_input = $(cart_template.cart_input);
-			 $cart_td.attr('class',"cart_product").css('margin-left','10px');
+			 $cart_td.attr('class',"cart_product");
 			 $cart_td.append($cart_a.append($cart_img));
 			 $cart_a.click(function(){
 				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");

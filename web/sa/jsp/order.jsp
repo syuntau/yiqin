@@ -184,7 +184,7 @@ $(document).ready(function(){
 						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
                         
-                        <button type="button" style="margin-left:100px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
+                        <button type="button" style="margin-left:50px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
                     </form>
                 </div>
 				<table class="table table-condensed">
