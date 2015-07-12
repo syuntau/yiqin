@@ -411,7 +411,7 @@ $(document).ready(function(){
 				<ul>
 					<li>
 						<label>旧邮箱地址：</label>
-						<span>lj520qz@qq.com</span>
+						<span><s:property value="#session.userInfo.email"/></span>
 					</li>
 					<li>
 						<label>新邮箱地址：</label>
@@ -447,7 +447,7 @@ $(document).ready(function(){
 				<ul>
 					<li>
 						<label>验证邮箱：</label>
-						<span>lj520qz@qq.com</span>
+						<span><s:property value="#session.userInfo.email"/></span>
 					</li>
 					<li>
 						<label>邮箱验证码：</label>
