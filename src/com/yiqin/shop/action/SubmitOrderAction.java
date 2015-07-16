@@ -126,8 +126,8 @@ public class SubmitOrderAction extends ActionSupport {
 					totalPrice += cart.getCount() * cart.getZhekouPrice();
 					totalYuanjia += cart.getCount() * cart.getPrice();
 				}
-				order.setZongjia(Float.valueOf(new DecimalFormat("#########.##").format(totalPrice)));
-				order.setYuanjia(Float.valueOf(new DecimalFormat("#########.##").format(totalYuanjia)));
+				order.setZongjia(Float.valueOf(new DecimalFormat("#########.00").format(totalPrice)));
+				order.setYuanjia(Float.valueOf(new DecimalFormat("#########.00").format(totalYuanjia)));
 				UserConf userConf = userManager.findUserConfInfo(user.getId(),"zhekou");
 				if (userConf != null) {
 					order.setZhekou(Float.valueOf(userConf.getValue()));

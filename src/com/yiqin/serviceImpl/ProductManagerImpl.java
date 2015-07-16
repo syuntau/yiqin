@@ -370,7 +370,7 @@ public class ProductManagerImpl implements ProductManager {
 			
 			Map<String,String> nameid_pvalue = entry.getValue();
 			String price = nameid_pvalue.get("price");
-			String zhekouPrice = new DecimalFormat("#########.##").format(Float.valueOf(price)*zhekou);
+			String zhekouPrice = new DecimalFormat("#########.00").format(Float.valueOf(price)*zhekou);
 			
 			productView.setProductName(nameid_pvalue.get("name"));
 			productView.setPrice(price);
