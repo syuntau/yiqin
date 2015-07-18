@@ -175,7 +175,7 @@ $(document).ready(function(){
 										<td style="text-align:center;">
 											<p>
 												<script type="text/javascript">
-													document.write(<s:property value="#product.zhekouPrice"/>*<s:property value="#product.count"/>);
+													document.write((<s:property value="#product.zhekouPrice"/>*<s:property value="#product.count"/>).toFixed(2));
 												</script>
 											</p>
 										</td>

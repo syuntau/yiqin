@@ -106,10 +106,10 @@ public class AddProductToCartAction extends ActionSupport {
 			cart.setUseId(loninUser.getId());
 			cart.setProductId(product.getProductId());
 			cart.setProductName(product.getProductName());
-			cart.setPrice(Float.valueOf(product.getPrice()));
+			cart.setPrice(product.getPrice());
 			cart.setImgUrl(product.getImgUrl().split(",")[0]);
 			cart.setCount(num);
-			cart.setZhekouPrice(Float.valueOf(product.getZhekouPrice()));
+			cart.setZhekouPrice(product.getZhekouPrice());
 			cart.setProductInfo(product.getColor());
 			boolean flag = shoppingManager.addProductToCart(cart);
 			if(!flag){

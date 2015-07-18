@@ -24,16 +24,16 @@
             <column name="img_url" length="40">
             </column>
         </property>
-        <property name="price" type="java.lang.Float">
-            <column name="price" precision="9" scale="3">
+        <property name="price" type="string">
+            <column name="price" length="20">
             </column>
         </property>
         <property name="count" type="java.lang.Integer">
             <column name="count">
             </column>
         </property>
-        <property name="zhekouPrice" type="java.lang.Float">
-            <column name="zhekou_price" precision="9" scale="3">
+        <property name="zhekouPrice" type="string">
+            <column name="zhekou_price" length="20">
             </column>
         </property>
         <property name="productInfo" type="string">

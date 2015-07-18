@@ -114,7 +114,7 @@ var yiqin_cart_action = function(){
 	            	 }else if(data=='success'){
 	            		 $productTr.data(pIndex+"_productNum",pNum);
 	            		 $productInput.val(pNum);
-	            		 $productTr.find("p[class='cart_total_price']").html(pNum*price);
+	            		 $productTr.find("p[class='cart_total_price']").html((pNum*price).toFixed(2));
 	            	 }
                },
                beforeSend: function(){},
@@ -209,7 +209,7 @@ var yiqin_cart_action = function(){
  			$cart_td = $(cart_template.cart_td),
  			$cart_p = $(cart_template.cart_p);
  			$cart_td.attr('class',"cart_total").append($cart_p);
- 			$cart_p.attr('class',"cart_total_price").append(val.count*val.zhekouPrice);
+ 			$cart_p.attr('class',"cart_total_price").append((val.count*val.zhekouPrice).toFixed(2));
  			$cart_tr.append($cart_td);
  			$cart_td = $(cart_template.cart_td),
  			$cart_a = $(cart_template.cart_a);

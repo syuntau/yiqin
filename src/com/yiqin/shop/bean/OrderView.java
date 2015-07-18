@@ -26,9 +26,9 @@ public class OrderView {
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
 	private List<Cart> productList; // 商品记录
-	private Float yuanjia;// 订单原价
+	private String yuanjia;// 订单原价
 	private Float zhekou;// 订单折扣
-	private Float zongjia;// 订单总价
+	private String zongjia;// 订单总价
 	private String crateDate;// 订单创建时间
 	private String updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
@@ -153,11 +153,11 @@ public class OrderView {
 		this.productList = productList;
 	}
 
-	public Float getYuanjia() {
+	public String getYuanjia() {
 		return yuanjia;
 	}
 
-	public void setYuanjia(Float yuanjia) {
+	public void setYuanjia(String yuanjia) {
 		this.yuanjia = yuanjia;
 	}
 
@@ -169,11 +169,11 @@ public class OrderView {
 		this.zhekou = zhekou;
 	}
 
-	public Float getZongjia() {
+	public String getZongjia() {
 		return zongjia;
 	}
 
-	public void setZongjia(Float zongjia) {
+	public void setZongjia(String zongjia) {
 		this.zongjia = zongjia;
 	}
 

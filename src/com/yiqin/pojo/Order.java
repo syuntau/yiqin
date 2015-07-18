@@ -25,9 +25,9 @@ public class Order implements java.io.Serializable {
 	private String fapiaotaitou;// 发票抬头
 	private String fapiaomingxi;// 发票明细
 	private String productList; // cart对象list 
-	private Float yuanjia;// 订单原价
+	private String yuanjia;// 订单原价
 	private Float zhekou;// 订单折扣
-	private Float zongjia;// 订单总价
+	private String zongjia;// 订单总价
 	private Date crateDate;// 订单创建时间
 	private Date updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
@@ -43,7 +43,7 @@ public class Order implements java.io.Serializable {
 			String address, String mobile, String email, Byte zhifu,
 			Float yunfei, String songhuoriqi, String peisongfangshi,String fapiaolx,
 			String fapiaotaitou, String fapiaomingxi, String productList,
-			Float yuanjia, Float zhekou, Float zongjia, Date crateDate,
+			String yuanjia, Float zhekou, String zongjia, Date crateDate,
 			Date updateDate, Byte deleteFlag) {
 		this.id = id;
 		this.status = status;
@@ -188,11 +188,11 @@ public class Order implements java.io.Serializable {
 		this.productList = productList;
 	}
 
-	public Float getYuanjia() {
+	public String getYuanjia() {
 		return this.yuanjia;
 	}
 
-	public void setYuanjia(Float yuanjia) {
+	public void setYuanjia(String yuanjia) {
 		this.yuanjia = yuanjia;
 	}
 
@@ -204,11 +204,11 @@ public class Order implements java.io.Serializable {
 		this.zhekou = zhekou;
 	}
 
-	public Float getZongjia() {
+	public String getZongjia() {
 		return this.zongjia;
 	}
 
-	public void setZongjia(Float zongjia) {
+	public void setZongjia(String zongjia) {
 		this.zongjia = zongjia;
 	}
 

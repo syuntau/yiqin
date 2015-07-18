@@ -16,16 +16,16 @@ public class Cart implements java.io.Serializable {
 	private String productId;// 商品ID
 	private String productName;// 商品名
 	private String imgUrl;// 商品缩略图URL
-	private Float price;// 单价
+	private String price;// 单价
 	private Integer count; // 数量
-	private Float zhekouPrice;//折扣价格
+	private String zhekouPrice;//折扣价格
 	private String productInfo;// 商品其他属性(如：品牌,颜色,....)
 
 	public Cart() {
 	}
 
 	public Cart(String useId, String productId, String productName,
-			String imgUrl, Float price, Integer count,Float zhekouPrice,String productInfo) {
+			String imgUrl, String price, Integer count,String zhekouPrice,String productInfo) {
 		this.useId = useId;
 		this.productId = productId;
 		this.productName = productName;
@@ -76,11 +76,11 @@ public class Cart implements java.io.Serializable {
 		this.imgUrl = imgUrl;
 	}
 
-	public Float getPrice() {
+	public String getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -92,11 +92,11 @@ public class Cart implements java.io.Serializable {
 		this.count = count;
 	}
 
-	public Float getZhekouPrice() {
+	public String getZhekouPrice() {
 		return zhekouPrice;
 	}
 
-	public void setZhekouPrice(Float zhekouPrice) {
+	public void setZhekouPrice(String zhekouPrice) {
 		this.zhekouPrice = zhekouPrice;
 	}
 

@@ -1,5 +1,6 @@
 package com.yiqin.serviceImpl;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.yiqin.dao.IShoppingDao;
@@ -164,9 +165,9 @@ public class UserManagerImpl implements UserManager {
 			List<Cart> cartList = shoppingDao.findCartListInfo(userId);
 			if(Util.isNotEmpty(cartList)){
 				for(Cart cart : cartList){
-					float value = cart.getPrice()*zhekou;
-					String zkp = String.valueOf(value).split("\\.")[0];
-					cart.setZhekouPrice(Float.parseFloat(zkp));
+					float value = Float.valueOf(cart.getPrice())*zhekou;
+					String zkp = new DecimalFormat("#########.00").format(value);
+					cart.setZhekouPrice(zkp);
 					shoppingDao.updateCart(cart);
 				}
 			}

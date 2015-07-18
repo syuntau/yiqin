@@ -186,7 +186,7 @@ var yiqin_cart_check = function(){
 					totalPrice += toPrice;
 				</s:iterator>
 				
-				$totalli.append("订单总价：").append(totalPrice+" 元");
+				$totalli.append("订单总价：").append(totalPrice.toFixed(2)+" 元");
 			}
 		},
 	};
@@ -465,7 +465,7 @@ $(document).ready(function(){
 												<td class="cart_total">
 													<p>
 														<script type="text/javascript">
-															document.write(<s:property value="zhekouPrice"/>*<s:property value="count"/>);
+															document.write((<s:property value="zhekouPrice"/>*<s:property value="count"/>).toFixed(2));
 														</script>
 													</p>
 												</td>

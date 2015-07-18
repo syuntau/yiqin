@@ -64,16 +64,16 @@
             <column name="product_list" length="1024">
             </column>
         </property>
-        <property name="yuanjia" type="java.lang.Float">
-            <column name="yuanjia" precision="9" scale="3">
+        <property name="yuanjia" type="string">
+            <column name="yuanjia" length="20">
             </column>
         </property>
         <property name="zhekou" type="java.lang.Float">
             <column name="zhekou" precision="9" scale="3">
             </column>
         </property>
-        <property name="zongjia" type="java.lang.Float">
-            <column name="zongjia" precision="9" scale="3">
+        <property name="zongjia" type="string">
+            <column name="zongjia" length="20">
             </column>
         </property>
         <property name="crateDate" type="timestamp">

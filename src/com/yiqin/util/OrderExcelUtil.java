@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -141,10 +142,9 @@ public class OrderExcelUtil {
 				fieldzhekoup.setAccessible(true);
 				Field fieldcount = docClass.getDeclaredField("count");
 				fieldcount.setAccessible(true);
-				Float zhekouPrice = (Float) fieldzhekoup.get(cart);
+				String zhekouPrice = (String) fieldzhekoup.get(cart);
 				int count = (int) fieldcount.get(cart);
-				int totalPrice = (int) (zhekouPrice*count);
-				value = String.valueOf(totalPrice);
+				value = new DecimalFormat("#########.00").format(Float.valueOf(zhekouPrice)*count);
 				return value;
 			}
 			Field field = docClass.getDeclaredField(headCode);
