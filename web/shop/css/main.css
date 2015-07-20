@@ -936,6 +936,7 @@ h2.title:before{
 
 .features_items{
 	overflow:hidden;
+	padding-top: 2px;
 }
 
 
@@ -955,6 +956,10 @@ h2.title {
 	overflow: hidden;
 	margin-bottom:30px;
 	height: 441px;
+}
+
+div.product-image-wrapper:hover {
+	box-shadow: 0 0 2px 2px #FE980F;
 }
 
 .single-products {
