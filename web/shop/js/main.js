@@ -21,7 +21,7 @@ $(document).ready(function(){
 	        scrollTrigger: false, // Set a custom triggering element. Can be an HTML string or jQuery object
 					//scrollTarget: false, // Set a custom target element for scrolling to the top
 	        scrollText: '<i class="fa fa-angle-up"></i>', // Text for element, can contain HTML
-	        scrollTitle: false, // Set a custom <a> title if required.
+	        scrollTitle: '返回页顶', // Set a custom <a> title if required.
 	        scrollImg: false, // Set true to use image
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay

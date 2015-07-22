@@ -5,10 +5,12 @@
 
 <script type="text/javascript">
 var shop_temp = {
-	filter_li : '<li style="margin-bottom: 10px;border-bottom: 1px solid #DDD;"></li>',
+	filter_li : '<li style="padding: 10px 5px;border-bottom: 1px solid #DDD;"></li>',
 	filter_label : '<label></label>',
 	filter_span : '<span></span>',
 	filter_a : '<a></a>',
+	filter_row : '<div class="row" />',
+	filter_div : '<div />'
 };
 
 var yiqin_shoplist_action = function(){
@@ -49,17 +51,22 @@ var yiqin_shoplist_action = function(){
 		$.each(data, function(i,val){
 			var $filter_li = $(shop_temp.filter_li),
 				$filter_label = $(shop_temp.filter_label),
+				$filterLbl = $(shop_temp.filter_div).addClass('col-sm-2'),
+				$filterAll = $(shop_temp.filter_div).addClass('col-sm-1'),
+				$filterItem = $(shop_temp.filter_div).addClass('col-sm-9'),
+				$filterRow = $(shop_temp.filter_row),
 				$filter_span = $(shop_temp.filter_span),
 				nameId = val.nameId,
 				showValue = val.showValue,
 				id = val.id;
 			
-			$filter_li.append($filter_label);
+			$filter_li.append($filterRow);
+			$filterRow.append($filterLbl.append($filter_label));
 			$filter_label.append(val.name).append("：");
 			
 			$filter_a = $(shop_temp.filter_a);
-			$filter_a.append("全部").attr('style','margin-left:10px');
-			$filter_li.append($filter_a);
+			$filter_a.append("全部").attr('style','margin-left:-20px');
+			$filterRow.append($filterAll.append($filter_a));
 			$filter_a.click(function(){
 				if(!$(this).hasClass('select-filter-a')){
 					filterProduct(nameId, id+"_");
@@ -89,7 +96,7 @@ var yiqin_shoplist_action = function(){
 				});
 				$filter_span.append($filter_a);
 			});
-			$filter_li.append($filter_span);
+			$filterRow.append($filterItem.append($filter_span));
 			$shop_filter_ul.append($filter_li);
 		});
 	};
