@@ -170,12 +170,12 @@ var yiqin_my_set = function(){
 				$("#receive_error_mpw").html(msg);
 				return false;
 			}
-			if (verification_code == "") {
-				$modal.find("input[name='verification_code']").focus();
-				msg = "邮箱验证码不能为空";
-				$("#receive_error_mpw").html(msg);
-				return false;
-			}
+// 			if (verification_code == "") {
+// 				$modal.find("input[name='verification_code']").focus();
+// 				msg = "邮箱验证码不能为空";
+// 				$("#receive_error_mpw").html(msg);
+// 				return false;
+// 			}
 			if (password != confirmPwd) {
 				$modal.find("input[name='confirmPwd']").focus();
 				msg = "确认新密码输入错误，请重新输入";
@@ -193,12 +193,12 @@ var yiqin_my_set = function(){
 				$("#receive_error_mem").html(msg);
 				return false;
 			}
-			if (verification_code == "") {
-				$modal.find("input[name='verification_code']").focus();
-				msg = "邮箱验证码不能为空";
-				$("#receive_error_mem").html(msg);
-				return false;
-			}
+// 			if (verification_code == "") {
+// 				$modal.find("input[name='verification_code']").focus();
+// 				msg = "邮箱验证码不能为空";
+// 				$("#receive_error_mem").html(msg);
+// 				return false;
+// 			}
 			if(!checkEmailFormat(email)){
 				$modal.find("input[name='email']").focus();
 				msg = "新邮箱地址格式不正确";
@@ -209,12 +209,12 @@ var yiqin_my_set = function(){
 		}else if(ptype=="vem"){
 			var $modal = $("#email_verify_alert"),
 			verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
-			if (verification_code == "") {
-				$modal.find("input[name='verification_code']").focus();
-				msg = "邮箱验证码不能为空";
-				$("#receive_error_vem").html(msg);
-				return false;
-			}
+// 			if (verification_code == "") {
+// 				$modal.find("input[name='verification_code']").focus();
+// 				msg = "邮箱验证码不能为空";
+// 				$("#receive_error_vem").html(msg);
+// 				return false;
+// 			}
 			return "modifyType=vem&verification_code="+verification_code;
 		}else if(ptype=="normal"){
 			var $modal = $("#my_info_list_normal"),

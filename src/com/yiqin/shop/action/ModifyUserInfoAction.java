@@ -135,26 +135,28 @@ public class ModifyUserInfoAction extends ActionSupport {
 			User loninUser = Util.getLoginUser(session);
 			
 			// 邮箱是否已经验证
-			boolean verifyFlag = false;
+			//boolean verifyFlag = false;
+			boolean verifyFlag = true;
 			UserConf userConf = userManager.findUserConfInfo(loninUser.getId(),"email_verify");
-			if(userConf != null){
-				if("11".equals(userConf.getValue())){
-					verifyFlag = true;
-				}
-			}
+//			if(userConf != null){
+//				if("11".equals(userConf.getValue())){
+//					verifyFlag = true;
+//				}
+//			}
 			
 			//获取存储验证码 和 过期时间
 			String vcodekey = loninUser.getId() + "_code_" + verification_code;
 			Object expetTime = session.getAttribute(vcodekey);
 			boolean expetFlag = false;
-			boolean errorCode = true;
-			if (expetTime != null) {
-				errorCode = false;
-				Date expetDate = (Date) expetTime;
-				if (expetDate.before(new Date())) {
-					expetFlag = true;
-				}
-			}
+			//boolean errorCode = true;
+			boolean errorCode = false;
+//			if (expetTime != null) {
+//				errorCode = false;
+//				Date expetDate = (Date) expetTime;
+//				if (expetDate.before(new Date())) {
+//					expetFlag = true;
+//				}
+//			}
 
 			// 设置信息
 			if ("mem".equals(modifyType)) {
