@@ -8,7 +8,7 @@ public class Page {
 
 	public static final int DEFAULT_PAGE_SIZE = 20;// 默认每页显示行数
 
-	public static final int DEFAULT_PAGE_INDEX_NUM = 20;// 默认页号数目
+	public static final int DEFAULT_PAGE_INDEX_NUM = 8;// 默认页号数目
 
 	private int totalRowNum = 0;// 总的记录数
 
