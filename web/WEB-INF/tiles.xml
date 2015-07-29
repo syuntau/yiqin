@@ -63,7 +63,7 @@
 	</definition>
 	
 	<definition name="shop.index.body" template="/shop/jsp/index.jsp">
-<!-- 		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" /> -->
+		<put-attribute name="ad" value="/shop/jsp/idx_ad.jsp" />
 		<put-attribute name="left" value="shop.index.body.left" />
 		<put-attribute name="right" value="shop.index.body.right" />
 	</definition>
