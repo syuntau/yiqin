@@ -26,6 +26,9 @@ var sa_order = function(){
 							$op.val(val.id).html(val.name);
 							$userListSelect.append($op);
 						});
+						var $firstOP = $(sa_conf.option);
+						$firstOP.val('all').html("请选择客户...");
+						$userListSelect.prepend($firstOP);
 						$userList.find('option:first').attr('selected', true);
 						$('.user-select').removeClass('display-off');
 		           	 }
