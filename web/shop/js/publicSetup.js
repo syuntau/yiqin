@@ -90,8 +90,34 @@ var yiqin_public_js = function(){
 		       complete: function(){},
 		       error: function(){}
 		    });
-		}
+		},
 		
+		setCookie : function(name,value,expDay){
+			var Days = expDay;
+			var exp = new Date(); //new Date("December 31, 9998");
+			exp.setTime(exp.getTime() + Days*24*60*60*1000);
+			document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+		},
+		
+		getCookie : function(name){
+			var arr = document.cookie.split(";");
+			for(var i=0; i<arr.length; i++){
+				var temp = arr[i].split("=");
+				if(temp[0] == name){
+					return unescape(temp[1]);
+				}
+			}
+			return null;
+		},
+		
+		delCookie : function(name){
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			var cval=getCookie(name);
+			if(cval!=null){
+				document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+			}
+		}
 	};
 	
 	//添加到购物车动态效果

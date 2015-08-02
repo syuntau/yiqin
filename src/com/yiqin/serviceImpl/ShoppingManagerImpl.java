@@ -105,7 +105,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		if (endTime != null) {
 			hql.append(" and crateDate<'").append(Util.format(endTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
-		if (Util.isNotEmpty(userId)) {
+		if (Util.isNotEmpty(userId) && !"all".equalsIgnoreCase(userId)) {
 			hql.append(" and userId='").append(userId).append("'");
 		}
 		if (orderId != 0) {
@@ -171,7 +171,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		if (endTime != null) {
 			hql.append(" and crateDate<'").append(Util.format(endTime,"yyyy-MM-dd HH:mm:ss")).append("'");
 		}
-		if (Util.isNotEmpty(userId)) {
+		if (Util.isNotEmpty(userId) && !"all".equalsIgnoreCase(userId)) {
 			hql.append(" and userId='").append(userId).append("'");
 		}
 		if (orderId != 0) {

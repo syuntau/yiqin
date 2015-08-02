@@ -19,7 +19,15 @@ var yiqin_login_action = function(){
 				errmsg.html("请输入密码");
 				return false;
 			}
+			yiqin_public_js.setCookie("cookieUser",document.getElementById("login_name_id").value,30);
 			loginForm.submit();
+		},
+		
+		setCookieLoginUser : function(){
+			var userId = yiqin_public_js.getCookie("cookieUser");
+			if(userId != null && userId != ""){
+				document.getElementById("login_name_id").value = userId;
+			}
 		},
 		
 		registerUser : function(){
@@ -159,6 +167,10 @@ var yiqin_login_action = function(){
 
 	return login_action;
 }();
+
+$(document).ready(function(){
+	yiqin_login_action.setCookieLoginUser();
+});
 </script>
 	<section id="form"><!--form-->
 		<div class="container">
