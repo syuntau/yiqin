@@ -10,7 +10,7 @@ var yiqin_my_set = function(){
 		mySetInit : function(){
 			$("#my_set_info").css('color','#fdb45e');
 			
-			yiqin_my_set.findEmailIsVerify();
+			//yiqin_my_set.findEmailIsVerify();
 		},
 		
 		findEmailIsVerify : function(){
@@ -156,8 +156,8 @@ var yiqin_my_set = function(){
 		if(ptype=="mpw"){
 			var $modal = $("#modify_pwd_alert"),
 			password = $modal.find("input[name=password]").val(),
-			confirmPwd = $modal.find("input[name=confirmPwd]").val(),
-			verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
+			confirmPwd = $modal.find("input[name=confirmPwd]").val();
+			//verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
 			if (password == "") {
 				$modal.find("input[name='password']").focus();
 				msg = "新密码不能为空";
@@ -185,8 +185,8 @@ var yiqin_my_set = function(){
 			return "modifyType=mpw&password="+password+"&confirmPwd="+confirmPwd+"&verification_code="+verification_code;
 		}else if(ptype=="mem"){
 			var $modal = $("#modify_email_alert"),
-			email = $modal.find("input[name=email]").val().replace(REX, ""),
-			verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
+			email = $modal.find("input[name=email]").val().replace(REX, "");
+			//verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
 			if (email == "") {
 				$modal.find("input[name='email']").focus();
 				msg = "新邮箱地址不能为空";
@@ -209,12 +209,12 @@ var yiqin_my_set = function(){
 		}else if(ptype=="vem"){
 			var $modal = $("#email_verify_alert"),
 			verification_code = $modal.find("input[name=verification_code]").val().replace(REX, "");
-// 			if (verification_code == "") {
-// 				$modal.find("input[name='verification_code']").focus();
-// 				msg = "邮箱验证码不能为空";
-// 				$("#receive_error_vem").html(msg);
-// 				return false;
-// 			}
+			if (verification_code == "") {
+				$modal.find("input[name='verification_code']").focus();
+				msg = "邮箱验证码不能为空";
+				$("#receive_error_vem").html(msg);
+				return false;
+			}
 			return "modifyType=vem&verification_code="+verification_code;
 		}else if(ptype=="normal"){
 			var $modal = $("#my_info_list_normal"),
@@ -311,7 +311,7 @@ $(document).ready(function(){
 					<li style="margin-bottom:10px;">
 						<label>登录密码：</label>
 						<span class='span-mark'>互联网账号存在被盗风险，建议您定期更改密码。</span>
-						<a href="javaScript:;" data-toggle="modal" data-target="#modify_pwd_alert">修改</a>
+						<a data-toggle="modal" data-target="#modify_pwd_alert">修改</a>
 					</li>
 					<li style="margin-bottom:10px;">
 						<label>公司名称：</label>
@@ -325,8 +325,8 @@ $(document).ready(function(){
 					<li style="margin-bottom:10px;">
 						<label>邮箱地址：</label>
 						<span><s:property value="#session.userInfo.email"/></span>
-						<a href="javaScript:;" data-toggle="modal" data-target="#modify_email_alert">修改</a>
-						<span class="ftx-03" id="email_verify_type"></span>
+						<a data-toggle="modal" data-target="#modify_email_alert">修改</a>
+<%-- 						<span class="ftx-03" id="email_verify_type"></span> --%>
 					</li>
 <!-- 					<li> -->
 <!-- 						<label>公司地址：</label> -->
@@ -381,12 +381,12 @@ $(document).ready(function(){
 						<label>确认新密码：</label>
 						<input type="password" name="confirmPwd"/>
 					</li>
-					<li>
-						<label>邮箱验证码：</label>
-						<input type="text" name="verification_code"/>
-						<a href="javaScript:yiqin_my_set.sendEmailVerifyCode('mpw');" id="get_code_mpw">获取验证码</a>
-						<span class='span-mark' id="except_time_mpw"></span>
-					</li>
+<!-- 					<li> -->
+<!-- 						<label>邮箱验证码：</label> -->
+<!-- 						<input type="text" name="verification_code"/> -->
+<!-- 						<a href="javaScript:yiqin_my_set.sendEmailVerifyCode('mpw');" id="get_code_mpw">获取验证码</a> -->
+<%-- 						<span class='span-mark' id="except_time_mpw"></span> --%>
+<!-- 					</li> -->
 					<li>
 						<span style="color:red" id="receive_error_mpw"></span>
 					</li>
@@ -417,12 +417,12 @@ $(document).ready(function(){
 						<label>新邮箱地址：</label>
 						<input type="email" name="email"/>
 					</li>
-					<li>
-						<label>邮箱验证码：</label>
-						<input type="text" name="verification_code"/>
-						<a href="javaScript:yiqin_my_set.sendEmailVerifyCode('mem');" id="get_code_mem">获取验证码</a>
-						<span class='span-mark' id="except_time_mem"></span>
-					</li>
+<!-- 					<li> -->
+<!-- 						<label>邮箱验证码：</label> -->
+<!-- 						<input type="text" name="verification_code"/> -->
+<!-- 						<a href="javaScript:yiqin_my_set.sendEmailVerifyCode('mem');" id="get_code_mem">获取验证码</a> -->
+<%-- 						<span class='span-mark' id="except_time_mem"></span> --%>
+<!-- 					</li> -->
 					<li>
 						<span style="color:red" id="receive_error_mem"></span>
 					</li>
