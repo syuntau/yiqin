@@ -30,6 +30,7 @@ public class UtilKeys {
 	public static final String MAIL_SERVER_HOST = "mail.smtpServerHost";
 	public static final String EMAIL_SIZE = "mail.mailsizelimit";
 	public static final String FROM_EMAIL = "from.email";
+	public static final String TO_EMAIL = "to.email";
 	public static final String FROM_EMAIL_PASSWORD = "from.email.password";
 	public static final String SEND_NAME_EMAIL = "send.name.email";
 	
