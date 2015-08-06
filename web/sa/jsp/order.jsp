@@ -46,7 +46,7 @@ var sa_order = function(){
 			});
 		},
 		
-		modifyBootBox : function(orderId,statusStr){
+		modifyBootBox : function(orderId,statusStr,userId){
 			bootbox.dialog({  
                 message: "<span>订单号："+orderId+"</span><span style='margin-left:50px;'>当前状态："+statusStr+"</span>"
                 		+"<div style='margin-top:20px;'>请选择要修改的订单状态：<select id='mod_sel_status'><option value='1'>等待付款</option><option value='2'>等待收货</option>"	
@@ -62,19 +62,19 @@ var sa_order = function(){
                         className: "btn-primary",  
                         callback: function () {
                         	var status = $("#mod_sel_status").val();
-                        	sa_order.updateOrderStatus(orderId, status);
+                        	sa_order.updateOrderStatus(orderId, status, userId);
                         }  
                     }  
                 }  
             });  
 		},
 		
-		updateOrderStatus : function(orderId,status){
+		updateOrderStatus : function(orderId,status,userId){
 			$.ajax({
 	             type: "POST",
 	             async: true,
 	             url: "updateOrderStatus",
-	             data : "userId=<s:property value='userId'/>&orderId="+orderId+"&status="+status,
+	             data : "userId="+userId+"&orderId="+orderId+"&status="+status,
 	             dataType: "text",
 	             success: function(data){
 	            	if(data=='1'){
@@ -187,7 +187,7 @@ $(document).ready(function(){
 						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
                         
-                        <button type="button" style="margin-left:50px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
+                        <button type="button" style="margin-left:30px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
                     </form>
                 </div>
 				<table class="table table-condensed">
@@ -233,7 +233,7 @@ $(document).ready(function(){
 									<span><s:property value='#order.status'/></span>
 								</td>
 								<td style="text-align:center;">
-									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>');">
+									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>','<s:property value='#order.userId'/>');">
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
 									</span>
 								</td>
