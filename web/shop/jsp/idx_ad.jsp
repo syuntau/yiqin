@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<img alt="" src="/shop/images/home/banner-20150729001.png" />
+					<img alt="" src="/shop/images/home/banner.png" />
 				</div>
 			</div>
 		</div>

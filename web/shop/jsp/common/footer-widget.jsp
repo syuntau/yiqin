@@ -9,8 +9,8 @@
 						<div class="single-widget">
 							<h2><s:text name="shop.footer.widget.about.yiqin"></s:text></h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="javaScript:footerTo('footer_about');"><s:text name="shop.footer.widget.yiqin.present"></s:text></a></li>
-								<li><s:text name="shop.footer.widget.about.yiqin.info"></s:text></li>
+<%-- 								<li><a href="javaScript:footerTo('footer_about');"><s:text name="shop.footer.widget.yiqin.present"></s:text></a></li> --%>
+								<li><a href="javaScript:footerTo('footer_about');"><s:text name="shop.footer.widget.about.yiqin.info"/></a></li>
 							</ul>
 						</div>
 					</div>

@@ -12,7 +12,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="contact-form" style="margin-bottom: 20px">
-							<img alt="" src="/shop/images/home/logo.jpg" height="282px" width="400px">
+							<img alt="" src="/shop/images/home/contactus.png" height="282px" width="400px">
 						</div>
 					</div>
 					<div class="col-sm-6">
