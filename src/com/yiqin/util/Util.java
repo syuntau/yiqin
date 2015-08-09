@@ -260,9 +260,9 @@ public class Util {
 		if (status == 10) {
 			statusStr = "全部状态";
 		} else if (status == 1) {
-			statusStr = "等待付款";
-		} else if (status == 2) {
 			statusStr = "等待收货";
+		} else if (status == 2) {
+			statusStr = "等待付款";
 		} else if (status == 3) {
 			statusStr = "已完成";
 		} else if (status == 0) {
