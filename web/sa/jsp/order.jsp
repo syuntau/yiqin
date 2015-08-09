@@ -179,8 +179,8 @@ $(document).ready(function(){
 	                        <label class="user-select display-off">订单状态</label>
 							<select id="submitStatus" class="form-control">
 								<option value="10">全部状态</option>
-								<option value="1">等待付款</option>
-								<option value="2">等待收货</option>
+								<option value="1">等待收货</option>
+								<option value="2">等待付款</option>
 								<option value="3">已完成</option>
 								<option value="0">已取消</option>
 							</select>
