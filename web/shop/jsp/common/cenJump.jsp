@@ -22,13 +22,14 @@
 	var msg = "${requestScope.notLoginError}";
 	if (msg != "") {
 		alert(msg);
-		yiqin_public_js.postFormToTopAction("top_login");
+		window.location.href="/dispatcher?para_nav=top_login";
 	}
 	
 	var somsg = "${requestScope.submitOrderError}";
 	if (somsg != "") {
 		alert(somsg);
-		yiqin_public_js.postFormToTopAction("top_cart");
+		window.location.href="/shop/index?home=top_cart";
+		//yiqin_public_js.postFormToTopAction("top_cart");
 	}
 </script>
 </head>

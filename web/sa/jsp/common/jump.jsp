@@ -22,7 +22,8 @@
 	var msg = "${requestScope.notLoginError}";
 	if (msg != "") {
 		alert(msg);
-		sa_common.postFormToLogin();
+		window.location.href="/sa/toLogin";
+		//sa_common.postFormToLogin();
 	}
 </script>
 </head>
