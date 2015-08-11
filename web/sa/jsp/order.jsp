@@ -49,7 +49,7 @@ var sa_order = function(){
 		modifyBootBox : function(orderId,statusStr,userId){
 			bootbox.dialog({  
                 message: "<span>订单号："+orderId+"</span><span style='margin-left:50px;'>当前状态："+statusStr+"</span>"
-                		+"<div style='margin-top:20px;'>请选择要修改的订单状态：<select id='mod_sel_status'><option value='1'>等待付款</option><option value='2'>等待收货</option>"	
+                		+"<div style='margin-top:20px;'>请选择要修改的订单状态：<select id='mod_sel_status'><option value='1'>等待收货</option><option value='2'>等待付款</option>"	
 						+"<option value='3'>已完成</option><option value='0'>已取消</option></select></div>",  
                 title: "订单状态修改", 
                 buttons: {  
