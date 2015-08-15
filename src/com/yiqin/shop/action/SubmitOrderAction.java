@@ -192,16 +192,20 @@ public class SubmitOrderAction extends ActionSupport {
 		String pBeg = "<span style=\"font-size:14px;font-weight:bold;\">", pEnd = "</span>";
 		content.append("新增订单信息：<br/>");
 		if(order != null){
-			content.append("<div>").append(pBeg).append("　订单号：").append(pEnd).append(order.getId()).append(pBeg).append("　客服ID：").append(pEnd).append(order.getUserId());
+			content.append("<div>").append(pBeg).append("　订单号：").append(pEnd).append(order.getId()).append(pBeg).append("　客户ID：").append(pEnd).append(order.getUserId());
 			content.append(pBeg).append("　联系电话：").append(pEnd).append(order.getMobile()).append(pBeg).append("　订单折扣：").append(pEnd).append(order.getZhekou());
 			content.append(pBeg).append("　订单总价：").append(pEnd).append(order.getZongjia()).append("元<br/>");
-			content.append(pBeg).append("　送货地址：").append(pEnd).append(order.getAddress()).append("</div><br/>");
+			content.append(pBeg).append("　送货地址：").append(pEnd).append(order.getAddress()).append("<br/>");
+			content.append(pBeg).append("　发票类型：").append(pEnd).append(order.getFapiaolx())
+						.append(pBeg).append("　发票抬头：").append(pEnd).append(order.getFapiaotaitou())
+						.append(pBeg).append("　发票明细：").append(pEnd).append(order.getFapiaomingxi())
+						.append("</div><br/>");
 			
 			if(Util.isNotEmpty(cartList)){
 				content.append("<div>所购商品详细信息：<br/>");
 				for(Cart cart : cartList){
 					content.append(pBeg).append("　商品ID：").append(pEnd).append(cart.getProductId()).append(pBeg).append("　名称：").append(pEnd).append(cart.getProductName());
-					content.append(pBeg).append("　数量：").append(pEnd).append(cart.getCount()).append(pBeg).append("　总价：").append(pEnd).append(cart.getZhekouPrice()).append("<br/>");
+					content.append(pBeg).append("　数量：").append(pEnd).append(cart.getCount()).append(pBeg).append("　单价：").append(pEnd).append(cart.getZhekouPrice()).append("<br/>");
 				}
 			}
 		}
