@@ -50,6 +50,18 @@ var yiqin_order_center = function(){
 			var filterTime= $("#submitDate").val(),
 				status = $("#submitStatus").val();
 			window.location.href = "findOrderList?filterTime="+filterTime+"&status="+status;
+		},
+		
+		orderSwitch : function(orderId,type){
+			if(type=="down"){
+				$("#order_up_"+orderId).show();
+				$("#order_down_"+orderId).parent().parent().parent().nextAll().show();
+				$("#order_down_"+orderId).hide();
+			}else{
+				$("#order_down_"+orderId).show();
+				$("#order_up_"+orderId).parent().parent().parent().nextAll().hide();
+				$("#order_up_"+orderId).hide();
+			}
 		}
 	};
 	
@@ -134,8 +146,10 @@ $(document).ready(function(){
 							<tbody>
 								<tr style="background-color: #F0F0E9;font-weight:bold;">
 									<td>
-										<div class="summary" style="margin-left:20px">
-											<span>订单号：<s:property value="#order.id"/></span>
+										<div class="summary">
+											<a href="javaScript:yiqin_order_center.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>">展开<i class="fa fa-caret-down"></i></a>
+											<a href="javaScript:yiqin_order_center.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;">缩起<i class="fa fa-caret-up"></i></a>
+											<span style="margin-left:20px">订单号：<s:property value="#order.id"/></span>
 											<span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
 										</div>
 									</td>
@@ -152,7 +166,7 @@ $(document).ready(function(){
 									</td>
 								</tr>
 								<s:iterator value="#order.productList" var="product" status="st">
-									 <tr>
+									 <tr style="display:none;">
 										<td class="cart_product" style="margin-left:10px;margin-right:-10px;">
 											<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
 											<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
