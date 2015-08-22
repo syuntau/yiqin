@@ -155,8 +155,8 @@ $(document).ready(function(){
 												<ul class="dropdown-menu" aria-labelledby="dropdownMenu<s:property value='#order.id'/>">
 												    <li><a><span style="font-weight:bold;">订单号：</span><s:property value="#order.id"/></a></li>
 												    <li><a><span style="font-weight:bold;">收货人：</span><s:property value="#order.name"/></a></li>
+												    <li><a><span style="font-weight:bold;">联系电话：</span><s:property value="#order.mobile"/></a></li>
 												    <li><a><span style="font-weight:bold;">收货地址：</span><s:property value="#order.address"/></a></li>
-												    <li><a><span style="font-weight:bold;">联系电话：</span><s:property value="#order.address"/></a></li>
 												    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
 												    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
 												    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
