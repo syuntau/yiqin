@@ -150,7 +150,18 @@ $(document).ready(function(){
 											<a href="javaScript:yiqin_order_center.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>">展开<i class="fa fa-caret-down"></i></a>
 											<a href="javaScript:yiqin_order_center.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;">缩起<i class="fa fa-caret-up"></i></a>
 											<span style="margin-left:20px">订单号：<s:property value="#order.id"/></span>
-											<span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
+											<span class="dropdown" style="margin-left:50px;">
+												<a id="dropdownMenu<s:property value='#order.id'/>" data-toggle="dropdown" style="cursor:pointer;">订单详细<i class="fa fa-table fa-fw"></i></a>
+												<ul class="dropdown-menu" aria-labelledby="dropdownMenu<s:property value='#order.id'/>">
+												    <li><a><span style="font-weight:bold;">订单号：</span><s:property value="#order.id"/></a></li>
+												    <li><a><span style="font-weight:bold;">收货人：</span><s:property value="#order.name"/></a></li>
+												    <li><a><span style="font-weight:bold;">收货地址：</span><s:property value="#order.address"/></a></li>
+												    <li><a><span style="font-weight:bold;">联系电话：</span><s:property value="#order.address"/></a></li>
+												    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
+												    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
+												    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
+												</ul>
+											</span>
 										</div>
 									</td>
 									<td>&nbsp;</td>

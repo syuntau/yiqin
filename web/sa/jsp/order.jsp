@@ -134,6 +134,18 @@ var sa_order = function(){
 				userId = "<s:property value='userId'/>";
 			window.location.href = "exportOrderExcel?startTime="+startTime+"&endTime="+endTime+"&userId="+userId;
 		},
+		
+		orderSwitch : function(orderId,type){
+			if(type=="down"){
+				$("#order_up_"+orderId).show();
+				$("#order_down_"+orderId).parent().parent().parent().nextAll().show();
+				$("#order_down_"+orderId).hide();
+			}else{
+				$("#order_down_"+orderId).show();
+				$("#order_up_"+orderId).parent().parent().parent().nextAll().hide();
+				$("#order_up_"+orderId).hide();
+			}
+		}
 	};
 	
 	var toIndexPage = function(pageIndex){
@@ -216,9 +228,22 @@ $(document).ready(function(){
 						<tbody>
 							<tr style="background-color: #F0F0E9;font-weight:bold;">
 								<td>
-									<div class="summary" style="margin-left:20px">
-										 <span>订单号：<s:property value="#order.id"/></span>
-										 <span style="margin-left:50px">收货人：<s:property value="#order.name"/></span>
+									<div class="summary">
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>">展开<i class="fa fa-caret-down"></i></a>
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;">缩起<i class="fa fa-caret-up"></i></a>
+										 <span style="margin-left:20px">订单号：<s:property value="#order.id"/></span>
+										 <span class="dropdown" style="margin-left:50px;">
+											<a id="dropdownMenu<s:property value='#order.id'/>" data-toggle="dropdown" style="cursor:pointer;">订单详细<i class="fa fa-table fa-fw"></i></a>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenu<s:property value='#order.id'/>">
+											    <li><a><span style="font-weight:bold;">订单号：</span><s:property value="#order.id"/></a></li>
+											    <li><a><span style="font-weight:bold;">收货人：</span><s:property value="#order.name"/></a></li>
+											    <li><a><span style="font-weight:bold;">收货地址：</span><s:property value="#order.address"/></a></li>
+											    <li><a><span style="font-weight:bold;">联系电话：</span><s:property value="#order.address"/></a></li>
+											    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
+											    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
+											    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
+											</ul>
+										 </span>
 									</div>
 								</td>
 								<td>&nbsp;</td>
@@ -239,10 +264,10 @@ $(document).ready(function(){
 								</td>
 							</tr>
 							<s:iterator value="#order.productList" var="product" status="st">
-								 <tr>
+								 <tr style="display:none;">
 									<td class="cart_product">
-										<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
-										<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
+										<a><img src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
+										<h4><a><s:property value="#product.productName"/></a></h4>
 										<p><s:text name="shop.product.details.productId"/><s:property value="#product.productId"/></p>
 										<p><s:text name="cart.item.product.color"/><s:property value="#product.productInfo"/></p>
 									</td>
