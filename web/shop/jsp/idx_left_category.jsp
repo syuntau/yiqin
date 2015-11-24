@@ -6,8 +6,8 @@
 var	category_temp = {
 	cate_div : '<div></div>',
 	cate_h4 : '<h4 class="panel-title"></h4>',
-	cate_coll_a : '<a data-toggle="collapse" data-parent="#accordian">',
-	cate_span_i : '<span class="badge pull-right"><i class="fa fa-plus"></i></span>',
+	cate_coll_a : '<a data-toggle="collapse" data-parent="#accordian" />',
+	cate_span_i : '<span class="badge pull-right" style="width:124px;text-align:right"><i class="fa fa-plus"></i></span>',
 	cate_ul : '<ul></ul>',
 	cate_li : '<li></li>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
@@ -121,7 +121,8 @@ var yiqin_category_action = function(){
 					 
 					 $cate_div.append($cate_div_coll);
 					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"aname_first_"+sub.id));
-					 $cate_panel_a.click(function(){
+					 $cate_panel_a.click(function(e){
+						 e.stopPropagation();
 						 if(category_temp.best_currentNav=="best_product_nav"){
 							 yiqin_public_js.toTilesAction(sub.id, "/findBestProduct");
 						 }else{
