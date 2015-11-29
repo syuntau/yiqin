@@ -7,7 +7,7 @@ var	category_temp = {
 	cate_div : '<div></div>',
 	cate_h4 : '<h4 class="panel-title"></h4>',
 	cate_coll_a : '<a data-toggle="collapse" data-parent="#accordian" />',
-	cate_span_i : '<span class="badge pull-right" style="width:124px;text-align:right"><i class="fa fa-plus"></i></span>',
+	cate_span_i : '<span class="badge pull-right"><i class="fa fa-plus"></i></span>',
 	cate_ul : '<ul></ul>',
 	cate_li : '<li></li>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
@@ -120,8 +120,11 @@ var yiqin_category_action = function(){
 // 					 $cate_div_coll.append($cate_div_body);
 					 
 					 $cate_div.append($cate_div_coll);
-					 $cate_h4.append($cate_panel_a.append(sub.name).attr('id',"aname_first_"+sub.id));
-					 $cate_panel_a.click(function(e){
+					 var $tmpSpan = $('<span class="badge" style="width:160px;text-align:left;cursor:pointer;font-size:15px;"></span>').append(sub.name);
+					 //.append($cate_panel_a.append(sub.name));
+					 $cate_h4.append($tmpSpan);
+					 $tmpSpan.attr('id',"aname_first_"+sub.id);
+					 $tmpSpan.click(function(e){
 						 e.stopPropagation();
 						 if(category_temp.best_currentNav=="best_product_nav"){
 							 yiqin_public_js.toTilesAction(sub.id, "/findBestProduct");
@@ -136,18 +139,19 @@ var yiqin_category_action = function(){
 					 $cate_div_coll.append($cate_div_body);
 					 
 					$.each(sub.subCategoryList, function(k,nextSub){
-	 					$cate_li = $(category_temp.cate_li),
+	 					$cate_li = $(category_temp.cate_li).attr('id',"two_"+nextSub.id).append(nextSub.name);
+	 					$cate_li.css('width','160px').css('text-align','left').css('cursor','pointer').css('color','#FFFFFF');
 	 					$cate_panel_a = $(category_temp.cate_panel_a);
-	 					$cate_panel_a.attr('id',"two_"+nextSub.id);
+	 					//$cate_panel_a.attr('id',"two_"+nextSub.id);
 	 					$cate_ul.append($cate_li);
-	 					$cate_panel_a.click(function(){
+	 					$cate_li.click(function(){
 	 						 if(category_temp.best_currentNav=="best_product_nav"){
 								 yiqin_public_js.toTilesAction(nextSub.id, "/findBestProduct");
 	 						 }else{
 	 							 yiqin_public_js.toTilesAction(nextSub.id, "/productFilter"); 
 	 						 }
 	 					});
-	 					$cate_li.append($cate_panel_a.append(nextSub.name));
+	 					//$cate_li.append($cate_panel_a.append(nextSub.name));
 					});
 				 }else{
 					 $cate_panel_a.click(function(){
