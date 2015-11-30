@@ -120,7 +120,7 @@ var yiqin_category_action = function(){
 // 					 $cate_div_coll.append($cate_div_body);
 					 
 					 $cate_div.append($cate_div_coll);
-					 var $tmpSpan = $('<span class="badge" style="width:160px;text-align:left;cursor:pointer;font-size:15px;"></span>').append(sub.name);
+					 var $tmpSpan = $('<span class="badge" style="width:175px;text-align:left;cursor:pointer;font-size:15px;"></span>').append(sub.name);
 					 //.append($cate_panel_a.append(sub.name));
 					 $cate_h4.append($tmpSpan);
 					 $tmpSpan.attr('id',"aname_first_"+sub.id);
