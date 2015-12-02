@@ -29,7 +29,8 @@ var yiqin_cart_action = function(){
 	            	 $cart_info_list.empty();
 	            	 if(data=='1'){
 	            		 $("#to_check_btn").css("display", "none");
-	            		 $cart_info_list.append("购物车还没有心爱的商品哦，赶快去抢购吧！");
+	            		 $cart_info_list.append("购物车空空的，赶快选购实用的办公用品，让工作更轻松。").prepend('<i class="fa fa-shopping-cart fa-2x" style="color:#9F9E99">&nbsp;</i>').attr('style','text-align:center;line-height:300px');
+	            		 $cart_info_list.parent().css('height', '300px');
 	            	 }else if(data=='2'){
 	            		 $("#to_check_btn").css("display", "none");
 	            		 $cart_info_list.append("购物车坏了，正在抢修哦，稍后再来");

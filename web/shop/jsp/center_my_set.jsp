@@ -310,7 +310,7 @@ $(document).ready(function(){
 					</li>
 					<li style="margin-bottom:10px;">
 						<label>登录密码：</label>
-						<span class='span-mark'>互联网账号存在被盗风险，建议您定期更改密码。</span>
+						<span class='span-mark' style="font-size:14px;">互联网账号存在被盗风险，建议您定期更改密码。</span>
 						<a data-toggle="modal" data-target="#modify_pwd_alert">修改</a>
 					</li>
 					<li style="margin-bottom:10px;">

@@ -221,13 +221,13 @@ $(document).ready(function(){
 		<div class="tab-content">
 			<div class="tab-pane fade active in" id="details">
 				<div class="col-sm-12">
-					<div class="product-image-wrapper">
+<!-- 					<div class="product-image-wrapper"> -->
 						<div class="single-products">
 							<div class="productinfo">
 								<ul class="p-parameter-list"></ul>
 							</div>
 						</div>
-					</div>
+<!-- 					</div> -->
 				</div>
 			</div>
 

@@ -157,9 +157,10 @@ a#scrollUp i{
     margin-left: -15px;
 }
 
-.contactinfo ul li a{
-  font-size: 12px;
-  color: #696763;
+.contactinfo ul li a {
+  font-size: 14px;
+  font-weight: 900;
+  color: #101263;
   font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
@@ -841,7 +842,7 @@ h2.title:before{
 }
 
 .category-products ul li:hover {
-  box-shadow: 0 0 1px 2px #F7F7F5;
+  box-shadow: 0 0 1px 1px #F7F7F5;
 }
 
 .panel-group .panel-heading + .panel-collapse .panel-body {
@@ -865,7 +866,7 @@ h2.title:before{
 }
 
 .category-products span.badge:hover {
-  box-shadow: 0 0 1px 2px #F7F7F5;
+  box-shadow: 0 0 1px 1px #F7F7F5;
   border-radius: 0px;
 }
 
@@ -1331,6 +1332,10 @@ div.product-image-wrapper:hover {
 #similar-product .carousel-inner .item img {
   display: inline-block;
   margin-left: 15px;
+}
+
+#similar-product .carousel-inner .item img {
+  box-shadow: box-shadow: 0 0 1px 1px #FE980F;
 }
 
 .item-control {
