@@ -300,7 +300,7 @@ $(document).ready(function(){
 </script>
 <div class="center-right padding-right">
 	<div class="row" id="my_info_list_normal">
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<h5><b>基本信息</b></h5>
 			<div class="chose_area">
 				<ul class="user_option">
