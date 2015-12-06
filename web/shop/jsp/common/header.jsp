@@ -19,7 +19,12 @@ var shop_header = function() {
 		setCurrentNav : function() {
 			var currentNav = "<s:property value='#session.se_shop_nav' />";
 			if (currentNav == '') {
-				currentNav = 'top_home';
+				var bestProductNav = "<s:property value='#session.se_shop_nav_best_product' />";
+				if (bestProductNav == 'best_product_nav') {
+					currentNav = 'top_quick_shopping';
+				} else {
+					currentNav = 'top_home';
+				}
 			}
 			$('#header li a').removeClass('active');
 			$('#' + currentNav).addClass('active').removeClass('shop_header');
@@ -29,6 +34,14 @@ var shop_header = function() {
 	var setNav = function() {
 		$('.shop_header').on('click', function() {
 			var nav = $(this).attr('id');
+			var $form = $(template.form);
+			var	$nav = $(template.nav);
+			$form.attr('action', template.dispatcher).append($nav.val(nav));
+			$('#header').append($form);
+			$form.submit();
+		});
+		$('.yq-side .go-to-page').on('click', function() {
+			var nav = $(this).attr('idx');
 			var $form = $(template.form);
 			var	$nav = $(template.nav);
 			$form.attr('action', template.dispatcher).append($nav.val(nav));

@@ -103,11 +103,11 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="search-01">
+<div class="search-01" style="padding-right:10px;">
 	<input id="ip_keyword" name="searchName" type="text" class="s-itxt" value="商品名称、商品编号、订单编号" onfocus="if (this.value==this.defaultValue) this.value=''" onblur="if (this.value=='') this.value=this.defaultValue" onkeydown="javascript:if(event.keyCode==13) yiqin_order_center.orderSearch('ip_keyword');">
     <a href="javascript:;" class="btn-13" onclick="yiqin_order_center.orderSearch('ip_keyword')">查 询</a>
 </div>
-<div class="center-right padding-right">
+<div class="center-right padding-right"  style="padding-right:10px;">
 	<section id="cart_items">
 		<div>
 			<div class="table-responsive cart_info" style="margin-bottom:10px;">
