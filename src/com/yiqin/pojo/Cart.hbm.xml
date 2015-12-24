@@ -17,11 +17,11 @@
             </column>
         </property>
         <property name="productName" type="string">
-            <column name="product_name" length="20">
+            <column name="product_name" length="100">
             </column>
         </property>
         <property name="imgUrl" type="string">
-            <column name="img_url" length="40">
+            <column name="img_url" length="20">
             </column>
         </property>
         <property name="price" type="string">
@@ -37,7 +37,7 @@
             </column>
         </property>
         <property name="productInfo" type="string">
-            <column name="product_info" length="200">
+            <column name="product_info" length="20">
             </column>
         </property>
     </class>

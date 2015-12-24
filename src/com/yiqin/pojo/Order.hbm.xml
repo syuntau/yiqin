@@ -17,7 +17,7 @@
             </column>
         </property>
         <property name="name" type="string">
-            <column name="name" length="50">
+            <column name="name" length="20">
             </column>
         </property>
         <property name="address" type="string">
@@ -29,7 +29,7 @@
             </column>
         </property>
         <property name="email" type="string">
-            <column name="email" length="40">
+            <column name="email" length="20">
             </column>
         </property>
         <property name="zhifu" type="java.lang.Byte">
@@ -57,7 +57,7 @@
             </column>
         </property>
         <property name="fapiaomingxi" type="string">
-            <column name="fapiaomingxi" length="100">
+            <column name="fapiaomingxi" length="20">
             </column>
         </property>
         <property name="productList" type="string">
