@@ -88,5 +88,9 @@
             <column name="delete_flag">
             </column>
         </property>
+        <property name="orderNote" type="string">
+            <column name="order_note" length="1024">
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

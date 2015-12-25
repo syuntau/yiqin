@@ -32,7 +32,8 @@ public class OrderView {
 	private String crateDate;// 订单创建时间
 	private String updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
-
+	private String orderNote;// 订单备注
+	
 	public long getId() {
 		return id;
 	}
@@ -199,6 +200,14 @@ public class OrderView {
 
 	public void setDeleteFlag(Byte deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public String getOrderNote() {
+		return orderNote;
+	}
+
+	public void setOrderNote(String orderNote) {
+		this.orderNote = orderNote;
 	}
 
 }

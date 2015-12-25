@@ -33,6 +33,7 @@ var yiqin_cart_check = function(){
 					fapiaolx = $("input:checked[name=fapiao_lx]").val(),
 					fapiaotaitou = $("input[name=fapiaotaitou]").val().replace(REX, ""),
 					fapiaomingxi = $("input[name=fapiaomingxi]").val().replace(REX, ""),
+					ordernote = $("textarea[name=ordernote]").val().replace(REX, ""),
 					productIds = "<s:property value='#request.submit_ProductIds'/>",
 					$check_from = $(cart_check_temp.check_from);
 					
@@ -59,6 +60,8 @@ var yiqin_cart_check = function(){
 					$check_from.append($check_input_hidden.attr('name','fapiaotaitou').val(fapiaotaitou));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','fapiaomingxi').val(fapiaomingxi));
+					$check_input_hidden = $(cart_check_temp.check_input_hidden);
+					$check_from.append($check_input_hidden.attr('name','ordernote').val(ordernote));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','productIds').val(productIds));
 					$(document.body).append($check_from);
@@ -405,7 +408,7 @@ $(document).ready(function(){
 <!-- 			</div> -->
 <!-- 		</div> -->
 		<div class="row">
-			<div class="col-sm-100">
+			<div class="col-sm-6">
 				<h5><b><s:text name="cart.check.fapiao"></s:text></b></h5>
 				<div class="chose_area" style="margin-bottom:10px;">
 					<ul class="user_option">
@@ -421,6 +424,17 @@ $(document).ready(function(){
 						<li>
 							<label>开票项目：</label>
 							<input type="text" name="fapiaomingxi" style="width:300px;" value="">
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<h5><b><s:text name="cart.check.ordernote"></s:text></b></h5>
+				<div class="chose_area" style="margin-bottom:10px;">
+					<ul class="user_option">
+						<li>
+							<label>备注内容：</label>
+							<textarea style="width:300px;height:83px;" name="ordernote"></textarea>
 						</li>
 					</ul>
 				</div>

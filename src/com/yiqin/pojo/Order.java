@@ -31,6 +31,7 @@ public class Order implements java.io.Serializable {
 	private Date crateDate;// 订单创建时间
 	private Date updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
+	private String orderNote;// 订单备注
 
 	public Order() {
 	}
@@ -44,7 +45,7 @@ public class Order implements java.io.Serializable {
 			Float yunfei, String songhuoriqi, String peisongfangshi,String fapiaolx,
 			String fapiaotaitou, String fapiaomingxi, String productList,
 			String yuanjia, Float zhekou, String zongjia, Date crateDate,
-			Date updateDate, Byte deleteFlag) {
+			Date updateDate, Byte deleteFlag, String orderNote) {
 		this.id = id;
 		this.status = status;
 		this.userId = userId;
@@ -66,6 +67,7 @@ public class Order implements java.io.Serializable {
 		this.crateDate = crateDate;
 		this.updateDate = updateDate;
 		this.deleteFlag = deleteFlag;
+		this.orderNote = orderNote;
 	}
 
 	public long getId() {
@@ -234,6 +236,14 @@ public class Order implements java.io.Serializable {
 
 	public void setDeleteFlag(Byte deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public String getOrderNote() {
+		return orderNote;
+	}
+
+	public void setOrderNote(String orderNote) {
+		this.orderNote = orderNote;
 	}
 
 }

@@ -160,6 +160,7 @@ $(document).ready(function(){
 												    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
 												    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
 												    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
+												    <li><a><span style="font-weight:bold;">订单备注：</span><s:property value="#order.orderNote"/></a></li>
 												</ul>
 											</span>
 										</div>

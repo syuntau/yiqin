@@ -42,6 +42,8 @@ public class SubmitOrderAction extends ActionSupport {
 	private String fapiaotaitou;
 	// 发票明细
 	private String fapiaomingxi;
+	// 订单备注
+	private String ordernote;
 	// 订单所有商品ID
 	private String productIds;
 
@@ -71,6 +73,10 @@ public class SubmitOrderAction extends ActionSupport {
 
 	public void setFapiaotaitou(String fapiaotaitou) {
 		this.fapiaotaitou = fapiaotaitou;
+	}
+
+	public void setOrdernote(String ordernote) {
+		this.ordernote = ordernote;
 	}
 
 	public void setFapiaomingxi(String fapiaomingxi) {
@@ -110,6 +116,7 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setFapiaolx(Util.faPiaoLx(fapiaolx));
 			order.setFapiaotaitou(fapiaotaitou);
 			order.setFapiaomingxi(fapiaomingxi);
+			order.setOrderNote(ordernote);
 			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
 			order.setStatus((byte) 1);
 			order.setCrateDate(new Date());
@@ -198,8 +205,8 @@ public class SubmitOrderAction extends ActionSupport {
 			content.append(pBeg).append("　送货地址：").append(pEnd).append(order.getAddress()).append("<br/>");
 			content.append(pBeg).append("　发票类型：").append(pEnd).append(order.getFapiaolx())
 						.append(pBeg).append("　发票抬头：").append(pEnd).append(order.getFapiaotaitou())
-						.append(pBeg).append("　发票明细：").append(pEnd).append(order.getFapiaomingxi())
-						.append("</div><br/>");
+						.append(pBeg).append("　发票明细：").append(pEnd).append(order.getFapiaomingxi()).append("<br/>");
+			content.append(pBeg).append("　订单备注：").append(pEnd).append(order.getOrderNote()).append("</div><br/>");
 			
 			if(Util.isNotEmpty(cartList)){
 				content.append("<div>所购商品详细信息：<br/>");
