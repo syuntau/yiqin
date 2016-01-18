@@ -15,6 +15,10 @@ var initCenterClick = function(){
 	$("#my_set_address").click(function(){
 		yiqin_public_js.toTilesAction("address", "/toCenterMySet");
 	});
+	
+	$("#my_set_youhui").click(function(){
+		yiqin_public_js.toTilesAction("youhui", "/toCenterMySet");
+	});
 };
 
 $(document).ready(function(){
@@ -38,6 +42,7 @@ $(document).ready(function(){
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="javaScript:;" id="my_set_info">个人信息</a></li>
 				<li><a href="javaScript:;" id="my_set_address">收货地址</a></li>
+				<li><a href="javaScript:;" id="my_set_youhui">优惠政策</a></li>
 			</ul>
 		</div>
 	</div>
