@@ -315,7 +315,7 @@ var yiqin_my_address = function(){
 }();
 
 $(document).ready(function(){
-	$("#my_set_address").css('color','#fdb45e');
+// 	$("#my_set_address").css('color','#fdb45e');
 	yiqin_my_address.findUserAddress();
 });
 </script>

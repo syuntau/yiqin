@@ -128,7 +128,9 @@ var customer_manage = {
 				} else if (data=='2') {
 					$('.customer-youhui').val('');
 				} else {
-					$('.customer-youhui').val(data.value);
+					var value = data.value;
+					value = value.replace(/<br>/g, '\n');
+					$('.customer-youhui').val(value);
 				}
             },
             beforeSend: function() {

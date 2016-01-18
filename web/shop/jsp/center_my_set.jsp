@@ -295,7 +295,7 @@ function countDown(mailType){
 };
 
 $(document).ready(function(){
-	yiqin_my_set.mySetInit();
+// 	yiqin_my_set.mySetInit();
 });
 </script>
 <div class="center-right padding-right">

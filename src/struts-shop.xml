@@ -75,6 +75,8 @@
 		
 		<action name="findUserConf" class="com.yiqin.shop.action.FindUserConfAction"></action>
 		
+		<action name="findYouHui" class="com.yiqin.shop.action.FindYouHuiAction"></action>
+		
 		<action name="saveOrUpdateAddress" class="com.yiqin.shop.action.ModifyUserAddressAction"></action>
 		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
@@ -95,6 +97,7 @@
 		<action name="toCenterMySet" class="com.yiqin.shop.action.ToCenterMySetAction">
 			<result name="userset" type="tiles">shop.center.userset</result>
 			<result name="address" type="tiles">shop.center.address</result>
+			<result name="youhui" type="tiles">shop.center.youhui</result>
 		</action>
 		
 		<action name="toProductDetails" class="com.yiqin.shop.action.ToProductDetailsAction">

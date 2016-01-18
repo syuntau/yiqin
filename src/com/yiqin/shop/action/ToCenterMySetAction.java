@@ -1,5 +1,9 @@
 package com.yiqin.shop.action;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
@@ -40,10 +44,14 @@ public class ToCenterMySetAction extends ActionSupport {
 			if (Util.isEmpty(paramVal)) {
 				return null;
 			}
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setAttribute("custom_set_param", paramVal);
 			if (paramVal.equals("info")) {
 				return "userset";
 			} else if (paramVal.equals("address")) {
 				return "address";
+			} else if (paramVal.equals("youhui")) {
+				return "youhui";
 			}
 			return null;
 		} catch (Exception e) {

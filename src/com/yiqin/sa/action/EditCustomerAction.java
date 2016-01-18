@@ -138,6 +138,8 @@ public class EditCustomerAction extends ActionSupport {
 				return null;
 			} else {
 				try {
+					youHuiZhengCe = youHuiZhengCe.replaceAll("\r\n", "<br>");
+					youHuiZhengCe = youHuiZhengCe.replaceAll("\n", "<br>");
 					boolean flag = userManager.saveOrUpdateUserConf(userId, UtilKeys.USRE_CONF_YOU_HUI, youHuiZhengCe);
 					if(flag){
 						result = UtilKeys.CODE_SUCCESS;
