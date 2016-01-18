@@ -88,6 +88,9 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean deleteUserConf(String userId, String attribute) {
+		if (Util.isEmpty(userId) || Util.isEmpty(attribute)) {
+			return false;
+		}
 		return userDao.deleteUserConf(userId, attribute);
 	}
 
@@ -189,7 +192,27 @@ public class UserManagerImpl implements UserManager {
 		}
 		return flag;
 	}
-	
+
+	@Override
+	public boolean saveOrUpdateUserConf(String userId, String attribute, String value) {
+		if (Util.isEmpty(userId) || Util.isEmpty(attribute) || Util.isEmpty(value)) {
+			return false;
+		}
+		UserConf userConf = findUserConfInfo(userId, attribute);
+		boolean flag = false;
+		if(userConf != null){
+			userConf.setValue(value);
+			flag = updateUserConf(userConf);
+		}else{
+			UserConf temp = new UserConf();
+			temp.setUserId(userId);
+			temp.setAttribute(attribute);
+			temp.setValue(value);
+			flag = updateUserConf(temp);
+		}
+		return flag;
+	}
+
 	@Override
 	public SAUser findAdminById(String id) {
 		try {

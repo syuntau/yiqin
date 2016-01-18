@@ -87,11 +87,65 @@ var customer_manage = {
             }
 		});
 	},
+	addYouHui : function() {
+		$('.btn-customer-youhui').on('click', function() {
+			var userId = $('.user-list select').find('option:selected').val();
+			var youHui = $('.customer-youhui').val();
+			$.ajax({
+	        	type: "post",
+				url: "editCustomer_addYouHui",
+				data: 'youHuiZhengCe='+youHui+ '&userId=' + userId,
+				dataType: "json",
+				success: function(data) {
+					if (data=='1') {
+						alert("<s:text name='msg.err.param'></s:text>");
+					} else if (data=='3') {
+						alert("<s:text name='msg.err.db'></s:text>");
+					} else {
+						alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+					}
+	            },
+	            beforeSend: function() {
+		            var $loadingTextIcon = $(com_conf.loading_text_icon);
+		            $('.youhui-form').append($loadingTextIcon);
+	        	},
+	            complete: function() {
+	            	$('.youhui-form').find('span').remove();
+	            }
+			});
+		});
+	},
+	loadYouHui : function() {
+		var userId = $('.user-list select').find('option:selected').val();
+		$.ajax({
+        	type: "post",
+			url: "editCustomer_getYouHui",
+			data: 'userId=' + userId,
+			dataType: "json",
+			success: function(data) {
+				if (data=='1') {
+					alert("<s:text name='msg.err.param'></s:text>");
+				} else if (data=='2') {
+					$('.customer-youhui').val('');
+				} else {
+					$('.customer-youhui').val(data.value);
+				}
+            },
+            beforeSend: function() {
+	            var $loadingTextIcon = $(com_conf.loading_text_icon);
+		        $('.youhui-form').append($loadingTextIcon);
+        	},
+            complete: function() {
+            	$('.youhui-form').find('span').remove();
+            }
+		});
+	},
 	check_customer : function() {
 		$('.btn-user-submit').on('click', function() {
 			$('.customer-hr').removeClass('display-off');
 			$('.customer-section').removeClass('display-off');
 			customer_manage.loadZheKou();
+			customer_manage.loadYouHui();
 		});
 	}
 };
@@ -99,6 +153,7 @@ var customer_manage = {
 $(document).ready(function() {
 	customer_manage.load_user();
 	customer_manage.addZheKou();
+	customer_manage.addYouHui();
 	customer_manage.check_customer();
 });
 </script>
@@ -131,6 +186,16 @@ $(document).ready(function() {
 		                        </div>
 		                        
 		                        <button type="button" class="btn btn-info btn-customer-zhekou"><s:text name="sa.btn.save" /></button>
+		                    </form>
+		                </div>
+		                <div class="col-lg-12" style="margin: 10px 0px;">
+		                    <form role="form" class="form-inline youhui-form" >
+		                        <div class="form-group">
+	                                <label><s:text name="sa.customer.youhui" /></label>
+	                                <textarea class="form-control customer-youhui" rows="6" cols="60" name="youHuiZhengCe"></textarea>
+		                        </div>
+		                        
+		                        <button type="button" class="btn btn-info btn-customer-youhui"><s:text name="sa.btn.save" /></button>
 		                    </form>
 		                </div>
 		                </s:if>

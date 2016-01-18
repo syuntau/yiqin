@@ -103,6 +103,7 @@ public interface UserManager {
 	
 	public boolean saveOrUpdateUserZheKou(String userId, float zhekou);
 	public boolean deleteUserZheKou(String userId);
+	public boolean saveOrUpdateUserConf(String userId, String attribute, String value);
 
 	public SAUser findAdminById(String id);
 

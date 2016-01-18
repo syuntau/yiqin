@@ -22,6 +22,7 @@ public class EditCustomerAction extends ActionSupport {
 	private UserManager userManager;
 	private String userId;
 	private String zheKou;
+	private String youHuiZhengCe;
 
 	public UserManager getUserManager() {
 		return userManager;
@@ -40,6 +41,12 @@ public class EditCustomerAction extends ActionSupport {
 	}
 	public void setZheKou(String zheKou) {
 		this.zheKou = zheKou;
+	}
+	public String getYouHuiZhengCe() {
+		return youHuiZhengCe;
+	}
+	public void setYouHuiZhengCe(String youHuiZhengCe) {
+		this.youHuiZhengCe = youHuiZhengCe;
 	}
 
 	public String addZheKou() {
@@ -114,6 +121,69 @@ public class EditCustomerAction extends ActionSupport {
 			return null;
 		} catch (Exception e1) {
 			System.out.println("error in EditCustomerAction.getZK ");
+			e1.printStackTrace();
+			return null;
+		}
+	}
+
+	public String addYouHui() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId) || Util.isEmpty(youHuiZhengCe)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			} else {
+				try {
+					boolean flag = userManager.saveOrUpdateUserConf(userId, UtilKeys.USRE_CONF_YOU_HUI, youHuiZhengCe);
+					if(flag){
+						result = UtilKeys.CODE_SUCCESS;
+					}else{
+						result = UtilKeys.CODE_ERR_DB;
+					}
+					out.print(result);
+				} catch(DataAccessException dbe) {
+					System.out.println("error in EditCustomerAction.addYouHui for db exception");
+					dbe.printStackTrace();
+					out.print(UtilKeys.CODE_ERR_DB);
+					return null;
+				}
+			}
+		} catch (IOException e1) {
+			System.out.println("error in EditCustomerAction.addYouHui for io exception");
+			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getYouHui() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			}
+			UserConf youHuiConf = userManager.findUserConfInfo(userId, UtilKeys.USRE_CONF_YOU_HUI);
+			if (youHuiConf == null) {
+				result = UtilKeys.CODE_NO_RESULT;
+				out.print(result);
+				return null;
+			}
+			JSONObject json = JSONObject.fromObject(youHuiConf);
+			result = json.toString();
+			out.print(result);
+			return null;
+		} catch (Exception e1) {
+			System.out.println("error in EditCustomerAction.getYouHui ");
 			e1.printStackTrace();
 			return null;
 		}
