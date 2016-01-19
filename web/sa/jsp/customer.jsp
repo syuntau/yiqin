@@ -91,6 +91,9 @@ var customer_manage = {
 		$('.btn-customer-youhui').on('click', function() {
 			var userId = $('.user-list select').find('option:selected').val();
 			var youHui = $('.customer-youhui').val();
+			if (youHui == "") {
+				youHui = 'empty';
+			}
 			$.ajax({
 	        	type: "post",
 				url: "editCustomer_addYouHui",

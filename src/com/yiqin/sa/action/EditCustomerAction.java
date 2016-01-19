@@ -138,13 +138,22 @@ public class EditCustomerAction extends ActionSupport {
 				return null;
 			} else {
 				try {
-					youHuiZhengCe = youHuiZhengCe.replaceAll("\r\n", "<br>");
-					youHuiZhengCe = youHuiZhengCe.replaceAll("\n", "<br>");
-					boolean flag = userManager.saveOrUpdateUserConf(userId, UtilKeys.USRE_CONF_YOU_HUI, youHuiZhengCe);
-					if(flag){
-						result = UtilKeys.CODE_SUCCESS;
-					}else{
-						result = UtilKeys.CODE_ERR_DB;
+					if (youHuiZhengCe.equals("empty")) {
+						boolean flag = userManager.deleteUserConf(userId, UtilKeys.USRE_CONF_YOU_HUI);
+						if(flag){
+							result = UtilKeys.CODE_SUCCESS;
+						}else{
+							result = UtilKeys.CODE_ERR_DB;
+						}
+					} else {
+						youHuiZhengCe = youHuiZhengCe.replaceAll("\r\n", "<br>");
+						youHuiZhengCe = youHuiZhengCe.replaceAll("\n", "<br>");
+						boolean flag = userManager.saveOrUpdateUserConf(userId, UtilKeys.USRE_CONF_YOU_HUI, youHuiZhengCe);
+						if(flag){
+							result = UtilKeys.CODE_SUCCESS;
+						}else{
+							result = UtilKeys.CODE_ERR_DB;
+						}
 					}
 					out.print(result);
 				} catch(DataAccessException dbe) {
