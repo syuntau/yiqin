@@ -142,6 +142,9 @@ public class SubmitOrderAction extends ActionSupport {
 					order.setZhekou((float) 1);
 				}
 				order.setProductList(cartList.toString());
+			}else{
+				request.setAttribute("submitOrderError", "订单商品不存在或已被删除，请重新选购！");
+				return ERROR;
 			}
 
 			// 查询配送地址信息
