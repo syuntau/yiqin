@@ -66,7 +66,7 @@ $(document).ready(function(){
 		<h3>设置</h3>
 		<div class="brands-name customer-pro-menu">
 			<ul class="nav nav-pills nav-stacked">
-				<li><a style="cursor: pointer" id="my_set_info">个人信息</a></li>
+				<li><a style="cursor: pointer" id="my_set_info">用户信息</a></li>
 				<li><a style="cursor: pointer" id="my_set_address">收货地址</a></li>
 			</ul>
 		</div>

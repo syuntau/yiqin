@@ -94,7 +94,7 @@ var yiqin_product_detail = function(){
 					$div = $('<div class="item">');
 					$imgNavDiv.append($div);
 				}
-				var $img = $('<a style="cursor:pointer;"><img width="84" height="84"></a>');
+				var $img = $('<a style="cursor:pointer;"><img width="70" height="70"></a>');
 				$img.attr('val', imgArr[i]);
 				$img.find('img').attr('src', imgArr[i]);
 				$img.on('click', function() {
