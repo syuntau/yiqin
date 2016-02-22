@@ -294,4 +294,26 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return getHibernateTemplate().find(queryString);
 	}
 
+	@Override
+	public Brand findBrandById(Integer id) {
+		String queryString = "from Brand where id=?";
+		List<?> list = getHibernateTemplate().find(queryString, id);
+		if (Util.isNotEmpty(list)) {
+			return (Brand) list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public void deleteBrandById(String id) throws DataAccessException {
+		Brand brand = findBrandById(Integer.valueOf(id));
+		if (brand != null) {
+			getHibernateTemplate().delete(brand);
+		}
+	}
+
+	@Override
+	public void editBrand(Brand brand) throws DataAccessException {
+		getHibernateTemplate().update(brand);
+	}
 }

@@ -804,24 +804,31 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public Brand findProductBrandByBrandId(int brandId) {
-		BrandUtil brandUtil = new BrandUtil();
-		Brand brand = brandUtil.getBrand(brandId);
+		Brand brand = BrandUtil.getBrand(brandId);
 		if (brand == null) {
-			brandUtil.init(productDao);
-			brand = brandUtil.getBrand(brandId);
+			BrandUtil.init(productDao);
+			brand = BrandUtil.getBrand(brandId);
 		}
 		return brand;
 	}
 
 	@Override
 	public List<Brand> findAllBrand() {
-		BrandUtil brandUtil = new BrandUtil();
-		List<Brand> brandList = brandUtil.getBrandList();
+		List<Brand> brandList = BrandUtil.getBrandList();
 		if (Util.isEmpty(brandList)) {
-			brandUtil.init(productDao);
-			brandList = brandUtil.getBrandList();
+			BrandUtil.init(productDao);
+			brandList = BrandUtil.getBrandList();
 		}
 		return brandList;
 	}
 
+	public void deleteBrandById(String id) throws DataAccessException {
+		productDao.deleteBrandById(id);
+		BrandUtil.reInit(productDao);
+	}
+
+	public void editBrand(Brand brand) throws DataAccessException {
+		productDao.editBrand(brand);
+		BrandUtil.reInit(productDao);
+	}
 }

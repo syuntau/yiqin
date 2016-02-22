@@ -111,4 +111,7 @@ public interface IProductDao {
 	public List<BestProduct> findBestProductByUserId(String userId);
 	public List<BestProduct> findBestProductByTopCateId(String userId, String topCategoryId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
+	public Brand findBrandById(Integer id);
+	public void deleteBrandById(String id) throws DataAccessException;
+	public void editBrand(Brand brand) throws DataAccessException;
 }

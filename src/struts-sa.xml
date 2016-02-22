@@ -60,6 +60,7 @@
 			<result name="user-sa" type="tiles">sa.user.sa</result>
 			<result name="user-admin" type="tiles">sa.user.admin</result>
 			<result name="customer-manage" type="tiles">sa.customer.manage</result>
+			<result name="product-brand" type="tiles">sa.product.brand</result>
 			<result name="product-attribute" type="tiles">sa.product.attribute</result>
 			<result name="product-item" type="tiles">sa.product.item</result>
 			<result name="quick-shopping" type="tiles">sa.quick.shopping</result>

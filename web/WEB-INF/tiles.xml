@@ -197,6 +197,10 @@
 		<put-attribute name="body" value="/sa/jsp/customer.jsp" />
 	</definition>
 
+	<definition name="sa.product.brand" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/brand.jsp" />
+	</definition>
+
 	<definition name="sa.product.attribute" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/attribute.jsp" />
 	</definition>

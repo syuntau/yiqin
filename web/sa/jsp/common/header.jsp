@@ -110,6 +110,11 @@ $(document).ready(function() {
                     <li class="side-menu-li">
                         <a href="#"><i class="fa fa-qrcode fa-fw"></i> <s:text name="sa.header.product" /><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                			<s:if test="%{#roles.indexOf('13300')>-1}">
+                            <li>
+                                <a href="#" class="side-menu-a" val="product-brand"><s:text name="sa.header.product.brand" /></a>
+                            </li>
+                            </s:if>
                 			<s:if test="%{#roles.indexOf('13100')>-1}">
                             <li>
                                 <a href="#" class="side-menu-a" val="product-attribute"><s:text name="sa.header.product.attribute" /></a>

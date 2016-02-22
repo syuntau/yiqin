@@ -40,4 +40,9 @@ public class BrandUtil {
 		}
 		isInit = true;
 	}
+
+	public static void reInit(IProductDao productDao) {
+		isInit = false;
+		init(productDao);
+	}
 }
