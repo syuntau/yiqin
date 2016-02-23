@@ -189,12 +189,12 @@ var pd_brand = {
 
 	           						var roles = pd_brand.conf.roles;
 	           						var $iRemove = '';
-	           						if (roles.indexOf('13103') > -1) {
-		           						$iRemove = $(pd_brand.conf.i_remove);
-		           						$iRemove.on('click', function() {
-		           							pd_brand.removeBrand(data.id);
-		           						});
-	           						}
+// 	           						if (roles.indexOf('13103') > -1) {
+// 		           						$iRemove = $(pd_brand.conf.i_remove);
+// 		           						$iRemove.on('click', function() {
+// 		           							pd_brand.removeBrand(data.id);
+// 		           						});
+// 	           						}
 	           						var $iEdit = '';
 	           						if (roles.indexOf('13104') > -1) {
 		           						$iEdit = $(pd_brand.conf.i_edit);
@@ -288,12 +288,12 @@ var pd_brand = {
 
 	           						var roles = pd_brand.conf.roles;
 	           						var $iRemove = '';
-	           						if (roles.indexOf('13103') > -1) {
-		           						$iRemove = $(pd_brand.conf.i_remove);
-		           						$iRemove.on('click', function() {
-		           							pd_brand.removeBrand(data.id);
-		           						});
-	           						}
+// 	           						if (roles.indexOf('13103') > -1) {
+// 		           						$iRemove = $(pd_brand.conf.i_remove);
+// 		           						$iRemove.on('click', function() {
+// 		           							pd_brand.removeBrand(data.id);
+// 		           						});
+// 	           						}
 	           						var $iEdit = '';
 	           						if (roles.indexOf('13104') > -1) {
 		           						$iEdit = $(pd_brand.conf.i_edit);
