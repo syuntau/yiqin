@@ -81,7 +81,7 @@ public class EditBrandAction extends ActionSupport {
 			} else {
 				try {
 					productManager.deleteBrandById(brandId);
-					productManager.deleteProductByAttributeId(brandId);
+//					productManager.deleteProductByAttributeId(brandId);
 				} catch(DataAccessException dbe) {
 					System.out.println("error in EditBrandAction.removeBrand for db exception");
 					dbe.printStackTrace();

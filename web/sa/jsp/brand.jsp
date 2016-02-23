@@ -11,33 +11,23 @@ var pd_brand = {
 		i_edit : '<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="<s:text name='msg.brand.edit'></s:text>"></i>',
 		roles : '<s:property value="#session.yiqin_sa_user_roles" />',
 	},
-	loadAttributeList : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
-			alert("<s:text name='msg.err.param'></s:text>");
-			return ;
-		}
-		var $attrHR = $('.attr-hr');
+	loadBrandList : function() {
 		var $brandDiv = $('.brand-section');
 		$.ajax({
             type: "post",
-            url: "getAttribute_getList",
-            data: 'cId='+catetoryId,
+            url: "editBrand_getList",
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
 	           		$brandDiv.find('.brand-panel').parent().append("<span><s:text name='msg.err.param'></s:text></span>");
 	           	 } else if (data=='2') {
-					$('.upload-attr').removeClass('display-off');
-		           	$brandDiv.find('.brand-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.attribute' /></s:param></s:text></span>");
+		           	$brandDiv.find('.brand-panel').parent().append("<span><s:text name='msg.no.item'><s:param><s:text name='msg.param.brand' /></s:param></s:text></span>");
 	           	 } else {
-	           		pd_brand.editAttrTbl(data);
+	           		pd_brand.editBrandTbl(data);
 	           	 }
             },
             beforeSend: function() {
-            	$attrHR.removeClass('display-off');
            		$brandDiv.find('span').remove();
-				$('.upload-attr').addClass('display-off');
            		$brandDiv.find('.brand-panel').addClass('display-off');
            		var $tbody = $brandDiv.find('tbody');
            		$tbody.empty();
@@ -49,38 +39,30 @@ var pd_brand = {
             }
 		});
 	},
-	editAttrTbl : function(data) {
+	editBrandTbl : function(data) {
 		var $brandDiv = $('.brand-section');
    		var $tbody = $brandDiv.find('tbody');
 		$.each(data, function(i, val) {
 			var $tr = $(pd_brand.conf.tr).addClass('tr_'+val.id);
 			var _id = $(pd_brand.conf.td).html(val.id);
-			var _nameId = $(pd_brand.conf.td).html(val.nameId);
-			var _name = $(pd_brand.conf.td).html(val.name);
-			var _value = $(pd_brand.conf.td).html(val.value);
-			var _categoryId = $(pd_brand.conf.td).html(val.categoryId);
-			var _filter = $(pd_brand.conf.td).html(val.filter);
-			var _filterType = $(pd_brand.conf.td).html(val.filterType);
-			var _showValue = $(pd_brand.conf.td).html(val.showValue);
-			var _sort = $(pd_brand.conf.td).html(val.sort);
+			var _nameEn = $(pd_brand.conf.td).html(val.nameEn);
+			var _nameCn = $(pd_brand.conf.td).html(val.nameCn);
 
-			$tr.append(_id).append(_nameId).append(_name).append(_value)
-				.append(_categoryId).append(_filter).append(_filterType)
-				.append(_showValue).append(_sort);
+			$tr.append(_id).append(_nameEn).append(_nameCn);
 
 			var roles = pd_brand.conf.roles;
 			var $iRemove = '';
-			if (roles.indexOf('13103') > -1) {
-				$iRemove = $(pd_brand.conf.i_remove);
-				$iRemove.on('click', function() {
-					pd_brand.removeAttr(val.id, val.name);
-				});
-			}
+// 			if (roles.indexOf('13103') > -1) {
+// 				$iRemove = $(pd_brand.conf.i_remove);
+// 				$iRemove.on('click', function() {
+// 					pd_brand.removeBrand(val.id);
+// 				});
+// 			}
 			var $iEdit = '';
 			if (roles.indexOf('13104') > -1) {
 				$iEdit = $(pd_brand.conf.i_edit);
 				$iEdit.on('click', function() {
-					pd_brand.modifyAttr(val.id);
+					pd_brand.modifyBrand(val.id);
 				});
 			}
 			if ($iRemove.length > 0 || $iEdit.length > 0) {
@@ -92,13 +74,12 @@ var pd_brand = {
 		});
 		$brandDiv.find('.brand-panel').removeClass('display-off');
 	},
-	removeAttr : function(attrId, attrName) {
+	removeBrand : function(attrId, attrName) {
 		if (attrId && isNaN(attrId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
 
-		var $attrHR = $('.attr-hr');
 		var $brandDiv = $('.brand-section');
 		var alertMsg = "<s:text name='msg.alert.remove.item'><s:param><s:text name='msg.param.attr.' /></s:param></s:text>";
 		alertMsg = alertMsg.replace(/attrName/, attrName);
@@ -125,7 +106,6 @@ var pd_brand = {
 				           		$tbody.find('.tr_'+attrId).remove();
 				           		var trCnt = $tbody.children().length;
 				           		if (trCnt == 0) {
-					           		$attrHR.addClass('display-off');
 							  		$brandDiv.find('.brand-panel').addClass('display-off');
 				           		}
 							}
@@ -145,90 +125,28 @@ var pd_brand = {
        	    }
        	})
 	},
-	initAddAttr : function() {
+	initAddBrand : function() {
 		$('.btn-add-brand').on('click', function() {
-			pd_brand.addAttr();
+			pd_brand.addBrand();
 		});
 	},
-	addAttr : function() {
+	addBrand : function() {
 		bootbox.dialog({
             title: "<s:text name='sa.pd.brand.lbl.add' />",
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal attr-form" method="post">' +
+	            		'<form class="form-horizontal brand-form" method="post">' +
 	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
+	            				'<label class="col-md-3 control-label" for="brandNameEn">英文名称</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrNameId" name="attr.nameId" type="text" placeholder="name id" class="form-control input-md">' +
+	            					'<input id="brandNameEn" name="brand.nameEn" type="text" placeholder="英文名称" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrName">name</label>' +
+	            				'<label class="col-md-3 control-label" for="brandNameCn">中文名称</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrName" name="attr.name" type="text" placeholder="name..." class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrValue">value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrValue" name="attr.value" type="text" placeholder="value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrCategoryId" name="attr.categoryId" type="hidden" value="' + $('.third-category select').find('option:selected').val() + '"class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilter0">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter0" value="0" checked="checked"> 非筛选项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilter1">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter1" value="1"> 筛选项' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group" style="display:none">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter type</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilterType0">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType0" value="0" checked="checked"> 无类型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType1">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType1" value="1"> 组合型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType2">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType2" value="2"> 价格型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType3">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType3" value="3"> 连续型' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrShowValue">show value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrShowValue" name="attr.showValue" type="text" placeholder="show value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="sort">sort</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrSort0">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrSort1">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort1" value="1"> 排序项' +
-	            						'</label>' +
-	            					'</div>' +
+	            					'<input id="brandNameCn" name="brand.nameCn" type="text" placeholder="中文名称" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            		'</form>' +
@@ -239,7 +157,7 @@ var pd_brand = {
                     label: "<s:text name='sa.btn.reset' />",
                     className: "btn-default",
                     callback: function () {
-                        $('.attr-form')[0].reset();
+                        $('.brand-form')[0].reset();
                         return false;
                     }
                 },
@@ -265,31 +183,23 @@ var pd_brand = {
 	
 	              			   		var $tr = $(pd_brand.conf.tr).addClass('tr_'+data.id);
 	           						var _id = $(pd_brand.conf.td).html(data.id);
-	           						var _nameId = $(pd_brand.conf.td).html(data.nameId);
-	           						var _name = $(pd_brand.conf.td).html(data.name);
-	           						var _value = $(pd_brand.conf.td).html(data.value);
-	           						var _categoryId = $(pd_brand.conf.td).html(data.categoryId);
-	           						var _filter = $(pd_brand.conf.td).html(data.filter);
-	           						var _filterType = $(pd_brand.conf.td).html(data.filterType);
-	           						var _showValue = $(pd_brand.conf.td).html(data.showValue);
-	           						var _sort = $(pd_brand.conf.td).html(data.sort);
-	           						$tr.append(_id).append(_nameId).append(_name).append(_value)
-	           							.append(_categoryId).append(_filter).append(_filterType)
-	           							.append(_showValue).append(_sort);
+	           						var _nameEn = $(pd_brand.conf.td).html(data.nameEn);
+	           						var _nameCn = $(pd_brand.conf.td).html(data.nameCn);
+	           						$tr.append(_id).append(_nameEn).append(_nameCn);
 
 	           						var roles = pd_brand.conf.roles;
 	           						var $iRemove = '';
 	           						if (roles.indexOf('13103') > -1) {
 		           						$iRemove = $(pd_brand.conf.i_remove);
 		           						$iRemove.on('click', function() {
-		           							pd_brand.removeAttr(data.id, data.name);
+		           							pd_brand.removeBrand(data.id);
 		           						});
 	           						}
 	           						var $iEdit = '';
 	           						if (roles.indexOf('13104') > -1) {
 		           						$iEdit = $(pd_brand.conf.i_edit);
 		           						$iEdit.on('click', function() {
-		           							pd_brand.modifyAttr(data.id);
+		           							pd_brand.modifyBrand(data.id);
 		           						});
 	           						}
 	           						if ($iRemove.length > 0 || $iEdit.length > 0) {
@@ -309,14 +219,14 @@ var pd_brand = {
               	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
               	        	}
                 		};
-	              		$('.attr-form').ajaxSubmit(options);
+	              		$('.brand-form').ajaxSubmit(options);
 	              		return false;
                     }
                 }
             }
         });
 	},
-	modifyAttr : function(id) {
+	modifyBrand : function(id) {
 		var $tr = $('.tr_'+id);
 		var $tdArr = $tr.children();
 		bootbox.dialog({
@@ -324,80 +234,18 @@ var pd_brand = {
             message: 
 	            '<div class="row">' +
 	            	'<div class="col-md-12">' +
-	            		'<form class="form-horizontal attr-form" method="post">' +
-	            			'<input name="attr.id" type="hidden" value="' +$tdArr.eq(0).html() + '" class="form-control input-md">' +
+	            		'<form class="form-horizontal brand-form" method="post">' +
+	            			'<input name="brand.id" type="hidden" value="' +$tdArr.eq(0).html() + '" class="form-control input-md">' +
 	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrNameId">name id</label>' +
+	            				'<label class="col-md-3 control-label" for="brandNameEn">英文名称</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrNameId" name="attr.nameId" type="text" value="' + $tdArr.eq(1).html() + '" placeholder="name id" class="form-control input-md">' +
+	            					'<input id="brandNameEn" name="brand.nameEn" type="text" value="' + $tdArr.eq(1).html() + '" placeholder="英文名称" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrName">name</label>' +
+	            				'<label class="col-md-3 control-label" for="brandNameCn">中文名称</label>' +
 	            				'<div class="col-md-7">' +
-	            					'<input id="attrName" name="attr.name" type="text" value="' + $tdArr.eq(2).html() + '" placeholder="name..." class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrValue">value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrValue" name="attr.value" type="text"value="' + $tdArr.eq(3).html() + '" placeholder="value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrCategoryId" name="attr.categoryId" type="hidden" value="' + $tdArr.eq(4).html() + '"class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilter0">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter0" value="0"> 非筛选项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilter1">' +
-	            							'<input type="radio" name="attr.filter" id="attrFilter1" value="1"> 筛选项' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="filter">filter type</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrFilterType0">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType0" value="0"> 无类型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType1">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType1" value="1"> 组合型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType2">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType2" value="2"> 价格型' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrFilterType3">' +
-	            							'<input type="radio" name="attr.filterType" id="attrFilterType3" value="3"> 连续型' +
-	            						'</label>' +
-	            					'</div>' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="attrShowValue">show value</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<input id="attrShowValue" name="attr.showValue" value="' + $tdArr.eq(7).html() + '" type="text" placeholder="show value" class="form-control input-md">' +
-	            				'</div>' +
-	            			'</div>' +
-	            			'<div class="form-group">' +
-	            				'<label class="col-md-3 control-label" for="sort">sort</label>' +
-	            				'<div class="col-md-7">' +
-	            					'<div class="radio">' +
-	            						'<label class="radio-inline" for="attrSort0">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort0" value="0" checked="checked"> 非排序项' +
-	            						'</label>' +
-	            						'<label class="radio-inline" for="attrSort1">' +
-	            							'<input type="radio" name="attr.sort" id="attrSort1" value="1"> 排序项' +
-	            						'</label>' +
-	            					'</div>' +
+	            					'<input id="brandNameCn" name="brand.nameCn" type="text" value="' + $tdArr.eq(2).html() + '" placeholder="中文名称" class="form-control input-md">' +
 	            				'</div>' +
 	            			'</div>' +
 	            		'</form>' +
@@ -408,7 +256,7 @@ var pd_brand = {
                     label: "<s:text name='sa.btn.reset' />",
                     className: "btn-default",
                     callback: function () {
-                        $('.attr-form')[0].reset();
+                        $('.brand-form')[0].reset();
                         return false;
                     }
                 },
@@ -434,31 +282,23 @@ var pd_brand = {
 	
 	              			   		var $tr = $tbody.find('.tr_'+data.id);
 	           						var _id = $(pd_brand.conf.td).html(data.id);
-	           						var _nameId = $(pd_brand.conf.td).html(data.nameId);
-	           						var _name = $(pd_brand.conf.td).html(data.name);
-	           						var _value = $(pd_brand.conf.td).html(data.value);
-	           						var _categoryId = $(pd_brand.conf.td).html(data.categoryId);
-	           						var _filter = $(pd_brand.conf.td).html(data.filter);
-	           						var _filterType = $(pd_brand.conf.td).html(data.filterType);
-	           						var _showValue = $(pd_brand.conf.td).html(data.showValue);
-	           						var _sort = $(pd_brand.conf.td).html(data.sort);
-	           						$tr.empty().append(_id).append(_nameId).append(_name).append(_value)
-	           							.append(_categoryId).append(_filter).append(_filterType)
-	           							.append(_showValue).append(_sort);
+	           						var _nameEn = $(pd_brand.conf.td).html(data.nameEn);
+	           						var _nameCn = $(pd_brand.conf.td).html(data.nameCn);
+	           						$tr.empty().append(_id).append(_nameEn).append(_nameCn);
 
 	           						var roles = pd_brand.conf.roles;
 	           						var $iRemove = '';
 	           						if (roles.indexOf('13103') > -1) {
 		           						$iRemove = $(pd_brand.conf.i_remove);
 		           						$iRemove.on('click', function() {
-		           							pd_brand.removeAttr(data.id, data.name);
+		           							pd_brand.removeBrand(data.id);
 		           						});
 	           						}
 	           						var $iEdit = '';
 	           						if (roles.indexOf('13104') > -1) {
 		           						$iEdit = $(pd_brand.conf.i_edit);
 		           						$iEdit.on('click', function() {
-		           							pd_brand.modifyAttr(data.id);
+		           							pd_brand.modifyBrand(data.id);
 		           						});
 	           						}
 
@@ -477,21 +317,17 @@ var pd_brand = {
               	        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.modify' /></s:param></s:text>");
               	        	}
                 		};
-	              		$('.attr-form').ajaxSubmit(options);
+	              		$('.brand-form').ajaxSubmit(options);
 	              		return false;
                     }
                 }
             }
-        }).on('shown.bs.modal', function() {
-        	$("#attrFilter" + $tdArr.eq(5).html()).attr("checked",true);
-        	$("#attrFilterType" + $tdArr.eq(6).html()).attr("checked",true);
-        	$("#attrSort" + $tdArr.eq(8).html()).attr("checked",true);
         });
 	}
 }
 $(document).ready(function() {
-	pd_brand.loadAttributeList();
-	pd_brand.initAddAttr();
+	pd_brand.loadBrandList();
+	pd_brand.initAddBrand();
 
 });
 </script>
