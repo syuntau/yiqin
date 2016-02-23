@@ -111,7 +111,7 @@ var pd_brand = {
        	    	if (result) {
        				$.ajax({
        		            type: "post",
-       		            url: "editAttribute_removeAttr",
+       		            url: "editBrand_removeBrand",
        		            data: 'attrId='+attrId,
        		            dataType: "json",
        		            success: function(data) {
@@ -248,7 +248,7 @@ var pd_brand = {
                     className: "btn-success",
                     callback: function () {
                     	var options = {
-                		    url : 'editAttribute_saveAttr',
+                		    url : 'editBrand_saveBrand',
                 		    dataType : 'json',
                 		    beforeSubmit : function() {
               	            	var $loadingTextIcon = $(com_conf.loading_text_icon);
@@ -417,7 +417,7 @@ var pd_brand = {
                     className: "btn-success",
                     callback: function () {
                     	var options = {
-                		    url : 'editAttribute_updateAttr',
+                		    url : 'editBrand_updateBrand',
                 		    dataType : 'json',
                 		    beforeSubmit : function() {
               	            	var $loadingTextIcon = $(com_conf.loading_text_icon);

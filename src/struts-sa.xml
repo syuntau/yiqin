@@ -48,6 +48,7 @@
 		<action name="getAttribute_*" class="com.yiqin.sa.action.GetAttributeAction" method="{1}"></action>
 		<action name="uploadAttribute" class="com.yiqin.sa.action.UploadAttributeAction" method="uploadAttribute"></action>
 		<action name="editAttribute_*" class="com.yiqin.sa.action.EditAttributeAction" method="{1}"></action>
+		<action name="editBrand_*" class="com.yiqin.sa.action.EditBrandAction" method="{1}"></action>
 		<action name="editProduct_*" class="com.yiqin.sa.action.EditProductAction" method="{1}"></action>
 		<action name="uploadItem" class="com.yiqin.sa.action.UploadItemAction" method="uploadItems"></action>
 		<action name="editBestProduct_*" class="com.yiqin.sa.action.EditBestProductAction" method="{1}"></action>

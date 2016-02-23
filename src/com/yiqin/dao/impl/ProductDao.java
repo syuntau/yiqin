@@ -316,4 +316,9 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	public void editBrand(Brand brand) throws DataAccessException {
 		getHibernateTemplate().update(brand);
 	}
+
+	@Override
+	public Integer saveBrand(Brand brand) throws DataAccessException {
+		return (Integer) getHibernateTemplate().save(brand);
+	}
 }

@@ -114,4 +114,5 @@ public interface IProductDao {
 	public Brand findBrandById(Integer id);
 	public void deleteBrandById(String id) throws DataAccessException;
 	public void editBrand(Brand brand) throws DataAccessException;
+	public Integer saveBrand(Brand brand) throws DataAccessException;
 }

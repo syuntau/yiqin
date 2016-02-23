@@ -822,13 +822,25 @@ public class ProductManagerImpl implements ProductManager {
 		return brandList;
 	}
 
+	@Override
 	public void deleteBrandById(String id) throws DataAccessException {
 		productDao.deleteBrandById(id);
 		BrandUtil.reInit(productDao);
 	}
 
+	@Override
 	public void editBrand(Brand brand) throws DataAccessException {
 		productDao.editBrand(brand);
 		BrandUtil.reInit(productDao);
+	}
+
+	@Override
+	public Integer saveBrand(Brand brand) throws DataAccessException {
+		Integer brandId = productDao.saveBrand(brand);
+		if (brandId != null) {
+			BrandUtil.reInit(productDao);
+		}
+
+		return brandId;
 	}
 }
