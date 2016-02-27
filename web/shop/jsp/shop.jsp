@@ -190,8 +190,13 @@ $(document).ready(function(){
 									name="good_img" style="cursor: pointer;"
 									onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>,'toProductDetails')" />
 								<h2>
-									￥
-									<s:property value="#product.zhekouPrice" />
+									<s:if test="#session.userInfo==null">
+										<span style="font-size:14px;"><s:text name="shop.product.list.zhekou.info"/></span>
+									</s:if>
+									<s:else>
+										￥
+										<s:property value="#product.zhekouPrice" />
+									</s:else>
 								</h2>
 								<del>
 									<s:text name="shop.product.label.yuan.price"/>

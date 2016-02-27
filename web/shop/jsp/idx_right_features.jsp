@@ -69,7 +69,12 @@
 				$feature_img.click(function(){
 					yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 				});
-				$feature_info_div.append($feature_h2.append('￥'+val.zhekouPrice));
+				<s:if test="#session.userInfo==null">
+					$feature_info_div.append($feature_h2.append('<span style="font-size:14px;"><s:text name="shop.product.list.zhekou.info"/></span>'));
+				</s:if>
+				<s:else>
+					$feature_info_div.append($feature_h2.append('￥'+val.zhekouPrice));
+				</s:else>
 				$feature_info_div.append($feature_del.append('<s:text name="shop.product.label.yuan.price"/>'+val.price));
 				$feature_info_div.append($feature_p.append(val.productName));
 				$feature_info_div.append($feature_a.attr('id',val.productId));

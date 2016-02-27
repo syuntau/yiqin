@@ -167,8 +167,14 @@ $(document).ready(function(){
 					<s:property value='#productId'/>
 				</p>
 				<span>
-					<span><s:property value='#productInfo.zhekouPrice'/><br>
-						<p><del style="font-size:14px">
+					<span>
+						<s:if test="#session.userInfo==null">
+							<span style="font-size:10px;"><s:text name="shop.product.list.zhekou.info"/></span>
+						</s:if>
+						<s:else>
+							<s:property value='#productInfo.zhekouPrice'/>
+						</s:else><br>
+						<p><del style="font-size:14px;">
 								<s:text name="shop.product.label.yuan.price"/>
 							 	<s:property value="#productInfo.price" />
 						   </del>
