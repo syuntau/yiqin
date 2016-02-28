@@ -6,16 +6,16 @@
 	<div class="bg">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="title text-center">
+				<h2 class="title">
 					<s:text name="shop.footer.widget.about.yiqin"></s:text>
 				</h2>
 				<div class="row">
-					<div class="col-sm-6" >
+					<div class="col-sm-5" >
 						<div class="contact-form" style="text-align: left;">
 							<img src="/shop/images/home/aboutus.png" height="282px" width="400px">
 						</div>
 					</div>
-					<div class="col-sm-6" >
+					<div class="col-sm-7" >
 						<div class="contact-info">
 							<address>
 								<p>品质为<b>依</b>，服务至<b>勤</b><br><b>依勤办公（ELECTTE.COM）</b>创立于2015年5月1日，是一家致力于企业办公的网站，为企业提供<b>一站式办公设备及用品的采购服务。</b></p>

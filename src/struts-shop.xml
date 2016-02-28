@@ -135,6 +135,7 @@
 			<result name="top_register" type="tiles">shop.register</result>
 			<result name="top_home" type="tiles">shop.index</result>
 			<result name="top_logout" type="chain">logout</result>
+			<result name="footer_qa" type="tiles">shop.qa</result>
 			<result name="footer_us" type="tiles">shop.contact.us</result>
 			<result name="footer_about" type="tiles">shop.about.yiqin</result>
 			<result name="footer_return" type="tiles">shop.return.instructions</result>

@@ -6,16 +6,16 @@
 	<div class="bg">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="title text-center">
+				<h2 class="title">
 					<s:text name="shop.footer.widget.service.contact.us" />
 				</h2>
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-5">
 						<div class="contact-form" style="margin-bottom: 20px">
 							<img alt="" src="/shop/images/home/contactus.png" height="282px" width="400px">
 						</div>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-7">
 						<div class="contact-info">
 							<address>
 								<p>依勤（ELECTTE.COM）</p>

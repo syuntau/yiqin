@@ -22,7 +22,7 @@
 							<li><a href=""><s:text name="shop.footer.widget.service.online.help" /></a></li>
 							<li><a href="javaScript:footerTo('footer_us');"><s:text name="shop.footer.widget.service.contact.us" /></a></li>
 							<li><a href=""><s:text name="shop.footer.widget.service.order.status" /></a></li>
-							<li><a href=""><s:text name="shop.footer.widget.service.faq" /></a></li>
+							<li><a href="javaScript:footerTo('footer_qa');"><s:text name="shop.footer.widget.service.faq" /></a></li>
 						</ul>
 					</div>
 				</div>
