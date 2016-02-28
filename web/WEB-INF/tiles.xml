@@ -47,6 +47,11 @@
 		<put-attribute name="body" value="shop.details.body" />
 	</definition>
 	
+	<definition name="shop.help" extends="shop.template">
+		<put-attribute name="title" value="shop.index.title"/>
+		<put-attribute name="body" value="/shop/jsp/common/yiqin-help.jsp" />
+	</definition>
+	
 	<definition name="shop.qa" extends="shop.template">
 		<put-attribute name="title" value="shop.index.title"/>
 		<put-attribute name="body" value="/shop/jsp/common/yiqin-qa.jsp" />
