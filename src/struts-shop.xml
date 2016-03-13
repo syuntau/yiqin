@@ -71,13 +71,17 @@
 		
 		<action name="deleteCartProduct" class="com.yiqin.shop.action.DeleteCartProductAction"></action>
 		
-		<action name="deleteUserAddress" class="com.yiqin.shop.action.DeleteUserAddressAction"></action>
+		<action name="deleteUserConf" class="com.yiqin.shop.action.DeleteUserConfAction"></action>
 		
 		<action name="findUserConf" class="com.yiqin.shop.action.FindUserConfAction"></action>
+		
+		<action name="findUserInvoice" class="com.yiqin.shop.action.FindUserInvoiceAction"></action>
 		
 		<action name="findYouHui" class="com.yiqin.shop.action.FindYouHuiAction"></action>
 		
 		<action name="saveOrUpdateAddress" class="com.yiqin.shop.action.ModifyUserAddressAction"></action>
+		
+		<action name="saveOrUpdateInvoice" class="com.yiqin.shop.action.ModifyUserInvoiceAction"></action>
 		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
 		

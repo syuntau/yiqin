@@ -71,6 +71,15 @@ public interface IUserDao {
 	 * @return 地址信息集
 	 */
 	public List<UserConf> findUserAddressList(String userId);
+	
+	/**
+	 * 查找用户所有发票信息
+	 * 
+	 * @param userId
+	 *            用户ID
+	 * @return 发票信息集
+	 */
+	public List<UserConf> findUserInvoiceList(String userId);
 
 	/**
 	 * 更新用户配置

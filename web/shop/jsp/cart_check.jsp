@@ -19,6 +19,16 @@ var cart_check_temp = {
 	
 	check_from : '<form method="post" action="submitOrder"></form>',
 	check_input_hidden : '<input type="hidden"/>',
+	
+	fp_li : '<li style="margin-bottom:10px;"></li>',
+	fp_table : '<table></table>',
+	fp_tr : '<tr></tr>',
+	fp_td : '<td></td>',
+	fp_input : '<input type="radio" name="fapiao_info"></input>',
+	
+	add_invoice_btn : '<button class="btn btn-default update" id="invoice_add" data-toggle="modal" data-target="#EditInvoiceInfo">添加</button>',
+	upt_invoice_btn : '<button class="btn btn-default update" id="invoice_update" data-toggle="modal" data-target="#EditInvoiceInfo">修改</button>',
+	del_invoice_btn : '<button class="btn btn-default update" id="invoice_delete">删除</button>',
 };
 
 var yiqin_cart_check = function(){
@@ -30,9 +40,7 @@ var yiqin_cart_check = function(){
 				var addressAttr = $("input:checked[name=accept_info]"),
 					zhifu = 1,//$("input:checked[name=zhi_fu]").val(),
 					peisong = 1,//$("input:checked[name=pei_song]").val(), 
-					fapiaolx = $("input:checked[name=fapiao_lx]").val(),
-					fapiaotaitou = $("input[name=fapiaotaitou]").val().replace(REX, ""),
-					fapiaomingxi = $("input[name=fapiaomingxi]").val().replace(REX, ""),
+					fapiaoAttr = $("input:checked[name=fapiao_info]"),
 					ordernote = $("textarea[name=ordernote]").val().replace(REX, ""),
 					productIds = "<s:property value='#request.submit_ProductIds'/>",
 					$check_from = $(cart_check_temp.check_from);
@@ -43,10 +51,11 @@ var yiqin_cart_check = function(){
 				}
 				addressAttr = addressAttr.val();
 				
-				if(fapiaomingxi==""){
-					alert("请填写开票项目信息！");
+				if(fapiaoAttr==""||fapiaoAttr.length==0){
+					alert("您还没有发票信息，请先添加！");
 					return;
 				}
+				fapiaoAttr = fapiaoAttr.val();
 					
 				var $check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','addressAttr').val(addressAttr));
@@ -55,11 +64,7 @@ var yiqin_cart_check = function(){
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','peisong').val(peisong));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
-					$check_from.append($check_input_hidden.attr('name','fapiaolx').val(fapiaolx));
-					$check_input_hidden = $(cart_check_temp.check_input_hidden);
-					$check_from.append($check_input_hidden.attr('name','fapiaotaitou').val(fapiaotaitou));
-					$check_input_hidden = $(cart_check_temp.check_input_hidden);
-					$check_from.append($check_input_hidden.attr('name','fapiaomingxi').val(fapiaomingxi));
+					$check_from.append($check_input_hidden.attr('name','invoiceAttr').val(fapiaoAttr));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
 					$check_from.append($check_input_hidden.attr('name','ordernote').val(ordernote));
 					$check_input_hidden = $(cart_check_temp.check_input_hidden);
@@ -77,6 +82,21 @@ var yiqin_cart_check = function(){
 	             dataType: "json",
 	             success: function(data){
 	            	appendToAddress(data);
+                 },
+                 beforeSend: function(){},
+                 complete: function(){},
+                 error: function(){}
+	         });
+		},
+		
+		findUserInvoice : function(){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findUserInvoice",
+	             dataType: "json",
+	             success: function(data){
+	            	appendToInvoice(data);
                  },
                  beforeSend: function(){},
                  complete: function(){},
@@ -108,6 +128,35 @@ var yiqin_cart_check = function(){
 	            		if(data.attribute=="address_def"){
 	            			$modal.find("input[name=receive_default]").prop("checked",true);
 	            		}
+	            	}
+	             },
+	             beforeSend: function(){},
+	             complete: function(){},
+	             error: function(){}
+	         });
+		},
+		
+		editInvoiceByAttr : function(attribute){
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "findUserConf",
+	             data : "attribute="+attribute,
+	             dataType: "json",
+	             success: function(data){
+	            	var $modal = $("#EditInvoiceInfo");
+	            	if(data=='1'){
+	            		alert("本条发票信息已被删除，请刷新页面！");
+	            	}else if(data=='2'){
+	            		alert("加载发票信息失败，请稍后再试！");
+	            	}else{
+	            		var fapiaolx = data.value.split("_invoice_")[0],
+	       					fapiaott = data.value.split("_invoice_")[1],
+	       					fapiaomx = data.value.split("_invoice_")[2];
+	            		$modal.find("input[name=fapiao_lx][value='"+fapiaolx+"']").prop("checked",true);
+	            		$modal.find("input[name=fapiaotaitou]").val(fapiaott);
+	            		$modal.find("input[name=fapiaomingxi]").val(fapiaomx);
+	            		$modal.find("input[name=fapiao_attr]").val(data.attribute);
 	            	}
 	             },
 	             beforeSend: function(){},
@@ -153,12 +202,48 @@ var yiqin_cart_check = function(){
 	         });
 		},
 		
+		saveOrUpdateInvoice : function(){
+			var dataParm = checkInvoiceInfo();
+			if(!dataParm){
+				return;
+			}
+			$.ajax({
+	             type: "POST",
+	             async: true,
+	             url: "saveOrUpdateInvoice",
+	             data : dataParm,
+	             dataType: "json",
+	             success: function(data){
+	            	 if(data=='1'){
+	            		 $("#invoice_error").html("信息填写不正确，请再次填写！");
+	            		 return;
+	            	 }else if(data=='2'){
+	            		 $("#invoice_error").html("保存失败，请稍后重试！");
+	            		 return;
+	            	 }else if(data=='3'){
+	            		 yiqin_cart_check.findUserInvoice();
+	            		 return;
+	            	 }else if(data=='4'){
+	            		 $("#invoice_error").html("发票信息数量超出最大数量5个");
+	            		 return;
+	            	 }
+	             },
+	             beforeSend: function(){
+	            	 $("#invoice_error").html("");
+	             },
+	             complete: function(){
+	            	 $('#EditInvoiceInfo').modal('hide');
+	             },
+	             error: function(){}
+	         });
+		},
+		
 		deleteUserAddress : function(attribute){
 			if(confirm("确认要删除选择的地址信息吗？")){
 				$.ajax({
 		             type: "POST",
 		             async: true,
-		             url: "deleteUserAddress",
+		             url: "deleteUserConf",
 		             data : "attribute="+attribute,
 		             dataType: "json",
 		             success: function(data){
@@ -168,6 +253,30 @@ var yiqin_cart_check = function(){
 		            		alert("删除失败，请稍后再试！");
 		            	}else if(data=='3'){
 		            		yiqin_cart_check.findUserAddress();
+		            	}
+		             },
+		             beforeSend: function(){},
+		             complete: function(){},
+		             error: function(){}
+		         });
+			}
+		},
+		
+		deleteUserInvoice : function(attribute){
+			if(confirm("确认要删除选择的发票信息吗？")){
+				$.ajax({
+		             type: "POST",
+		             async: true,
+		             url: "deleteUserConf",
+		             data : "attribute="+attribute,
+		             dataType: "json",
+		             success: function(data){
+		            	if(data=='1'){
+		            		alert("本条发票信息不存在，请再次确认！");
+		            	}else if(data=='2'){
+		            		alert("删除失败，请稍后再试！");
+		            	}else if(data=='3'){
+		            		yiqin_cart_check.findUserInvoice();
 		            	}
 		             },
 		             beforeSend: function(){},
@@ -192,6 +301,79 @@ var yiqin_cart_check = function(){
 				$totalli.append("订单总价：").append(totalPrice.toFixed(2)+" 元");
 			}
 		},
+	};
+	
+	var appendToInvoice = function(data){
+		var $user_fp_info = $('<ul class="user_option" id="fapiao_info_ul"></ul>'),
+			$invoice_info_div = $("#invoice_info_div"),
+			$fp_li = $(cart_check_temp.fp_li),
+			$add_invoice_btn = $(cart_check_temp.add_invoice_btn),
+			$upt_invoice_btn = $(cart_check_temp.upt_invoice_btn),
+			$del_invoice_btn = $(cart_check_temp.del_invoice_btn);
+			$invoice_info_div.empty();
+			
+		$invoice_info_div.append($user_fp_info);
+		if(data == '1'){
+			$user_fp_info.append($fp_li);
+			$fp_li.append("您还没有发票信息，请点击添加按钮添加");
+			$invoice_info_div.append($add_invoice_btn);
+			$add_invoice_btn.click(function(){
+				emptyInvoiceModal();
+			});
+       	}else if(data == '2'){
+       		$user_fp_info.append($fp_li);
+       		$fp_li.append("发票信息加载失败，请刷新页面再试");
+       	}else{
+       		if(data.length<5){
+       			$invoice_info_div.append($add_invoice_btn);
+    			$add_invoice_btn.click(function(){
+    				emptyInvoiceModal();
+    			});
+       		}
+       		$invoice_info_div.append($upt_invoice_btn);
+       		$invoice_info_div.append($del_invoice_btn);
+       		$upt_invoice_btn.click(function(){
+       			emptyInvoiceModal();
+				var type = $("input:checked[name=fapiao_info]").val();
+				yiqin_cart_check.editInvoiceByAttr(type);
+			});
+       		$del_invoice_btn.click(function(){
+				var type = $("input:checked[name=fapiao_info]").val();
+				yiqin_cart_check.deleteUserInvoice(type);
+			});
+       		$.each(data, function(n,val){
+       			var $fp_li = $(cart_check_temp.fp_li),
+	    			$fp_table = $(cart_check_temp.fp_table),
+	    			$fp_tr = $(cart_check_temp.fp_tr),
+	    			$fp_td = $(cart_check_temp.fp_td),
+	    			$fp_input = $(cart_check_temp.fp_input),
+       				fplx = val.value.split("_invoice_")[0],
+       				fptt = val.value.split("_invoice_")[1],
+       				fpxm = val.value.split("_invoice_")[2];
+       			
+       			$fp_li.attr('id',val.attribute).append($fp_table).css("margin-bottom","10px");
+       			$fp_table.append($fp_tr.append($fp_td.attr("width","30px").append($fp_input.val(val.attribute))));
+       			$fp_td = $(cart_check_temp.fp_td);
+       			$fp_tr.append($fp_td.append("发票类型：").append(faPiaoLx(fplx)));
+       			
+       			$fp_tr = $(cart_check_temp.fp_tr);
+       			$fp_td = $(cart_check_temp.fp_td);
+       			$fp_table.append($fp_tr.append($fp_td.append("&nbsp;")));
+       			$fp_td = $(cart_check_temp.fp_td);
+       			$fp_tr.append($fp_td.append("发票抬头：").append(fptt));
+       			
+       			$fp_tr = $(cart_check_temp.fp_tr);
+       			$fp_td = $(cart_check_temp.fp_td);
+       			$fp_table.append($fp_tr.append($fp_td.append("&nbsp;")));
+       			$fp_td = $(cart_check_temp.fp_td);
+       			$fp_tr.append($fp_td.append("开票项目：").append(fpxm));
+       			
+   				if(n==0){
+   					$fp_input.attr("checked",true);
+   				}
+   				$user_fp_info.append($fp_li);
+       		});
+       	}
 	};
 	
 	var appendToAddress = function(data){
@@ -319,6 +501,35 @@ var yiqin_cart_check = function(){
 		return "attribute="+attribute+"&address="+address+"&telephone="+telephone+"&userName="+userName+"&oldAttribute="+oldAttribute;
 	};
 	
+	var checkInvoiceInfo = function(){
+		var $modal = $("#EditInvoiceInfo"),
+			fapiaolx = $("input:checked[name=fapiao_lx]"),
+			fapiaotaitou = $("input[name=fapiaotaitou]").val().replace(REX, ""),
+			fapiaomingxi = $("input[name=fapiaomingxi]").val().replace(REX, ""),
+			attribute = $("input[name=fapiao_attr]").val();
+		if(fapiaolx==""||fapiaolx.length==0){
+			$("#invoice_error").html("请选择发票类型");
+			return false;
+		}
+		fapiaolx = fapiaolx.val();
+		if(fapiaomingxi==""){
+			$modal.find("input[name=fapiaomingxi]").focus();
+			$("#invoice_error").html("请填写开票项目信息");
+			return false;
+		}
+		return "attribute="+attribute+"&fapiaolx="+fapiaolx+"&fapiaotaitou="+fapiaotaitou+"&fapiaomingxi="+fapiaomingxi;
+	};
+	
+	var faPiaoLx = function(fplx){
+		var fapiaolx = "普通发票";
+		if ("1"==fplx) {
+			fapiaolx = "普通发票";
+		} else if ("2"==fplx) {
+			fapiaolx = "专用发票";
+		}
+		return fapiaolx;
+	};
+	
 	var checkPhone = function(value) {
 		var REX_PHONE = /^[1][0-9]{10}$/;
 		var REX_DIANH = /^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
@@ -345,12 +556,22 @@ var yiqin_cart_check = function(){
 		$modal.find("input[name=receive_default]").prop("checked",false);
 		$modal.data("receive_aType","");
 	};
+	
+	var emptyInvoiceModal = function(){
+		var $modal = $("#EditInvoiceInfo");
+		$("#invoice_error").html("");
+		$modal.find("input[name=fapiao_lx]").prop("checked",false);
+		$modal.find("input[name=fapiaotaitou]").val("");
+		$modal.find("input[name=fapiaomingxi]").val("");
+		$modal.find("input[name=fapiao_attr]").val("");
+	};
 
 	return action;
 }();
 
 $(document).ready(function(){
 	yiqin_cart_check.findUserAddress();
+	yiqin_cart_check.findUserInvoice();
 	yiqin_cart_check.totalSelCartInfo();
 });
 </script>
@@ -408,27 +629,12 @@ $(document).ready(function(){
 <!-- 			</div> -->
 <!-- 		</div> -->
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-6" style="padding-left:0px;">
 				<h5><b><s:text name="cart.check.fapiao"></s:text></b></h5>
-				<div class="chose_area" style="margin-bottom:10px;">
-					<ul class="user_option">
-						<li>
-							<label>发票类型：</label>
-							<span><input type="radio" name="fapiao_lx" value="1" checked="checked">&nbsp;&nbsp;普通发票</span>
-							<span><input type="radio" name="fapiao_lx" value="2">&nbsp;&nbsp;专用发票</span>
-						</li>
-						<li>
-							<label>发票抬头：</label>
-							<input type="text" name="fapiaotaitou" style="width:300px;" value="<s:property value='#session.userInfo.company'/>">
-						</li>
-						<li>
-							<label>开票项目：</label>
-							<input type="text" name="fapiaomingxi" style="width:300px;" value="">
-						</li>
-					</ul>
+				<div class="chose_area" style="margin-bottom:10px;height:155px;overflow-y:auto;" id="invoice_info_div">
 				</div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-6" style="padding-right:0px;padding-left:0px;">
 				<h5><b><s:text name="cart.check.ordernote"></s:text></b></h5>
 				<div class="chose_area" style="margin-bottom:10px;">
 					<ul class="user_option">
@@ -534,6 +740,42 @@ $(document).ready(function(){
 	         	</div>
 	         	<div class="modal-footer">
 					<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.saveOrUpdateAddress();">保存</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- alert modal -->
+	<div class="modal" id="EditInvoiceInfo" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" >
+				<div class="modal-header">
+		             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		             <h5 class="modal-title"><strong>填写发票信息</strong></h5>
+	         	</div>
+	         	<div class="modal-body">
+	         		<input type="hidden" name="fapiao_attr">
+					<ul>
+						<li>
+							<label>发票类型：</label>
+							<input type="radio" name="fapiao_lx" value="1">&nbsp;&nbsp;普通发票
+							<input type="radio" name="fapiao_lx" value="2">&nbsp;&nbsp;专用发票
+						</li>
+						<li>
+							<label>发票抬头：</label>
+							<input type="text" name="fapiaotaitou" style="width:300px;">
+						</li>
+						<li>
+							<label>开票项目：</label>
+							<input type="text" name="fapiaomingxi" style="width:300px;">
+						</li>
+						<li>
+							<span style="color:red" id="invoice_error"></span>
+						</li>
+					</ul>
+	         	</div>
+	         	<div class="modal-footer">
+					<a class="btn btn-default check_out" href="javaScript:yiqin_cart_check.saveOrUpdateInvoice();">保存</a>
 				</div>
 			</div>
 		</div>

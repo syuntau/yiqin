@@ -36,12 +36,8 @@ public class SubmitOrderAction extends ActionSupport {
 	private Byte zhifu;
 	// 配送方式
 	private String peisong;
-	// 发票类型
-	private String fapiaolx;
-	// 发票抬头
-	private String fapiaotaitou;
-	// 发票明细
-	private String fapiaomingxi;
+	// 发票信息
+	private String invoiceAttr;
 	// 订单备注
 	private String ordernote;
 	// 订单所有商品ID
@@ -63,24 +59,12 @@ public class SubmitOrderAction extends ActionSupport {
 		this.peisong = peisong;
 	}
 
-	public String getFapiaolx() {
-		return fapiaolx;
-	}
-
-	public void setFapiaolx(String fapiaolx) {
-		this.fapiaolx = fapiaolx;
-	}
-
-	public void setFapiaotaitou(String fapiaotaitou) {
-		this.fapiaotaitou = fapiaotaitou;
+	public void setInvoiceAttr(String invoiceAttr) {
+		this.invoiceAttr = invoiceAttr;
 	}
 
 	public void setOrdernote(String ordernote) {
 		this.ordernote = ordernote;
-	}
-
-	public void setFapiaomingxi(String fapiaomingxi) {
-		this.fapiaomingxi = fapiaomingxi;
 	}
 
 	public void setProductIds(String productIds) {
@@ -101,8 +85,8 @@ public class SubmitOrderAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			if (Util.isEmpty(addressAttr) || Util.isEmpty(peisong)
-					|| Util.isEmpty(fapiaolx) || Util.isEmpty(fapiaomingxi)
-					|| Util.isEmpty(productIds) || zhifu == null) {
+					|| Util.isEmpty(invoiceAttr) || Util.isEmpty(productIds)
+					|| zhifu == null) {
 				request.setAttribute("submitOrderError", "订单必填项不能为空，请填写完整！");
 				return ERROR;
 			}
@@ -113,9 +97,17 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setUserId(user.getId());
 			order.setEmail(user.getEmail());
 			order.setZhifu(zhifu);
-			order.setFapiaolx(Util.faPiaoLx(fapiaolx));
-			order.setFapiaotaitou(fapiaotaitou);
-			order.setFapiaomingxi(fapiaomingxi);
+			
+			// 查询发票信息
+			UserConf invoiceConf = userManager.findUserConfInfo(user.getId(),
+					invoiceAttr);
+			if (invoiceConf != null) {
+				String [] invoice = invoiceConf.getValue().split("_invoice_");
+				order.setFapiaolx(Util.faPiaoLx(invoice[0]));
+				order.setFapiaotaitou(invoice[1]);
+				order.setFapiaomingxi(invoice[2]);
+			}
+			
 			order.setOrderNote(ordernote);
 			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
 			order.setStatus((byte) 1);

@@ -129,7 +129,7 @@ var yiqin_my_address = function(){
 				$.ajax({
 		             type: "POST",
 		             async: true,
-		             url: "deleteUserAddress",
+		             url: "deleteUserConf",
 		             data : "attribute="+attribute,
 		             dataType: "json",
 		             success: function(data){

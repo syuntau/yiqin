@@ -72,6 +72,11 @@ public class UserManagerImpl implements UserManager {
 	public List<UserConf> findUserAddressList(String userId) {
 		return userDao.findUserAddressList(userId);
 	}
+	
+	@Override
+	public List<UserConf> findUserInvoiceList(String userId) {
+		return userDao.findUserInvoiceList(userId);
+	}
 
 	@Override
 	public boolean updateUserConf(UserConf userConf) {
