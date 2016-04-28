@@ -109,6 +109,10 @@
 		<put-attribute name="check" value="/shop/jsp/cart_items.jsp" />
 	</definition>
 	
+	<definition name="shop.code.body" template="/shop/jsp/cart.jsp">
+		<put-attribute name="check" value="/shop/jsp/code_cart.jsp" />
+	</definition>
+	
 	<definition name="shop.order.body" template="/shop/jsp/cart.jsp">
 		<put-attribute name="check" value="/shop/jsp/cart_check.jsp" />
 	</definition>
@@ -116,6 +120,11 @@
 	<definition name="shop.cart" extends="shop.template">
 		<put-attribute name="title" value="shop.cart.title"/>
 		<put-attribute name="body" value="shop.cart.body" />
+	</definition>
+	
+	<definition name="shop.code" extends="shop.template">
+		<put-attribute name="title" value="shop.cart.title"/>
+		<put-attribute name="body" value="shop.code.body" />
 	</definition>
 	
 	<definition name="shop.order" extends="shop.template">

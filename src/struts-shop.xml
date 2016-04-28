@@ -134,6 +134,7 @@
 			<interceptor-ref name="setNav"></interceptor-ref>
 			<result name="top_account" type="chain">findOrderList</result>
 			<result name="top_quick_shopping" type="chain">findBestProduct</result>
+			<result name="top_code_shopping" type="tiles">shop.code</result>
 			<result name="top_cart" type="tiles">shop.cart</result>
 			<result name="top_login" type="tiles">shop.login</result>
 			<result name="top_register" type="tiles">shop.register</result>

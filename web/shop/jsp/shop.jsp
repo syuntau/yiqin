@@ -131,7 +131,7 @@ var handleProductFilter = function(filterType,filterVal){
 	}else{
 		return filterStr;
 	}
-}
+};
 
 var filterProduct = function(filterType,filterVal){
 	var paramVal = "<s:property value='paramVal'/>",

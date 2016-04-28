@@ -47,6 +47,7 @@ $(document).ready(function(){
 					<ul class="nav navbar-nav" id="shop_header_ul">
 						<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
 						<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>
+						<li><a class="shop_header" id="top_code_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.code.shopping" /></a></li>
 						<li>
 							<a class="shop_header" id="top_cart"><i class="fa fa-shopping-cart"></i> <s:text name="shop.header.top.cart" />
 								<strong id="J_MiniCartNum" class="h"></strong>
