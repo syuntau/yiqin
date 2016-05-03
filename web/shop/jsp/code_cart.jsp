@@ -241,7 +241,13 @@ var yiqin_cart_action = function(){
 			 $cart_a.click(function(){
 				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });
-			 $cart_img.attr({"src":val.imgUrl,"width":"110px"});
+			 var imgArr = val.imgUrl.split(","), tempImage;
+			 if (imgArr.length > 1) {
+				 tempImage = imgArr[0];
+			 } else {
+				 tempImage = val.imgUrl;
+			 }
+			 $cart_img.attr({"src":tempImage,"width":"100px"});
 			 $cart_tr.append($cart_td);
 			 $cart_td = $(cart_template.cart_td),
 			 $cart_a = $(cart_template.cart_a),
@@ -324,7 +330,13 @@ var yiqin_cart_action = function(){
 			 $cart_a.click(function(){
 				 yiqin_public_js.toTilesAction(val.productId, "/toProductDetails");
 			 });
-			 $cart_img.attr({"src":val.imgUrl,"width":"110px"});
+			 var imgArr = val.imgUrl.split(","), tempImage;
+			 if (imgArr.length > 1) {
+				 tempImage = imgArr[0];
+			 } else {
+				 tempImage = val.imgUrl;
+			 }
+			 $cart_img.attr({"src":tempImage,"width":"100px"});
 			 $cart_tr.append($cart_td);
 			 $cart_td = $(cart_template.cart_td),
 			 $cart_a = $(cart_template.cart_a),
