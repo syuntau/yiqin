@@ -187,6 +187,7 @@ var yiqin_cart_action = function(){
 	 						$cart_info_list.empty();
 	 						addCodeProductToCart(searchStr,1,data);
 	 					}
+	 					searchObj.value = "";
 	            	}
               },
               beforeSend: function(){},
@@ -312,8 +313,14 @@ var yiqin_cart_action = function(){
          });
 	};
 	
+	var count = 0,tid;
 	var appendInfoToCart = function(data){
 		 var $cart_info_list = $('#cart_info_list');
+		 if($cart_info_list.find('tr').length>0){
+			 $cart_info_list.find('tr').css('border','1px solid#F7F7F0');
+		 }
+		 count = 0;
+		 clearInterval(tid);
 		 $.each(data, function(i, val){
 			 var $cart_tr = $(cart_template.cart_tr),
 				$cart_td = $(cart_template.cart_td),
@@ -397,7 +404,19 @@ var yiqin_cart_action = function(){
 			$cart_tr.data(val.productId+"_productNum",1);
 			$cart_tr.data("_productId",val.productId);
 			$cart_tr.attr('id',val.productId+'_product');
-			$cart_info_list.append($cart_tr);
+			$cart_info_list.prepend($cart_tr);
+			tid = setInterval(function(){
+				if(count>=20){
+					clearInterval(tid);
+					return;
+				}
+				if(count%2==0){
+					$cart_tr.css('border','2px solid#FE980F');
+				}else{
+					$cart_tr.css('border','1px solid#F7F7F0');
+				}
+				count++;
+			},500);
         });
 	};
 	
@@ -405,6 +424,13 @@ var yiqin_cart_action = function(){
 }();
 
 $(document).ready(function() {
+	$("#ip_keyword").bind('input propertychange',function(){
+		if(this.value==this.defaultValue || this.value==""){
+			$(this).css({'font-size':'','font-weight':'normal'});
+		}else{
+			$(this).css({'font-size':'24px','font-weight':'bold'});
+		}
+	});
 	yiqin_cart_action.initCodeCartInfo();
 	yiqin_cart_action.toCartCheck();
 });
@@ -412,7 +438,7 @@ $(document).ready(function() {
 <span id="search_error"></span>
 <div class="search-01" style="padding-bottom:10px;padding-right:200px;padding-top:10px;font-size:20px;line-height:22px;">
 	 编码下单：
-	<input style="line-height:30px;height:30px;" id="ip_keyword" name="searchName" type="text" class="s-itxt" value="商品编号" onfocus="if (this.value==this.defaultValue) this.value=''" onblur="if (this.value=='') this.value=this.defaultValue" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
+	<input style="line-height:30px;height:30px;" id="ip_keyword" name="searchName" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
     <a href="javascript:;" class="btn-13" style="height:30px;" onclick="yiqin_cart_action.orderSearch('ip_keyword')">搜 索</a>
 </div>
 <section id="cart_items">
