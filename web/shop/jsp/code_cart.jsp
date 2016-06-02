@@ -436,7 +436,7 @@ $(document).ready(function() {
 });
 </script>
 <span id="search_error"></span>
-<div class="search-01" style="padding-bottom:10px;padding-right:200px;padding-top:10px;font-size:20px;line-height:22px;">
+<div class="search-01" style="float:left;padding-bottom:10px;padding-left:90px;padding-top:10px;font-size:20px;line-height:22px;">
 	 编码下单：
 	<input style="line-height:30px;height:30px;" id="ip_keyword" name="searchName" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
     <a href="javascript:;" class="btn-13" style="height:30px;" onclick="yiqin_cart_action.orderSearch('ip_keyword')">搜 索</a>
