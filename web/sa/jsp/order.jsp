@@ -211,7 +211,7 @@ $(document).ready(function(){
 							<td width="10%" style="text-align:center;">总价</td>
 							<td width="18%" style="text-align:center;">订单时间</td>
 							<td width="10%" style="text-align:center;">订单状态</td>
-							<td width="8%" style="text-align:center;">订单修改</td>
+							<td width="8%" style="text-align:center;">订单处理</td>
 						</tr>
 					</thead>
 					<s:if test="page.results==null">
@@ -256,12 +256,15 @@ $(document).ready(function(){
 									<span><s:property value='#order.crateDate'/></span>
 								</td>
 								<td style="text-align:center;">
-									<span><s:property value='#order.status'/></span>
+									<a class="cursor-pointer" style="color:#337ab7" onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>','<s:property value='#order.userId'/>');">
+									  <s:property value='#order.status'/>
+									</a>
 								</td>
 								<td style="text-align:center;">
-									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>','<s:property value='#order.userId'/>');">
+<%-- 									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>','<s:property value='#order.userId'/>');"> --%>
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
-									</span>
+										<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="删除订单"></i>
+<%-- 									</span> --%>
 								</td>
 							</tr>
 							<s:iterator value="#order.productList" var="product" status="st">
