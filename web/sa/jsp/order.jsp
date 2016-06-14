@@ -68,7 +68,56 @@ var sa_order = function(){
                 }  
             });  
 		},
-		
+
+		modifyOrder : function(data) {
+			var html = '';
+			bootbox.dialog({
+				message : '<table class="table table-condensed">' +
+								'<thead>' +
+									'<tr class="cart_menu">' +
+										'<td class="image"></td>' +
+										'<td class="description">商品</td>' +
+										'<td class="price">单价(元)</td>' +
+										'<td class="quantity">数量</td>' +
+										'<td></td>' +
+									'</tr>' +
+								'</thead>' +
+								'<tbody id="cart_info_list">' +
+									'<tr id="0_product">' +
+										'<td class="cart_product">' +
+											'<a href="javaScript:void(0);"><img src="/img/11111111-1.jpg" width="50px"></a>' +
+										'</td>' +
+										'<td class="cart_description">' +
+											'<p>惠普(HP) LaserJet 1020 Plus 黑白激光打印机</p>' +
+											'<p style="margin-top: 10px;">商品ID：11111111</p>' +
+											'<p>颜色：灰色</p>' +
+										'</td>' +
+										'<td class="cart_price"><p><input style="width:100px" value="1529.15" /></p><del>1799.00</del></td>' +
+										'<td class="cart_quantity">' +
+											'<div class="cart_quantity_button">' +
+												'<input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
+											'</div>' +
+										'</td>' +
+									'</tr>' +
+								'</tbody>' +
+							'</table>',
+				title : "订单修改",
+				buttons : {
+                    Cancel: {  
+                        label: "取消",  
+                        className: "btn-default",  
+                    }
+                    , OK: {  
+                        label: "更新",  
+                        className: "btn-primary",  
+                        callback: function () {
+                        	alert("test");
+                        }  
+                    }
+				}
+			});
+		},
+
 		updateOrderStatus : function(orderId,status,userId){
 			$.ajax({
 	             type: "POST",
@@ -229,8 +278,8 @@ $(document).ready(function(){
 							<tr style="background-color: #F0F0E9;font-weight:bold;">
 								<td>
 									<div class="summary">
-										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>">展开<i class="fa fa-caret-down"></i></a>
-										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;">缩起<i class="fa fa-caret-up"></i></a>
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>"><i class="fa fa-chevron-right"></i></a>
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;"><i class="fa fa-chevron-down"></i></a>
 										 <span style="margin-left:20px">订单号：<s:property value="#order.id"/></span>
 										 <span class="dropdown" style="margin-left:50px;">
 											<a id="dropdownMenu<s:property value='#order.id'/>" data-toggle="dropdown" style="cursor:pointer;">订单详细<i class="fa fa-table fa-fw"></i></a>
@@ -261,10 +310,12 @@ $(document).ready(function(){
 									</a>
 								</td>
 								<td style="text-align:center;">
-<%-- 									<span onclick="sa_order.modifyBootBox(<s:property value='#order.id'/>,'<s:property value='#order.status'/>','<s:property value='#order.userId'/>');"> --%>
+									<span onclick="sa_order.modifyOrder('');">
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
+									</span>
+									<span>
 										<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="删除订单"></i>
-<%-- 									</span> --%>
+									</span>
 								</td>
 							</tr>
 							<s:iterator value="#order.productList" var="product" status="st">
