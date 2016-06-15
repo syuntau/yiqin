@@ -69,39 +69,57 @@ var sa_order = function(){
             });  
 		},
 
-		modifyOrder : function(data) {
+		modifyOrder : function(id) {
+			var orderId = id+'';
+			var orderTmpList = '<s:property value="#request.orderTmpList" escape="false"/>';
+			var orderArrray = JSON.parse(orderTmpList);
+			var order = orderArrray[orderId];
+			var productList = order.productList;
 			var html = '';
+			html += '<table class="table table-condensed">' +
+						'<thead>' +
+							'<tr class="cart_menu">' +
+								'<td class="image"></td>' +
+								'<td class="description">商品</td>' +
+								'<td class="price">单价(元)</td>' +
+								'<td class="quantity">数量</td>' +
+								'<td></td>' +
+							'</tr>' +
+						'</thead>' +
+						'<tbody id="cart_info_list">';
+			$.each(productList, function(i, val) {
+				html += '<tr>' +
+							'<td class="cart_product">' +
+								'<a><img src="' + val.imgUrl + '" width="50px"></a>' +
+							'</td>' +
+							'<td class="cart_description">' +
+								'<p>' + val.productName + '</p>' +
+								'<p style="margin-top: 10px;">商品ID：' + val.productId + '</p>' +
+								'<p>颜色：' + val.productInfo + '</p>' +
+							'</td>' +
+							'<td class="cart_price"><p><input style="width:100px" value="' + val.zhekouPrice + '" /></p><del>' + val.price + '</del></td>' +
+							'<td class="cart_quantity">' +
+								'<div class="cart_quantity_button">' +
+									'<input class="cart_quantity_input" value="' + val.count + '" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
+								'</div>' +
+							'</td>' +
+						'</tr>';
+			});
+			html +=	'<tr>' +
+						'<td class="cart_product">备注</td>' +
+						'<td class="cart_description">' +
+							'<textarea style="width:300px;height:100px;">' + order.orderNote + '</textarea>' +
+						'</td>' +
+						'<td colspan = "2" class="cart_price"><p><input style="width:100px" value="' + order.beizhuzongjia + '" /></p></td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" style="color:black">重新计算</button></td>' +
+						'<td colspan = "2" style="color:red"><input type="hidden" name=""/>10000.00</td>' +
+					'</tr>' +
+					'</tbody></table>';
 			bootbox.dialog({
-				message : '<table class="table table-condensed">' +
-								'<thead>' +
-									'<tr class="cart_menu">' +
-										'<td class="image"></td>' +
-										'<td class="description">商品</td>' +
-										'<td class="price">单价(元)</td>' +
-										'<td class="quantity">数量</td>' +
-										'<td></td>' +
-									'</tr>' +
-								'</thead>' +
-								'<tbody id="cart_info_list">' +
-									'<tr id="0_product">' +
-										'<td class="cart_product">' +
-											'<a href="javaScript:void(0);"><img src="/img/11111111-1.jpg" width="50px"></a>' +
-										'</td>' +
-										'<td class="cart_description">' +
-											'<p>惠普(HP) LaserJet 1020 Plus 黑白激光打印机</p>' +
-											'<p style="margin-top: 10px;">商品ID：11111111</p>' +
-											'<p>颜色：灰色</p>' +
-										'</td>' +
-										'<td class="cart_price"><p><input style="width:100px" value="1529.15" /></p><del>1799.00</del></td>' +
-										'<td class="cart_quantity">' +
-											'<div class="cart_quantity_button">' +
-												'<input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
-											'</div>' +
-										'</td>' +
-									'</tr>' +
-								'</tbody>' +
-							'</table>',
-				title : "订单修改",
+				message : html,
+				title : "订单修改 <span style='font-size:14px;color:red'>(订单号：" + orderId + ")</span>",
 				buttons : {
                     Cancel: {  
                         label: "取消",  
@@ -310,7 +328,7 @@ $(document).ready(function(){
 									</a>
 								</td>
 								<td style="text-align:center;">
-									<span onclick="sa_order.modifyOrder('');">
+									<span onclick="sa_order.modifyOrder(<s:property value='#order.id'/>);">
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
 									</span>
 									<span>

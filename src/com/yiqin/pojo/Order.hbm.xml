@@ -92,5 +92,9 @@
             <column name="order_note" length="1024">
             </column>
         </property>
+        <property name="beizhuzongjia" type="string">
+            <column name="beizhuzongjia" length="20">
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

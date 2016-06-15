@@ -11,9 +11,12 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.service.ShoppingManager;
+import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.shop.bean.OrderView;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
+
+import net.sf.json.JSONObject;
 
 /**
  * 查询SA订单列表
@@ -108,6 +111,20 @@ public class FindSAOrderListAction extends ActionSupport {
 			page = new Page(MAXITEMINPAGE, count, pageNo + 1);
 			page.setResults(orderList);
 			request.getSession().setAttribute("export_order", page);
+			if (Util.isNotEmpty(orderList)) {
+				JSONObject json = new JSONObject();
+				for (OrderView view : orderList) {
+					OrderTempObj obj = new OrderTempObj();
+					obj.setId(view.getId());
+					obj.setOrderNote(view.getOrderNote());
+					obj.setProductList(view.getProductList());
+					obj.setZongjia(view.getZongjia());
+					JSONObject jsonTmp = JSONObject.fromObject(obj);
+					json.accumulate(String.valueOf(obj.getId()), jsonTmp.toString());
+				}
+				request.setAttribute("orderTmpList", json.toString());
+			}
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

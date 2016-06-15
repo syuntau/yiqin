@@ -87,7 +87,7 @@ CREATE TABLE `product` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '订单ID',
-  `status` tinyint(4) DEFAULT NULL COMMENT '订单状态\r\n',
+  `status` tinyint(4) DEFAULT NULL COMMENT '订单状态',
   `user_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
   `name` varchar(50) DEFAULT NULL COMMENT '用户名称',
   `address` varchar(100) DEFAULT NULL COMMENT '收货地址',
@@ -144,3 +144,6 @@ CREATE TABLE `sa_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+
+alter table `order` add column order_note text default NULL comment '备注' after fapiaomingxi;
+alter table `order` add column beizhuzongjia varchar(20) default NULL comment '备注总价' after order_note;
