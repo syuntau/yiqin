@@ -32,7 +32,7 @@ public class Order implements java.io.Serializable {
 	private Date updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
 	private String orderNote;// 订单备注
-	private Float beizhuzongjia;// 备注总价
+	private String beizhuzongjia;// 备注总价
 
 	public Order() {
 	}
@@ -46,7 +46,7 @@ public class Order implements java.io.Serializable {
 			Float yunfei, String songhuoriqi, String peisongfangshi,String fapiaolx,
 			String fapiaotaitou, String fapiaomingxi, String productList,
 			String yuanjia, Float zhekou, String zongjia, Date crateDate,
-			Date updateDate, Byte deleteFlag, String orderNote, Float beizhuzongjia) {
+			Date updateDate, Byte deleteFlag, String orderNote, String beizhuzongjia) {
 		this.id = id;
 		this.status = status;
 		this.userId = userId;
@@ -248,11 +248,11 @@ public class Order implements java.io.Serializable {
 		this.orderNote = orderNote;
 	}
 
-	public Float getBeizhuzongjia() {
+	public String getBeizhuzongjia() {
 		return beizhuzongjia;
 	}
 
-	public void setBeizhuzongjia(Float beizhuzongjia) {
+	public void setBeizhuzongjia(String beizhuzongjia) {
 		this.beizhuzongjia = beizhuzongjia;
 	}
 

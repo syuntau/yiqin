@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.shop.bean.OrderTempObj;
 
 /**
  * 购物DAO
@@ -141,4 +142,6 @@ public interface IShoppingDao {
 	 * @return 符合条件总数
 	 */
 	public int findOrderCount(final String hql);
+
+	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
 }

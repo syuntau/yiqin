@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.shop.bean.OrderView;
 
 public interface ShoppingManager {
@@ -161,4 +162,6 @@ public interface ShoppingManager {
 	 */
 	public int findOrderCount(String userId, Date startTime, Date endTime,
 			int status, long orderId, String productName, String productId);
+
+	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
 }

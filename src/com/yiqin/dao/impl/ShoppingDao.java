@@ -1,6 +1,7 @@
 package com.yiqin.dao.impl;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -11,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.util.Util;
 
 public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
@@ -151,6 +153,34 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 				Order tempOrder = (Order) list.get(0);
 				tempOrder.setStatus(Byte.valueOf(String.valueOf(status)));
 				getHibernateTemplate().saveOrUpdate(tempOrder);
+				return true;
+			}
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateOrder(long orderId, OrderTempObj tmpOrder) {
+		try{
+			String queryString = "from Order where id=?";
+			List<?> list = getHibernateTemplate().find(queryString, orderId);
+			if(list != null){
+				Order order = (Order) list.get(0);
+				if (Util.isNotEmpty(tmpOrder.getOrderNote())) {
+					order.setOrderNote(tmpOrder.getOrderNote());
+				}
+				if (Util.isNotEmpty(tmpOrder.getBeizhuzongjia())) {
+					order.setBeizhuzongjia(tmpOrder.getBeizhuzongjia());
+				}
+				if (Util.isNotEmpty(tmpOrder.getZongjia())) {
+					order.setZongjia(tmpOrder.getZongjia());
+				}
+				order.setProductList(tmpOrder.getProductList().toString());
+				order.setUpdateDate(new Date());
+				getHibernateTemplate().saveOrUpdate(order);
 				return true;
 			}
 			return false;

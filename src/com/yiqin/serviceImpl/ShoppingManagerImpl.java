@@ -8,6 +8,7 @@ import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
 import com.yiqin.service.ShoppingManager;
+import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.shop.bean.OrderView;
 import com.yiqin.util.Util;
 
@@ -189,5 +190,10 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public boolean updateOrderStatus(String userId, long orderId, int status) {
 		return shoppingDao.updateOrderStatus(userId, orderId, status);
+	}
+
+	@Override
+	public boolean updateOrder(long orderId, OrderTempObj tmpOrder) {
+		return shoppingDao.updateOrder(orderId, tmpOrder);
 	}
 }
