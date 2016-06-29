@@ -114,7 +114,7 @@ var sa_order = function(){
 					'</tr>' +
 					'<tr>' +
 						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" onclick="sa_order.recalculatePrice()" style="color:black">重新计算</button></td>' +
-						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>10000.00</td>' +
+						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>' + val.zongjia + '</td>' +
 					'</tr>' +
 					'</tbody></table></div>';
 			bootbox.dialog({
@@ -147,7 +147,7 @@ var sa_order = function(){
 			var $beizhuzongjia = $('.beizhuzongjia');
 			var beizhuzongjia = $beizhuzongjia.val();
 			if (beizhuzongjia && beizhuzongjia.length > 0) {
-				totalPrice += beizhuzongjia;
+				totalPrice += beizhuzongjia * 1;
 			}
 			$('.recalculate_price_td').text(totalPrice);
 		},
