@@ -75,7 +75,7 @@ var sa_order = function(){
 			var orderArrray = JSON.parse(orderTmpList);
 			var order = orderArrray[orderId];
 			var productList = order.productList;
-			var html = '';
+			var html = '<div style="max-height: 500px;overflow-y: auto;">';
 			html += '<table class="table table-condensed">' +
 						'<thead>' +
 							'<tr class="cart_menu">' +
@@ -116,7 +116,7 @@ var sa_order = function(){
 						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" style="color:black">重新计算</button></td>' +
 						'<td colspan = "2" style="color:red"><input type="hidden" name=""/>10000.00</td>' +
 					'</tr>' +
-					'</tbody></table>';
+					'</tbody></table></div>';
 			bootbox.dialog({
 				message : html,
 				title : "订单修改 <span style='font-size:14px;color:red'>(订单号：" + orderId + ")</span>",
