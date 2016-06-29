@@ -114,7 +114,7 @@ var sa_order = function(){
 					'</tr>' +
 					'<tr>' +
 						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" onclick="sa_order.recalculatePrice()" style="color:black">重新计算</button></td>' +
-						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>' + val.zongjia + '</td>' +
+						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>' + order.zongjia + '</td>' +
 					'</tr>' +
 					'</tbody></table></div>';
 			bootbox.dialog({
