@@ -160,6 +160,30 @@ var sa_order = function(){
 	         });
 		},
 		
+		deleteOrder : function(orderId){
+			if (confirm("确认删除此订单吗？")) {
+				$.ajax({
+		             type: "POST",
+		             async: true,
+		             url: "deleteOrder",
+		             data: "orderId="+orderId,
+		             dataType: 'text',
+		             success: function(data){
+		            	if(data=='1'){
+		            		sa_order.orderSearch();
+		            	}else if(data=='2'){
+		            		alert("订单删除失败！");
+		            	}else if(data=='3'){
+		            		alert("删除程序异常，请稍后再试！");
+		            	}
+	                },
+	                beforeSend: function(){},
+	                complete: function(){},
+	                error: function(){}
+		         });
+		    }
+		},
+		
 		initOrderCheck : function(){
 			 var startTime = "<s:property value='startTime'/>";
 			 $("input[name=startTime]").val(startTime);
@@ -331,7 +355,7 @@ $(document).ready(function(){
 									<span onclick="sa_order.modifyOrder(<s:property value='#order.id'/>);">
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
 									</span>
-									<span>
+									<span onclick="sa_order.deleteOrder(<s:property value='#order.id'/>);">
 										<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="删除订单"></i>
 									</span>
 								</td>

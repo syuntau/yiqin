@@ -142,6 +142,15 @@ public interface IShoppingDao {
 	 * @return 符合条件总数
 	 */
 	public int findOrderCount(final String hql);
+	
+	/**
+	 * 删除指定订单
+	 * 
+	 * @param orderId
+	 *            订单ID
+	 * @return 成功状态
+	 */
+	public boolean deleteOrder(long orderId);
 
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
 }

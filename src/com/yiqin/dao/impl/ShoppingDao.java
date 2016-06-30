@@ -189,4 +189,17 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean deleteOrder(long orderId) {
+		String queryString = "from Order where id=?";
+		List<?> list = getHibernateTemplate().find(queryString, orderId);
+		if (list != null) {
+			Order order = (Order) list.get(0);
+			order.setDeleteFlag((byte) 1);
+			getHibernateTemplate().saveOrUpdate(order);
+			return true;
+		}
+		return false;
+	}
 }
