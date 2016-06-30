@@ -96,7 +96,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			Date endTime, int status, long orderId, String productName,
 			String productId, int offset, int pageSize) {
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Order where 1=1");
+		hql.append("from Order where deleteFlag=0");
 		if (status != 10) {
 			hql.append(" and status=").append(status);
 		}
@@ -163,7 +163,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	public int findOrderCount(String userId, Date startTime, Date endTime,
 			int status, long orderId, String productName, String productId) {
 		StringBuilder hql = new StringBuilder();
-		hql.append("from Order where 1=1");
+		hql.append("from Order where deleteFlag=0");
 		if (status != 10) {
 			hql.append(" and status=").append(status);
 		}
@@ -195,5 +195,10 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder) {
 		return shoppingDao.updateOrder(orderId, tmpOrder);
+	}
+
+	@Override
+	public boolean deleteOrder(long orderId) {
+		return shoppingDao.deleteOrder(orderId);
 	}
 }

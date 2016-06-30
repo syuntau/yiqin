@@ -162,6 +162,15 @@ public interface ShoppingManager {
 	 */
 	public int findOrderCount(String userId, Date startTime, Date endTime,
 			int status, long orderId, String productName, String productId);
+	
+	/**
+	 * 删除指定订单
+	 * 
+	 * @param orderId
+	 *            订单ID
+	 * @return 成功状态
+	 */
+	public boolean deleteOrder(long orderId);
 
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
 }

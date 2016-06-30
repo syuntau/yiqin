@@ -41,6 +41,7 @@
 		<action name="findSAOrderList" class="com.yiqin.sa.action.FindSAOrderListAction">
 			<result type="tiles">sa.order</result>
 		</action>
+		<action name="deleteOrder" class="com.yiqin.sa.action.DeleteOrderAction"></action>
 		<action name="updateOrderStatus" class="com.yiqin.sa.action.UpdateOrderStatusAction"></action>
 		<action name="updateOrder" class="com.yiqin.sa.action.UpdateOrderAction"></action>
 		<action name="exportOrderExcel" class="com.yiqin.sa.action.ExportOrderExcelAction"></action>
