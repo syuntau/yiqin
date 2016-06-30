@@ -97,10 +97,10 @@ var sa_order = function(){
 								'<p style="margin-top: 10px;">商品ID：' + val.productId + '</p>' +
 								'<p>颜色：' + val.productInfo + '</p>' +
 							'</td>' +
-							'<td class="cart_price"><p><input style="width:100px" class="item_price" idx="' + val.productId + '" value="' + val.zhekouPrice + '" /></p><del>' + val.price + '</del></td>' +
+							'<td class="cart_price"><p><input style="width:100px" onblur="sa_order.blurPriceInput(this)" class="item_price item_price_' + val.productId + '" idx="' + val.productId + '" origval="' + val.zhekouPrice + '" value="' + val.zhekouPrice + '" /></p><del>' + val.price + '</del></td>' +
 							'<td class="cart_quantity">' +
 								'<div class="cart_quantity_button">' +
-									'<input class="cart_quantity_' + val.productId + '" value="' + val.count + '" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
+									'<input class="cart_quantity_' + val.productId + '" onblur="sa_order.blurCountInput(this)" origval="' + val.count + '" value="' + val.count + '" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
 								'</div>' +
 							'</td>' +
 						'</tr>';
@@ -129,11 +129,34 @@ var sa_order = function(){
                         label: "更新",  
                         className: "btn-primary",  
                         callback: function () {
-                        	alert("test");
+                        	sa_order.submitModifyOrder(order);
                         }  
                     }
 				}
 			});
+		},
+
+		blurPriceInput : function(obj) {
+			var priceObj = $(obj);
+			var productId = priceObj.attr('idx');
+			var price = priceObj.val();
+			var origPrice = priceObj.attr('origval');
+			var regu = "(^[0-9]+[\.][0-9]{1,2}$)|(^[0-9]+$)";
+			var re = new RegExp(regu);
+			if (!re.test(price)) {
+				alert("商品价格输入有误");
+				priceObj.val(origPrice);
+			}
+		},
+		
+		blurCountInput : function(obj) {
+			var countObj = $(obj);
+			var count = countObj.val();
+			var origCount = countObj.attr('origval');
+			if (isNaN(count) || count < 1) {
+				alert("商品数量必须大于0");
+				countObj.val(origCount);
+			}
 		},
 
 		recalculatePrice : function() {
@@ -150,6 +173,17 @@ var sa_order = function(){
 				totalPrice += beizhuzongjia * 1;
 			}
 			$('.recalculate_price_td').text(totalPrice);
+		},
+		
+		submitModifyOrder : function(order) {
+			var productList = order.productList;
+			$.each(productList, function(i, val) {
+				var productId = val.productId;
+				var price = $('.item_price_' + productId).val();
+				val.zhekouPrice = price;
+				var count = $('.cart_quantity_' + productId).val();
+				val.count = count;
+			});
 		},
 
 		updateOrderStatus : function(orderId,status,userId){
