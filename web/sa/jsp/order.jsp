@@ -75,7 +75,7 @@ var sa_order = function(){
 			var orderArrray = JSON.parse(orderTmpList);
 			var order = orderArrray[orderId];
 			var productList = order.productList;
-			var html = '';
+			var html = '<div style="max-height: 500px;overflow-y: auto;">';
 			html += '<table class="table table-condensed">' +
 						'<thead>' +
 							'<tr class="cart_menu">' +
@@ -97,10 +97,10 @@ var sa_order = function(){
 								'<p style="margin-top: 10px;">商品ID：' + val.productId + '</p>' +
 								'<p>颜色：' + val.productInfo + '</p>' +
 							'</td>' +
-							'<td class="cart_price"><p><input style="width:100px" value="' + val.zhekouPrice + '" /></p><del>' + val.price + '</del></td>' +
+							'<td class="cart_price"><p><input style="width:100px" class="item_price" idx="' + val.productId + '" value="' + val.zhekouPrice + '" /></p><del>' + val.price + '</del></td>' +
 							'<td class="cart_quantity">' +
 								'<div class="cart_quantity_button">' +
-									'<input class="cart_quantity_input" value="' + val.count + '" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
+									'<input class="cart_quantity_' + val.productId + '" value="' + val.count + '" type="text" name="quantity" autocomplete="off" size="3" id="0_input">' +
 								'</div>' +
 							'</td>' +
 						'</tr>';
@@ -110,13 +110,13 @@ var sa_order = function(){
 						'<td class="cart_description">' +
 							'<textarea style="width:300px;height:100px;">' + order.orderNote + '</textarea>' +
 						'</td>' +
-						'<td colspan = "2" class="cart_price"><p><input style="width:100px" value="' + order.beizhuzongjia + '" /></p></td>' +
+						'<td colspan = "2" class="cart_price"><p><input style="width:100px" class="beizhuzongjia" value="' + order.beizhuzongjia + '" /></p></td>' +
 					'</tr>' +
 					'<tr>' +
-						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" style="color:black">重新计算</button></td>' +
-						'<td colspan = "2" style="color:red"><input type="hidden" name=""/>10000.00</td>' +
+						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" onclick="sa_order.recalculatePrice()" style="color:black">重新计算</button></td>' +
+						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>' + order.zongjia + '</td>' +
 					'</tr>' +
-					'</tbody></table>';
+					'</tbody></table></div>';
 			bootbox.dialog({
 				message : html,
 				title : "订单修改 <span style='font-size:14px;color:red'>(订单号：" + orderId + ")</span>",
@@ -134,6 +134,22 @@ var sa_order = function(){
                     }
 				}
 			});
+		},
+
+		recalculatePrice : function() {
+			var totalPrice = 0;
+			$('.item_price').each(function() {
+				var price = $(this).val();
+				var productId = $(this).attr('idx');
+				var count = $('.cart_quantity_' + productId).val();
+				totalPrice += price * count;
+			});
+			var $beizhuzongjia = $('.beizhuzongjia');
+			var beizhuzongjia = $beizhuzongjia.val();
+			if (beizhuzongjia && beizhuzongjia.length > 0) {
+				totalPrice += beizhuzongjia * 1;
+			}
+			$('.recalculate_price_td').text(totalPrice);
 		},
 
 		updateOrderStatus : function(orderId,status,userId){
