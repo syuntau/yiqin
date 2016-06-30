@@ -146,6 +146,8 @@ var sa_order = function(){
 			if (!re.test(price)) {
 				alert("商品价格输入有误");
 				priceObj.val(origPrice);
+			} else {
+				priceObj.val(sa_order.toDecimal2(price));
 			}
 		},
 		
