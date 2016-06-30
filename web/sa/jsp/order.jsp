@@ -114,7 +114,7 @@ var sa_order = function(){
 					'</tr>' +
 					'<tr>' +
 						'<td colspan = "2" style="text-align:right;color:red">订单折后总价：<button type="button" onclick="sa_order.recalculatePrice()" style="color:black">重新计算</button></td>' +
-						'<td colspan = "2" style="color:red" class="recalculate_price_td"><input type="hidden" class="recalculate_price" name=""/>' + order.zongjia + '</td>' +
+						'<td colspan = "2" style="color:red" class="recalculate_price_td">' + order.zongjia + '</td>' +
 					'</tr>' +
 					'</tbody></table></div>';
 			bootbox.dialog({
@@ -159,6 +159,24 @@ var sa_order = function(){
 			}
 		},
 
+		toDecimal2 : function(x) {
+			var f = parseFloat(x);
+			if (isNaN(f)) {
+			return false;
+			}
+			var f = Math.round(x*100)/100;
+			var s = f.toString();
+			var rs = s.indexOf('.');
+			if (rs < 0) {
+			rs = s.length;
+			s += '.';
+			}
+			while (s.length <= rs + 2) {
+			s += '0';
+			}
+			return s;
+		},
+		
 		recalculatePrice : function() {
 			var totalPrice = 0;
 			$('.item_price').each(function() {
@@ -172,6 +190,7 @@ var sa_order = function(){
 			if (beizhuzongjia && beizhuzongjia.length > 0) {
 				totalPrice += beizhuzongjia * 1;
 			}
+			totalPrice = sa_order.toDecimal2(totalPrice);
 			$('.recalculate_price_td').text(totalPrice);
 		},
 		
