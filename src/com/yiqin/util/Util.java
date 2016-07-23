@@ -235,6 +235,15 @@ public class Util {
 		return list;
 	}
 
+	public static Object getBeanByJson(String json, Class clazz, Map classMap) {
+		JSONObject jsonObject = JSONObject.fromObject(json);
+		if (classMap == null || classMap.size() == 0) {
+			return JSONObject.toBean(jsonObject, clazz);
+		} else {
+			return JSONObject.toBean(jsonObject, clazz, classMap);
+		}
+	}
+
 	public static String peiSongFangShi(String peisong) {
 		String peisongfangshi = "依勤送货";
 		if ("1".equals(peisong)) {
@@ -274,8 +283,7 @@ public class Util {
 	public static String objToString(Object obj) {
 		if (obj == null)
 			return null;
-		net.sf.json.JSONObject jsonString = net.sf.json.JSONObject
-				.fromObject(obj);
+		net.sf.json.JSONObject jsonString = net.sf.json.JSONObject.fromObject(obj);
 		String content = jsonString.toString();
 		return content;
 	}

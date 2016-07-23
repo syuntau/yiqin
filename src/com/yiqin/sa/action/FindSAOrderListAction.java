@@ -118,6 +118,7 @@ public class FindSAOrderListAction extends ActionSupport {
 					obj.setId(view.getId());
 					obj.setOrderNote(view.getOrderNote());
 					obj.setProductList(view.getProductList());
+					obj.setBeizhuzongjia(view.getBeizhuzongjia());
 					obj.setZongjia(view.getZongjia());
 					JSONObject jsonTmp = JSONObject.fromObject(obj);
 					json.accumulate(String.valueOf(obj.getId()), jsonTmp.toString());

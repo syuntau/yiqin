@@ -107,8 +107,9 @@ public class SubmitOrderAction extends ActionSupport {
 				order.setFapiaotaitou(invoice[1]);
 				order.setFapiaomingxi(invoice[2]);
 			}
-			
-			order.setOrderNote(ordernote);
+			String orderNote = ordernote.replaceAll("\r\n", "<br>");
+			orderNote = orderNote.replaceAll("\n", "<br>");
+			order.setOrderNote(orderNote);
 			order.setPeisongfangshi(Util.peiSongFangShi(peisong));
 			order.setStatus((byte) 1);
 			order.setCrateDate(new Date());

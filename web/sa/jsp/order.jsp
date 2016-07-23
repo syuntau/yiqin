@@ -75,6 +75,9 @@ var sa_order = function(){
 			var orderArrray = JSON.parse(orderTmpList);
 			var order = orderArrray[orderId];
 			var productList = order.productList;
+			var orderNote = order.orderNote;
+			orderNote = orderNote.replace(/<br>/g, '\n');
+
 			var html = '<div style="max-height: 500px;overflow-y: auto;">';
 			html += '<table class="table table-condensed">' +
 						'<thead>' +
@@ -108,7 +111,7 @@ var sa_order = function(){
 			html +=	'<tr>' +
 						'<td class="cart_product">备注</td>' +
 						'<td class="cart_description">' +
-							'<textarea style="width:300px;height:100px;">' + order.orderNote + '</textarea>' +
+							'<textarea class="order_note" style="width:300px;height:100px;">' + orderNote + '</textarea>' +
 						'</td>' +
 						'<td colspan = "2" class="cart_price"><p><input style="width:100px" class="beizhuzongjia" value="' + order.beizhuzongjia + '" /></p></td>' +
 					'</tr>' +
@@ -130,7 +133,7 @@ var sa_order = function(){
                         className: "btn-primary",  
                         callback: function () {
                         	sa_order.submitModifyOrder(order);
-                        }  
+                        }
                     }
 				}
 			});
@@ -194,9 +197,12 @@ var sa_order = function(){
 			}
 			totalPrice = sa_order.toDecimal2(totalPrice);
 			$('.recalculate_price_td').text(totalPrice);
+			return totalPrice;
 		},
 		
 		submitModifyOrder : function(order) {
+			var totalPrice = sa_order.recalculatePrice();
+			
 			var productList = order.productList;
 			$.each(productList, function(i, val) {
 				var productId = val.productId;
@@ -205,6 +211,37 @@ var sa_order = function(){
 				var count = $('.cart_quantity_' + productId).val();
 				val.count = count;
 			});
+			order.orderNote=$('.order_note').val();
+
+			var $beizhuzongjia = $('.beizhuzongjia');
+			var beizhuzongjia = $beizhuzongjia.val();
+			if (beizhuzongjia && beizhuzongjia.length > 0) {
+				beizhuzongjia = beizhuzongjia * 1;
+			} else {
+				beizhuzongjia = '0';
+			}
+			order.beizhuzongjia = beizhuzongjia;
+			order.zongjia = totalPrice;
+			
+			$.ajax({
+	             type: "POST",
+	             url: "updateOrder",
+	             data : "order="+JSON.stringify(order),
+	             success: function(data){
+	            	if(data=='1'){
+	            		alert("修改成功！");
+	            	}else if(data=='2'){
+	            		alert("订单状态修改失败！");
+	            	}else if(data=='3'){
+	            		alert("修改异常，请稍后再试！");
+	            	}
+	             },
+	             beforeSend: function(){},
+	             complete: function(data){
+	            	 sa_order.orderSearch();
+	             },
+	             error: function(){}
+	         });
 		},
 
 		updateOrderStatus : function(orderId,status,userId){
@@ -404,7 +441,7 @@ $(document).ready(function(){
 											    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
 											    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
 											    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
-											    <li><a><span style="font-weight:bold;">订单备注：</span><s:property value="#order.orderNote"/></a></li>
+											    <li><a><span style="font-weight:bold;">订单备注：</span><s:property value="#order.orderNote" escape="false"/></a></li>
 											</ul>
 										 </span>
 									</div>

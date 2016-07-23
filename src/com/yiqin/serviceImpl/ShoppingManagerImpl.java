@@ -151,6 +151,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			ov.setYunfei(order.getYunfei());
 			ov.setZhekou(order.getZhekou());
 			ov.setZhifu(order.getZhifu());
+			ov.setBeizhuzongjia(order.getBeizhuzongjia());
 			ov.setZongjia(order.getZongjia());
 			ov.setProductList(Util.getDTOList(order.getProductList(),Cart.class));
 			ov.setOrderNote(order.getOrderNote());

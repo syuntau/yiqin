@@ -3,6 +3,7 @@ package com.yiqin.shop.bean;
 import java.util.List;
 
 import com.yiqin.pojo.Cart;
+import com.yiqin.util.Util;
 
 public class OrderTempObj {
 	private long id;// 订单号
@@ -40,5 +41,8 @@ public class OrderTempObj {
 	public void setBeizhuzongjia(String beizhuzongjia) {
 		this.beizhuzongjia = beizhuzongjia;
 	}
-	
+
+	public String toString() {
+		return Util.objToString(this);
+	}
 }

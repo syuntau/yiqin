@@ -33,6 +33,7 @@ public class OrderView {
 	private String updateDate;// 订单修改时间
 	private Byte deleteFlag; // 删除Flag
 	private String orderNote;// 订单备注
+	private String beizhuzongjia;// 备注总价
 	
 	public long getId() {
 		return id;
@@ -208,6 +209,14 @@ public class OrderView {
 
 	public void setOrderNote(String orderNote) {
 		this.orderNote = orderNote;
+	}
+
+	public String getBeizhuzongjia() {
+		return beizhuzongjia;
+	}
+
+	public void setBeizhuzongjia(String beizhuzongjia) {
+		this.beizhuzongjia = beizhuzongjia;
 	}
 
 }

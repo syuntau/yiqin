@@ -1,25 +1,24 @@
 package com.yiqin.sa.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.Cart;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.OrderTempObj;
+import com.yiqin.util.Util;
 
 /** 修改订单 */
 public class UpdateOrderAction extends ActionSupport {
 	private static final long serialVersionUID = 1834817239052250543L;
-	// 订单Id
-	private String orderId;
-	// 订单内容
-	private String orderContent;
-	// 备份详情
-	private String orderNote;
-	// 备份总价
-	private String beifenzongjia;
+	// 订单
+	private String order;
 
 	private ShoppingManager shoppingManager;
 
@@ -28,15 +27,23 @@ public class UpdateOrderAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
-			if (GenericValidator.isBlankOrNull(orderId) || GenericValidator.isBlankOrNull(orderContent)) {
+			if (GenericValidator.isBlankOrNull(order)) {
 				result = "2";
 				response.getWriter().print(result);
 				return null;
 			}
-			OrderTempObj obj = new OrderTempObj();
-			// todo : set OrderTempObj
+			System.out.println("###### UpdateOrderAction order : " + order);
+
+			Map<String, Class> classMap = new HashMap<String, Class>();
+			classMap.put("productList", Cart.class);
+			OrderTempObj obj = (OrderTempObj) Util.getBeanByJson(order, OrderTempObj.class, classMap);
+			String orderNote = obj.getOrderNote().replaceAll("\r\n", "<br>");
+			orderNote = orderNote.replaceAll("\n", "<br>");
+			obj.setOrderNote(orderNote);
+			System.out.println("###### UpdateOrderAction obj : " + obj);
+
 			// 修改订单
-			boolean flag = shoppingManager.updateOrder(Long.valueOf(orderId), obj);
+			boolean flag = shoppingManager.updateOrder(obj.getId(), obj);
 			if(!flag){
 				result = "2";
 				response.getWriter().print(result);
@@ -53,14 +60,6 @@ public class UpdateOrderAction extends ActionSupport {
 		}
 	}
 
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
-
 	public ShoppingManager getShoppingManager() {
 		return shoppingManager;
 	}
@@ -69,27 +68,11 @@ public class UpdateOrderAction extends ActionSupport {
 		this.shoppingManager = shoppingManager;
 	}
 
-	public String getOrderContent() {
-		return orderContent;
+	public String getOrder() {
+		return order;
 	}
 
-	public void setOrderContent(String orderContent) {
-		this.orderContent = orderContent;
-	}
-
-	public String getOrderNote() {
-		return orderNote;
-	}
-
-	public void setOrderNote(String orderNote) {
-		this.orderNote = orderNote;
-	}
-
-	public String getBeifenzongjia() {
-		return beifenzongjia;
-	}
-
-	public void setBeifenzongjia(String beifenzongjia) {
-		this.beifenzongjia = beifenzongjia;
+	public void setOrder(String order) {
+		this.order = order;
 	}
 }
