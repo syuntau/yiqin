@@ -2,6 +2,7 @@ package com.yiqin.service;
 
 import java.util.List;
 
+import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -102,6 +103,40 @@ public interface UserManager {
 	 * @return 成功状态
 	 */
 	public boolean deleteUserConf(String userId, String attribute);
+	
+	/**
+	 * 插入注册邀请码信息
+	 * 
+	 * @param regCodeBean
+	 *            邀请码信息
+	 * @return 成功状态
+	 */
+	public boolean insertRegisterCode(RegisterCode regCodeBean);
+	
+	/**
+	 * 获取注册邀请码，看是否存在
+	 * 
+	 * @param rCode
+	 *            邀请码
+	 * @return RegisterCode
+	 */
+	public RegisterCode findRCodeByCode(String rCode);
+	
+	/**
+	 * 查询所有注册邀请码
+	 * 
+	 * @return List<RegisterCode>
+	 */
+	public List<RegisterCode> findRcodeList();
+	
+	/**
+	 * 删除注册邀请码
+	 * 
+	 * @param rCode
+	 *            邀请码
+	 * @return 成功状态
+	 */
+	public boolean deleteRegCode(String rCode);
 
 	public List<User> findAll();
 	public SAUser findSAUser(String id, String password);

@@ -58,6 +58,7 @@
 				<value>com/yiqin/pojo/UserConf.hbm.xml</value>
 				<value>com/yiqin/pojo/BestProduct.hbm.xml</value>
 				<value>com/yiqin/pojo/SAUser.hbm.xml</value>
+				<value>com/yiqin/pojo/RegisterCode.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -28,6 +28,10 @@
             <column name="company" length="50">
             </column>
         </property>
+        <property name="registerCode" type="string">
+            <column name="register_code" length="20">
+            </column>
+        </property>
         <property name="role" type="java.lang.Byte">
             <column name="role">
             </column>

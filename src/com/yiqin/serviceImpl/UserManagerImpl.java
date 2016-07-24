@@ -6,6 +6,7 @@ import java.util.List;
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.dao.IUserDao;
 import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -228,4 +229,26 @@ public class UserManagerImpl implements UserManager {
 		}
 	}
 
+	@Override
+	public boolean insertRegisterCode(RegisterCode regCodeBean) {
+		if (regCodeBean == null || Util.isEmpty(regCodeBean.getRegisterCode())) {
+			return false;
+		}
+		return userDao.insertRegisterCode(regCodeBean);
+	}
+
+	@Override
+	public RegisterCode findRCodeByCode(String rCode) {
+		return userDao.findRCodeByCode(rCode);
+	}
+
+	@Override
+	public List<RegisterCode> findRcodeList() {
+		return userDao.findRcodeList();
+	}
+
+	@Override
+	public boolean deleteRegCode(String rCode) {
+		return userDao.deleteRegCode(rCode);
+	}
 }

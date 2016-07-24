@@ -27,7 +27,7 @@ var yiqin_login_action = function(){
 				target: "",
 				type: "POST",
 				url:"register",
-		        resetForm: true,
+		        resetForm: false,
 		        success: responseFunction
 			};
 	    	if (registerValidation()) {
@@ -59,8 +59,14 @@ var yiqin_login_action = function(){
 			$("#registerError").html("注册失败，请稍后再试");
 			return;
 		}
+		if(data == 6){
+			regForm.find("input[name='registerCode']").focus();
+			$("#registerError").html("注册邀请码错误，请重新输入");
+			return;
+		}
 		if (data == 1) {
 			alert("注册成功，请登录");
+			window.location.href="/dispatcher?para_nav=top_login";
 		}
 	};
 
@@ -72,6 +78,7 @@ var yiqin_login_action = function(){
 		var confirmPwd = regForm.find("input[name='confirmPwd']").val().replace(REX, "");
 		var email = regForm.find("input[name='email']").val().replace(REX,"");
 		var telephone = regForm.find("input[name='mobile']").val().replace(REX, "");
+		var regcode = regForm.find("input[name='registerCode']").val().replace(REX, "");
 		var msg = "注册项为必填项，不能为空";
 		if (name == "") {
 			regForm.find("input[name='userId']").focus();
@@ -96,6 +103,16 @@ var yiqin_login_action = function(){
 		if (password != confirmPwd) {
 			regForm.find("input[name='confirmPwd']").focus();
 			$("#registerError").html("确认密码输入错误，请重新输入");
+			return false;
+		}
+		if (regcode == ""){
+			regForm.find("input[name='registerCode']").focus();
+			$("#registerError").html(msg);
+			return false;
+		}
+		if (!checkRegCode(regcode)) {
+			regForm.find("input[name='registerCode']").focus();
+			$("#registerError").html("邀请码为8位字母数字组成");
 			return false;
 		}
 		if (email == "") {
@@ -136,6 +153,14 @@ var yiqin_login_action = function(){
 		}
 		return true;
 	};
+	
+	var checkRegCode = function(value){
+		var REX_CODE = /^([a-zA-Z0-9]{8})$/;
+		if (value.length > 0 && !REX_CODE.test(value)) {
+			return false;
+		}
+		return true;
+	};
 
 	var checkPhone = function(value) {
 		var REX_PHONE = /^[1][0-9]{10}$/;
@@ -170,6 +195,7 @@ var yiqin_login_action = function(){
 							<input type="text" placeholder="<s:text name='login.user.name' />" name="userId" value=""/>
 							<input type="password" placeholder="<s:text name='login.user.password' />" name="password" value=""/>
 							<input type="password" placeholder="<s:text name='login.user.confirm.password' />" name="confirmPwd" value=""/>
+							<input type="text" placeholder="<s:text name='login.user.reg.code' />" name="registerCode" value=""/>
 							<input type="email" placeholder="<s:text name='login.user.email' />" name="email" value=""/>
 							<input type="text" placeholder="<s:text name='login.user.mobile' />" name="mobile" value=""/>
 							<span id="registerError" style="COLOR: red;text-align: left;"></span>

@@ -203,6 +203,10 @@
 	<definition name="sa.order" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/order.jsp" />
 	</definition>
+	
+	<definition name="sa.reg.code" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/regcode.jsp" />
+	</definition>
 
 	<definition name="sa.user.sa" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/sa.jsp" />

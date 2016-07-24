@@ -16,6 +16,7 @@ public class User implements java.io.Serializable {
 	private String name;// 用户名称
 	private String mobile;// 手机
 	private String company; // 公司
+	private String registerCode;//邀请码
 	private Byte role;// 用户类型，1：个人用户，2：企业用户
 	private Date createDate;// 创建时间
 	private Date updateDate; // 更新时间
@@ -29,7 +30,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String id, String password, String email, String name,
-			String mobile, String company, Byte role, Date createDate,
+			String mobile, String company, String registerCode, Byte role, Date createDate,
 			Date updateDate, Byte flag) {
 		this.id = id;
 		this.password = password;
@@ -37,6 +38,7 @@ public class User implements java.io.Serializable {
 		this.name = name;
 		this.mobile = mobile;
 		this.company = company;
+		this.registerCode = registerCode;
 		this.role = role;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
@@ -89,6 +91,14 @@ public class User implements java.io.Serializable {
 
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	public String getRegisterCode() {
+		return registerCode;
+	}
+
+	public void setRegisterCode(String registerCode) {
+		this.registerCode = registerCode;
 	}
 
 	public Byte getRole() {

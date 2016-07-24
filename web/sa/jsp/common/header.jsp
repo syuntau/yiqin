@@ -134,6 +134,9 @@ $(document).ready(function() {
                         <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-shopping-cart fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
                     </li>
                     </s:if>
+                     <li>
+                        <a href="#" class="side-menu-a" val="reg-code"><i class="fa fa-table fa-fw"></i> <s:text name="sa.header.register.code" /></a>
+                    </li>
 <!--                     <li class="side-menu-li"> -->
 <%--                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> <s:text name="sa.header.inventory" /><span class="fa arrow"></span></a> --%>
 <!--                         <ul class="nav nav-second-level"> -->

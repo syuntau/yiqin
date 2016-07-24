@@ -35,5 +35,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 var com_conf = {
 	loading_icon : '<span><i class="fa fa-refresh fa-spin fa-2x fa-fw"></i></span>',
 	loading_text_icon : '<span><i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>处理中，请稍后...</span>'
-}
+};
 </script>

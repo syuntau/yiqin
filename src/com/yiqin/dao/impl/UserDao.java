@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IUserDao;
+import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.SAUser;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -116,7 +117,51 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean insertRegisterCode(RegisterCode regCodeBean) {
+		try {
+			getHibernateTemplate().saveOrUpdate(regCodeBean);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	@Override
+	public RegisterCode findRCodeByCode(String rCode) {
+		Object object = getHibernateTemplate().get(RegisterCode.class, rCode);
+		if (object != null) {
+			return (RegisterCode) object;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<RegisterCode> findRcodeList() {
+		String sql = "from RegisterCode";
+		List<?> list = getHibernateTemplate().find(sql);
+		if (list != null) {
+			return (List<RegisterCode>) list;
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean deleteRegCode(String rCode) {
+		try {
+			RegisterCode rc = findRCodeByCode(rCode);
+			if (rc != null) {
+				getHibernateTemplate().delete(rc);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	@Override
 	public List<User> findAll() {
 		String sql = "from User";
@@ -175,4 +220,5 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 		}
 		return null;
 	}
+
 }

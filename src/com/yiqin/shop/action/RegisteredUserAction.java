@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
@@ -31,6 +32,8 @@ public class RegisteredUserAction extends ActionSupport {
 	private String email;
 	// 手机
 	private String mobile;
+	// 注册邀请码
+	private String registerCode;
 
 	private UserManager userManager;
 
@@ -74,6 +77,14 @@ public class RegisteredUserAction extends ActionSupport {
 		this.mobile = mobile;
 	}
 
+	public String getRegisterCode() {
+		return registerCode;
+	}
+
+	public void setRegisterCode(String registerCode) {
+		this.registerCode = registerCode;
+	}
+
 	public UserManager getUserManager() {
 		return userManager;
 	}
@@ -90,8 +101,16 @@ public class RegisteredUserAction extends ActionSupport {
 			// 参数判断
 			if (Util.isEmpty(userId) || Util.isEmpty(password)
 					|| Util.isEmpty(confirmPwd) || Util.isEmpty(email)
-					|| Util.isEmpty(mobile)) {
+					|| Util.isEmpty(mobile) || Util.isEmpty(registerCode)) {
 				result = "2";
+				response.getWriter().print(result);
+				return null;
+			}
+			
+			//邀请码核实
+			RegisterCode rc = userManager.findRCodeByCode(registerCode);
+			if(rc == null){
+				result = "6";
 				response.getWriter().print(result);
 				return null;
 			}
@@ -117,6 +136,7 @@ public class RegisteredUserAction extends ActionSupport {
 			tempUser.setPassword(password);
 			tempUser.setEmail(email);
 			tempUser.setMobile(mobile);
+			tempUser.setRegisterCode(registerCode);
 			tempUser.setFlag((byte) 1);
 			tempUser.setRole((byte) 1);
 			tempUser.setCreateDate(new Date());
