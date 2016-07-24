@@ -153,6 +153,13 @@ public class RegisteredUserAction extends ActionSupport {
 			userConf.setUserId(userId);
 			userConf.setValue("00");
 			userManager.updateUserConf(userConf);
+			//添加用户折扣记录
+			UserConf zhekouConf = new UserConf();
+			zhekouConf.setAttribute("zhekou");
+			zhekouConf.setUserId(userId);
+			zhekouConf.setValue(String.valueOf(rc.getZhekou()));
+			userManager.updateUserConf(zhekouConf);
+			
 			result = "1";
 			response.getWriter().print(result);
 			return null;
