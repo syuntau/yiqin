@@ -35,31 +35,29 @@ var customer_manage = {
 		});
 	},
 	addZheKou : function() {
-		$('.btn-customer-zhekou').on('click', function() {
-			var userId = $('.user-list select').find('option:selected').val();
-			var zheKou = $('.customer-zhekou').val();
-			$.ajax({
-	        	type: "post",
-				url: "editCustomer_addZheKou",
-				data: 'zheKou='+zheKou+ '&userId=' + userId,
-				dataType: "json",
-				success: function(data) {
-					if (data=='1') {
-						alert("<s:text name='msg.err.param'></s:text>");
-					} else if (data=='3') {
-						alert("<s:text name='msg.err.db'></s:text>");
-					} else {
-						alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-					}
-	            },
-	            beforeSend: function() {
-		            var $loadingTextIcon = $(com_conf.loading_text_icon);
-		            $('.zhekou-form').append($loadingTextIcon);
-	        	},
-	            complete: function() {
-	            	$('.zhekou-form').find('span').remove();
-	            }
-			});
+		var userId = $('.user-list select').find('option:selected').val();
+		var zheKou = $('.customer-zhekou').val();
+		$.ajax({
+        	type: "post",
+			url: "editCustomer_addZheKou",
+			data: 'zheKou='+zheKou+ '&userId=' + userId,
+			dataType: "json",
+			success: function(data) {
+				if (data=='1') {
+					alert("<s:text name='msg.err.param'></s:text>");
+				} else if (data=='3') {
+					alert("<s:text name='msg.err.db'></s:text>");
+				} else {
+					alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+				}
+            },
+            beforeSend: function() {
+	            var $loadingTextIcon = $(com_conf.loading_text_icon);
+	            $('.zhekou-form').append($loadingTextIcon);
+        	},
+            complete: function() {
+            	$('.zhekou-form').find('span').remove();
+            }
 		});
 	},
 	loadZheKou : function() {
@@ -88,34 +86,32 @@ var customer_manage = {
 		});
 	},
 	addYouHui : function() {
-		$('.btn-customer-youhui').on('click', function() {
-			var userId = $('.user-list select').find('option:selected').val();
-			var youHui = $('.customer-youhui').val();
-			if (youHui == "") {
-				youHui = 'empty';
-			}
-			$.ajax({
-	        	type: "post",
-				url: "editCustomer_addYouHui",
-				data: 'youHuiZhengCe='+youHui+ '&userId=' + userId,
-				dataType: "json",
-				success: function(data) {
-					if (data=='1') {
-						alert("<s:text name='msg.err.param'></s:text>");
-					} else if (data=='3') {
-						alert("<s:text name='msg.err.db'></s:text>");
-					} else {
-						alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
-					}
-	            },
-	            beforeSend: function() {
-		            var $loadingTextIcon = $(com_conf.loading_text_icon);
-		            $('.youhui-form').append($loadingTextIcon);
-	        	},
-	            complete: function() {
-	            	$('.youhui-form').find('span').remove();
-	            }
-			});
+		var userId = $('.user-list select').find('option:selected').val();
+		var youHui = $('.customer-youhui').val();
+		if (youHui == "") {
+			youHui = 'empty';
+		}
+		$.ajax({
+        	type: "post",
+			url: "editCustomer_addYouHui",
+			data: 'youHuiZhengCe='+youHui+ '&userId=' + userId,
+			dataType: "json",
+			success: function(data) {
+				if (data=='1') {
+					alert("<s:text name='msg.err.param'></s:text>");
+				} else if (data=='3') {
+					alert("<s:text name='msg.err.db'></s:text>");
+				} else {
+					alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
+				}
+            },
+            beforeSend: function() {
+	            var $loadingTextIcon = $(com_conf.loading_text_icon);
+	            $('.youhui-form').append($loadingTextIcon);
+        	},
+            complete: function() {
+            	$('.youhui-form').find('span').remove();
+            }
 		});
 	},
 	loadYouHui : function() {
@@ -151,14 +147,38 @@ var customer_manage = {
 			$('.customer-section').removeClass('display-off');
 			customer_manage.loadZheKou();
 			customer_manage.loadYouHui();
+			customer_manage.loadPwd();
+		});
+	},
+	loadPwd : function() {
+		var $pwdDiv = $('.customer-pwd-div');
+		if ($pwdDiv.length == 0) {
+			return ;
+		}
+		var userId = $('.user-list select').find('option:selected').val();
+		$.ajax({
+        	type: "post",
+			url: "editCustomer_getPwd",
+			data: 'userId=' + userId,
+			dataType: "json",
+			success: function(data) {
+				if (data=='1') {
+					alert("<s:text name='msg.err.param'></s:text>");
+				} else if (data=='2') {
+					$('.customer-pwd-div').hide();
+				} else {
+					$('.customer-pwd-div').show();
+					$('.customer-pwd-div span').html(data.pwd);
+				}
+            },
+            beforeSend: function() { },
+            complete: function() { }
 		});
 	}
 };
 
 $(document).ready(function() {
 	customer_manage.load_user();
-	customer_manage.addZheKou();
-	customer_manage.addYouHui();
 	customer_manage.check_customer();
 });
 </script>
@@ -182,7 +202,6 @@ $(document).ready(function() {
                     </form>
 		            <hr class="customer-hr display-off">
 		            <div class="row customer-section display-off">
-                		<s:if test="%{#roles.indexOf('12301')>-1}">
 		                <div class="col-lg-12" style="margin: 10px 0px;">
 		                    <form role="form" class="form-inline zhekou-form" >
 		                        <div class="form-group">
@@ -190,7 +209,9 @@ $(document).ready(function() {
 	                                <input type="text" class="form-control customer-zhekou" maxlength="5" width="100px" name="zhekou">
 		                        </div>
 		                        
-		                        <button type="button" class="btn btn-info btn-customer-zhekou"><s:text name="sa.btn.save" /></button>
+                				<s:if test="%{#roles.indexOf('12301')>-1}">
+		                        <button type="button" class="btn btn-info btn-customer-zhekou" onclick="customer_manage.addZheKou();"><s:text name="sa.btn.save" /></button>
+		                        </s:if>
 		                    </form>
 		                </div>
 		                <div class="col-lg-12" style="margin: 10px 0px;">
@@ -200,8 +221,16 @@ $(document).ready(function() {
 	                                <textarea class="form-control customer-youhui" rows="6" cols="60" name="youHuiZhengCe"></textarea>
 		                        </div>
 		                        
-		                        <button type="button" class="btn btn-info btn-customer-youhui"><s:text name="sa.btn.save" /></button>
+                				<s:if test="%{#roles.indexOf('12302')>-1}">
+		                        <button type="button" class="btn btn-info btn-customer-youhui" onclick="customer_manage.addYouHui();"><s:text name="sa.btn.save" /></button>
+		                        </s:if>
 		                    </form>
+		                </div>
+		                <s:if test="%{#roles.indexOf('12303')>-1}">
+		                <div class="col-lg-12" style="margin: 10px 0px;">
+	                        <div class="form-group customer-pwd-div">
+                                <s:text name="sa.customer.pwd" /> <span style="color:#A94442;"></span>
+	                        </div>
 		                </div>
 		                </s:if>
 		                <!-- /.col-lg-12 -->

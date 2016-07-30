@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
@@ -195,6 +196,35 @@ public class EditCustomerAction extends ActionSupport {
 			return null;
 		} catch (Exception e1) {
 			System.out.println("error in EditCustomerAction.getYouHui ");
+			e1.printStackTrace();
+			return null;
+		}
+	}
+
+	public String getPwd() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			}
+			User user = userManager.findUserByUserId(userId);
+			if (user == null) {
+				result = UtilKeys.CODE_NO_RESULT;
+				out.print(result);
+				return null;
+			}
+			JSONObject json = new JSONObject();
+			json.accumulate("pwd", user.getPassword());
+			result = json.toString();
+			out.print(result);
+			return null;
+		} catch (Exception e1) {
+			System.out.println("error in EditCustomerAction.getPwd ");
 			e1.printStackTrace();
 			return null;
 		}
