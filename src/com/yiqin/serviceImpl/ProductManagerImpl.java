@@ -843,4 +843,18 @@ public class ProductManagerImpl implements ProductManager {
 
 		return brandId;
 	}
+
+	public void editCategory(Category category) throws DataAccessException {
+		productDao.editCategory(category);
+		CategoryUtil.reInit(this);
+	}
+
+	public Integer saveCategory(Category category) throws DataAccessException {
+		Integer categoryId = productDao.saveCategory(category);
+		if (categoryId != null) {
+			CategoryUtil.reInit(this);
+		}
+
+		return categoryId;
+	}
 }

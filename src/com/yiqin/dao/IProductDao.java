@@ -115,4 +115,7 @@ public interface IProductDao {
 	public void deleteBrandById(String id) throws DataAccessException;
 	public void editBrand(Brand brand) throws DataAccessException;
 	public Integer saveBrand(Brand brand) throws DataAccessException;
+
+	public void editCategory(Category category) throws DataAccessException;
+	public Integer saveCategory(Category category) throws DataAccessException;
 }

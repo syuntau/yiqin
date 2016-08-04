@@ -12,6 +12,7 @@ import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.CategoryUtil;
 
 public interface ProductManager {
 	/**
@@ -189,4 +190,6 @@ public interface ProductManager {
 	public void deleteBrandById(String id) throws DataAccessException;
 	public void editBrand(Brand brand) throws DataAccessException;
 	public Integer saveBrand(Brand brand) throws DataAccessException;
+	public void editCategory(Category category) throws DataAccessException;
+	public Integer saveCategory(Category category) throws DataAccessException;
 }

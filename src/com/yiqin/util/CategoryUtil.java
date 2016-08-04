@@ -71,4 +71,9 @@ public class CategoryUtil {
 		setCategorySimpleMap();
 		isInit = true;
 	}
+
+	public static void reInit(ProductManager productManager) {
+		isInit = false;
+		init(productManager);
+	}
 }
