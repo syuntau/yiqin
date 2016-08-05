@@ -70,6 +70,9 @@ var pd_category = {
 			}
 
 			$tbody.append($tr);
+			if (val.subCategoryList && val.subCategoryList.length > 0) {
+				pd_category.editCategoryTbl(val.subCategoryList);
+			}
 		});
 		$categoryDiv.find('.category-panel').removeClass('display-off');
 	},
@@ -137,6 +140,12 @@ var pd_category = {
 	            	'<div class="col-md-12">' +
 	            		'<form class="form-horizontal category-form" method="post">' +
 	            			'<div class="form-group">' +
+		        				'<label class="col-md-3 control-label" for="categoryId">分类 ID</label>' +
+		        				'<div class="col-md-7">' +
+		        					'<input id="categoryId" name="id" type="text" placeholder="分类 ID" class="form-control input-md">' +
+		        				'</div>' +
+		        			'</div>' +
+	            			'<div class="form-group">' +
 	            				'<label class="col-md-3 control-label" for="categoryName">分类名称</label>' +
 	            				'<div class="col-md-7">' +
 	            					'<input id="categoryName" name="name" type="text" placeholder="分类名称" class="form-control input-md">' +
@@ -166,8 +175,8 @@ var pd_category = {
                 		    	$('.bootbox.modal .modal-footer').prepend($loadingTextIcon);
                 		    },
                 		    success : function(data) {
-	              				if (data=='1') {
-	              					alert("<s:text name='msg.err.param'></s:text>");
+	              				if (data=='1' || data=='4') {
+	              					alert("<s:text name='msg.err.wrong.category.info'></s:text>");
 	              				} else if (data=='3') {
 	              					alert("<s:text name='msg.err.db'></s:text>");
 	              				} else {
@@ -177,7 +186,7 @@ var pd_category = {
 	              			   		var $tr = $(pd_category.conf.tr).addClass('tr_'+data.id);
 	           						var _id = $(pd_category.conf.td).html(data.id);
 	           						var _name = $(pd_category.conf.td).html(data.name);
-	           						$tr.append(_id).append(_nameEn).append(_name);
+	           						$tr.append(_id).append(_name);
 
 	           						var roles = pd_category.conf.roles;
 	           						var $iRemove = '';
@@ -260,6 +269,8 @@ var pd_category = {
                 		    success : function(data) {
 	              				if (data=='1') {
 	              					alert("<s:text name='msg.err.param'></s:text>");
+	              				} else if (data=='2') {
+	              					alert("<s:text name='msg.err.no.category'></s:text>");
 	              				} else if (data=='3') {
 	              					alert("<s:text name='msg.err.db'></s:text>");
 	              				} else {
@@ -269,7 +280,7 @@ var pd_category = {
 	              			   		var $tr = $tbody.find('.tr_'+data.id);
 	           						var _id = $(pd_category.conf.td).html(data.id);
 	           						var _name = $(pd_category.conf.td).html(data.name);
-	           						$tr.empty().append(_id).append(_nameEn).append(_name);
+	           						$tr.empty().append(_id).append(_name);
 
 	           						var roles = pd_category.conf.roles;
 	           						var $iRemove = '';

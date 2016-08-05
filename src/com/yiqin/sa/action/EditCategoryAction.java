@@ -112,7 +112,7 @@ public class EditCategoryAction extends ActionSupport {
 //		return null;
 //	}
 
-	public String updateCatgory() {
+	public String updateCategory() {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
@@ -177,7 +177,7 @@ public class EditCategoryAction extends ActionSupport {
 						category.setLevel(1);
 						category.setParentId(0);
 					} else {
-						System.out.println("error in EditCategoryAction.saveCategory for wrong category id 181");
+						System.out.println("error in EditCategoryAction.saveCategory for wrong category id 180");
 						out.print(UtilKeys.CODE_ERR_PARAM);
 						return null;
 					}
@@ -190,7 +190,7 @@ public class EditCategoryAction extends ActionSupport {
 
 					Integer categoryId = productManager.saveCategory(category);
 					if (categoryId == null) {
-						System.out.println("fail in EditCategoryAction.saveCategory");
+						System.out.println("error in EditCategoryAction.saveCategory for wrong category id 193");
 						out.print(UtilKeys.CODE_ERR_DB);
 						return null;
 					}
@@ -199,7 +199,7 @@ public class EditCategoryAction extends ActionSupport {
 					result = json.toString();
 					out.print(result);
 				} catch (NumberFormatException ne) {
-					System.out.println("error in EditCategoryAction.saveCategory for wrong category id 197");
+					System.out.println("error in EditCategoryAction.saveCategory for wrong category id 202");
 					ne.printStackTrace();
 					out.print(UtilKeys.CODE_ERR_EXCEPTION);
 					return null;

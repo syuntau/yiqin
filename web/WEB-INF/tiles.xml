@@ -224,6 +224,10 @@
 		<put-attribute name="body" value="/sa/jsp/brand.jsp" />
 	</definition>
 
+	<definition name="sa.product.category" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/category.jsp" />
+	</definition>
+
 	<definition name="sa.product.attribute" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/attribute.jsp" />
 	</definition>
