@@ -59,6 +59,7 @@
 				<value>com/yiqin/pojo/BestProduct.hbm.xml</value>
 				<value>com/yiqin/pojo/SAUser.hbm.xml</value>
 				<value>com/yiqin/pojo/RegisterCode.hbm.xml</value>
+				<value>com/yiqin/pojo/Conf.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -89,6 +90,10 @@
 	</bean>
 	
 	<bean id="productDao" class="com.yiqin.dao.impl.ProductDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="systemDao" class="com.yiqin.dao.impl.SystemDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

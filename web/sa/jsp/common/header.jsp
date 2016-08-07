@@ -130,11 +130,6 @@ $(document).ready(function() {
                                 <a href="#" class="side-menu-a" val="product-item"><s:text name="sa.header.product.item" /></a>
                             </li>
                             </s:if>
-                			<s:if test="%{#roles.indexOf('13500')>-1}">
-                            <li>
-                                <a href="#" class="side-menu-a" val="product-indexList"><s:text name="sa.header.product.index.pro.list" /></a>
-                            </li>
-                            </s:if>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -145,8 +140,20 @@ $(document).ready(function() {
                     </li>
                     </s:if>
                 	<s:if test="%{#roles.indexOf('15000')>-1}">
-                    <li>
-                        <a href="#" class="side-menu-a" val="reg-code"><i class="fa fa-table fa-fw"></i> <s:text name="sa.header.register.code" /></a>
+                    <li class="side-menu-li">
+                        <a href="#"><i class="fa fa-qrcode fa-fw"></i> <s:text name="sa.header.sys.set" /><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+		                	<s:if test="%{#roles.indexOf('15100')>-1}">
+		                    <li>
+		                        <a href="#" class="side-menu-a" val="reg-code"><s:text name="sa.header.sys.register.code" /></a>
+		                    </li>
+		                    </s:if>
+                			<s:if test="%{#roles.indexOf('15200')>-1}">
+                            <li>
+                                <a href="#" class="side-menu-a" val="product-indexList"><s:text name="sa.header.sys.index.pro.list" /></a>
+                            </li>
+                            </s:if>
+                        </ul>
                     </li>
                     </s:if>
 <!--                     <li class="side-menu-li"> -->

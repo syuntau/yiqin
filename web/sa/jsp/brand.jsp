@@ -208,6 +208,7 @@ var pd_brand = {
 	           						}
 	
 	           						$tbody.append($tr);
+							  		$brandDiv.find('.brand-panel').removeClass('display-off');
 	
 	              				   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.save' /></s:param></s:text>");
 	              				}

@@ -147,3 +147,12 @@ CREATE TABLE `sa_user` (
 
 alter table `order` add column order_note text default NULL comment '备注' after fapiaomingxi;
 alter table `order` add column beizhuzongjia varchar(20) default NULL comment '备注总价' after order_note;
+
+
+/* 系统扩展表 */
+CREATE TABLE `conf` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `attribute` varchar(20) DEFAULT NULL COMMENT '配置属性',
+  `value` varchar(500) DEFAULT NULL COMMENT '配置值',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;

@@ -55,6 +55,7 @@
 		<action name="editAttribute_*" class="com.yiqin.sa.action.EditAttributeAction" method="{1}"></action>
 		<action name="editBrand_*" class="com.yiqin.sa.action.EditBrandAction" method="{1}"></action>
 		<action name="editCategory_*" class="com.yiqin.sa.action.EditCategoryAction" method="{1}"></action>
+		<action name="editPDIndexList_*" class="com.yiqin.sa.action.EditPDIndexListAction" method="{1}"></action>
 		<action name="editProduct_*" class="com.yiqin.sa.action.EditProductAction" method="{1}"></action>
 		<action name="uploadItem" class="com.yiqin.sa.action.UploadItemAction" method="uploadItems"></action>
 		<action name="editBestProduct_*" class="com.yiqin.sa.action.EditBestProductAction" method="{1}"></action>

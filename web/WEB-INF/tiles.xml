@@ -239,4 +239,8 @@
 	<definition name="sa.quick.shopping" extends="sa.template">
 		<put-attribute name="body" value="/sa/jsp/best_product.jsp" />
 	</definition>
+
+	<definition name="sa.product.index.list" extends="sa.template">
+		<put-attribute name="body" value="/sa/jsp/product_index_list_set.jsp" />
+	</definition>
 </tiles-definitions>
