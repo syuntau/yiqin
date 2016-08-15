@@ -51,14 +51,14 @@ var shop_header = function() {
 	};
 	
 	var appendRegister = function(){
-		var loginUser = "<s:property value='#session.userInfo.id'/>",
-			showUser = "<s:text name='shop.user.regist.show.userid'/>";
-		if(loginUser==showUser){
+// 		var loginUser = "<s:property value='#session.userInfo.id'/>",
+// 			showUser = "<s:text name='shop.user.regist.show.userid'/>";
+// 		if(loginUser==showUser){
 			var $shop_header_ul = $("#shop_header_ul"),
 				$li = $("<li></li>"),
 				$a = $('<a class="shop_header" id="top_register"><i class="fa fa-lock"></i> <s:text name="shop.header.top.register" /></a>');
 			$shop_header_ul.append($li.append($a));
-		}
+// 		}
 	};
 	
 	return shop_header_action;

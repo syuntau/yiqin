@@ -115,6 +115,9 @@ public class OrderExcelUtil {
 			field.setAccessible(true);
 			if (null == field.get(orderv)) {
 				value = "";
+			} else if ("beizhuzongjia".equals(headCode)) {
+				value = String.valueOf(field.get(orderv));
+				value = new DecimalFormat("#########.00").format(Float.valueOf(value)*1);
 			} else {
 				value = String.valueOf(field.get(orderv));
 			}
