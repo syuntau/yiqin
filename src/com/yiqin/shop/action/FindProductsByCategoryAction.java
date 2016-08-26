@@ -10,6 +10,8 @@ import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.dao.ISystemDao;
+import com.yiqin.pojo.Conf;
 import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
@@ -35,6 +37,7 @@ public class FindProductsByCategoryAction extends ActionSupport {
 	private String categoryId;
 
 	private ProductManager productManager;
+	private ISystemDao systemDao;
 
 	public String getCategoryId() {
 		return categoryId;
@@ -50,6 +53,14 @@ public class FindProductsByCategoryAction extends ActionSupport {
 
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
+	}
+
+	public ISystemDao getSystemDao() {
+		return systemDao;
+	}
+
+	public void setSystemDao(ISystemDao systemDao) {
+		this.systemDao = systemDao;
 	}
 
 	public String execute() throws Exception {
@@ -69,7 +80,15 @@ public class FindProductsByCategoryAction extends ActionSupport {
 				}
 				
 				List<ProductView> product = null;
-				String productIds = Configuration.getProperty(UtilKeys.SHOP_INDEX_PAGE_SHOW_PRODUCT_IDS);
+				String productIds = "";
+				Conf conf = systemDao.getConf("product_index_list");
+				if (conf != null) {
+					productIds = conf.getValue();
+				}
+//				else {
+//					productIds = Configuration.getProperty(UtilKeys.SHOP_INDEX_PAGE_SHOW_PRODUCT_IDS);
+//				}
+
 				if(Util.isNotEmpty(productIds)){
 					if(productIds.endsWith(",")){
 						productIds = productIds.substring(0, productIds.length()-1);
