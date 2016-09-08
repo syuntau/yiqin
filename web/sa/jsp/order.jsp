@@ -222,11 +222,13 @@ var sa_order = function(){
 			}
 			order.beizhuzongjia = beizhuzongjia;
 			order.zongjia = totalPrice;
+			var orderJson = JSON.stringify(order);
+			orderJson = orderJson.replace(/&/g,":NNN:");
 			
 			$.ajax({
 	             type: "POST",
 	             url: "updateOrder",
-	             data : "order="+JSON.stringify(order),
+	             data : "order="+orderJson,
 	             success: function(data){
 	            	if(data=='1'){
 	            		alert("修改成功！");

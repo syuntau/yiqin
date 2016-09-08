@@ -36,6 +36,8 @@ public class UpdateOrderAction extends ActionSupport {
 
 			Map<String, Class> classMap = new HashMap<String, Class>();
 			classMap.put("productList", Cart.class);
+			order = order.replaceAll(":NNN:", "&");
+			System.out.println("###### UpdateOrderAction replaced order : " + order);
 			OrderTempObj obj = (OrderTempObj) Util.getBeanByJson(order, OrderTempObj.class, classMap);
 			String orderNote = obj.getOrderNote().replaceAll("\r\n", "<br>");
 			orderNote = orderNote.replaceAll("\n", "<br>");
