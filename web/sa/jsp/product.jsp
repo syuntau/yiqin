@@ -655,6 +655,7 @@ $(document).ready(function() {
                         </div>
                         
                         <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
+                        <button type="button" class="btn btn-info btn-download-product-submit category-select display-off">Download</button>
                         <div class="form-group" style="padding-left:20px">
                             <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item ">
                         </div>
