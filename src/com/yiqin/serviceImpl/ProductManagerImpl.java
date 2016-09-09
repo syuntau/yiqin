@@ -300,8 +300,14 @@ public class ProductManagerImpl implements ProductManager {
 		return resultMap;
 	}
 	
+
 	@Override
 	public Map<String,Map<String,String>> findProductAllInfo(String categorys){
+		return findProductAllInfo(categorys, true);
+	}
+
+	@Override
+	public Map<String,Map<String,String>> findProductAllInfo(String categorys, boolean changeBrandFlag){
 		List<Product> productList = productDao.findProductInfoByCategorys(categorys);
 		if (Util.isEmpty(productList)) {
 			return null;
@@ -343,7 +349,7 @@ public class ProductManagerImpl implements ProductManager {
 			for(Map.Entry<Integer, String> entrysub : attrid_pvalueMap.entrySet()){
 				String nameId = id_nameid.get(entrysub.getKey()).get(0);
 				String value = entrysub.getValue();
-				if("brandId".equals(nameId)){
+				if("brandId".equals(nameId) && changeBrandFlag){
 					value = getBrandShowName(Integer.valueOf(value));
 				}
 				nameid_pvalue.put(nameId, value);
@@ -528,6 +534,11 @@ public class ProductManagerImpl implements ProductManager {
 			return categorytops;
 		}
 		return null;
+	}
+
+	@Override
+	public List<Category> findCategoryList(String categoryIds) {
+		return productDao.findCategoryInfoByCategoryId(categoryIds);
 	}
 
 	@Override

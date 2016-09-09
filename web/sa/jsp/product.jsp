@@ -48,12 +48,12 @@ var pd_item = {
             }
 		});
 	},
-	loadCategory : function(type, catetoryId) {
+	loadCategory : function(type, categoryId) {
 		var $categoryDiv = $('.' + type);
 		$.ajax({
             type: "post",
             url: "getCategoryList_getList",
-            data: 'cId='+catetoryId,
+            data: 'cId='+categoryId,
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
@@ -91,9 +91,11 @@ var pd_item = {
 		if (type == 'second-category') {
        		$('.second-category select, .third-category select').addClass('display-off');
        		$('.btn-category-submit').addClass('display-off');
+       		$('.btn-download-product-submit').addClass('display-off');
 		} else if (type == 'third-category') {
        		$('.third-category select').addClass('display-off');
        		$('.btn-category-submit').addClass('display-off');
+       		$('.btn-download-product-submit').addClass('display-off');
 		}
 	},
 	hideItem : function() {
@@ -107,21 +109,38 @@ var pd_item = {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.second-category select, .third-category select').empty();
 			pd_item.loadCategory('second-category', selectCategoryId);
+			$('.btn-download-product-submit').addClass('display-off');
 		});
 		$('.second-category').on('change', function() {
 			var selectCategoryId = $(this).find('option:selected').val();
 			$('.third-category select').empty();
 			pd_item.loadCategory('third-category', selectCategoryId);
+			$('.btn-download-product-submit').addClass('display-off');
+		});
+		$('.third-category').on('change', function() {
+			$('.btn-download-product-submit').addClass('display-off');
 		});
 	},
 	initSubmitCategory : function() {
 		$('.btn-category-submit').on('click', function() {
 			pd_item.loadProductList();
 		})
+		$('.btn-download-product-submit').on('click', function() {
+			pd_item.downloadProducts();
+		});
+	},
+	downloadProducts : function() {
+		var categoryId = $('.third-category select').find('option:selected').val();
+		if (categoryId && isNaN(categoryId)) {
+			alert("<s:text name='msg.err.param'></s:text>");
+			return ;
+		}
+		window.location.href = "exportProductExcel?categoryId=" + categoryId;
 	},
 	loadProductList : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
+		$('.btn-download-product-submit').addClass('display-off');
+		var categoryId = $('.third-category select').find('option:selected').val();
+		if (categoryId && isNaN(categoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
@@ -130,7 +149,7 @@ var pd_item = {
 		$.ajax({
         	type: "post",
 			url: "editProduct_getItems",
-			data: 'cId='+catetoryId,
+			data: 'cId='+categoryId,
 			dataType: "json",
 			success: function(data) {
 				if (data=='1') {
@@ -143,6 +162,7 @@ var pd_item = {
 					$itemDiv.find('.item-panel').parent().append("<span><s:text name='msg.fail.do'><s:param><s:text name='msg.param.query' /></s:param></s:text></span>");
 				} else {
 					pd_item.editItemsTbl(data);
+					$('.btn-download-product-submit').removeClass('display-off');
 				}
             },
             beforeSend: function() {
@@ -167,8 +187,8 @@ var pd_item = {
 		});
 	},
 	uploadProduct : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
+		var categoryId = $('.third-category select').find('option:selected').val();
+		if (categoryId && isNaN(categoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
@@ -188,7 +208,7 @@ var pd_item = {
 		$.ajaxFileUpload({
             url: "uploadItem",
             fileElementId: 'itemFile',
-            additionalData: {cId : catetoryId},
+            additionalData: {cId : categoryId},
             dataType: "json",
             success: function(data) {
 	           	if (data=='1') {
@@ -252,8 +272,8 @@ var pd_item = {
 		});
 	},
 	removeAllItem : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
+		var categoryId = $('.third-category select').find('option:selected').val();
+		if (categoryId && isNaN(categoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
@@ -270,7 +290,7 @@ var pd_item = {
        				$.ajax({
        		            type: "post",
        		            url: "editProduct_removeAll",
-       		            data: 'cId='+catetoryId,
+       		            data: 'cId='+categoryId,
        		            dataType: "json",
        		            success: function(data) {
        			           	if (data=='1') {
@@ -359,8 +379,8 @@ var pd_item = {
 		});
 	},
 	addItem : function() {
-		var catetoryId = $('.third-category select').find('option:selected').val();
-		if (catetoryId && isNaN(catetoryId)) {
+		var categoryId = $('.third-category select').find('option:selected').val();
+		if (categoryId && isNaN(categoryId)) {
 			alert("<s:text name='msg.err.param'></s:text>");
 			return ;
 		}
@@ -369,7 +389,7 @@ var pd_item = {
 		$.ajax({
             type: "post",
             url: "getAttribute_getList",
-            data: 'cId='+catetoryId,
+            data: 'cId='+categoryId,
             dataType: "json",
             success: function(data) {
 	           	 if (data=='1') {
@@ -392,7 +412,7 @@ var pd_item = {
 	        			formItem += item;
 	         		});
 	         		bootbox.dialog({
-	                    title: "<s:text name='sa.pd.item.lbl.add' /><span style='font-size:14px'>（Product Id : " + catetoryId + "<input type='text' id='addProductId'>）</span>",
+	                    title: "<s:text name='sa.pd.item.lbl.add' /><span style='font-size:14px'>（Product Id : " + categoryId + "<input type='text' id='addProductId'>）</span>",
 	                    message: 
 	        	            '<div class="row">' +
 	        	            	'<div class="col-md-12">' +
@@ -417,7 +437,7 @@ var pd_item = {
 	                            		alert("<s:text name='msg.err.wrong.product.id' />");
 	                            		return false;
 	                            	}
-	                            	pId = catetoryId + pId;
+	                            	pId = categoryId + pId;
 	                            	$('.item-product-id').val(pId);
 	                            	var options = {
 	                        		    url : 'editProduct_saveProduct',
@@ -655,7 +675,9 @@ $(document).ready(function() {
                         </div>
                         
                         <button type="button" class="btn btn-info btn-category-submit category-select display-off"><s:text name="sa.btn.query" /></button>
-                        <button type="button" class="btn btn-info btn-download-product-submit category-select display-off">Download</button>
+                        <s:if test="%{#roles.indexOf('13205')>-1}">
+                        <button type="button" class="btn btn-info btn-download-product-submit display-off"><s:text name="sa.btn.download" /></button>
+                        </s:if>
                         <div class="form-group" style="padding-left:20px">
                             <input type="file" id="itemFile" name="itemFile" class="upload-item-file upload-item ">
                         </div>

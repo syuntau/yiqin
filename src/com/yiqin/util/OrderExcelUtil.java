@@ -1,15 +1,9 @@
 package com.yiqin.util;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -34,7 +28,11 @@ public class OrderExcelUtil {
 		workbook = new HSSFWorkbook();
 		sheet = workbook.createSheet();
 	}
-	
+
+	public HSSFWorkbook getWorkbook() {
+		return this.workbook;
+	}
+
 	public void addRows(List<OrderView> orderList, List<String> columnKeysList) {
 		String[] columnKeysArray = (String[])columnKeysList.toArray(new String[columnKeysList.size()]);
 		for (OrderView orderv : orderList) {
@@ -69,42 +67,6 @@ public class OrderExcelUtil {
 			String tempValue = exportAttrMap.get(columnKeysArray[i]);
 			cell.setCellValue(tempValue);
 		}
-	}
-	
-	public void download(HttpServletResponse response, String fileName) {
-		String name = generateFileName(fileName);
-		setHeader(response, name);
-		try {
-			OutputStream output = response.getOutputStream();
-			this.workbook.write(output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static String generateFileName(String fileName) {
-		StringBuffer namebuf = new StringBuffer();
-		if (fileName != null) {
-			namebuf.append(fileName);
-		}
-//		Date date = new Date(System.currentTimeMillis());
-//		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-//		namebuf.append(format.format(date));
-		namebuf.append(".xls");
-		return namebuf.toString();
-	}
-	
-	private static void setHeader(HttpServletResponse response, String fileName) {
-		response.setContentType("applicaiton/octet-stream");
-		StringBuffer str = new StringBuffer(100);
-        str.append("attachment ; filename = \"");
-        try {
-        	str.append(URLEncoder.encode(fileName, "UTF-8"));
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
-        str.append("\"");
-        response.setHeader("Content-Disposition", str.toString());
 	}
 
 	private static String getExcelOrderValues(String headCode, OrderView orderv) {

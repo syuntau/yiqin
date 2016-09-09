@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -184,6 +189,42 @@ public class ExcelUtil {
 			list.add(linked);
 		}
 		return list;
+	}
+	
+	public static void download(HttpServletResponse response, HSSFWorkbook workbook, String fileName) {
+		String name = generateFileName(fileName);
+		setHeader(response, name);
+		try {
+			OutputStream output = response.getOutputStream();
+			workbook.write(output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static String generateFileName(String fileName) {
+		StringBuffer namebuf = new StringBuffer();
+		if (fileName != null) {
+			namebuf.append(fileName);
+		}
+//		Date date = new Date(System.currentTimeMillis());
+//		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+//		namebuf.append(format.format(date));
+		namebuf.append(".xls");
+		return namebuf.toString();
+	}
+	
+	private static void setHeader(HttpServletResponse response, String fileName) {
+		response.setContentType("applicaiton/octet-stream");
+		StringBuffer str = new StringBuffer(100);
+        str.append("attachment ; filename = \"");
+        try {
+        	str.append(URLEncoder.encode(fileName, "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+        str.append("\"");
+        response.setHeader("Content-Disposition", str.toString());
 	}
 
 	public static void main(String[] args) {

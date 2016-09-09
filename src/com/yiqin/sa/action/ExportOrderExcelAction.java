@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.shop.bean.OrderView;
+import com.yiqin.util.ExcelUtil;
 import com.yiqin.util.ExportReportTypeFactory;
 import com.yiqin.util.OrderExcelUtil;
 import com.yiqin.util.Page;
@@ -78,7 +79,7 @@ public class ExportOrderExcelAction extends ActionSupport {
 			util.addRows(orderList, ExportReportTypeFactory.columnKeyList);
 			StringBuilder sb = new StringBuilder();
 			sb.append("客户：").append(userId).append("于").append(startTime).append("~").append(endTime).append("订单详情");
-			util.download(response, sb.toString());
+			ExcelUtil.download(response, util.getWorkbook(), sb.toString());
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();

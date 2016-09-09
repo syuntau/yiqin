@@ -12,7 +12,6 @@ import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Product;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
-import com.yiqin.util.CategoryUtil;
 
 public interface ProductManager {
 	/**
@@ -91,6 +90,8 @@ public interface ProductManager {
 	 */
 	public Map<String, Map<String, String>> findProductAllInfo(String categorys);
 
+	public Map<String,Map<String,String>> findProductAllInfo(String categorys, boolean changeBrandFlag);
+
 	/**
 	 * 查询指定过滤条件下的列表展示商品信息
 	 * 
@@ -129,6 +130,8 @@ public interface ProductManager {
 	public List<Category> findCategoryInfo(int topCateId);
 	
 	public List<Category> findCategoryInfoForBest(int topCateId, String userId);
+	
+	public List<Category> findCategoryList(String categoryIds);
 	/**
 	 * 查询顶级分类
 	 * 
