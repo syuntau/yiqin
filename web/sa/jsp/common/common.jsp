@@ -10,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath%>sa/css/plugins/timeline.css" rel="stylesheet">
 <link href="<%=basePath%>sa/css/sb-admin-2.css" rel="stylesheet">
 <%-- <link href="<%=basePath%>sa/css/plugins/morris.css" rel="stylesheet"> --%>
-<link href="<%=basePath%>sa/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<%-- <link href="<%=basePath%>sa/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> --%>
+<link href="<%=basePath%>sa/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

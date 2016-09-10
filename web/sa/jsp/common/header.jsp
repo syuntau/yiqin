@@ -136,12 +136,12 @@ $(document).ready(function() {
                     </s:if>
                 	<s:if test="%{#roles.indexOf('14000')>-1}">
                     <li>
-                        <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-shopping-cart fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
+                        <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-cart-plus fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
                     </li>
                     </s:if>
                 	<s:if test="%{#roles.indexOf('15000')>-1}">
                     <li class="side-menu-li">
-                        <a href="#"><i class="fa fa-qrcode fa-fw"></i> <s:text name="sa.header.sys.set" /><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cog fa-fw"></i> <s:text name="sa.header.sys.set" /><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 		                	<s:if test="%{#roles.indexOf('15100')>-1}">
 		                    <li>

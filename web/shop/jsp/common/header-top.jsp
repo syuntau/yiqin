@@ -46,21 +46,20 @@ $(document).ready(function(){
 				<div class="shop-menu pull-right">
 					<ul class="nav navbar-nav" id="shop_header_ul">
 						<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
-						<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>
+						<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-cart-plus"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>
 						<li><a class="shop_header" id="top_code_shopping"><i class="fa fa-qrcode"></i> <s:text name="shop.header.top.code.shopping" /></a></li>
 						<li>
 							<a class="shop_header" id="top_cart"><i class="fa fa-shopping-cart"></i> <s:text name="shop.header.top.cart" />
 								<strong id="J_MiniCartNum" class="h"></strong>
 							</a>
 						</li>
-						<li>
-							<s:if test="#session.userInfo==null">
-								<a class="shop_header" id="top_login"><i class="fa fa-lock"></i> <s:text name="shop.header.top.login" /></a>
-							</s:if>
-							<s:else>
-								<a class="shop_header" id="top_logout"><i class="fa fa-lock"></i> <s:text name="shop.header.top.logout" /></a>
-							</s:else>
-						</li>
+						<s:if test="#session.userInfo==null">
+						<li><a class="shop_header" id="top_login"><i class="fa fa-sign-in"></i> <s:text name="shop.header.top.login" /></a></li>
+						<li><a class="shop_header" id="top_register"><i class="fa fa-lock"></i> <s:text name="shop.header.top.register" /></a></li>
+						</s:if>
+						<s:else>
+						<li><a class="shop_header" id="top_logout"><i class="fa fa-sign-out"></i> <s:text name="shop.header.top.logout" /></a></li>
+						</s:else>
 					</ul>
 				</div>
 			</div>

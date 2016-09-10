@@ -11,7 +11,7 @@ var template = {
 var shop_header = function() {
 	var shop_header_action = {
 		init : function() {
-			appendRegister();
+// 			appendRegister();
 			shop_header.setCurrentNav();
 			setNav();
 		},
