@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-sm-8">
 					<div class="logo pull-left">
-						<a href="javaScript:window.location.href='index';"><img src="/shop/images/home/logo.png"/></a>
+						<a href="javaScript:window.location.href='index';"><img src="/shop/images/home/logo.png" width="294px"/></a>
 					</div>
 					<div style="float: right">
 						<div class="input-group">&nbsp;
