@@ -79,7 +79,11 @@ public class OrderExcelUtil {
 				value = "";
 			} else if ("beizhuzongjia".equals(headCode)) {
 				value = String.valueOf(field.get(orderv));
-				value = new DecimalFormat("#########.00").format(Float.valueOf(value)*1);
+				if ("0".equals(value)) {
+					value = "0.00";
+				} else {
+					value = new DecimalFormat("#########.00").format(Float.valueOf(value)*1);
+				}
 			} else {
 				value = String.valueOf(field.get(orderv));
 			}
