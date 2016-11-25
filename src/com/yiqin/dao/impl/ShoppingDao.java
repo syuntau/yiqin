@@ -1,6 +1,7 @@
 package com.yiqin.dao.impl;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -179,6 +180,14 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 					order.setZongjia(tmpOrder.getZongjia());
 				}
 				order.setProductList(tmpOrder.getProductList().toString());
+
+				float totalYuanjia = 0;
+				for (Cart cart : tmpOrder.getProductList()) {
+					totalYuanjia += cart.getCount() * Float.valueOf(cart.getPrice());
+				}
+				totalYuanjia += Float.valueOf(tmpOrder.getBeizhuzongjia());
+				order.setYuanjia(new DecimalFormat("#########.00").format(totalYuanjia));
+
 				order.setUpdateDate(new Date());
 				getHibernateTemplate().saveOrUpdate(order);
 				return true;
