@@ -91,7 +91,7 @@ public interface ProductManager {
 	 */
 	public List<Category> findCategoryInfo();
 	
-	public List<Category> findCategoryInfoForBest(String userId);
+//	public List<Category> findCategoryInfoForBest(String userId);
 
 	/**
 	 * 查询顶级分类下分类菜单
@@ -103,7 +103,7 @@ public interface ProductManager {
 	 */
 	public List<Category> findCategoryInfo(int topCateId);
 	
-	public List<Category> findCategoryInfoForBest(int topCateId, String userId);
+//	public List<Category> findCategoryInfoForBest(int topCateId, String userId);
 	
 	public List<Category> findCategoryList(String categoryIds);
 	/**
@@ -204,4 +204,6 @@ public interface ProductManager {
 	public void deleteCommonProduct(String userId, String categoryId) throws DataAccessException;
 	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize);
 	public int findCommonProductCount(String userId, String categoryId);
+	public List<Category> findCategoryInfoForCommon(String userId);
+	public List<Category> findCategoryInfoForCommon(int topCateId, String userId);
 }

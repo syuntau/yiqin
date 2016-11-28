@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -34,6 +35,10 @@ public class Util {
 		return str == null || "".equals(str);
 	}
 
+	public static boolean isEmpty(@SuppressWarnings("rawtypes") Set set) {
+		return set == null || set.size() == 0;
+	}
+
 	public static boolean isEmpty(@SuppressWarnings("rawtypes") Map map) {
 		return map == null || map.size() == 0;
 	}
@@ -48,6 +53,10 @@ public class Util {
 
 	public static boolean isNotEmpty(String str) {
 		return str != null && str.length() > 0;
+	}
+
+	public static boolean isNotEmpty(@SuppressWarnings("rawtypes") Set set) {
+		return set != null && set.size() > 0;
 	}
 
 	public static boolean isNotEmpty(@SuppressWarnings("rawtypes") List list) {
@@ -67,19 +76,6 @@ public class Util {
 		Collections.sort(list, new Comparator<ProductView>() {
             public int compare(ProductView arg0, ProductView arg1) {
                 return arg0.getProductId().compareTo(arg1.getProductId());
-            }
-        });
-	}
-
-	public static void sortProductViewByCount(List<ProductView> list) {
-		Collections.sort(list, new Comparator<ProductView>() {
-            public int compare(ProductView arg0, ProductView arg1) {
-            	int countCompared = arg0.getCount().compareTo(arg1.getCount());
-            	if (countCompared == 0) {
-                    return arg0.getProductId().compareTo(arg1.getProductId());
-            	} else {
-            		return countCompared;
-            	}
             }
         });
 	}

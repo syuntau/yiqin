@@ -414,31 +414,6 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return tempCategory;
 	}
-	
-	@Override
-	public List<Category> findCategoryInfoForBest(String userId) {
-		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
-		if(Util.isNotEmpty(bestList)){
-			Set<String> topId = new HashSet<String>();
-			StringBuilder bestCateIds = new StringBuilder();
-			for(BestProduct bp : bestList){
-				bestCateIds.append(bp.getCategoryId()).append(",");
-				topId.add(bp.getCategoryId().toString().substring(0, 2));
-			}
-			StringBuilder cids = new StringBuilder();
-			for (String cid : topId) {
-				cids.append(cid).append(",");
-			}
-			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
-			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
-			if(Util.isNotEmpty(bestCategorys)){
-				bestCategorys.addAll(categorytops);
-				handleSubCategory(bestCategorys, categorytops);
-			}
-			return categorytops;
-		}
-		return null;
-	}
 
 	private void handleSubCategory(List<Category> allCategoryList,
 			List<Category> superCategory) {
@@ -472,36 +447,6 @@ public class ProductManagerImpl implements ProductManager {
 			handleSubCategory(categoryList, tempCategory);
 		}
 		return tempCategory;
-	}
-	
-	@Override
-	public List<Category> findCategoryInfoForBest(int topCateId, String userId) {
-		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
-		if(Util.isNotEmpty(bestList)){
-			Set<String> topId = new HashSet<String>();
-			StringBuilder bestCateIds = new StringBuilder();
-			for(BestProduct bp : bestList){
-				if(bp.getCategoryId().toString().startsWith(String.valueOf(topCateId))){
-					bestCateIds.append(bp.getCategoryId()).append(",");
-					topId.add(String.valueOf(bp.getCategoryId()).substring(0, 2));
-				}
-			}
-			if(Util.isEmpty(bestCateIds.toString())){
-				return null;
-			}
-			StringBuilder cids = new StringBuilder();
-			for (String cid : topId) {
-				cids.append(cid).append(",");
-			}
-			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
-			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
-			if(Util.isNotEmpty(bestCategorys)){
-				bestCategorys.addAll(categorytops);
-				handleSubCategory(bestCategorys, categorytops);
-			}
-			return categorytops;
-		}
-		return null;
 	}
 
 	@Override
@@ -715,30 +660,6 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return tempList;
 	}
-	
-	@Override
-	public Map<String, List<String>> findBestProductByUserId(String userId) {
-		List<BestProduct> list = productDao.findBestProductByUserId(userId);
-		if (Util.isNotEmpty(list)) {
-			Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
-			for (BestProduct bd : list) {
-				List<String> temp = new ArrayList<String>();
-				String categoryName = CategoryUtil.getCategoryName(bd.getCategoryId());
-				temp.add(categoryName);
-				List<ProductView> productList = findProductInfoById(userId, bd.getProductId());
-				StringBuilder name = new StringBuilder();
-				for (ProductView pv : productList) {
-					name.append(",").append(pv.getProductName());
-				}
-				if (name.length() > 0) {
-					temp.add(name.substring(1));
-				}
-				result.put(String.valueOf(bd.getCategoryId()), temp);
-			}
-			return result;
-		}
-		return null;
-	}
 
 	@Override
 	public Brand findProductBrandByBrandId(int brandId) {
@@ -869,6 +790,85 @@ public class ProductManagerImpl implements ProductManager {
 //			throws DataAccessException {
 //		productDao.deleteBestProductBycategoryId(userId, categoryId);
 //	}
+	
+//	@Override
+//	public List<Category> findCategoryInfoForBest(String userId) {
+//		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
+//		if(Util.isNotEmpty(bestList)){
+//			Set<String> topId = new HashSet<String>();
+//			StringBuilder bestCateIds = new StringBuilder();
+//			for(BestProduct bp : bestList){
+//				bestCateIds.append(bp.getCategoryId()).append(",");
+//				topId.add(bp.getCategoryId().toString().substring(0, 2));
+//			}
+//			StringBuilder cids = new StringBuilder();
+//			for (String cid : topId) {
+//				cids.append(cid).append(",");
+//			}
+//			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
+//			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+//			if(Util.isNotEmpty(bestCategorys)){
+//				bestCategorys.addAll(categorytops);
+//				handleSubCategory(bestCategorys, categorytops);
+//			}
+//			return categorytops;
+//		}
+//		return null;
+//	}
+	
+//	@Override
+//	public List<Category> findCategoryInfoForBest(int topCateId, String userId) {
+//		List<BestProduct> bestList = productDao.findBestProductByUserId(userId);
+//		if(Util.isNotEmpty(bestList)){
+//			Set<String> topId = new HashSet<String>();
+//			StringBuilder bestCateIds = new StringBuilder();
+//			for(BestProduct bp : bestList){
+//				if(bp.getCategoryId().toString().startsWith(String.valueOf(topCateId))){
+//					bestCateIds.append(bp.getCategoryId()).append(",");
+//					topId.add(String.valueOf(bp.getCategoryId()).substring(0, 2));
+//				}
+//			}
+//			if(Util.isEmpty(bestCateIds.toString())){
+//				return null;
+//			}
+//			StringBuilder cids = new StringBuilder();
+//			for (String cid : topId) {
+//				cids.append(cid).append(",");
+//			}
+//			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(bestCateIds.toString());
+//			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+//			if(Util.isNotEmpty(bestCategorys)){
+//				bestCategorys.addAll(categorytops);
+//				handleSubCategory(bestCategorys, categorytops);
+//			}
+//			return categorytops;
+//		}
+//		return null;
+//	}
+	
+//	@Override
+//	public Map<String, List<String>> findBestProductByUserId(String userId) {
+//		List<BestProduct> list = productDao.findBestProductByUserId(userId);
+//		if (Util.isNotEmpty(list)) {
+//			Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+//			for (BestProduct bd : list) {
+//				List<String> temp = new ArrayList<String>();
+//				String categoryName = CategoryUtil.getCategoryName(bd.getCategoryId());
+//				temp.add(categoryName);
+//				List<ProductView> productList = findProductInfoById(userId, bd.getProductId());
+//				StringBuilder name = new StringBuilder();
+//				for (ProductView pv : productList) {
+//					name.append(",").append(pv.getProductName());
+//				}
+//				if (name.length() > 0) {
+//					temp.add(name.substring(1));
+//				}
+//				result.put(String.valueOf(bd.getCategoryId()), temp);
+//			}
+//			return result;
+//		}
+//		return null;
+//	}
 
 	@Override
 	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId) {
@@ -890,40 +890,24 @@ public class ProductManagerImpl implements ProductManager {
 		productDao.deleteCommonProductBycategoryId(userId, categoryId);
 	}
 	
-	private List<String> findCommonProductIdsByUserId(String userId,String cateId) {
-		if(Util.isEmpty(userId)){
-			return null;
-		}
-		List<CommonProduct> list = productDao.findCommonProductByTopCateId(userId, cateId);
-		if(Util.isNotEmpty(list)){
-			List<String> result = new ArrayList<String>();
-			for(CommonProduct cp : list){
-				String productId = cp.getProductId();
-				result.add(productId);
-			}
-			return result;
-		}
-		return null;
-	}
-	
 	@Override
 	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize) {
-		List<String> pidList = findCommonProductIdsByUserId(userId,categoryId);
+		List<CommonProduct> list = productDao.findCommonProductByTopCateId(userId, categoryId);
 		List<ProductView> result = new ArrayList<ProductView>();
-		if (Util.isNotEmpty(pidList)) {
-			int size = pidList.size();
+		if (Util.isNotEmpty(list)) {
+			int size = list.size();
 			int beginCount = offset + 1;
 			if (beginCount > size) {
 				return null;
 			}
 			if ((beginCount + pageSize) <= size) {
-				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
+				list = list.subList(beginCount - 1, (beginCount - 1)+ pageSize);
 			} else if ((beginCount + pageSize) > size) {
-				pidList = pidList.subList(beginCount - 1, pidList.size());
+				list = list.subList(beginCount - 1, list.size());
 			}
 			StringBuilder pids = new StringBuilder();
-			for (String pid : pidList) {
-				pids.append(pid).append(",");
+			for (CommonProduct cp : list) {
+				pids.append(cp.getProductId()).append(",");
 			}
 			result = findProductInfoById(userId,pids.toString());
 		}
@@ -932,11 +916,99 @@ public class ProductManagerImpl implements ProductManager {
 	
 	@Override
 	public int findCommonProductCount(String userId, String categoryId) {
-		List<String> pidList = findCommonProductIdsByUserId(userId,categoryId);
-		if(pidList != null){
-			return pidList.size();
+		List<CommonProduct> list = productDao.findCommonProductByTopCateId(userId, categoryId);
+		if(Util.isNotEmpty(list)){
+			return list.size();
 		}
 		return 0;
+	}
+	
+	@Override
+	public List<Category> findCategoryInfoForCommon(String userId) {
+		List<CommonProduct> List = productDao.findCommonProductByUserId(userId);
+		if(Util.isNotEmpty(List)){
+			Set<String> topId = new HashSet<String>();
+			Set<Integer> commonCatIdSet = new HashSet<Integer>();
+			for(CommonProduct cp : List){
+				commonCatIdSet.add(cp.getCategoryId());
+				topId.add(cp.getCategoryId().toString().substring(0, 2));
+			}
+			StringBuilder commonCateIds = new StringBuilder();
+			for (Integer cid : commonCatIdSet) {
+				commonCateIds.append(cid).append(",");
+			}
+			StringBuilder cids = new StringBuilder();
+			for (String cid : topId) {
+				cids.append(cid).append(",");
+			}
+			List<Category> commCategorys = productDao.findCategoryInfoByCategoryId(commonCateIds.toString());
+			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+			if(Util.isNotEmpty(commCategorys)){
+				commCategorys.addAll(categorytops);
+				handleSubCategory(commCategorys, categorytops);
+			}
+			return categorytops;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Category> findCategoryInfoForCommon(int topCateId, String userId) {
+		List<CommonProduct> commProList = productDao.findCommonProductByUserId(userId);
+		if(Util.isNotEmpty(commProList)){
+			Set<String> topId = new HashSet<String>();
+			Set<Integer> commCatIdSet = new HashSet<Integer>();
+			for(CommonProduct cp : commProList){
+				if(cp.getCategoryId().toString().startsWith(String.valueOf(topCateId))){
+					commCatIdSet.add(cp.getCategoryId());
+					topId.add(String.valueOf(cp.getCategoryId()).substring(0, 2));
+				}
+			}
+			if(Util.isEmpty(commCatIdSet)){
+				return null;
+			}
+			StringBuilder commCateIds = new StringBuilder();
+			for (Integer cid : commCatIdSet) {
+				commCateIds.append(cid).append(",");
+			}
+
+			StringBuilder cids = new StringBuilder();
+			for (String cid : topId) {
+				cids.append(cid).append(",");
+			}
+			List<Category> bestCategorys = productDao.findCategoryInfoByCategoryId(commCateIds.toString());
+			List<Category> categorytops = productDao.findCategoryInfoByCategoryId(cids.toString());
+			if(Util.isNotEmpty(bestCategorys)){
+				bestCategorys.addAll(categorytops);
+				handleSubCategory(bestCategorys, categorytops);
+			}
+			return categorytops;
+		}
+		return null;
+	}
+	
+	@Override
+	public Map<String, List<String>> findCommonProductByUserId(String userId) {
+		List<CommonProduct> list = productDao.findCommonProductByUserId(userId);
+		if (Util.isNotEmpty(list)) {
+			Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+			for (CommonProduct cp : list) {
+				List<String> temp = new ArrayList<String>();
+				String categoryName = CategoryUtil.getCategoryName(cp.getCategoryId());
+				temp.add(categoryName);
+				List<ProductView> productList = findProductInfoById(userId, cp.getProductId());
+				StringBuilder name = new StringBuilder();
+				for (ProductView pv : productList) {
+					name.append(",").append(pv.getProductName());
+				}
+				if (name.length() > 0) {
+					temp.add(name.substring(1));
+				}
+				result.put(String.valueOf(cp.getCategoryId()), temp);
+			}
+			return result;
+		}
+		return null;
 	}
 	
 }

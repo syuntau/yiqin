@@ -63,13 +63,13 @@ public class FindCategoryInfoAction extends ActionSupport {
 			List<Category> category = null;
 			if(Util.isEmpty(topCateId)){
 				if(flag){
-					category = productManager.findCategoryInfoForBest(Util.getLoginUser(session).getId());
+					category = productManager.findCategoryInfoForCommon(Util.getLoginUser(session).getId());
 				}else{
 					category = productManager.findCategoryInfo();
 				}
 			}else{
 				if(flag){
-					category = productManager.findCategoryInfoForBest(Integer.valueOf(topCateId), Util.getLoginUser(session).getId());
+					category = productManager.findCategoryInfoForCommon(Integer.valueOf(topCateId), Util.getLoginUser(session).getId());
 				}else{
 					category = productManager.findCategoryInfo(Integer.valueOf(topCateId));
 				}

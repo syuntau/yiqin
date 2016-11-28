@@ -370,7 +370,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			queryString.append(" and categoryId like '");
 			queryString.append(topCategoryId).append("%'");
 		}
-		queryString.append(" order by count");
+		queryString.append(" order by count desc, categoryId");
 		List<?> list = getHibernateTemplate().find(queryString.toString());
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;
@@ -380,7 +380,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public List<CommonProduct> findCommonProductByUserId(String userId) {
-		String queryString = "from CommonProduct where userId = ? order by count";
+		String queryString = "from CommonProduct where userId = ? order by count,categoryId";
 		List<?> list = getHibernateTemplate().find(queryString, userId);
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;

@@ -233,7 +233,7 @@ public class EditBestProductAction extends ActionSupport {
 							}
 						}
 					}
-					Util.sortProductViewByCount(productlist);
+					Util.sortProductView(productlist);
 					JSONArray jsonArray = JSONArray.fromObject(productlist);
 					result = jsonArray.toString();
 				}
