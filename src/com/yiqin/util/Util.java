@@ -71,6 +71,19 @@ public class Util {
         });
 	}
 
+	public static void sortProductViewByCount(List<ProductView> list) {
+		Collections.sort(list, new Comparator<ProductView>() {
+            public int compare(ProductView arg0, ProductView arg1) {
+            	int countCompared = arg0.getCount().compareTo(arg1.getCount());
+            	if (countCompared == 0) {
+                    return arg0.getProductId().compareTo(arg1.getProductId());
+            	} else {
+            		return countCompared;
+            	}
+            }
+        });
+	}
+
 	/**
 	 * 获取当天零点时间
 	 * 

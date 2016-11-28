@@ -9,6 +9,7 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
+import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.Product;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
@@ -23,33 +24,6 @@ public interface ProductManager {
 	 */
 	public List<ProductView> findProductInfoById(String pids);
 	public List<ProductView> findProductInfoById(String userId, String pids);
-	
-	/**
-	 * 查询快速购物商品
-	 * 
-	 * @param userId
-	 *            用户ID
-	 * @param categoryId
-	 *            分类ID
-	 * @param offset
-	 *            第一条记录索引
-	 * @param pageSize
-	 *            每页显示的数量
-	 * @return 商品集合
-	 */
-	public List<ProductView> findBestProductInfo(String userId, String categoryId, int offset,
-			int pageSize);
-	
-	/**
-	 * 查询快速购物商品总数
-	 * 
-	 * @param userId
-	 *            用户ID
-	 * @param categoryId
-	 *            分类ID
-	 * @return 总数
-	 */
-	public int findBestProductCount(String userId, String categoryId);
 	
 	/**
 	 * 通过ID查询商品所有信息
@@ -186,13 +160,48 @@ public interface ProductManager {
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 
 	public Map<String, List<String>> findBestProductByUserId(String userId);
-	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
-	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
-	public void deleteAllBestProduct(String userId) throws DataAccessException;
-	public void deleteBestProduct(String userId, String categoryId) throws DataAccessException;
 	public void deleteBrandById(String id) throws DataAccessException;
 	public void editBrand(Brand brand) throws DataAccessException;
 	public Integer saveBrand(Brand brand) throws DataAccessException;
 	public void editCategory(Category category) throws DataAccessException;
 	public Integer saveCategory(Category category) throws DataAccessException;
+
+
+//	/**
+//	 * 查询快速购物商品
+//	 * 
+//	 * @param userId
+//	 *            用户ID
+//	 * @param categoryId
+//	 *            分类ID
+//	 * @param offset
+//	 *            第一条记录索引
+//	 * @param pageSize
+//	 *            每页显示的数量
+//	 * @return 商品集合
+//	 */
+//	public List<ProductView> findBestProductInfo(String userId, String categoryId, int offset,
+//			int pageSize);
+	
+//	/**
+//	 * 查询快速购物商品总数
+//	 * 
+//	 * @param userId
+//	 *            用户ID
+//	 * @param categoryId
+//	 *            分类ID
+//	 * @return 总数
+//	 */
+//	public int findBestProductCount(String userId, String categoryId);
+//	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
+//	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
+//	public void deleteAllBestProduct(String userId) throws DataAccessException;
+//	public void deleteBestProduct(String userId, String categoryId) throws DataAccessException;
+
+	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId);
+	public void saveCommonProductList(List<CommonProduct> commonProductList) throws DataAccessException;
+	public void deleteAllCommonProduct(String userId) throws DataAccessException;
+	public void deleteCommonProduct(String userId, String categoryId) throws DataAccessException;
+	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize);
+	public int findCommonProductCount(String userId, String categoryId);
 }

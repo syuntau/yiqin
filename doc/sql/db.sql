@@ -99,6 +99,8 @@ CREATE TABLE `order` (
   `peisongfangshi` varchar(20) DEFAULT NULL COMMENT '配送方式',
   `fapiaotaitou` varchar(50) DEFAULT NULL COMMENT '发票抬头',
   `fapiaomingxi` varchar(100) DEFAULT NULL COMMENT '发票明细',
+  `order_note` text default NULL comment '备注',
+  `beizhuzongjia` varchar(20) default NULL comment '备注总价',
   `product_list` varchar(1024) DEFAULT NULL COMMENT '商品列表：商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价',
   `yuanjia` float(9,3) DEFAULT NULL COMMENT '订单原价',
   `zhekou` float(9,3) DEFAULT NULL COMMENT '订单折扣',
@@ -156,3 +158,18 @@ CREATE TABLE `conf` (
   `value` varchar(500) DEFAULT NULL COMMENT '配置值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+
+/* 快速购物表 */
+DROP TABLE IF EXISTS `common_product`;
+CREATE TABLE `common_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `user_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
+  `category_id` int(11) DEFAULT NULL COMMENT '属性ID',
+  `product_id` varchar(20) DEFAULT NULL COMMENT '产品ID',
+  `count` int(11) DEFAULT 1 COMMENT '产品购买次数',
+  PRIMARY KEY (`id`),
+  KEY `uId` (`user_id`),
+  KEY `uId_cId` (`user_id`, `category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+

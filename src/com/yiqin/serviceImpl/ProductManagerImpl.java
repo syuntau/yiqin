@@ -18,6 +18,7 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
+import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.Product;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.ProductManager;
@@ -72,39 +73,6 @@ public class ProductManagerImpl implements ProductManager {
 	public List<ProductView> findProductInfo(String categorys) {
 		Map<String,Map<String,String>> productMap = findProductAllInfo(categorys);
 		return productToProductView(productMap);
-	}
-	
-	@Override
-	public List<ProductView> findBestProductInfo(String userId,String categoryId, int offset, int pageSize) {
-		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
-		List<ProductView> result = new ArrayList<ProductView>();
-		if (pidSet != null && pidSet.size() > 0) {
-			List<String> pidList = new ArrayList(pidSet);
-			int beginCount = offset + 1;
-			if (beginCount > pidSet.size()) {
-				return null;
-			}
-			if ((beginCount + pageSize) <= pidSet.size()) {
-				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
-			} else if ((beginCount + pageSize) > pidSet.size()) {
-				pidList = pidList.subList(beginCount - 1, pidList.size());
-			}
-			StringBuilder pids = new StringBuilder();
-			for (String pid : pidList) {
-				pids.append(pid).append(",");
-			}
-			result = findProductInfoById(userId,pids.toString());
-		}
-		return result;
-	}
-	
-	@Override
-	public int findBestProductCount(String userId, String categoryId) {
-		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
-		if(pidSet != null){
-			return pidSet.size();
-		}
-		return 0;
 	}
 	
 	@Override
@@ -716,25 +684,6 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return resultPid;
 	}
-	
-	private Set<String> findProductIdsByUserId(String userId,String cateId){
-		if(Util.isEmpty(userId)){
-			return null;
-		}
-		List<BestProduct> bestProducts = productDao.findBestProductByTopCateId(userId, cateId);
-		if(Util.isNotEmpty(bestProducts)){
-			Set<String> set = new HashSet<String>();
-			for(BestProduct bp : bestProducts){
-				String productIds = bp.getProductId();
-				if(Util.isNotEmpty(productIds)){
-					 String[] ids = productIds.split(",");
-					 set.addAll(Arrays.asList(ids));
-				}
-			}
-			return set;
-		}
-		return null;
-	}
 
 	@Override
 	public List<Attribute> findFilterAttribute(int categoryId) {
@@ -792,28 +741,6 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
-		return productDao.findBestProductByCategoryId(userId, categoryId);
-	}
-
-	@Override
-	public void saveBestProduct(BestProduct bestProduct)
-			throws DataAccessException {
-		productDao.saveBestProduct(bestProduct);
-	}
-
-	@Override
-	public void deleteAllBestProduct(String userId) throws DataAccessException {
-		productDao.deleteBestProductByUserId(userId);
-	}
-
-	@Override
-	public void deleteBestProduct(String userId, String categoryId)
-			throws DataAccessException {
-		productDao.deleteBestProductBycategoryId(userId, categoryId);
-	}
-
-	@Override
 	public Brand findProductBrandByBrandId(int brandId) {
 		Brand brand = BrandUtil.getBrand(brandId);
 		if (brand == null) {
@@ -868,4 +795,148 @@ public class ProductManagerImpl implements ProductManager {
 
 		return categoryId;
 	}
+	
+//	@Override
+//	public List<ProductView> findBestProductInfo(String userId, String categoryId, int offset, int pageSize) {
+//		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
+//		List<ProductView> result = new ArrayList<ProductView>();
+//		if (pidSet != null && pidSet.size() > 0) {
+//			List<String> pidList = new ArrayList(pidSet);
+//			int beginCount = offset + 1;
+//			if (beginCount > pidSet.size()) {
+//				return null;
+//			}
+//			if ((beginCount + pageSize) <= pidSet.size()) {
+//				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
+//			} else if ((beginCount + pageSize) > pidSet.size()) {
+//				pidList = pidList.subList(beginCount - 1, pidList.size());
+//			}
+//			StringBuilder pids = new StringBuilder();
+//			for (String pid : pidList) {
+//				pids.append(pid).append(",");
+//			}
+//			result = findProductInfoById(userId,pids.toString());
+//		}
+//		return result;
+//	}
+	
+//	@Override
+//	public int findBestProductCount(String userId, String categoryId) {
+//		Set<String> pidSet = findProductIdsByUserId(userId,categoryId);
+//		if(pidSet != null){
+//			return pidSet.size();
+//		}
+//		return 0;
+//	}
+	
+//	private Set<String> findProductIdsByUserId(String userId,String cateId){
+//		if(Util.isEmpty(userId)){
+//			return null;
+//		}
+//		List<BestProduct> bestProducts = productDao.findBestProductByTopCateId(userId, cateId);
+//		if(Util.isNotEmpty(bestProducts)){
+//			Set<String> set = new HashSet<String>();
+//			for(BestProduct bp : bestProducts){
+//				String productIds = bp.getProductId();
+//				if(Util.isNotEmpty(productIds)){
+//					 String[] ids = productIds.split(",");
+//					 set.addAll(Arrays.asList(ids));
+//				}
+//			}
+//			return set;
+//		}
+//		return null;
+//	}
+
+//	@Override
+//	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
+//		return productDao.findBestProductByCategoryId(userId, categoryId);
+//	}
+
+//	@Override
+//	public void saveBestProduct(BestProduct bestProduct)
+//			throws DataAccessException {
+//		productDao.saveBestProduct(bestProduct);
+//	}
+
+//	@Override
+//	public void deleteAllBestProduct(String userId) throws DataAccessException {
+//		productDao.deleteBestProductByUserId(userId);
+//	}
+
+//	@Override
+//	public void deleteBestProduct(String userId, String categoryId)
+//			throws DataAccessException {
+//		productDao.deleteBestProductBycategoryId(userId, categoryId);
+//	}
+
+	@Override
+	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId) {
+		return productDao.findCommonProductByCategoryId(userId, categoryId);
+	}
+
+	@Override
+	public void saveCommonProductList(List<CommonProduct> commonProductList) throws DataAccessException {
+		productDao.saveCommonProductList(commonProductList);
+	}
+
+	@Override
+	public void deleteAllCommonProduct(String userId) throws DataAccessException {
+		productDao.deleteCommonProductByUserId(userId);
+	}
+
+	@Override
+	public void deleteCommonProduct(String userId, String categoryId) throws DataAccessException {
+		productDao.deleteCommonProductBycategoryId(userId, categoryId);
+	}
+	
+	private List<String> findCommonProductIdsByUserId(String userId,String cateId) {
+		if(Util.isEmpty(userId)){
+			return null;
+		}
+		List<CommonProduct> list = productDao.findCommonProductByTopCateId(userId, cateId);
+		if(Util.isNotEmpty(list)){
+			List<String> result = new ArrayList<String>();
+			for(CommonProduct cp : list){
+				String productId = cp.getProductId();
+				result.add(productId);
+			}
+			return result;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize) {
+		List<String> pidList = findCommonProductIdsByUserId(userId,categoryId);
+		List<ProductView> result = new ArrayList<ProductView>();
+		if (Util.isNotEmpty(pidList)) {
+			int size = pidList.size();
+			int beginCount = offset + 1;
+			if (beginCount > size) {
+				return null;
+			}
+			if ((beginCount + pageSize) <= size) {
+				pidList = pidList.subList(beginCount - 1, (beginCount - 1)+ pageSize);
+			} else if ((beginCount + pageSize) > size) {
+				pidList = pidList.subList(beginCount - 1, pidList.size());
+			}
+			StringBuilder pids = new StringBuilder();
+			for (String pid : pidList) {
+				pids.append(pid).append(",");
+			}
+			result = findProductInfoById(userId,pids.toString());
+		}
+		return result;
+	}
+	
+	@Override
+	public int findCommonProductCount(String userId, String categoryId) {
+		List<String> pidList = findCommonProductIdsByUserId(userId,categoryId);
+		if(pidList != null){
+			return pidList.size();
+		}
+		return 0;
+	}
+	
 }

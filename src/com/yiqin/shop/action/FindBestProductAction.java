@@ -64,10 +64,12 @@ public class FindBestProductAction extends ActionSupport {
 			
 			// 查询过滤总数
 			List<ProductView> productList = null;
-			int count = productManager.findBestProductCount(userId,paramVal);
+//			int count = productManager.findBestProductCount(userId,paramVal);
+			int count = productManager.findCommonProductCount(userId,paramVal);
 			if (count > 0) {
 				// 查询当前页信息
-				productList = productManager.findBestProductInfo(userId,paramVal, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+//				productList = productManager.findBestProductInfo(userId,paramVal, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
+				productList = productManager.findCommonProductInfo(userId,paramVal, pageNo * MAXITEMINPAGE, MAXITEMINPAGE);
 				for (ProductView pv : productList) {
 					pv.setImgUrl(pv.getImgUrl().split(",")[0]);
 				}

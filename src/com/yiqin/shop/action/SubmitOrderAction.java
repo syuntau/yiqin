@@ -1,6 +1,7 @@
 package com.yiqin.shop.action;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.Order;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
@@ -117,14 +119,23 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setDeleteFlag((byte) 0);
 
 			// 查询订单商品购物车信息
-			List<Cart> cartList = shoppingManager.findCartsByProductIds(
-					user.getId(), productIds);
+			List<Cart> cartList = shoppingManager.findCartsByProductIds(user.getId(), productIds);
 			if (Util.isNotEmpty(cartList)) {
+				List<CommonProduct> commonProductList = new ArrayList<CommonProduct>();  // 购买过的产品自动添加至 常用商品列表
 				float totalPrice = 0;
 				float totalYuanjia = 0;
 				for (Cart cart : cartList) {
 					totalPrice += cart.getCount() * Float.valueOf(cart.getZhekouPrice());
 					totalYuanjia += cart.getCount() * Float.valueOf(cart.getPrice());
+
+					// 购买过的产品自动添加至 常用商品列表，统计 产品列表
+					CommonProduct commonProduct = new CommonProduct();
+					commonProduct.setUserId(user.getId());
+					String productId = cart.getProductId();
+					commonProduct.setCategoryId(Integer.parseInt(productId.substring(0, 4)));
+					commonProduct.setProductId(productId);
+					commonProduct.setCount(1);
+					commonProductList.add(commonProduct);
 				}
 				order.setZongjia(new DecimalFormat("#########.00").format(totalPrice));
 				order.setYuanjia(new DecimalFormat("#########.00").format(totalYuanjia));
@@ -135,14 +146,19 @@ public class SubmitOrderAction extends ActionSupport {
 					order.setZhekou((float) 1);
 				}
 				order.setProductList(cartList.toString());
+				
+				try {
+					
+				} catch (Exception e) {
+					
+				}
 			}else{
 				request.setAttribute("submitOrderError", "订单商品不存在或已被删除，请重新选购！");
 				return ERROR;
 			}
 
 			// 查询配送地址信息
-			UserConf userConf = userManager.findUserConfInfo(user.getId(),
-					addressAttr);
+			UserConf userConf = userManager.findUserConfInfo(user.getId(), addressAttr);
 			if (userConf != null) {
 				String [] address = userConf.getValue().split("_receive_");
 				order.setName(address[0]);

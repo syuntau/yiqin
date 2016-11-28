@@ -8,7 +8,9 @@ import com.yiqin.pojo.Attribute;
 import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.Brand;
 import com.yiqin.pojo.Category;
+import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.Product;
+import com.yiqin.util.Util;
 
 /**
  * 产品DAO
@@ -108,7 +110,7 @@ public interface IProductDao {
 	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException;
 	public void deleteBestProductByUserId(String userId) throws DataAccessException;
 	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException;
-	public List<BestProduct> findBestProductByUserId(String userId);
+//	public List<BestProduct> findBestProductByUserId(String userId);
 	public List<BestProduct> findBestProductByTopCateId(String userId, String topCategoryId);
 	public BestProduct findBestProductByCategoryId(String userId, String categoryId);
 	public Brand findBrandById(Integer id);
@@ -118,4 +120,13 @@ public interface IProductDao {
 
 	public void editCategory(Category category) throws DataAccessException;
 	public Integer saveCategory(Category category) throws DataAccessException;
+
+
+	public void saveCommonProduct(CommonProduct commonProduct) throws DataAccessException;
+	public void saveCommonProductList(List<CommonProduct> commonProductList) throws DataAccessException;
+	public void deleteCommonProductByUserId(String userId) throws DataAccessException;
+	public void deleteCommonProductBycategoryId(String userId, String categoryId) throws DataAccessException;
+	public List<CommonProduct> findCommonProductByTopCateId(String userId, String topCategoryId);
+	public List<CommonProduct> findCommonProductByUserId(String userId);
+	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId);
 }

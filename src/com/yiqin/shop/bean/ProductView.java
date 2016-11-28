@@ -14,6 +14,15 @@ public class ProductView {
 	private String color;// 颜色
 	private String imgUrl; // 图片链接
 	private String check;
+	private String count; // 产品购买次数
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
+	}
 
 	public String getProductId() {
 		return productId;
