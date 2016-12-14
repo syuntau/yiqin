@@ -893,7 +893,8 @@ public class ProductManagerImpl implements ProductManager {
 	@Override
 	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize) {
 		List<CommonProduct> list = productDao.findCommonProductByTopCateId(userId, categoryId);
-		List<ProductView> result = new ArrayList<ProductView>();
+		List<ProductView> result = null;
+		List<ProductView> tempList = new ArrayList<ProductView>();
 		if (Util.isNotEmpty(list)) {
 			int size = list.size();
 			int beginCount = offset + 1;
@@ -906,10 +907,18 @@ public class ProductManagerImpl implements ProductManager {
 				list = list.subList(beginCount - 1, list.size());
 			}
 			StringBuilder pids = new StringBuilder();
+			Map<String, Integer> productIndexMap = new HashMap<String, Integer>();
+			int idx = 0;
 			for (CommonProduct cp : list) {
 				pids.append(cp.getProductId()).append(",");
+				productIndexMap.put(cp.getProductId(), idx++);
 			}
-			result = findProductInfoById(userId,pids.toString());
+			tempList = findProductInfoById(userId,pids.toString());
+			result = new ArrayList<ProductView>(tempList.size());
+			for (ProductView pv : tempList) {
+				int subscript = productIndexMap.get(pv.getProductId());
+				result.add(subscript, pv);
+			}
 		}
 		return result;
 	}
