@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -120,6 +123,7 @@ public class EditBestProductAction extends ActionSupport {
 //					out.print(UtilKeys.CODE_ERR_DB);
 //					return null;
 //				}
+				System.out.println("EditBestProductAction.saveBestProduct userId : " + userId + ", cId : " + cId + ", pIds : " + pIds);
 				try {
 					List<CommonProduct> dbList = productManager.findCommonProductByCategoryId(userId, cId);
 					List<CommonProduct> saveList = new ArrayList<CommonProduct>();
@@ -137,7 +141,10 @@ public class EditBestProductAction extends ActionSupport {
 						for (CommonProduct commonProduct : dbList) {
 							comcommonProCountMap.put(commonProduct.getProductId(), commonProduct.getCount());
 						}
+						System.out.println("EditBestProductAction.saveBestProduct comcommonProCountMap : " + comcommonProCountMap);
+						Set<String> pIdSet = new HashSet<String>();
 						for (String pId : pIds.split(",")) {
+							pIdSet.add(pId);
 							Integer count = comcommonProCountMap.get(pId);
 							if (count == null) {
 								CommonProduct commonProduct = new CommonProduct();
@@ -146,17 +153,25 @@ public class EditBestProductAction extends ActionSupport {
 								commonProduct.setProductId(pId);
 								commonProduct.setCount(1);
 								saveList.add(commonProduct);
-							} else {
-								CommonProduct commonProduct = new CommonProduct();
-								commonProduct.setUserId(userId);
-								commonProduct.setCategoryId(Integer.parseInt(cId));
-								commonProduct.setProductId(pId);
-								commonProduct.setCount(count + 1);
-								saveList.add(commonProduct);
 							}
 						}
+						StringBuilder deleteProductIds = new StringBuilder();
+						for (CommonProduct cp : dbList) {
+							if (!pIdSet.contains(cp.getProductId())) {
+								deleteProductIds.append(",").append(cp.getProductId());
+							}
+						}
+						System.out.println("EditBestProductAction.saveBestProduct deleteProductIds : " + deleteProductIds);
+						if (deleteProductIds.length() > 0) {
+							productManager.deleteCommonProductByProductIds(userId, deleteProductIds.substring(1));
+							System.out.println("EditBestProductAction.saveBestProduct delete common product end");
+						}
 					}
-					productManager.saveCommonProductList(saveList);
+					System.out.println("EditBestProductAction.saveBestProduct saveList size : " + saveList.size());
+					if (saveList.size() > 0) {
+						productManager.saveCommonProductList(saveList);
+						System.out.println("EditBestProductAction.saveBestProduct save common product end");
+					}
 					result = UtilKeys.CODE_SUCCESS;
 					out.print(result);
 					System.out.println("EditBestProductAction.saveBestProduct userId : " + userId + ", cId : " + cId + ", pIds : " + pIds);

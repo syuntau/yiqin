@@ -202,8 +202,10 @@ public interface ProductManager {
 	public void saveCommonProductList(List<CommonProduct> commonProductList) throws DataAccessException;
 	public void deleteAllCommonProduct(String userId) throws DataAccessException;
 	public void deleteCommonProduct(String userId, String categoryId) throws DataAccessException;
+	public void deleteCommonProductByProductIds(String userId, String productIds);
 	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize);
 	public int findCommonProductCount(String userId, String categoryId);
 	public List<Category> findCategoryInfoForCommon(String userId);
 	public List<Category> findCategoryInfoForCommon(int topCateId, String userId);
+	public List<CommonProduct> findCommonProductsByUserId(String userId);
 }

@@ -357,6 +357,14 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			getHibernateTemplate().deleteAll(list);
 		}
 	}
+
+	@Override
+	public void deleteCommonProductByProductIds(String userId, String productIds) throws DataAccessException {
+		List<CommonProduct> list = findCommonProductByUIdNPId(userId, productIds);
+		if (Util.isNotEmpty(list)) {
+			getHibernateTemplate().deleteAll(list);
+		}
+	}
 	
 	@Override
 	public List<CommonProduct> findCommonProductByTopCateId(String userId, String topCategoryId) {
@@ -392,6 +400,16 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId) {
 		String queryString = "from CommonProduct where userId = ? and categoryId = ?";
 		List<?> list = getHibernateTemplate().find(queryString, new Object[]{userId, Integer.parseInt(categoryId)});
+		if (Util.isNotEmpty(list)) {
+			return (List<CommonProduct>) list;
+		}
+		return null;
+	}
+
+	@Override
+	public List<CommonProduct> findCommonProductByUIdNPId(String userId, String productIds) {
+		String queryString = "from CommonProduct where userId = " + userId + " and productId in ( " + productIds + " )";
+		List<?> list = getHibernateTemplate().find(queryString);
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;
 		}

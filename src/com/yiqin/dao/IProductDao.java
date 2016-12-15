@@ -129,4 +129,6 @@ public interface IProductDao {
 	public List<CommonProduct> findCommonProductByTopCateId(String userId, String topCategoryId);
 	public List<CommonProduct> findCommonProductByUserId(String userId);
 	public List<CommonProduct> findCommonProductByCategoryId(String userId, String categoryId);
+	public List<CommonProduct> findCommonProductByUIdNPId(String userId, String productIds);
+	public void deleteCommonProductByProductIds(String userId, String productIds);
 }

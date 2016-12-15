@@ -170,6 +170,7 @@ CREATE TABLE `common_product` (
   `count` int(11) DEFAULT 1 COMMENT '产品购买次数',
   PRIMARY KEY (`id`),
   KEY `uId` (`user_id`),
-  KEY `uId_cId` (`user_id`, `category_id`)
+  KEY `uId_cId` (`user_id`, `category_id`),
+  KEY `uId_pId` (`user_id`, `product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 

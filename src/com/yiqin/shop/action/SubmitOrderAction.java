@@ -3,7 +3,9 @@ package com.yiqin.shop.action;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.Order;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
+import com.yiqin.service.ProductManager;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Configuration;
@@ -49,6 +52,8 @@ public class SubmitOrderAction extends ActionSupport {
 
 	private UserManager userManager;
 
+	private ProductManager productManager;
+
 	public void setAddressAttr(String addressAttr) {
 		this.addressAttr = addressAttr;
 	}
@@ -81,6 +86,14 @@ public class SubmitOrderAction extends ActionSupport {
 		this.userManager = userManager;
 	}
 
+	public ProductManager getProductManager() {
+		return productManager;
+	}
+
+	public void setProductManager(ProductManager productManager) {
+		this.productManager = productManager;
+	}
+
 	public String execute() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -94,14 +107,15 @@ public class SubmitOrderAction extends ActionSupport {
 			}
 			// 登录用户
 			User user = Util.getLoginUser(request.getSession());
+			String userId = user.getId();
 
 			Order order = new Order();
-			order.setUserId(user.getId());
+			order.setUserId(userId);
 			order.setEmail(user.getEmail());
 			order.setZhifu(zhifu);
 			
 			// 查询发票信息
-			UserConf invoiceConf = userManager.findUserConfInfo(user.getId(),
+			UserConf invoiceConf = userManager.findUserConfInfo(userId,
 					invoiceAttr);
 			if (invoiceConf != null) {
 				String [] invoice = invoiceConf.getValue().split("_invoice_");
@@ -119,9 +133,16 @@ public class SubmitOrderAction extends ActionSupport {
 			order.setDeleteFlag((byte) 0);
 
 			// 查询订单商品购物车信息
-			List<Cart> cartList = shoppingManager.findCartsByProductIds(user.getId(), productIds);
+			List<Cart> cartList = shoppingManager.findCartsByProductIds(userId, productIds);
 			if (Util.isNotEmpty(cartList)) {
 				List<CommonProduct> commonProductList = new ArrayList<CommonProduct>();  // 购买过的产品自动添加至 常用商品列表
+				List<CommonProduct> savedCommonProductList = productManager.findCommonProductsByUserId(userId);
+				Map<String, Integer> countMap = new HashMap<String, Integer>();
+				if (Util.isNotEmpty(savedCommonProductList)) {
+					for (CommonProduct comProduct : savedCommonProductList) {
+						countMap.put(comProduct.getProductId(), comProduct.getCount());
+					}
+				}
 				float totalPrice = 0;
 				float totalYuanjia = 0;
 				for (Cart cart : cartList) {
@@ -130,16 +151,20 @@ public class SubmitOrderAction extends ActionSupport {
 
 					// 购买过的产品自动添加至 常用商品列表，统计 产品列表
 					CommonProduct commonProduct = new CommonProduct();
-					commonProduct.setUserId(user.getId());
+					commonProduct.setUserId(userId);
 					String productId = cart.getProductId();
 					commonProduct.setCategoryId(Integer.parseInt(productId.substring(0, 4)));
 					commonProduct.setProductId(productId);
-					commonProduct.setCount(1);
+					int cnt = 0;
+					if (countMap.get(productId) != null) {
+						cnt = countMap.get(productId);
+					}
+					commonProduct.setCount(cnt + 1);
 					commonProductList.add(commonProduct);
 				}
 				order.setZongjia(new DecimalFormat("#########.00").format(totalPrice));
 				order.setYuanjia(new DecimalFormat("#########.00").format(totalYuanjia));
-				UserConf userConf = userManager.findUserConfInfo(user.getId(),"zhekou");
+				UserConf userConf = userManager.findUserConfInfo(userId,"zhekou");
 				if (userConf != null) {
 					order.setZhekou(Float.valueOf(userConf.getValue()));
 				}else{
@@ -148,9 +173,10 @@ public class SubmitOrderAction extends ActionSupport {
 				order.setProductList(cartList.toString());
 				
 				try {
-					
+					productManager.saveCommonProductList(commonProductList);
 				} catch (Exception e) {
-					
+					System.out.println("###### SubmitOrderAction saveCommonProductList error cause by : " + e.getMessage());
+					e.printStackTrace();
 				}
 			}else{
 				request.setAttribute("submitOrderError", "订单商品不存在或已被删除，请重新选购！");
@@ -158,7 +184,7 @@ public class SubmitOrderAction extends ActionSupport {
 			}
 
 			// 查询配送地址信息
-			UserConf userConf = userManager.findUserConfInfo(user.getId(), addressAttr);
+			UserConf userConf = userManager.findUserConfInfo(userId, addressAttr);
 			if (userConf != null) {
 				String [] address = userConf.getValue().split("_receive_");
 				order.setName(address[0]);

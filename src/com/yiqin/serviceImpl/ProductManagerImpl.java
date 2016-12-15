@@ -889,6 +889,11 @@ public class ProductManagerImpl implements ProductManager {
 	public void deleteCommonProduct(String userId, String categoryId) throws DataAccessException {
 		productDao.deleteCommonProductBycategoryId(userId, categoryId);
 	}
+
+	@Override
+	public void deleteCommonProductByProductIds(String userId, String productIds) throws DataAccessException {
+		productDao.deleteCommonProductByProductIds(userId, productIds);
+	}
 	
 	@Override
 	public List<ProductView> findCommonProductInfo(String userId, String categoryId, int offset, int pageSize) {
@@ -995,7 +1000,12 @@ public class ProductManagerImpl implements ProductManager {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public List<CommonProduct> findCommonProductsByUserId(String userId) {
+		return productDao.findCommonProductByTopCateId(userId, null);
+	}
+
 	@Override
 	public Map<String, List<String>> findCommonProductByUserId(String userId) {
 		List<CommonProduct> list = productDao.findCommonProductByUserId(userId);
