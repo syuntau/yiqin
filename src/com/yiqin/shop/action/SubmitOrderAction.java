@@ -137,10 +137,10 @@ public class SubmitOrderAction extends ActionSupport {
 			if (Util.isNotEmpty(cartList)) {
 				List<CommonProduct> commonProductList = new ArrayList<CommonProduct>();  // 购买过的产品自动添加至 常用商品列表
 				List<CommonProduct> savedCommonProductList = productManager.findCommonProductsByUserId(userId);
-				Map<String, Integer> countMap = new HashMap<String, Integer>();
+				Map<String, String> countMap = new HashMap<String, String>();
 				if (Util.isNotEmpty(savedCommonProductList)) {
 					for (CommonProduct comProduct : savedCommonProductList) {
-						countMap.put(comProduct.getProductId(), comProduct.getCount());
+						countMap.put(comProduct.getProductId(), comProduct.getId() + "_" + comProduct.getCnt());
 					}
 				}
 				float totalPrice = 0;
@@ -157,9 +157,11 @@ public class SubmitOrderAction extends ActionSupport {
 					commonProduct.setProductId(productId);
 					int cnt = 0;
 					if (countMap.get(productId) != null) {
-						cnt = countMap.get(productId);
+						String[] arr = countMap.get(productId).split("_");
+						commonProduct.setId(Integer.parseInt(arr[0]));
+						cnt = Integer.parseInt(arr[1]);
 					}
-					commonProduct.setCount(cnt + 1);
+					commonProduct.setCnt(cnt + 1);
 					commonProductList.add(commonProduct);
 				}
 				order.setZongjia(new DecimalFormat("#########.00").format(totalPrice));

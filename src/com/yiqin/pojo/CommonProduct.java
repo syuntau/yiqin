@@ -9,7 +9,7 @@ public class CommonProduct implements java.io.Serializable {
 	private String userId; // 用户名
 	private Integer categoryId; // 二级分类ID
 	private String productId; // 产品ID
-	private int count; // 产品购买次数
+	private int cnt; // 产品购买次数
 
 	public Integer getId() {
 		return id;
@@ -35,11 +35,11 @@ public class CommonProduct implements java.io.Serializable {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	public int getCount() {
-		return count;
+	public int getCnt() {
+		return cnt;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public String toString() {

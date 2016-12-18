@@ -440,6 +440,29 @@ var best_pd = {
        	    	}
        	    }
        	})
+	},
+	transformerSubmit : function() {
+		$('.btn-transformer').on('click', function() {
+			var userId = $('.user-list select').find('option:selected').val();
+			var $bpDiv = $('.best-product-section');
+	   		var $tbody = $bpDiv.find('tbody');
+
+	   		$.ajax({
+	        	type: "post",
+				url: "editBestProduct_transformer",
+				data: '&userId=' + userId,
+				dataType: "json",
+				success: function(data) {
+					if (data=='1') {
+						alert("error param, userId : " + userId);
+					} else if (data=='100') {
+				   		alert("transformer success");
+					} else {
+						alert("error cause by : " + data);
+					}
+	            },
+			});
+		});
 	}
 };
 

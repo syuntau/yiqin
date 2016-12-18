@@ -159,7 +159,7 @@ public interface ProductManager {
 
 	public void deleteProductByAttributeId(String attributeId) throws DataAccessException;
 
-	public Map<String, List<String>> findBestProductByUserId(String userId);
+//	public Map<String, List<String>> findBestProductByUserId(String userId);
 	public void deleteBrandById(String id) throws DataAccessException;
 	public void editBrand(Brand brand) throws DataAccessException;
 	public Integer saveBrand(Brand brand) throws DataAccessException;
@@ -208,4 +208,7 @@ public interface ProductManager {
 	public List<Category> findCategoryInfoForCommon(String userId);
 	public List<Category> findCategoryInfoForCommon(int topCateId, String userId);
 	public List<CommonProduct> findCommonProductsByUserId(String userId);
+	public Map<String, List<String>> findCommonProductMapByUserId(String userId);
+	
+	public void transformerCommonProduct(String userId);
 }

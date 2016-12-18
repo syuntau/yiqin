@@ -919,11 +919,12 @@ public class ProductManagerImpl implements ProductManager {
 				productIndexMap.put(cp.getProductId(), idx++);
 			}
 			tempList = findProductInfoById(userId,pids.toString());
-			result = new ArrayList<ProductView>(tempList.size());
+			ProductView[] pvArr = new ProductView[tempList.size()];
 			for (ProductView pv : tempList) {
 				int subscript = productIndexMap.get(pv.getProductId());
-				result.add(subscript, pv);
+				pvArr[subscript] = pv;
 			}
+			result = Arrays.asList(pvArr);
 		}
 		return result;
 	}
@@ -1007,15 +1008,28 @@ public class ProductManagerImpl implements ProductManager {
 	}
 
 	@Override
-	public Map<String, List<String>> findCommonProductByUserId(String userId) {
+	public Map<String, List<String>> findCommonProductMapByUserId(String userId) {
 		List<CommonProduct> list = productDao.findCommonProductByUserId(userId);
 		if (Util.isNotEmpty(list)) {
 			Map<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+			Map<Integer, String> cpMap = new HashMap<Integer, String>();
+			List<Integer> categoryIdList = new ArrayList<Integer>();
 			for (CommonProduct cp : list) {
+				Integer categoryId = cp.getCategoryId();
+				String productId = cp.getProductId();
+				String pIds = cpMap.get(categoryId);
+				if (Util.isEmpty(pIds)) {
+					categoryIdList.add(categoryId);
+					cpMap.put(categoryId, new StringBuilder().append(productId).toString());
+				} else {
+					cpMap.put(categoryId, new StringBuilder().append(pIds).append(",").append(productId).toString());
+				}
+			}
+			for (Integer categoryId : categoryIdList) {
 				List<String> temp = new ArrayList<String>();
-				String categoryName = CategoryUtil.getCategoryName(cp.getCategoryId());
+				String categoryName = CategoryUtil.getCategoryName(categoryId);
 				temp.add(categoryName);
-				List<ProductView> productList = findProductInfoById(userId, cp.getProductId());
+				List<ProductView> productList = findProductInfoById(userId, cpMap.get(categoryId));
 				StringBuilder name = new StringBuilder();
 				for (ProductView pv : productList) {
 					name.append(",").append(pv.getProductName());
@@ -1023,11 +1037,32 @@ public class ProductManagerImpl implements ProductManager {
 				if (name.length() > 0) {
 					temp.add(name.substring(1));
 				}
-				result.put(String.valueOf(cp.getCategoryId()), temp);
+				result.put(String.valueOf(categoryId), temp);
 			}
 			return result;
 		}
 		return null;
 	}
 	
+	@Override
+	public void transformerCommonProduct(String userId) {
+		List<BestProduct> bpList = productDao.findBestProductByTopCateId(userId, null);
+		List<CommonProduct> cpList = new ArrayList<CommonProduct>();
+		
+		StringBuilder sb = new StringBuilder();
+		for (BestProduct bp : bpList) {
+			sb.append(",").append(bp.getProductId());
+		}
+		
+		String pIds = sb.substring(1);
+		for (String pId : pIds.split(",")) {
+			CommonProduct commonProduct = new CommonProduct();
+			commonProduct.setUserId(userId);
+			commonProduct.setCategoryId(Integer.parseInt(pId.substring(0, 4)));
+			commonProduct.setProductId(pId);
+			commonProduct.setCnt(1);
+			cpList.add(commonProduct);
+		}
+		productDao.saveCommonProductList(cpList);
+	}
 }

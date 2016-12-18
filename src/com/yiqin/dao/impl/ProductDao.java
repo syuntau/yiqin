@@ -226,28 +226,28 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
-	@Override
-	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException {
-		getHibernateTemplate().saveOrUpdate(bestProduct);
-	}
-
-	@Override
-	public void deleteBestProductByUserId(String userId)
-			throws DataAccessException {
-		List<BestProduct> list = findBestProductByUserId(userId);
-		if (Util.isNotEmpty(list)) {
-			getHibernateTemplate().deleteAll(list);
-		}
-	}
-
-	@Override
-	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException {
-		BestProduct bestProduct = findBestProductByCategoryId(userId, categoryId);
-		if (bestProduct != null) {
-			getHibernateTemplate().delete(bestProduct);
-		}
-	}
-	
+//	@Override
+//	public void saveBestProduct(BestProduct bestProduct) throws DataAccessException {
+//		getHibernateTemplate().saveOrUpdate(bestProduct);
+//	}
+//
+//	@Override
+//	public void deleteBestProductByUserId(String userId)
+//			throws DataAccessException {
+//		List<BestProduct> list = findBestProductByUserId(userId);
+//		if (Util.isNotEmpty(list)) {
+//			getHibernateTemplate().deleteAll(list);
+//		}
+//	}
+//
+//	@Override
+//	public void deleteBestProductBycategoryId(String userId, String categoryId) throws DataAccessException {
+//		BestProduct bestProduct = findBestProductByCategoryId(userId, categoryId);
+//		if (bestProduct != null) {
+//			getHibernateTemplate().delete(bestProduct);
+//		}
+//	}
+//	
 	@Override
 	public List<BestProduct> findBestProductByTopCateId(String userId,
 			String topCategoryId) {
@@ -269,25 +269,25 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 		return null;
 	}
 
-	@Override
-	public List<BestProduct> findBestProductByUserId(String userId) {
-		String queryString = "from BestProduct where userId = ? order by categoryId";
-		List<?> list = getHibernateTemplate().find(queryString, userId);
-		if (Util.isNotEmpty(list)) {
-			return (List<BestProduct>) list;
-		}
-		return null;
-	}
+//	@Override
+//	public List<BestProduct> findBestProductByUserId(String userId) {
+//		String queryString = "from BestProduct where userId = ? order by categoryId";
+//		List<?> list = getHibernateTemplate().find(queryString, userId);
+//		if (Util.isNotEmpty(list)) {
+//			return (List<BestProduct>) list;
+//		}
+//		return null;
+//	}
 
-	@Override
-	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
-		String queryString = "from BestProduct where userId = ? and categoryId = ?";
-		List<?> list = getHibernateTemplate().find(queryString, new Object[]{userId, Integer.parseInt(categoryId)});
-		if (Util.isNotEmpty(list)) {
-			return (BestProduct) list.get(0);
-		}
-		return null;
-	}
+//	@Override
+//	public BestProduct findBestProductByCategoryId(String userId, String categoryId) {
+//		String queryString = "from BestProduct where userId = ? and categoryId = ?";
+//		List<?> list = getHibernateTemplate().find(queryString, new Object[]{userId, Integer.parseInt(categoryId)});
+//		if (Util.isNotEmpty(list)) {
+//			return (BestProduct) list.get(0);
+//		}
+//		return null;
+//	}
 
 	@Override
 	public List<Brand> findAllBrand() {
@@ -339,7 +339,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public void saveCommonProductList(List<CommonProduct> commonProductList) throws DataAccessException {
-		getHibernateTemplate().saveOrUpdate(commonProductList);
+		getHibernateTemplate().saveOrUpdateAll(commonProductList);
 	}
 
 	@Override
@@ -378,7 +378,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 			queryString.append(" and categoryId like '");
 			queryString.append(topCategoryId).append("%'");
 		}
-		queryString.append(" order by count desc");
+		queryString.append(" order by cnt desc");
 		List<?> list = getHibernateTemplate().find(queryString.toString());
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;
@@ -388,7 +388,7 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public List<CommonProduct> findCommonProductByUserId(String userId) {
-		String queryString = "from CommonProduct where userId = ? order by categoryId, count desc";
+		String queryString = "from CommonProduct where userId = ? order by categoryId asc, cnt desc";
 		List<?> list = getHibernateTemplate().find(queryString, userId);
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;
@@ -408,11 +408,12 @@ public class ProductDao extends HibernateDaoSupport implements IProductDao {
 
 	@Override
 	public List<CommonProduct> findCommonProductByUIdNPId(String userId, String productIds) {
-		String queryString = "from CommonProduct where userId = " + userId + " and productId in ( " + productIds + " )";
+		String queryString = "from CommonProduct where userId = '" + userId + "' and productId in ( " + productIds + " )";
 		List<?> list = getHibernateTemplate().find(queryString);
 		if (Util.isNotEmpty(list)) {
 			return (List<CommonProduct>) list;
 		}
 		return null;
 	}
+
 }

@@ -167,7 +167,7 @@ CREATE TABLE `common_product` (
   `user_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
   `category_id` int(11) DEFAULT NULL COMMENT '属性ID',
   `product_id` varchar(20) DEFAULT NULL COMMENT '产品ID',
-  `count` int(11) DEFAULT 1 COMMENT '产品购买次数',
+  `cnt` int(11) DEFAULT 1 COMMENT '产品购买次数',
   PRIMARY KEY (`id`),
   KEY `uId` (`user_id`),
   KEY `uId_cId` (`user_id`, `category_id`),

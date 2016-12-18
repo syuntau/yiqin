@@ -45,22 +45,8 @@
 				<prop key="hibernate.dialect">${dialect}</prop>
 			</props>
 		</property>
-		<property name="mappingResources">
-			<list>
-				<value>com/yiqin/pojo/Attribute.hbm.xml</value>
-				<value>com/yiqin/pojo/Brand.hbm.xml</value>
-				<value>com/yiqin/pojo/Cart.hbm.xml</value>
-				<value>com/yiqin/pojo/Category.hbm.xml</value>
-				<value>com/yiqin/pojo/CategoryConf.hbm.xml</value>
-				<value>com/yiqin/pojo/Order.hbm.xml</value>
-				<value>com/yiqin/pojo/Product.hbm.xml</value>
-				<value>com/yiqin/pojo/User.hbm.xml</value>
-				<value>com/yiqin/pojo/UserConf.hbm.xml</value>
-				<value>com/yiqin/pojo/BestProduct.hbm.xml</value>
-				<value>com/yiqin/pojo/SAUser.hbm.xml</value>
-				<value>com/yiqin/pojo/RegisterCode.hbm.xml</value>
-				<value>com/yiqin/pojo/Conf.hbm.xml</value>
-			</list>
+		<property name="mappingLocations">
+			<list><value>classpath:/com/yiqin/pojo/*.hbm.xml</value></list>
 		</property>
 	</bean>
 

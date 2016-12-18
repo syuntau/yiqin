@@ -17,8 +17,8 @@
         <property name="productId" type="string">
             <column name="product_id" length="20" />
         </property>
-        <property name="count" type="java.lang.Integer">
-            <column name="count" />
+        <property name="cnt" type="java.lang.Integer">
+            <column name="cnt" />
         </property>
     </class>
 </hibernate-mapping>

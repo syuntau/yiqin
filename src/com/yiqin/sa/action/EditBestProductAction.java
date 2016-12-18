@@ -133,13 +133,13 @@ public class EditBestProductAction extends ActionSupport {
 							commonProduct.setUserId(userId);
 							commonProduct.setCategoryId(Integer.parseInt(cId));
 							commonProduct.setProductId(pId);
-							commonProduct.setCount(1);
+							commonProduct.setCnt(1);
 							saveList.add(commonProduct);
 						}
 					} else {
 						Map<String, Integer> comcommonProCountMap = new HashMap<String, Integer>();
 						for (CommonProduct commonProduct : dbList) {
-							comcommonProCountMap.put(commonProduct.getProductId(), commonProduct.getCount());
+							comcommonProCountMap.put(commonProduct.getProductId(), commonProduct.getCnt());
 						}
 						System.out.println("EditBestProductAction.saveBestProduct comcommonProCountMap : " + comcommonProCountMap);
 						Set<String> pIdSet = new HashSet<String>();
@@ -151,7 +151,7 @@ public class EditBestProductAction extends ActionSupport {
 								commonProduct.setUserId(userId);
 								commonProduct.setCategoryId(Integer.parseInt(cId));
 								commonProduct.setProductId(pId);
-								commonProduct.setCount(1);
+								commonProduct.setCnt(1);
 								saveList.add(commonProduct);
 							}
 						}
@@ -229,7 +229,7 @@ public class EditBestProductAction extends ActionSupport {
 //					result = jsonArray.toString();
 
 
-					Map<String, List<String>> map = productManager.findBestProductByUserId(userId);
+					Map<String, List<String>> map = productManager.findCommonProductMapByUserId(userId);
 					if (!Util.isEmpty(map)) {
 						List<String> pdList = map.get(cId);
 						if (!Util.isEmpty(pdList)) {
@@ -269,7 +269,7 @@ public class EditBestProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
-			Map<String, List<String>> map = productManager.findBestProductByUserId(userId);
+			Map<String, List<String>> map = productManager.findCommonProductMapByUserId(userId);
 			if (Util.isEmpty(map)) {
 				result = UtilKeys.CODE_NO_RESULT;
 				out.print(result);
@@ -350,6 +350,29 @@ public class EditBestProductAction extends ActionSupport {
 			e1.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("error in EditBestProductAction.removeItem for exception");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String transformer() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			} else {
+				productManager.transformerCommonProduct(userId);
+				result = UtilKeys.CODE_SUCCESS;
+				out.print(result);
+			}
+		} catch (Exception e) {
+			System.out.println("error in EditBestProductAction.transformer error cause by : " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
