@@ -24,10 +24,10 @@ import org.apache.poi.ss.usermodel.Footer;
  *  
  */
 
-public class HssExcelExp extends ExcelExp{
+public class ExcelExportOrderByHss extends ExcelExportOrder{
 
 	
-	public HssExcelExp() {
+	public ExcelExportOrderByHss() {
 		super();
 	}
 	/**
@@ -37,7 +37,7 @@ public class HssExcelExp extends ExcelExp{
 	 * @param sheetNum 要操作的页签，0为第一个页签
 	 * @throws IOException
 	 */
-	public HssExcelExp(String filePath, int sheetNum) throws IOException {
+	public ExcelExportOrderByHss(String filePath, int sheetNum) throws IOException {
 		URL resource = this.getClass().getClassLoader().getResource(filePath);
 		InputStream is = new FileInputStream(resource.getFile());
 		hssWb = new HSSFWorkbook(is);

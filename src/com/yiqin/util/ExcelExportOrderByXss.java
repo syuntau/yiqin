@@ -24,9 +24,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *  
  */
 
-public class XssExcelExp extends ExcelExp{
+public class ExcelExportOrderByXss extends ExcelExportOrder{
 	
-	public XssExcelExp() {
+	public ExcelExportOrderByXss() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class XssExcelExp extends ExcelExp{
 	 * @param sheetNum 要操作的页签，0为第一个页签
 	 * @throws IOException
 	 */
-	public XssExcelExp(String filePath, int sheetNum) throws IOException {
+	public ExcelExportOrderByXss(String filePath, int sheetNum) throws IOException {
 		URL resource = this.getClass().getClassLoader().getResource(filePath);
 		InputStream is = new FileInputStream(resource.getFile());
 		xssWb = new XSSFWorkbook(is);

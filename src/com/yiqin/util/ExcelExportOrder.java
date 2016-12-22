@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * excel模板导出基类, 用于 订单模板 导出使用
  */
 
-public abstract class ExcelExp {
+public abstract class ExcelExportOrder {
 
 	protected XSSFWorkbook xssWb;
 	
