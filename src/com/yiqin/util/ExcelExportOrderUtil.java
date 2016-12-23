@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 public class ExcelExportOrderUtil {
 
-	public void wirteXssExcel(ExcelExportOrder excel){
+	public static void wirteXssExcel(ExcelExportOrder excel){
 		XSSFSheet sheet = excel.getXssSheet();
 		List list = new ArrayList();
 		for (int i = 0; i < list.size(); i++) {
@@ -22,7 +22,7 @@ public class ExcelExportOrderUtil {
 		}
 	}
 	
-	public void wirteHssExcel(ExcelExportOrder excel){
+	public static void wirteHssExcel(ExcelExportOrder excel){
 		HSSFSheet sheet = excel.getHssSheet();
 		List list = new ArrayList();
 		for (int i = 0; i < list.size(); i++) {

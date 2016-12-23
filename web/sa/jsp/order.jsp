@@ -314,6 +314,8 @@ var sa_order = function(){
 			 $('#order_export_btn').on('click', function() {
 				 sa_order.exportOrderExcel();
 			 });
+			 
+			 sa_order.exportOrderByTemplate();
 		},
 			
 		orderSearch : function(){
@@ -346,6 +348,17 @@ var sa_order = function(){
 				$("#order_up_"+orderId).parent().parent().parent().nextAll().hide();
 				$("#order_up_"+orderId).hide();
 			}
+		},
+		
+		exportOrderByTemplate : function() {
+			$('.export_order_by_template').on('click', function() {
+				var type = $(this).attr('idx');
+				if (type && type != '') {
+					window.location.href = "exportOrderByTemplate?type="+type;
+				} else {
+					return ;
+				}
+			});
 		}
 	};
 	
@@ -399,9 +412,19 @@ $(document).ready(function(){
 							</select>
 						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
-                        
-                        <button type="button" style="margin-left:30px;" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel</button>
                     </form>
+                </div>
+                <div class="col-lg-12" style="margin-bottom:10px;">
+                        <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel-旧</button>
+                        <div class="btn-group user-select display-off" style="margin-left:30px;">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    导出Excel模板 <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="11">汇总-依勤</a></li>
+						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="21">汇总-博大</a></li>
+						  </ul>
+						</div>
                 </div>
 				<table class="table table-condensed">
 					<thead>

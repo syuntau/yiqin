@@ -59,7 +59,7 @@ public class ExcelExportOrderByXss extends ExcelExportOrder{
 	 * @param rows
 	 */
 	public void insertRows(int startRow, int rows){
-		xssSheet.shiftRows(3, xssSheet.getLastRowNum(), rows, true, false);
+		xssSheet.shiftRows(startRow + 1, xssSheet.getLastRowNum(), rows, true, false);
 	}
 	
 	/**

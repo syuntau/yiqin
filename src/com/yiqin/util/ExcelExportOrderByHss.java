@@ -62,7 +62,7 @@ public class ExcelExportOrderByHss extends ExcelExportOrder{
 
 	@Override
 	public void insertRows(int startRow, int rows) {
-		hssSheet.shiftRows(3, hssSheet.getLastRowNum(), rows, true, false);
+		hssSheet.shiftRows(startRow + 1, hssSheet.getLastRowNum(), rows, true, false);
 	}
 
 	@Override
