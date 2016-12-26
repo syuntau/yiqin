@@ -60,6 +60,22 @@ public class ExcelExportOrderByXss extends ExcelExportOrder{
 	 */
 	public void insertRows(int startRow, int rows){
 		xssSheet.shiftRows(startRow + 1, xssSheet.getLastRowNum(), rows, true, false);
+		for (int i = 0; i < rows; i++) {
+			XSSFRow sourceRow = null;
+			XSSFRow targetRow = null;
+
+			sourceRow = xssSheet.getRow(startRow);
+			targetRow = xssSheet.createRow(++startRow);
+			XSSFCell sourceCell = null;
+			XSSFCell targetCell = null;
+			for (int j = sourceRow.getFirstCellNum(); j < sourceRow.getLastCellNum(); j++) {
+				sourceCell = sourceRow.getCell(j);
+				if (sourceCell == null) break;
+				targetCell = targetRow.createCell(j);
+				targetCell.setCellStyle(sourceCell.getCellStyle());
+				targetCell.setCellType(sourceCell.getCellType());
+			}
+		}
 	}
 	
 	/**

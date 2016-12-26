@@ -89,8 +89,8 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			excel.replaceExcelData(map);
 			System.out.println("###### excel header set over ...");
 
-			int startRow = 10; //起始行
-			int rows = ovList.size(); //插入行数
+			int startRow = 9; //起始行
+			int rows = order.getProductList().size(); //插入行数
 			if (rows > 1) {
 				excel.insertRows(startRow, rows - 1);
 			}
@@ -100,15 +100,16 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			Row rowCellStyle = excel.getXssSheet().getRow(startRow);
 			CellStyle[] styleArr = new CellStyle[5];
 			for (int i = 0; i < 5; i++) {
-				styleArr[i] = rowCellStyle.getCell(0).getCellStyle();
+				styleArr[i] = rowCellStyle.getCell(i).getCellStyle();
+				System.out.println(rowCellStyle.getCell(i).getStringCellValue());
 			}
 
-			int rowId = 10;
+			int rowId = 9;
 			int idx = 1;
 			for (OrderView ov : ovList) {
-				XSSFRow row = excel.getXssSheet().getRow(rowId++);
 				List<Cart> cartList = ov.getProductList();
 				for (Cart cart : cartList) {
+					XSSFRow row = excel.getXssSheet().getRow(rowId++);
 					int j = 0;
 					XSSFCell cell = row.getCell(j);
 					cell.setCellValue(idx++);

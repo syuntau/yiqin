@@ -16,7 +16,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Footer;
 
-
 /**
  * 
  * excel导出类
@@ -63,6 +62,19 @@ public class ExcelExportOrderByHss extends ExcelExportOrder{
 	@Override
 	public void insertRows(int startRow, int rows) {
 		hssSheet.shiftRows(startRow + 1, hssSheet.getLastRowNum(), rows, true, false);
+		for (int i = 0; i < rows; i++) {
+			HSSFRow sourceRow = hssSheet.getRow(startRow);;
+			HSSFRow targetRow = hssSheet.createRow(++startRow);
+			HSSFCell sourceCell = null;
+			HSSFCell targetCell = null;
+			for (int j = sourceRow.getFirstCellNum(); j < sourceRow.getLastCellNum(); j++) {
+				sourceCell = sourceRow.getCell(j);
+				if (sourceCell == null) break;
+				targetCell = targetRow.createCell(j);
+				targetCell.setCellStyle(sourceCell.getCellStyle());
+				targetCell.setCellType(sourceCell.getCellType());
+			}
+		}
 	}
 
 	@Override
