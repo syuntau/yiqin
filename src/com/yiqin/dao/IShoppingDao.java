@@ -153,4 +153,6 @@ public interface IShoppingDao {
 	public boolean deleteOrder(long orderId);
 
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
+
+	public List<Order> findOrders(String ids);
 }

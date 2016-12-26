@@ -173,4 +173,7 @@ public interface ShoppingManager {
 	public boolean deleteOrder(long orderId);
 
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
+
+	public List<OrderView> findOrderList(String ids);
+
 }

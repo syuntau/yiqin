@@ -202,4 +202,16 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	public boolean deleteOrder(long orderId) {
 		return shoppingDao.deleteOrder(orderId);
 	}
+
+	@Override
+	public List<OrderView> findOrderList(String ids) {
+		List<OrderView> result = new ArrayList<OrderView>();
+		List<Order> orderList = shoppingDao.findOrders(ids);
+		if (Util.isNotEmpty(orderList)) {
+			for (Order order : orderList) {
+				result.add(orderToOrderView(order));
+			}
+		}
+		return result;
+	}
 }

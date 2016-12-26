@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +17,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yiqin.pojo.BestProduct;
 import com.yiqin.pojo.CommonProduct;
 import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;

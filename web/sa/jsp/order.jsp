@@ -354,7 +354,7 @@ var sa_order = function(){
 			$('.export_order_by_template').on('click', function() {
 				var type = $(this).attr('idx');
 				if (type && type != '') {
-					window.location.href = "exportOrderByTemplate?type="+type;
+					window.location.href = "exportOrderByTemplate?ids=10000370&type="+type;
 				} else {
 					return ;
 				}

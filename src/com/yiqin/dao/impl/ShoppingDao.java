@@ -211,4 +211,10 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		}
 		return false;
 	}
+
+	@Override
+	public List<Order> findOrders(String ids) {
+		String queryString = "from Order where id in (" + ids + ")";
+		return (List<Order>) getHibernateTemplate().find(queryString);
+	}
 }
