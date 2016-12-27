@@ -364,6 +364,7 @@ var sa_order = function(){
 					$("#order_square_all").hide();
 					$("#order_check_all").show();
 				}
+				$('.export_order_by_template_div').removeClass('display-off');
 			}else{
 				$("#order_square_"+orderId).show();
 				$("#order_square_"+orderId).addClass('check');
@@ -371,6 +372,9 @@ var sa_order = function(){
 				$("#order_check_"+orderId).removeClass('check');
 				$("#order_square_all").show();
 				$("#order_check_all").hide();
+				if ($(".order-square").length == $(".order-square.check").length) {
+					$('.export_order_by_template_div').addClass('display-off');
+				}
 			}
 		},
 		
@@ -382,6 +386,7 @@ var sa_order = function(){
 				$(".order-check").show();
 				$(".order-check").addClass('check');
 				$(".order-square").removeClass('check');
+				$('.export_order_by_template_div').removeClass('display-off');
 			}else{
 				$("#order_square_all").show();
 				$("#order_check_all").hide();
@@ -389,14 +394,25 @@ var sa_order = function(){
 				$(".order-check").hide();
 				$(".order-check").removeClass('check');
 				$(".order-square").addClass('check');
+				$('.export_order_by_template_div').addClass('display-off');
 			}
 		},
 		
 		exportOrderByTemplate : function() {
 			$('.export_order_by_template').on('click', function() {
-				var type = $(this).attr('idx');
+				var type = $(this).attr('type');
 				if (type && type != '') {
-					window.location.href = "exportOrderByTemplate?ids=10000370&type="+type;
+					var $checkedOrders = $(".order-check.check");
+					if ($checkedOrders.length > 0) {
+						var ids = '';
+						$.each($checkedOrders, function() {
+							var id = $(this).attr('idx');
+							ids += ',' + id;
+						});
+						window.location.href = "exportOrderByTemplate_exportOrderTpl?ids=" + ids.substring(1) + "&type=" + type;
+					} else {
+						return ;
+					}
 				} else {
 					return ;
 				}
@@ -455,13 +471,13 @@ $(document).ready(function(){
 						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
                         <button type="button" class="btn btn-primary btn-user-submit user-select display-off" style="margin-left:30px;" id="order_export_btn">导出-全</button>
-                        <div class="btn-group user-select display-off" style="margin-left:10px;">
+                        <div class="btn-group display-off export_order_by_template_div" style="margin-left:10px;" id="">
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						    导出模板 <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu">
-						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="11">汇总-依勤</a></li>
-						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="21">汇总-博大</a></li>
+						    <li><a class="export_order_by_template" style="cursor: pointer;" type="21">汇总-依勤</a></li>
+						    <li><a class="export_order_by_template" style="cursor: pointer;" type="31">汇总-博大</a></li>
 						  </ul>
 						</div>
                     </form>
@@ -502,7 +518,7 @@ $(document).ready(function(){
 								<td>
 									<div class="summary">
 										 <a href="javaScript:sa_order.orderCheck('<s:property value='#order.id'/>','check');" class="order-square" id="order_square_<s:property value='#order.id'/>"><i class="fa fa-square-o fa-2 cursor-pointer" style="color:#337ab7"></i></a>
-										 <a href="javaScript:sa_order.orderCheck('<s:property value='#order.id'/>','square');" class="order-check" id="order_check_<s:property value='#order.id'/>" style="display:none;"><i class="fa fa-check-square fa-2 cursor-pointer" style="color:#337ab7"></i></a>
+										 <a href="javaScript:sa_order.orderCheck('<s:property value='#order.id'/>','square');" class="order-check" id="order_check_<s:property value='#order.id'/>" style="display:none;" idx="<s:property value='#order.id'/>"><i class="fa fa-check-square fa-2 cursor-pointer" style="color:#337ab7"></i></a>
 										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>" style="margin-left:15px;"><i class="fa fa-chevron-right"></i></a>
 										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="margin-left:15px;display:none;"><i class="fa fa-chevron-down"></i></a>
 										 <span style="margin-left:10px">订单号：<s:property value="#order.id"/></span>
