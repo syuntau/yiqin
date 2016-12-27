@@ -59,7 +59,7 @@ public class ExcelExportOrderByXss extends ExcelExportOrder{
 	 * @param rows
 	 */
 	public void insertRows(int startRow, int rows){
-		xssSheet.shiftRows(startRow + 1, xssSheet.getLastRowNum(), rows, true, false);
+		xssSheet.shiftRows(startRow + 1, xssSheet.getLastRowNum(), rows, true, true);
 		for (int i = 0; i < rows; i++) {
 			XSSFRow sourceRow = null;
 			XSSFRow targetRow = null;
@@ -85,6 +85,7 @@ public class ExcelExportOrderByXss extends ExcelExportOrder{
 	 */
 	public void replaceExcelData(Map<String, String> map){
 		int rowNum = xssSheet.getLastRowNum();
+
 		for(int i = 0;i <= rowNum; i++){
 			XSSFRow row = xssSheet.getRow(i);
 			if(row == null) continue;
@@ -113,5 +114,20 @@ public class ExcelExportOrderByXss extends ExcelExportOrder{
 		out.flush();
 		out.close();
 	}
-	
+
+	@Override
+	public void replaceFooterData(Map<String, String> map) {
+		int rowNum = xssSheet.getLastRowNum();
+
+		XSSFRow row = xssSheet.getRow(rowNum);
+		for(int j = 0;j < row.getPhysicalNumberOfCells();j++){
+			XSSFCell cell = row.getCell(j);
+			if(cell == null) continue;
+			String key = cell.getStringCellValue();
+			if(map.containsKey(key)){
+				cell.setCellValue(map.get(key));
+			}
+		}
+	}
+
 }

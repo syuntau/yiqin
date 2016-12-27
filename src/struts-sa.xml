@@ -45,7 +45,7 @@
 		<action name="updateOrderStatus" class="com.yiqin.sa.action.UpdateOrderStatusAction"></action>
 		<action name="updateOrder" class="com.yiqin.sa.action.UpdateOrderAction"></action>
 		<action name="exportOrderExcel" class="com.yiqin.sa.action.ExportOrderExcelAction"></action>
-		<action name="exportOrderByTemplate" class="com.yiqin.sa.action.ExportOrderByTemplateAction"></action>
+		<action name="exportOrderByTemplate_*" class="com.yiqin.sa.action.ExportOrderByTemplateAction" method="{1}"></action>
 		<action name="exportProductExcel" class="com.yiqin.sa.action.ExportProductExcelAction"></action>
 		<action name="generateRegCode" class="com.yiqin.sa.action.GenerateRegCodeAction"></action>
 		<action name="findRegCode" class="com.yiqin.sa.action.FindRegCodeAction"></action>

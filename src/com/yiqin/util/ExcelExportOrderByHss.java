@@ -80,6 +80,7 @@ public class ExcelExportOrderByHss extends ExcelExportOrder{
 	@Override
 	public void replaceExcelData(Map<String, String> map) {
 		int rowNum = hssSheet.getLastRowNum();
+
 		for(int i = 0;i <= rowNum; i++){
 			HSSFRow row = hssSheet.getRow(i);
 			if(row == null) continue;
@@ -90,6 +91,20 @@ public class ExcelExportOrderByHss extends ExcelExportOrder{
 				if(map.containsKey(key)){
 					cell.setCellValue(map.get(key));
 				}
+			}
+		}
+	}
+	@Override
+	public void replaceFooterData(Map<String, String> map) {
+		int rowNum = hssSheet.getLastRowNum();
+
+		HSSFRow row = hssSheet.getRow(rowNum);
+		for(int j = 0;j < row.getPhysicalNumberOfCells();j++){
+			HSSFCell cell = row.getCell(j);
+			if(cell == null) continue;
+			String key = cell.getStringCellValue();
+			if(map.containsKey(key)){
+				cell.setCellValue(map.get(key));
 			}
 		}
 	}

@@ -5,12 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 
 /**
  * excel模板导出基类, 用于 订单模板 导出使用
@@ -30,7 +28,7 @@ public abstract class ExcelExportOrder {
 	 * 设置页脚 
 	 */
 	public abstract void createFooter();
-	
+
 	/**
 	 * 
 	 * 插入行 
@@ -53,6 +51,13 @@ public abstract class ExcelExportOrder {
 	 * @throws IOException
 	 */
 	public abstract void downloadExcel(HttpServletResponse response, String filaName) throws IOException;
+	
+	/**
+	 * 
+	 * 替换模板底部变量 
+	 * @param map
+	 */
+	public abstract void replaceFooterData(Map<String, String> map);
 	
 	public XSSFWorkbook getXssWb() {
 		return xssWb;

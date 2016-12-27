@@ -294,6 +294,10 @@ var sa_order = function(){
 		    }
 		},
 		
+		exportOneOrder : function(orderId) {
+			window.location.href = "exportOrderByTemplate_exportOne?ids=" + orderId;
+		},
+		
 		initOrderCheck : function(){
 			 var startTime = "<s:property value='startTime'/>";
 			 $("input[name=startTime]").val(startTime);
@@ -350,6 +354,44 @@ var sa_order = function(){
 			}
 		},
 		
+		orderCheck : function(orderId, type) {
+			if(type=="check"){
+				$("#order_square_"+orderId).hide();
+				$("#order_square_"+orderId).removeClass('check');
+				$("#order_check_"+orderId).show();
+				$("#order_check_"+orderId).addClass('check');
+				if ($(".order-check").length == $(".order-check.check").length) {
+					$("#order_square_all").hide();
+					$("#order_check_all").show();
+				}
+			}else{
+				$("#order_square_"+orderId).show();
+				$("#order_square_"+orderId).addClass('check');
+				$("#order_check_"+orderId).hide();
+				$("#order_check_"+orderId).removeClass('check');
+				$("#order_square_all").show();
+				$("#order_check_all").hide();
+			}
+		},
+		
+		checkAll : function(type) {
+			if(type=="check"){
+				$("#order_square_all").hide();
+				$("#order_check_all").show();
+				$(".order-square").hide();
+				$(".order-check").show();
+				$(".order-check").addClass('check');
+				$(".order-square").removeClass('check');
+			}else{
+				$("#order_square_all").show();
+				$("#order_check_all").hide();
+				$(".order-square").show();
+				$(".order-check").hide();
+				$(".order-check").removeClass('check');
+				$(".order-square").addClass('check');
+			}
+		},
+		
 		exportOrderByTemplate : function() {
 			$('.export_order_by_template').on('click', function() {
 				var type = $(this).attr('idx');
@@ -397,9 +439,9 @@ $(document).ready(function(){
                             <select class="form-control user-select display-off" id="user_select"></select>
                         </div>
                         <div class="form-group" style="margin-left:10px;">
-                            <label class="user-select display-off">选择时间</label>
-                            <input type="text" class="form-control" name="startTime" onclick="WdatePicker()"></input>至
-                            <input type="text" class="form-control" name="endTime"  onclick="WdatePicker()"></input>
+                            <label class="user-select display-off">时间</label>
+                            <input type="text" class="form-control" name="startTime" style="width:130px;" onclick="WdatePicker()"></input>至
+                            <input type="text" class="form-control" name="endTime"  style="width:130px;" onclick="WdatePicker()"></input>
                         </div>
                         <div class="form-group" style="margin-left:10px;">
 	                        <label class="user-select display-off">订单状态</label>
@@ -412,24 +454,28 @@ $(document).ready(function(){
 							</select>
 						</div>
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_search_btn"><s:text name="sa.btn.query" /></button>
-                    </form>
-                </div>
-                <div class="col-lg-12" style="margin-bottom:10px;">
-                        <button type="button" class="btn btn-info btn-user-submit user-select display-off" id="order_export_btn">导出Excel-旧</button>
-                        <div class="btn-group user-select display-off" style="margin-left:30px;">
+                        <button type="button" class="btn btn-primary btn-user-submit user-select display-off" style="margin-left:30px;" id="order_export_btn">导出-全</button>
+                        <div class="btn-group user-select display-off" style="margin-left:10px;">
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    导出Excel模板 <span class="caret"></span>
+						    导出模板 <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu">
 						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="11">汇总-依勤</a></li>
 						    <li><a class="export_order_by_template" style="cursor: pointer;" idx="21">汇总-博大</a></li>
 						  </ul>
 						</div>
+                    </form>
                 </div>
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image" width="35%">订单信息</td>
+							<td class="image" width="35%">
+								<s:if test="page.results != null">
+								<a href="javaScript:sa_order.checkAll('check');" id="order_square_all" style="margin-right:10px;"><i class="fa fa-square-o fa-2 cursor-pointer" style="color:#337ab7"></i></a>
+								<a href="javaScript:sa_order.checkAll('square');" id="order_check_all" style="display:none;margin-right:10px;"><i class="fa fa-check-square fa-2 cursor-pointer" style="color:#337ab7"></i></a>
+								</s:if>
+								订单信息
+							</td>
 							<td width="10%" style="text-align:center;">单价</td>
 							<td width="8%" style="text-align:center;">数量</td>
 							<td width="10%" style="text-align:center;">总价</td>
@@ -455,9 +501,11 @@ $(document).ready(function(){
 							<tr style="background-color: #F0F0E9;font-weight:bold;">
 								<td>
 									<div class="summary">
-										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>"><i class="fa fa-chevron-right"></i></a>
-										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="display:none;"><i class="fa fa-chevron-down"></i></a>
-										 <span style="margin-left:20px">订单号：<s:property value="#order.id"/></span>
+										 <a href="javaScript:sa_order.orderCheck('<s:property value='#order.id'/>','check');" class="order-square" id="order_square_<s:property value='#order.id'/>"><i class="fa fa-square-o fa-2 cursor-pointer" style="color:#337ab7"></i></a>
+										 <a href="javaScript:sa_order.orderCheck('<s:property value='#order.id'/>','square');" class="order-check" id="order_check_<s:property value='#order.id'/>" style="display:none;"><i class="fa fa-check-square fa-2 cursor-pointer" style="color:#337ab7"></i></a>
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','down');" id="order_down_<s:property value='#order.id'/>" style="margin-left:15px;"><i class="fa fa-chevron-right"></i></a>
+										 <a href="javaScript:sa_order.orderSwitch('<s:property value='#order.id'/>','up');" id="order_up_<s:property value='#order.id'/>" style="margin-left:15px;display:none;"><i class="fa fa-chevron-down"></i></a>
+										 <span style="margin-left:10px">订单号：<s:property value="#order.id"/></span>
 										 <span class="dropdown" style="margin-left:50px;">
 											<a id="dropdownMenu<s:property value='#order.id'/>" data-toggle="dropdown" style="cursor:pointer;">订单详细<i class="fa fa-table fa-fw"></i></a>
 											<ul class="dropdown-menu" aria-labelledby="dropdownMenu<s:property value='#order.id'/>">
@@ -496,13 +544,17 @@ $(document).ready(function(){
 									<span onclick="sa_order.modifyOrder(<s:property value='#order.id'/>);">
 										<i class="fa fa-cog fa-2 cursor-pointer" style="color:#337ab7" title="修改订单"></i>
 									</span>
-									</s:if>
 									&nbsp;
+									</s:if>
                 					<s:if test="%{#roles.indexOf('11001')>-1}">
 									<span onclick="sa_order.deleteOrder(<s:property value='#order.id'/>);">
 										<i class="fa fa-times fa-2 cursor-pointer" style="color:#c9302c" title="删除订单"></i>
 									</span>
+									&nbsp;
 									</s:if>
+									<span onclick="sa_order.exportOneOrder(<s:property value='#order.id'/>);">
+										<i class="fa fa-download fa-2 cursor-pointer" style="color:#337ab7" title="订单导出"></i>
+									</span>
 								</td>
 							</tr>
 							<s:iterator value="#order.productList" var="product" status="st">
