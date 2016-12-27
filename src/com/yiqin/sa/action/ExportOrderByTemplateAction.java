@@ -109,8 +109,16 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			excel.replaceExcelData(map);
 			System.out.println("###### excel header set over ...");
 
+			List<Cart> cartList = order.getProductList();
+			if (Util.isNotEmpty(order.getOrderNote())) {
+				Cart cart = new Cart();
+				cart.setCount(1);
+				cart.setProductName(order.getOrderNote());
+				cart.setZhekouPrice(order.getBeizhuzongjia());
+				cartList.add(cart);
+			}
 			int startRow = Integer.parseInt(getText("tpl.start.row.11")); //起始行
-			int rows = order.getProductList().size(); //插入行数
+			int rows = cartList.size(); //插入行数
 			if (rows > 1) {
 				excel.insertRows(startRow, rows - 1);
 				System.out.println("###### excel start row : " + startRow + " insert : " + (rows - 1) + " rows over ...");
@@ -127,7 +135,6 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			int rowId = startRow;
 			int idx = 1;
 			float totalPrice = 0;
-			List<Cart> cartList = order.getProductList();
 			for (Cart cart : cartList) {
 				XSSFRow row = excel.getXssSheet().getRow(rowId++);
 				row.setHeight(height);
@@ -185,20 +192,9 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 
 			Set<String> userIdSet = new HashSet<String>();
 			List<Cart> orderMergeList = new ArrayList<Cart>();
-//			Map<String, Integer> productCountMap = new HashMap<String, Integer>();
 			for (OrderView ov : ovList) {
 				userIdSet.add(ov.getUserId());
 				for (Cart cart : ov.getProductList()) {
-//					String productId = cart.getProductId();
-//					Integer cnt = productCountMap.get(productId);
-//					if (cnt == null) {
-//						cnt = cart.getCount();
-//						orderMergeList.add(cart);
-//					} else {
-//						cnt += cart.getCount();
-//					}
-//					productCountMap.put(productId, cnt);
-//					cart.setCount(cnt);
 					orderMergeList.add(cart);
 				}
 				if (Util.isNotEmpty(ov.getOrderNote())) {
