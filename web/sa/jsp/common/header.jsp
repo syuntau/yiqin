@@ -130,6 +130,11 @@ $(document).ready(function() {
                                 <a href="#" class="side-menu-a" val="product-item"><s:text name="sa.header.product.item" /></a>
                             </li>
                             </s:if>
+                            <s:if test="%{#roles.indexOf('13200')>-1}">
+                            </s:if>
+                            <li>
+                                <a href="#" class="side-menu-a" val="product-image"><s:text name="sa.header.product.image" /></a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>

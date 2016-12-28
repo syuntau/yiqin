@@ -73,6 +73,7 @@
 			<result name="product-brand" type="tiles">sa.product.brand</result>
 			<result name="product-attribute" type="tiles">sa.product.attribute</result>
 			<result name="product-item" type="tiles">sa.product.item</result>
+			<result name="product-image" type="tiles">sa.product.image</result>
 			<result name="product-category" type="tiles">sa.product.category</result>
 			<result name="product-indexList" type="tiles">sa.product.index.list</result>
 			<result name="quick-shopping" type="tiles">sa.quick.shopping</result>
