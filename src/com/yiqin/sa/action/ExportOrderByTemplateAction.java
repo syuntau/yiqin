@@ -22,6 +22,7 @@ import com.yiqin.pojo.User;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.service.UserManager;
 import com.yiqin.shop.bean.OrderView;
+import com.yiqin.util.Amount2RMB;
 import com.yiqin.util.ExcelExportOrder;
 import com.yiqin.util.ExcelExportOrderByXss;
 import com.yiqin.util.Util;
@@ -224,7 +225,7 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("#CUSTOMER_NAME#", customer);
 			map.put("#ADDRESS#", order.getAddress());
-			map.put("#UPDATE_DATE#", order.getCrateDate());
+			map.put("#UPDATE_DATE#", order.getUpdateDate().substring(0, 10));
 			map.put("#TEL#", order.getMobile());
 			excel.replaceExcelData(map);
 			System.out.println("###### excel header set over ...");
@@ -247,6 +248,8 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			int rowId = startRow;
 			int idx = 1;
 			float totalPrice = 0;
+			int totalCnt = 0;
+			String rmb = null;
 			for (Cart cart : orderMergeList) {
 				XSSFRow row = excel.getXssSheet().getRow(rowId++);
 				row.setHeight(height);
@@ -266,6 +269,7 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell = row.getCell(++j);
 				cell.setCellValue(cart.getCount());
 				cell.setCellStyle(styleArr[j]);
+				totalCnt += cart.getCount();
 
 				cell = row.getCell(++j);
 				float subTotal = cart.getCount() * Float.valueOf(cart.getZhekouPrice());
@@ -275,10 +279,14 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 			}
 			map = new HashMap<String, String>();
 			map.put("#total#", new DecimalFormat("#########.00").format(totalPrice));
+			map.put("#totalCnt#", String.valueOf(totalCnt));
+			rmb = Amount2RMB.convert(map.get("#total#"));
+			System.out.println("###### rmb : " + rmb);
+			map.put("#rmb#", rmb);
 			excel.replaceFooterData(map);
 			System.out.println("###### excel order set over ...");
 
-			String fileName = userId + "_" + Util.format(new Date()) + ".xlsx";
+			String fileName = userId + "_" + Util.format(new Date()) + "_by_" + getText("tpl.name.prefix." + type) + ".xlsx";
 			excel.downloadExcel(response, fileName);
 			return null;
 		} catch (Exception e) {
