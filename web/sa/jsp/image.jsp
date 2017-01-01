@@ -4,7 +4,18 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		var html = 
+			'<div class="col-sm-6 col-md-4">'+
+				'<div class="thumbnail">'+
+					'<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1483287653&di=31dae1a151a58550aa07f7a5186633fd&src=http://file20.mafengwo.net/M00/D5/00/wKgB3FGgy-CAb90wAAiCjVBl2v445.groupinfo.w600.jpeg" alt="...">'+
+					'<div class="caption">'+
+						'<p><a href="#" class="btn btn-primary" role="button">删除</a></p>'+
+					'</div>'+
+				'</div>'+
+			'</div>';
+		$('.image_list').append(html);
+		$('.image_list').append(html);
+		$('.image_list').append(html);
 	});
 </script>
 <div id="page-wrapper">
@@ -20,7 +31,7 @@
 	<div class="row">
 		<div class="col-lg-12" style="margin-bottom: 20px;">
 			<form class="form-inline" style="float: left;">
-				
+
 				<div class="form-group" style="margin-left: 10px;">
 					<label class="user-select">商品id：</label> <input type="text"
 						class="form-control" name="zhekou">
@@ -61,55 +72,14 @@
 				</button>
 			</form>
 		</div>
-		
 		<!-- /.col-lg-12 -->
 	</div>
-
+	<div class="row image_list">
+		
+	</div>
 	<!-- /.row -->
 	<hr class="item-hr display-off">
 
-	<div class="row item-section">
-		<div class="col-lg-12">
-			<div class="panel panel-default item-panel display-off">
-				<div class="panel-heading">
-					<s:text name="sa.pd.item.list.title" />
-					<s:if test="%{#roles.indexOf('13201')>-1}">
-						<button type="button" class="btn btn-link btn-remove-all-item">
-							<s:text name="sa.pd.item.btn.remove.all" />
-						</button>
-					</s:if>
-					<s:if test="%{#roles.indexOf('13202')>-1}">
-						<button type="button" class="btn btn-link btn-add-item">
-							<s:text name="sa.pd.item.btn.add" />
-						</button>
-					</s:if>
-				</div>
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table table-hover attr-table">
-							<thead>
-								<tr>
-									<th>Product Id</th>
-									<th>Product Name</th>
-									<s:if
-										test="%{#roles.indexOf('13203')>-1 || #roles.indexOf('13204')>-1}">
-										<th>setting</th>
-									</s:if>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-					<!-- /.table-responsive -->
-				</div>
-				<!-- /.panel-body -->
-			</div>
-			<!-- /.panel -->
-		</div>
-		<!-- /.col-lg-12 -->
-	</div>
 	<!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
