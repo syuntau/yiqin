@@ -12,7 +12,7 @@
 			initFun : function (){
 				$('#reg_image_btn').off().on({
 					'click':function(){
-						imageFun.searchImage();
+						imageFun.searchImage($('.product_id').val());
 					}
 				});
 				$('.btn-upload').on('click', function() {
@@ -20,10 +20,9 @@
 				});
 			},
 			
-			searchImage : function (){
-				var productId = $('.product_id').val();
+			searchImage : function (productId){
 				if(isEmpty(productId)){
-					alert('不能为空！');
+					alert('商品ID不能为空！');
 					return;
 				}
 				
@@ -45,7 +44,7 @@
 			           			product_id = productId;
 			           			$.each(data , function (key,val){
 				           			var html = 
-				    					'<div class="col-sm-6 col-md-3">'+
+				    					'<div class="col-sm-6 col-md-3 '+val.replace('/img/','').split('.')[0]+'">'+
 				    						'<div class="thumbnail">'+
 				    							'<img src="'+val+'" alt="...">'+
 				    							'<div class="caption">'+
@@ -79,17 +78,14 @@
 			uploadImage : function (){
 				$.ajaxFileUpload({
 		            url: "uploadImage",
-		            dataType : 'text',
+		            dataType : 'json',
 		            fileElementId: 'imageFile',
 		            success: function(data) {
-		            	console.log(data);
-		            	alert(data == '100');
-		            	alert(data == 100);
-			           	if (data=='100') {
-			           		imageFun.searchImage();
-			           	} else {
-				        	
-			           	}
+		            	if (!isEmpty(data) && !isEmpty(data.req)) {
+			           		if(data.req == '100'){
+			           			alert('上传成功！');
+			           		}
+			           	 }
 		            },
 		            error : function(data,status,e) {
 		            	alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.upload' /></s:param></s:text>");
@@ -102,15 +98,16 @@
 				$.ajax({
 		            type: "post",
 		            url: "deleteImage",
-		            dataType: "text",
+		            dataType: "json",
 		            data : {
 		            	deleteImageFileName : imageId
 		            },
 		            success: function(data) {
-			           	 if (data=='2') {
-			           		
-			           	 } else {
-			           		
+			           	 if (!isEmpty(data) && !isEmpty(data.req)) {
+			           		if(data.req == '100'){
+			           			alert('删除成功！');
+			           			$('.'+imageId.split('.')[0]).remove();
+			           		}
 			           	 }
 		            },
 		            beforeSend: function() {
@@ -141,14 +138,13 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="col-lg-12" style="margin-bottom: 20px;">
-			<form class="form-inline" style="float: left;">
-				<div class="form-group" style="margin-left: 10px;">
+			<div class="form-inline" style="float: left;">
+				<div class="" style="margin-left: 10px;">
 					<label class="user-select">商品id：</label> <input type="text"
 						class="form-control product_id" name="product_id">
+					<button type="button" class="btn btn-info btn-user-submit " id="reg_image_btn">查询</button>
 				</div>
-				<button type="button"
-					class="btn btn-info btn-user-submit " id="reg_image_btn">查询</button>
-			</form>
+			</div>
 			<form role="form" class="form-inline category-form"
 				enctype="multipart/form-data">
 				<div class="form-group" style="padding-left: 20px">

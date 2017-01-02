@@ -21,6 +21,7 @@ import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class ImageManageAction extends ActionSupport {
 	private static final long serialVersionUID = 1074040371036374358L;
@@ -118,9 +119,11 @@ public class ImageManageAction extends ActionSupport {
 			String result = "";
 			System.out.println("###################### imageFileFileName : " + imageFileFileName);
 			
-			if (Util.isEmpty(imageFileFileName)) {
+			if (Util.isEmpty(imageFileFileName) || !(imageFileFileName.endsWith("jpg") || imageFileFileName.endsWith("png"))) {
 				result = UtilKeys.CODE_ERR_PARAM;
-				out.print(result);
+				JSONObject jb = new JSONObject();
+				jb.accumulate("req", result);
+				out.print(jb.toString());
 				return null;
 			} else {
 				OutputStream output = null;
@@ -157,7 +160,9 @@ public class ImageManageAction extends ActionSupport {
 
 				
 		        result = UtilKeys.CODE_SUCCESS;
-				out.print(result);
+		        JSONObject jb = new JSONObject();
+				jb.accumulate("req", result);
+				out.print(jb.toString());
 				return null;
 			}
 		} catch (IOException e1) {
@@ -177,7 +182,9 @@ public class ImageManageAction extends ActionSupport {
 			
 			if (Util.isEmpty(deleteImageFileName)) {
 				result = UtilKeys.CODE_ERR_PARAM;
-				out.print(result);
+				JSONObject jb = new JSONObject();
+				jb.accumulate("req", result);
+				out.print(jb.toString());
 				return null;
 			} else {
 		        
@@ -190,8 +197,9 @@ public class ImageManageAction extends ActionSupport {
 		        	filee.delete();
 		        }
 				
-		        result = "100";
-				out.print(result);
+		        JSONObject jb = new JSONObject();
+				jb.accumulate("req", "100");
+				out.print(jb.toString());
 				return null;
 			}
 		} catch (IOException e1) {
