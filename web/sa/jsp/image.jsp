@@ -15,6 +15,11 @@
 						imageFun.searchImage($('.product_id').val());
 					}
 				});
+				$('.product_id').bind('keypress', function (event) {
+		            if (event.keyCode == "13") {
+		            	imageFun.searchImage($('.product_id').val());
+		            }
+		        });
 				$('.btn-upload').on('click', function() {
 					imageFun.uploadImage();
 				});
