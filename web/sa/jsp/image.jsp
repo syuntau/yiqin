@@ -62,8 +62,10 @@
 			           			
 			           			$('.image_delete_btn').off().on({
 			           				'click' : function (){
-			           					var imageId = $(this).attr('imageId');
-			           					imageFun.deleteImage(imageId);
+			           					if(confirm("确定删除吗")){
+				           					var imageId = $(this).attr('imageId');
+				           					imageFun.deleteImage(imageId);
+			           			        }
 			           				}
 			           			});
 			           		}
