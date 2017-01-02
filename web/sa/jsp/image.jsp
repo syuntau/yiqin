@@ -8,7 +8,7 @@
 		imageFun.initFun();
 	});
 	var imageFun = {
-			
+			roles : '<s:property value="#session.yiqin_sa_user_roles" />',
 			initFun : function (){
 				$('#reg_image_btn').off().on({
 					'click':function(){
@@ -47,13 +47,23 @@
 			           			alert('查询为空！');
 			           		}else{
 			           			product_id = productId;
+			           			var rmFlag = false;
+			           			if (imageFun.roles.indexOf('13503') > -1) {
+			           				rmFlag = true;
+			           			}
 			           			$.each(data , function (key,val){
+			           				var valTmp = val.replace('/img/','');
+			           				var rmBtn = '';
+			           				if (rmFlag) {
+			           					rmBtn = ' <a href="javascript:void(0)" class="btn btn-primary image_delete_btn" imageId = "'+valTmp+'"  role="button">删除</a>';
+			           				}
+			           				
 				           			var html = 
-				    					'<div class="col-sm-6 col-md-3 '+val.replace('/img/','').split('.')[0]+'">'+
+				    					'<div class="col-sm-6 col-md-3 '+valTmp.split('.')[0]+'">'+
 				    						'<div class="thumbnail">'+
 				    							'<img src="'+val+'" alt="...">'+
 				    							'<div class="caption">'+
-				    								'<p> '+val.replace('/img/','')+' <a href="javascript:void(0)" class="btn btn-primary image_delete_btn" imageId = "'+val.replace('/img/','')+'"  role="button">删除</a></p>'+
+				    								'<p> '+valTmp+rmBtn+'</p>'+
 				    							'</div>'+
 				    						'</div>'+
 				    					'</div>';
@@ -62,8 +72,8 @@
 			           			
 			           			$('.image_delete_btn').off().on({
 			           				'click' : function (){
-			           					if(confirm("确定删除吗")){
-				           					var imageId = $(this).attr('imageId');
+			           					var imageId = $(this).attr('imageId');
+			           					if(confirm("确定删除图片：" + imageId + "吗")){
 				           					imageFun.deleteImage(imageId);
 			           			        }
 			           				}
@@ -92,7 +102,7 @@
 			           		if(data.req == '100'){
 			           			alert('上传成功！');
 			           		}else if(data.req == '1'){
-			           			alert('上传失败，请检查文件格式。');
+			           			alert('上传失败，请检查文件格式，系统支持：png 和 jpg格式图片。');
 			           		}
 			           	 }
 		            },
@@ -154,6 +164,7 @@
 					<button type="button" class="btn btn-info btn-user-submit " id="reg_image_btn">查询</button>
 				</div>
 			</div>
+			<s:if test="%{#roles.indexOf('13502')>-1}">
 			<form role="form" class="form-inline category-form"
 				enctype="multipart/form-data">
 				<div class="form-group" style="padding-left: 20px">
@@ -164,6 +175,7 @@
 					<s:text name="sa.btn.upload" />
 				</button>
 			</form>
+			</s:if>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
