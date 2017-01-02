@@ -84,6 +84,8 @@
 		            	if (!isEmpty(data) && !isEmpty(data.req)) {
 			           		if(data.req == '100'){
 			           			alert('上传成功！');
+			           		}else if(data.req == '1'){
+			           			alert('上传失败，请检查文件格式。');
 			           		}
 			           	 }
 		            },
