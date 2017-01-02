@@ -64,6 +64,10 @@
 		<action name="editUser_*" class="com.yiqin.sa.action.EditUserAction" method="{1}"></action>
 		<action name="editCustomer_*" class="com.yiqin.sa.action.EditCustomerAction" method="{1}"></action>
 		
+		<action name="searchImage" class="com.yiqin.sa.action.ImageManageAction" method="searchImage"></action>
+		<action name="uploadImage" class="com.yiqin.sa.action.ImageManageAction" method="uploadImage"></action>
+		<action name="deleteImage" class="com.yiqin.sa.action.ImageManageAction" method="deleteImage"></action>
+		
 		<action name="dispatcher" class="com.yiqin.sa.action.SANavDispatcherAction">
 			<result name="order-manager" type="tiles">sa.order</result>
 			<result name="order-detail" type="tiles">sa.order.detail</result>
