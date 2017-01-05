@@ -78,6 +78,15 @@
 		<put-attribute name="right" value="shop.index.body.right" />
 	</definition>
 	
+	<definition name="shop.chart.index" extends="shop.template">
+		<put-attribute name="title" value="shop.cart.title"/>
+		<put-attribute name="body" value="shop.chart.index.body" />
+	</definition>
+	
+	<definition name="shop.chart.index.body" template="/shop/jsp/index_chart.jsp">
+		<put-attribute name="body" value="/shop/jsp/chart.jsp" />
+	</definition>
+	
 	<definition name="shop.search.body" template="/shop/jsp/other.jsp">
 		<put-attribute name="left" value="shop.index.body.left" />
 		<put-attribute name="right" value="/shop/jsp/shop.jsp" />
