@@ -148,8 +148,9 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell.setCellValue(cart.getProductName());
 				cell.setCellStyle(styleArr[j]);
 
+				String zhekouPrice = Util.isEmpty(cart.getZhekouPrice()) ? "0" : cart.getZhekouPrice();
 				cell = row.getCell(++j);
-				cell.setCellValue(cart.getZhekouPrice());
+				cell.setCellValue(zhekouPrice);
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
@@ -157,13 +158,13 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
-				float subTotal = cart.getCount() * Float.valueOf(cart.getZhekouPrice());
-				cell.setCellValue(new DecimalFormat("#########.00").format(subTotal)); // 需要小计
+				float subTotal = cart.getCount() * Float.valueOf(zhekouPrice);
+				cell.setCellValue(new DecimalFormat("########0.00").format(subTotal)); // 需要小计
 				cell.setCellStyle(styleArr[j]);
 				totalPrice += subTotal;
 			}
 			map = new HashMap<String, String>();
-			map.put("#total#", new DecimalFormat("#########.00").format(totalPrice));
+			map.put("#total#", new DecimalFormat("########0.00").format(totalPrice));
 			excel.replaceFooterData(map);
 			System.out.println("###### excel order set over ...");
 
@@ -263,7 +264,8 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
-				cell.setCellValue(cart.getZhekouPrice());
+				String zhekouPrice = Util.isEmpty(cart.getZhekouPrice()) ? "0" : cart.getZhekouPrice();
+				cell.setCellValue(zhekouPrice);
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
@@ -272,13 +274,13 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				totalCnt += cart.getCount();
 
 				cell = row.getCell(++j);
-				float subTotal = cart.getCount() * Float.valueOf(cart.getZhekouPrice());
-				cell.setCellValue(new DecimalFormat("#########.00").format(subTotal)); // 需要小计
+				float subTotal = cart.getCount() * Float.valueOf(zhekouPrice);
+				cell.setCellValue(new DecimalFormat("########0.00").format(subTotal)); // 需要小计
 				cell.setCellStyle(styleArr[j]);
 				totalPrice += subTotal;
 			}
 			map = new HashMap<String, String>();
-			map.put("#total#", new DecimalFormat("#########.00").format(totalPrice));
+			map.put("#total#", new DecimalFormat("########0.00").format(totalPrice));
 			map.put("#totalCnt#", String.valueOf(totalCnt));
 			rmb = Amount2RMB.convert(map.get("#total#"));
 			System.out.println("###### rmb : " + rmb);
