@@ -7,6 +7,7 @@ CREATE DATABASE `yiqin`
 
 
 /* 用户表 */
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` varchar(20) NOT NULL COMMENT '用户ID',
   `password` varchar(40) DEFAULT NULL COMMENT '密码',
@@ -14,6 +15,7 @@ CREATE TABLE `user` (
   `name` varchar(50) DEFAULT NULL COMMENT '用户名称',
   `mobile` varchar(20) DEFAULT NULL COMMENT '手机',
   `company` varchar(50) DEFAULT NULL COMMENT '公司名',
+  `register_code` varchar(20) DEFAULT NULL COMMENT '注册码',
   `role` tinyint(4) DEFAULT NULL COMMENT '用户类型，1：个人用户，2：企业用户',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
@@ -21,6 +23,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
 
 /* 用户扩展表 */
 CREATE TABLE `user_conf` (
@@ -30,6 +33,7 @@ CREATE TABLE `user_conf` (
   `value` varchar(500) DEFAULT NULL COMMENT '用户配置值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
 
 /* 分类表 */
 CREATE TABLE `category` (
@@ -42,6 +46,7 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+
 /* 分类扩展表 */
 CREATE TABLE `category_conf` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
@@ -51,6 +56,7 @@ CREATE TABLE `category_conf` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+
 /* 品牌表 */
 CREATE TABLE `brand` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '品牌ID',
@@ -58,6 +64,7 @@ CREATE TABLE `brand` (
   `name_cn` varchar(30) DEFAULT NULL COMMENT '品牌中文名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
 
 /* 属性表 */
 CREATE TABLE `attribute` (
@@ -73,12 +80,14 @@ CREATE TABLE `attribute` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+
 /* 产品表 */
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `product_id` varchar(20) DEFAULT NULL COMMENT '产品ID',
   `attribute_id` int(11) DEFAULT NULL COMMENT '属性ID',
-  `value` varchar(100) DEFAULT NULL COMMENT '属性值',
+  `value` varchar(512) DEFAULT NULL COMMENT '属性值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -97,14 +106,15 @@ CREATE TABLE `order` (
   `yunfei` float(9,3) DEFAULT NULL COMMENT '运费',
   `songhuoriqi` varchar(20) DEFAULT NULL COMMENT '送货日期',
   `peisongfangshi` varchar(20) DEFAULT NULL COMMENT '配送方式',
+  `fapiaolx` varchar(20) DEFAULT NULL COMMENT '发票类型',
   `fapiaotaitou` varchar(50) DEFAULT NULL COMMENT '发票抬头',
   `fapiaomingxi` varchar(100) DEFAULT NULL COMMENT '发票明细',
   `order_note` text default NULL comment '备注',
   `beizhuzongjia` varchar(20) default NULL comment '备注总价',
-  `product_list` varchar(1024) DEFAULT NULL COMMENT '商品列表：商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价',
-  `yuanjia` float(9,3) DEFAULT NULL COMMENT '订单原价',
+  `product_list` text DEFAULT NULL COMMENT '商品列表：商品ID + 商品缩略图URL + 商品名 + 数量  + 单价 + 总价',
+  `yuanjia` varchar(20) DEFAULT NULL COMMENT '订单原价',
   `zhekou` float(9,3) DEFAULT NULL COMMENT '订单折扣',
-  `zongjia` float(9,3) DEFAULT NULL COMMENT '订单总价',
+  `zongjia` varchar(20) DEFAULT NULL COMMENT '订单总价',
   `crate_date` datetime DEFAULT NULL COMMENT '订单生成时间',
   `update_date` datetime DEFAULT NULL COMMENT '订单更新时间',
   `delete_flag` tinyint(4) DEFAULT NULL COMMENT '订单删除Flag',
@@ -113,13 +123,15 @@ CREATE TABLE `order` (
 
 
 /* 购物车表 */
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `use_id` varchar(20) DEFAULT NULL COMMENT '用户ID',
   `product_id` varchar(20) DEFAULT NULL COMMENT '商品ID',
-  `product_name` varchar(20) DEFAULT NULL COMMENT '商品名称',
+  `product_name` varchar(100) DEFAULT NULL COMMENT '商品名称',
   `img_url` varchar(40) DEFAULT NULL COMMENT '商品图片地址',
-  `price` float(9,3) DEFAULT NULL COMMENT '商品单价',
+  `price` varchar(20) DEFAULT NULL COMMENT '商品单价',
+  `zhekou_price` varchar(20) DEFAULT NULL COMMENT '商品折扣单价',
   `count` int(11) DEFAULT NULL COMMENT '商品数量',
   `product_info` varchar(200) DEFAULT NULL COMMENT '商品其他属性',
   PRIMARY KEY (`id`)
@@ -147,10 +159,6 @@ CREATE TABLE `sa_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 
-alter table `order` add column order_note text default NULL comment '备注' after fapiaomingxi;
-alter table `order` add column beizhuzongjia varchar(20) default NULL comment '备注总价' after order_note;
-
-
 /* 系统扩展表 */
 CREATE TABLE `conf` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
@@ -174,3 +182,12 @@ CREATE TABLE `common_product` (
   KEY `uId_pId` (`user_id`, `product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+/* 注册码表 */
+DROP TABLE IF EXISTS `register_code`;
+CREATE TABLE `register_code` (
+  `register_code` varchar(20) NOT NULL COMMENT '注册码',
+  `name` varchar(20) NOT NULL COMMENT '名称',
+  `zhekou` float(9,3) NOT NULL COMMENT '折扣',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`register_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
