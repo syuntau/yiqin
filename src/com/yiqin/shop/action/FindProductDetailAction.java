@@ -52,9 +52,7 @@ public class FindProductDetailAction extends ActionSupport {
 				response.getWriter().print(result);
 				return null;
 			}
-			Map<String, Map<String, String>> product = productManager
-					.findProductDetailByIds(productId);
-
+			Map<String, Map<String, String>> product = productManager.findProductDetailByIds(productId);
 			JSONObject jsObject = JSONObject.fromObject(product);
 			result = jsObject.toString();
 			response.getWriter().print(result);

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
@@ -26,6 +27,7 @@ import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
 import com.yiqin.util.BrandUtil;
 import com.yiqin.util.CategoryUtil;
+import com.yiqin.util.PropConfig;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
@@ -194,6 +196,15 @@ public class ProductManagerImpl implements ProductManager {
 			}
 		}
 		Map<String, Map<Integer, List<String>>> attrMap = getAttributeMapByCategory4WeiId(cateId4wei);
+
+		String noShowAttrList = PropConfig.getFileConfig("config_shop", "product.detail.item.no.show");
+		Set<String> noShowAttrSet = new HashSet<String>();
+		if (Util.isNotEmpty(noShowAttrList)) {
+			for (String attr : noShowAttrList.split(",")) {
+				noShowAttrSet.add(attr);
+			}
+		}
+
 		for (Map.Entry<String,Map<Integer,String>> entry : productMap.entrySet()) {
 			id_nameid = attrMap.get(entry.getKey().substring(0, 4));
 //			int categoryId = Integer.valueOf(entry.getKey().substring(0, 4));
@@ -208,6 +219,9 @@ public class ProductManagerImpl implements ProductManager {
 				String value = entrysub.getValue();
 				if("品牌".equals(name)){
 					value = getBrandShowName(Integer.valueOf(value));
+				}
+				if (noShowAttrSet.contains(id_nameid.get(entrysub.getKey()).get(0))) {
+					continue;
 				}
 				nameid_pvalue.put(name, value);
 			}
@@ -351,6 +365,7 @@ public class ProductManagerImpl implements ProductManager {
 			productView.setColor(nameid_pvalue.get("color"));
 			productView.setZhekouPrice(zhekouPrice);
 			productView.setImgUrl(nameid_pvalue.get("imageUrl"));
+			productView.setParam(nameid_pvalue.get("param"));
 			
 			pViewList.add(productView);
 		}
@@ -373,6 +388,7 @@ public class ProductManagerImpl implements ProductManager {
 			productView.setPrice(nameid_pvalue.get("price"));
 			productView.setColor(nameid_pvalue.get("color"));
 			productView.setImgUrl(nameid_pvalue.get("imageUrl"));
+			productView.setParam(nameid_pvalue.get("param"));
 			
 			pViewList.add(productView);
 		}

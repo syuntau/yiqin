@@ -7,13 +7,22 @@ package com.yiqin.shop.bean;
  * 
  */
 public class ProductView {
-	private String productId;// 产品ID
-	private String productName; // 名称
-	private String price; // 价格
-	private String zhekouPrice;//折扣价格
-	private String color;// 颜色
-	private String imgUrl; // 图片链接
+	private String productId;      // 产品ID
+	private String productName;    // 名称
+	private String price;          // 价格
+	private String zhekouPrice;    //折扣价格
+	private String color;          // 颜色
+	private String imgUrl;         // 图片链接
 	private String check;
+	private String param;          // 规则参数
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
+	}
 
 	public String getProductId() {
 		return productId;

@@ -190,6 +190,7 @@ $(document).ready(function(){
 				<div id="select_product_info">
 					<p>
 						<b><s:text name="shop.product.details.color"/></b>
+<%-- 						<b><s:text name="shop.product.details.param"/></b> --%>
 					</p>
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
@@ -197,6 +198,9 @@ $(document).ready(function(){
 <%-- 							<img src="<s:property value='#productInfo.imgUrl'/>" class="share img-responsive" alt="<s:property value='#productInfo.color'/>" width="25" height="25"/> --%>
 							<i style="font-size: 16px;"><s:property value='#productInfo.color'/></i>
 						</a>
+<%-- 						<a href="#none" title="<s:property value='#productInfo.param'/>" class="none-detail-a"> --%>
+<%-- 							<i style="font-size: 16px;"><s:property value='#productInfo.param'/></i> --%>
+<!-- 						</a> -->
 					</div>
 				</div>
 			</div>
