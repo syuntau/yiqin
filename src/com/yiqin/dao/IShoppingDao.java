@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.pojo.Stat;
 import com.yiqin.shop.bean.OrderTempObj;
 
 /**
@@ -155,4 +156,9 @@ public interface IShoppingDao {
 	public boolean updateOrder(long orderId, OrderTempObj tmpOrder);
 
 	public List<Order> findOrders(String ids);
+	
+
+	public List<Order> findAllOrderList(final String hql);
+	
+	public boolean saveOrUpdateStat(Stat stat);
 }

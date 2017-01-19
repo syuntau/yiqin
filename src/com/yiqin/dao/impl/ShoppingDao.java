@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.pojo.Stat;
 import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.util.Util;
 
@@ -216,5 +217,25 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 	public List<Order> findOrders(String ids) {
 		String queryString = "from Order where id in (" + ids + ")";
 		return (List<Order>) getHibernateTemplate().find(queryString);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findAllOrderList(String userId) {
+//		String queryString = "from Order where userId = '"+userId+"' and deleteFlag = 0 and status > 0";
+		String queryString = "from Order where userId = '"+userId+"' and deleteFlag = 0";
+		List<?> list = getHibernateTemplate().find(queryString);
+		return (List<Order>)list;
+	}
+	
+	
+	public boolean saveOrUpdateStat(Stat stat){
+		try {
+			getHibernateTemplate().saveOrUpdate(stat);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.yiqin.pojo.Stat" table="stat" catalog="yiqin">
+        
+		<composite-id name="statId" class="com.yiqin.pojo.StatId">
+			<key-property name="userId" column="userId" type="java.lang.String" />
+			<key-property name="month" column="month" type="java.lang.String" />
+		</composite-id>
+
+        <property name="zongjia" type="string">
+            <column name="zongjia" length="50">
+            </column>
+        </property>
+        <property name="mingxi" type="string">
+            <column name="mingxi" length="1000">
+            </column>
+        </property>
+        
+    </class>
+</hibernate-mapping>

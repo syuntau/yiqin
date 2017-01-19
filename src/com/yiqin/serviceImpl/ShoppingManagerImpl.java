@@ -2,15 +2,24 @@ package com.yiqin.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.time.DateFormatUtils;
 
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.Order;
+import com.yiqin.pojo.Stat;
+import com.yiqin.pojo.StatId;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.shop.bean.OrderView;
 import com.yiqin.util.Util;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class ShoppingManagerImpl implements ShoppingManager {
 	private IShoppingDao shoppingDao;
@@ -129,6 +138,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		return ovList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private OrderView orderToOrderView(Order order) {
 		if (order != null) {
 			OrderView ov = new OrderView();
@@ -214,4 +224,132 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		}
 		return result;
 	}
+	
+	public boolean startStat(String userId){
+		List<Order> listOrder = shoppingDao.findAllOrderList(userId);
+		Map<String, List<Order>> orderMap =  getMonthOrder(listOrder);
+		List<Stat> statList = new ArrayList<>();
+		for (String key : orderMap.keySet()) {
+			Stat stat = getStat4Month(orderMap.get(key) ,userId,key);
+			stat.setZongjia(getPrice4Month(orderMap.get(key))+"");
+			statList.add(stat);
+		}
+		
+		try {
+			for (Stat stat : statList) {
+				shoppingDao.saveOrUpdateStat(stat);
+			}
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	/**
+	 * 根据月份分类order
+	 * @param listOrder
+	 * @return
+	 */
+	private Map<String, List<Order>> getMonthOrder(List<Order> listOrder){
+		Map<String, List<Order>> orderMap = new HashMap<>();
+		for (Order order : listOrder) {
+			String data = DateFormatUtils.format(order.getCrateDate(), "yyyyMM");
+			if(orderMap.get(data)==null){
+				orderMap.put(data, new ArrayList<Order>());
+			}
+			orderMap.get(data).add(order);
+		}
+		return orderMap;
+	}
+	
+	/**
+	 * 处理单月统计数据
+	 * @param listOrder
+	 * @param userId
+	 * @param month
+	 */
+	private Stat getStat4Month(List<Order> listOrder , String userId,String month){
+		Stat stat = new Stat();
+		stat.setStatId(new StatId(userId, month));
+		Map<String, Double> map = new HashMap<>();
+		
+		List<JSONObject> productList =  getProduct4Order(listOrder);
+		
+		for (JSONObject jsonObject : productList) {
+			String productId = jsonObject.getString("productId");
+			String cid = null;
+			try {
+				cid = productId.substring(0,2);
+			} catch (Exception e) {
+			}
+			if(cid != null){
+				if(map.get(cid)==null){
+					map.put(cid, 0.0);
+				}
+				try {
+					map.put(cid, map.get(cid) + Double.parseDouble(jsonObject.getString("zhekouPrice")));
+				} catch (Exception e) {
+				}
+			}
+		}
+		JSONArray ja = new JSONArray();
+		for (String key : map.keySet()) {
+			Double val = map.get(key);
+			JSONObject jo = new JSONObject();
+			jo.accumulate("cid", key);
+			jo.accumulate("price", val);
+			ja.add(jo);
+		}
+		stat.setMingxi(ja.toString());
+		return stat;
+	}
+	
+	/**
+	 * 获取所有order 对应product对象
+	 * @param listOrder
+	 */
+	private List<JSONObject> getProduct4Order(List<Order> listOrder){
+		
+		List<JSONObject> list = new ArrayList<>();
+		
+		for (Order order : listOrder) {
+			JSONArray ja = JSONArray.fromObject(order.getProductList());
+			for (Object object : ja) {
+				list.add(JSONObject.fromObject(object));
+			}
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * 计算单月总价
+	 * @param listOrder
+	 * @return
+	 */
+	private double getPrice4Month(List<Order> listOrder){
+		double price = 0.0;
+		for (Order order : listOrder) {
+			JSONArray ja = JSONArray.fromObject(order.getProductList());
+			for (Object object : ja) {
+				try {
+					System.out.println(object.toString());
+					JSONObject jo = JSONObject.fromObject(object);
+					String zhekouPrice = jo.getString("zhekouPrice");
+					int count = jo.getInt("count");
+					double d = Double.parseDouble(zhekouPrice);
+					price+=(d*count);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return price;
+	}
+	
+	
+	
 }

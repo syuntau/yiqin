@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
-	<section style="margin-top:50px">
+	<section >
 		<div class="container">
 			<div class="row">
 				<tiles:insertAttribute name="body" />

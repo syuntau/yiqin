@@ -176,4 +176,7 @@ public interface ShoppingManager {
 
 	public List<OrderView> findOrderList(String ids);
 
+	public boolean startStat(String userId);
+	
+	
 }
