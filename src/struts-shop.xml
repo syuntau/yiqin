@@ -132,6 +132,9 @@
 		<action name="findFilterAttr" class="com.yiqin.shop.action.FindFilterAttributeAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
+		
+		
+		<action name="findData4StatChart" class="com.yiqin.shop.action.FindData4StatChartAction"  method="getChartData"></action>
 
 		<action name="dispatcher" class="com.yiqin.shop.action.ShopNavDispatcherAction">
 			<interceptor-ref name="setNav"></interceptor-ref>

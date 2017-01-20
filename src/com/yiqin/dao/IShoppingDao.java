@@ -161,4 +161,8 @@ public interface IShoppingDao {
 	public List<Order> findAllOrderList(final String hql);
 	
 	public boolean saveOrUpdateStat(Stat stat);
+	
+	public List<Stat> findChartData(String userId,String begin,String end);
+	
+	
 }

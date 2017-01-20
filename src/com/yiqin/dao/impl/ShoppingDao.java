@@ -238,4 +238,13 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 			return false;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Stat> findChartData(String userId,String begin,String end) {
+		String queryString = "from Stat where statId.userId = '"+userId+"' and statId.month >= '"+begin+"' and statId.month <= '"+end+"'";
+		List<?> list = getHibernateTemplate().find(queryString);
+		return (List<Stat>)list;
+	}
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.yiqin.serviceImpl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import net.sf.json.JSONObject;
 
 public class ShoppingManagerImpl implements ShoppingManager {
 	private IShoppingDao shoppingDao;
-
+	
 	public IShoppingDao getShoppingDao() {
 		return shoppingDao;
 	}
@@ -350,6 +351,35 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		return price;
 	}
 	
-	
+	public JSONArray getChartData(String userId,String begin,String end){
+		
+		JSONArray ja = new JSONArray();
+		List<Stat> list = shoppingDao.findChartData(userId, begin, end);
+		DecimalFormat df=new java.text.DecimalFormat("#.##");   
+		
+		
+		if(list!=null && list.size()==1){
+			Stat stat = list.get(0);
+			JSONArray mingxi = JSONArray.fromObject(stat.getMingxi());
+			for (Object object : mingxi) {
+				JSONObject mingxiJo = JSONObject.fromObject(object);
+				String cid = mingxiJo.getString("cid");
+				Double price = mingxiJo.getDouble("price");
+				JSONObject jo = new JSONObject();
+				jo.accumulate("id", cid);
+				jo.accumulate("value", df.format(price));
+				ja.add(jo);
+			}
+		}else{
+			for (Stat stat : list) {
+				JSONObject jo  = new JSONObject();
+				jo.accumulate("value", df.format(Double.parseDouble(stat.getZongjia())));
+				jo.accumulate("name", stat.getStatId().getMonth());
+				ja.add(jo);
+			}
+		}
+		return ja;
+		
+	}
 	
 }

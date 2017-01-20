@@ -8,6 +8,8 @@ import com.yiqin.pojo.Order;
 import com.yiqin.shop.bean.OrderTempObj;
 import com.yiqin.shop.bean.OrderView;
 
+import net.sf.json.JSONArray;
+
 public interface ShoppingManager {
 	/**
 	 * 添加到购物车
@@ -178,5 +180,5 @@ public interface ShoppingManager {
 
 	public boolean startStat(String userId);
 	
-	
+	public JSONArray getChartData(String userId,String begin,String end);
 }
