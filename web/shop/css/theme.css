@@ -1,0 +1,88 @@
+#form .panel-heading{
+	padding: 0px 15px;
+	border-bottom: 1px solid #aaa;
+}
+.form{
+	background:#f8f8f8;
+	border-radius:5px;
+}
+#loginImg {
+	float:left;
+	padding: 20px 0px 20px 20px;
+}
+#btn-login .btn{
+	margin-left: 10px;
+}
+#loginform .input-group{
+	margin-bottom: 15px;
+}
+#loginform .input-group[class*="col-"]{
+	float:left;
+}
+#loginform input.item-class,
+#form .signup-form-class form input.item-class {
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#loginform span.input-group-addon.item-class,
+#form .signup-form-class form span.input-group-addon.item-class{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#loginform i, #form .signup-form-class form i {
+	width: 11px;
+}
+#form {
+	margin-bottom: 15px;
+    margin-top: 15px;
+}
+    
+#form .panel{
+	margin-bottom:0;
+	box-shadow:0px 0px 3px 1px #CCCCCC;
+	border-radius:5px;
+}
+#form .signup-form-class {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 350px;
+	float:left;
+	padding-left: 20px;
+}
+#form .signup-form-class form div {
+	padding-bottom: 20px;
+	width: 270px;
+}
+
+#form .signup-form-class form button {
+  background: #FE980F;
+  border: medium none;
+  color: #FFFFFF;
+  width: 150px;
+}
+#form #loginError{
+	padding-bottom : 10px;
+}
+#loginform button {
+  background: #FE980F;
+  border: medium none;
+  color: #FFFFFF;
+  width: 150px;
+}
+#loginbox{
+	padding: 20px;
+}
+#registertext{
+	padding: 20px;
+}
+.white-alpha-90{
+	width: 320px;
+	/* Fallback for web browsers that don't support RGBa */
+    background-color: white;
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(256, 256, 256, 0.9);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}

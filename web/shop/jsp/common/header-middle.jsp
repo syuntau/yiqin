@@ -24,9 +24,9 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="mainmenu pull-right">
-						<ul class="nav navbar-nav collapse navbar-collapse" id="top_header_mainmenu">
-							<li><a class="shop_header active" id="top_home"><s:text name="shop.header.nav.home" /></a></li>
-						</ul>
+<!-- 						<ul class="nav navbar-nav collapse navbar-collapse" id="top_header_mainmenu"> -->
+<%-- 							<li><a class="shop_header active" id="top_home"><s:text name="shop.header.nav.home" /></a></li> --%>
+<!-- 						</ul> -->
 					</div>
 				</div>
 			</div>

@@ -141,7 +141,7 @@ $(document).ready(function() {
                     </s:if>
                 	<s:if test="%{#roles.indexOf('14000')>-1}">
                     <li>
-                        <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-cart-plus fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
+                        <a href="#" val="quick-shopping" class="side-menu-a"><i class="fa fa-heart fa-fw"></i> <s:text name="sa.header.quick.shopping" /></a>
                     </li>
                     </s:if>
                 	<s:if test="%{#roles.indexOf('15000')>-1}">

@@ -26,7 +26,7 @@
 		  <li><a class="go-to-page" idx="top_home"><div class="sidebox yq-side-line-22"><i class="fa fa-qrcode fa-2x"></i><span><s:text name="shop.right.shortcut.all.product" /></span></div></a></li>
 		</s:if>
 		<s:else>
-		  <li><a class="go-to-page" idx="top_quick_shopping"><div class="sidebox yq-side-line-22"><i class="fa fa-cart-plus fa-2x"></i><span><s:text name="shop.right.shortcut.quick.shopping" /></span></div></a></li>
+		  <li><a class="go-to-page" idx="top_quick_shopping"><div class="sidebox yq-side-line-22"><i class="fa fa-heart fa-2x"></i><span><s:text name="shop.right.shortcut.quick.shopping" /></span></div></a></li>
 		</s:else>
 		  <li><a class="go-to-page" idx="top_cart"><div class="sidebox yq-side-line-50"><i class="fa fa-shopping-cart fa-2x"></i><span><s:text name="shop.right.shortcut.jiesuan" /></span></div></a></li>
 		  <li style="border:none;"><a href="javascript:goTop();"><div class="sidebox yq-side-line-50"><i class="fa fa-angle-up fa-2x"></i><span><s:text name="shop.right.shortcut.to.top" /></span></div></a></li>

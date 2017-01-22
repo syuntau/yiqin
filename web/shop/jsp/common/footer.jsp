@@ -17,7 +17,7 @@ var footerTo = function(para_id) {
 </script>
 	
 	<footer id="footer"><!--Footer-->
-<%-- 		<tiles:insertAttribute name="footer.top" /> --%>
+		<tiles:insertAttribute name="footer.top" />
 		<tiles:insertAttribute name="footer.widget" />
 		<tiles:insertAttribute name="footer.bottom" />
 	</footer><!--/Footer-->

@@ -158,15 +158,23 @@ a#scrollUp i{
 }
 
 .contactinfo ul li a {
-  font-size: 14px;
-  font-weight: 900;
-  color: #101263;
+/*   font-size: 14px; */
+/*   font-weight: 900; */
+  font-size: 12px;
+  color: #696763;
   font-family: Microsoft YaHei, 'Roboto', sans-serif;
 }
 
+.contactinfo ul li a i {
+  color: #101263;
+}
 
 .contactinfo ul li a:hover{
 	background:inherit;
+}
+
+.header_top a.shop_header i {
+	color: #101263;
 }
 
 
@@ -223,8 +231,8 @@ a#scrollUp i{
 /*   border-bottom: 1px solid #f5f5f5; */
   margin-left: 0;
   margin-right: 0;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 
 .header-middle .container .row .col-sm-4{
@@ -304,8 +312,10 @@ a#scrollUp i{
 
 
 .header-bottom {
-  padding-bottom: 30px;
-  padding-top: 30px;
+  padding-bottom: 5px;
+/*   padding-top: 30px; */
+  background: #40403E;
+  margin-bottom: 1px;
 }
 
 .navbar-collapse.collapse{
@@ -322,12 +332,13 @@ a#scrollUp i{
 }
 
 .mainmenu ul li a {
-	color: #696763;
+/* 	color: #696763; */
+	color: #ffffff;
 	font-family: Microsoft YaHei, 'Roboto', sans-serif;
-	font-size: 17px;
-	font-weight: 300;
-	padding: 0;
-	padding-bottom: 10px;
+	font-size: 16px;
+	font-weight: 900;
+	padding-top: 5px;
+	padding-bottom: 3px;
 }
 
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
@@ -442,13 +453,17 @@ ul.sub-menu {
 }
 
 
+.footer-top {
+	background: #40403E;
+}
+
 .footer-top .container {
-  border-bottom: 1px solid #E0E0DA;
-  padding-bottom: 20px;
+/*   border-bottom: 1px solid #E0E0DA; */
+  padding-bottom: 10px;
 }
 
 .companyinfo {
-  margin-top: 57px;
+/*   margin-top: 57px; */
 }
 
 .companyinfo h2 {
@@ -563,7 +578,7 @@ ul.sub-menu {
 }
 
 .footer-widget .container {
-  border-top: 1px solid #FFFFFF;
+/*   border-top: 1px solid #FFFFFF; */
   padding-top: 15px;
 }
 

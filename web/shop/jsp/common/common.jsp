@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath%>shop/css/animate.css" rel="stylesheet">
 <link href="<%=basePath%>shop/css/main.css" rel="stylesheet">
 <link href="<%=basePath%>shop/css/responsive.css" rel="stylesheet">
+<link href="<%=basePath%>shop/css/theme.css" rel="stylesheet">
 <!--[if lt IE 9]>
 <script src="<%=basePath%>shop/js/html5shiv.js"></script>
 <script src="<%=basePath%>shop/js/respond.min.js"></script>

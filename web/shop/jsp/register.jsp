@@ -187,22 +187,51 @@ var yiqin_login_action = function(){
 </script>
 	<section id="form"><!--form-->
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-						<h2><s:text name="login.user.sing.up"></s:text></h2>
-						<form action="" name="registerForm" method="post" id="registerFormId">
-							<input type="text" placeholder="<s:text name='login.user.name' />" name="userId" value=""/>
-							<input type="password" placeholder="<s:text name='login.user.password' />" name="password" value=""/>
-							<input type="password" placeholder="<s:text name='login.user.confirm.password' />" name="confirmPwd" value=""/>
-							<input type="text" placeholder="<s:text name='login.user.reg.code' />" name="registerCode" value=""/>
-							<input type="email" placeholder="<s:text name='login.user.email' />" name="email" value=""/>
-							<input type="text" placeholder="<s:text name='login.user.mobile' />" name="mobile" value=""/>
-							<span id="registerError" style="COLOR: red;text-align: left;"></span>
-							<button type="submit" class="btn btn-default" onclick="yiqin_login_action.registerUser();return false;"><s:text name="login.btn.sign.up"></s:text></button>
-						</form>
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-sm-4"> -->
+					<div id="loginImg" class="col-md-offset-3 col-sm-offset-2">
+						<img alt="" src="/shop/images/home/login.jpg" width="265px">
+					</div>
+					<div class="signup-form-class"><!--sign up form-->
+						<div class="panel white-alpha-90">
+							<div class="panel-heading">
+								<div class="panel-title"><h3 style="font-weight: 900;color: #40403E;"><s:text name="login.user.sing.up"/></h3></div>
+							</div>     
+							<div class="panel-body">
+								<form action="" name="registerForm" method="post" id="registerFormId">
+									<span id="registerError" style="COLOR: red;text-align: left;">&nbsp;</span>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-user"></i></span>
+										<input type="text" class="form-control item-class" placeholder="<s:text name='login.user.name' />" name="userId" value=""/>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-lock"></i></span>
+										<input type="password" class="form-control item-class" placeholder="<s:text name='login.user.password' />" name="password" value=""/>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-lock"></i></span>
+										<input type="password" class="form-control item-class" placeholder="<s:text name='login.user.confirm.password' />" name="confirmPwd" value=""/>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-users"></i></span>
+										<input type="text" class="form-control item-class" placeholder="<s:text name='login.user.reg.code' />" name="registerCode" value=""/>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-envelope"></i></span>
+										<input type="email" class="form-control item-class" placeholder="<s:text name='login.user.email' />" name="email" value=""/>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon item-class"><i class="fa fa-phone"></i></span>
+										<input type="text" class="form-control" placeholder="<s:text name='login.user.mobile' />" name="mobile" value=""/>
+									</div>
+									<div class="input-group col-xs-12 text-center login-action">
+									<button type="submit" class="btn btn-default" onclick="yiqin_login_action.registerUser();return false;"><s:text name="login.btn.sign.up"></s:text></button>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div><!--/sign up form-->
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</section><!--/form-->
