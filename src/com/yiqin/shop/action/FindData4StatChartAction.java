@@ -91,7 +91,7 @@ public class FindData4StatChartAction extends ActionSupport {
 			PrintWriter out = response.getWriter();
 			String result = "";
 			if(Util.isEmpty(beginMonth) || Util.isEmpty(endMonth)){
-				result = UtilKeys.CODE_ERR_PARAM;
+				result = "108";
 				out.print(result);
 				return;
 			}
@@ -101,6 +101,7 @@ public class FindData4StatChartAction extends ActionSupport {
 			} catch (Exception e) {
 				result = "109";//日期格式错误
 				out.print(result);
+				return;
 			}
 			
 			JSONArray ja = shoppingManager.getChartData(userId, beginMonth ,endMonth);

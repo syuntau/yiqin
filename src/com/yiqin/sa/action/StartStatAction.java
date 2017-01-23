@@ -44,6 +44,7 @@ public class StartStatAction extends ActionSupport {
 			if (Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
+				return;
 			} 
 			
 			boolean req = shoppingManager.startStat(userId);

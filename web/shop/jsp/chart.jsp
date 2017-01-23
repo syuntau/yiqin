@@ -8,32 +8,25 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">月份选择  <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
+          <a>月份选择:</a>
         </li> 
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control statMonth" placeholder="开始月份">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+        <div class="form-group">
+          <input type="text" class="form-control endMonth" placeholder="结束月份">
+        </div>
+        <button class="btn btn-default monthSubmitBtn">提交</button>
+      </div>
       
       
       
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类选择 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -47,12 +40,8 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div id="container" style="height: 500px">
-	<div class="spinner">
-	  <div class="rect1"></div>
-	  <div class="rect2"></div>
-	  <div class="rect3"></div>
-	  <div class="rect4"></div>
-	  <div class="rect5"></div>
+	<div class="jumbotron">
+	  <p align="center">暂无数据！</p>
 	</div>
 </div>
 
@@ -64,18 +53,31 @@
 
 
 var loadCharts = function (){
-	var titleText = "测试";
-	var titleSubtext = "测试数据";
+	if($('.statMonth').val() == $('.endMonth').val()){
+		var titleText = "分类统计";
+	}else{
+		var titleText = "月份统计";
+	}
+	var titleSubtext = "";
 	$.ajax({
 		type : "post",
 		dataType : "json",
 		url : 'findData4StatChart',
 		data : {
-			beginMonth : '201601',
-			endMonth : '201611',
+			beginMonth : $('.statMonth').val(),
+			endMonth : $('.endMonth').val(),
 		},
 		success : function(data) {
-			
+			if(data == 109 || data == "109" ){
+				alert("日期格式错误！");
+				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				return;
+			}
+			if(data == 108 || data == "108" ){
+				alert("日期为空！");
+				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				return;
+			}
 			var chartdata = [];
 			chartdata.legend = [];
 			
@@ -157,6 +159,10 @@ var loadCharts = function (){
 $(document).ready(function(){
 	$('head > title').html('依勤 - 统计图');
 	
-	loadCharts();
+	$('.monthSubmitBtn').off().on({
+		'click':function(){
+			loadCharts();
+		}
+	});
 });
 </script>

@@ -283,7 +283,11 @@ public class ShoppingManagerImpl implements ShoppingManager {
 			String productId = jsonObject.getString("productId");
 			String cid = null;
 			try {
-				cid = productId.substring(0,2);
+				if(productId.equals("-1000")){
+					cid = "-1000";
+				}else{
+					cid = productId.substring(0,2);
+				}
 			} catch (Exception e) {
 			}
 			if(cid != null){
@@ -317,6 +321,12 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		List<JSONObject> list = new ArrayList<>();
 		
 		for (Order order : listOrder) {
+			if(order.getBeizhuzongjia()!=null){
+				JSONObject jo = new JSONObject();
+				jo.accumulate("productId", "-1000");
+				jo.accumulate("zhekouPrice", order.getBeizhuzongjia());
+				list.add(jo);
+			}
 			JSONArray ja = JSONArray.fromObject(order.getProductList());
 			for (Object object : ja) {
 				list.add(JSONObject.fromObject(object));
@@ -335,6 +345,15 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		double price = 0.0;
 		for (Order order : listOrder) {
 			JSONArray ja = JSONArray.fromObject(order.getProductList());
+			if(order.getBeizhuzongjia()!=null){
+				try {
+					price+=Double.parseDouble(order.getBeizhuzongjia());
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
 			for (Object object : ja) {
 				try {
 					System.out.println(object.toString());
