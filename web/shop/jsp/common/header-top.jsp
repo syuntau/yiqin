@@ -46,7 +46,7 @@ $(document).ready(function(){
 				<div class="shop-menu pull-right">
 					<ul class="nav navbar-nav" id="shop_header_ul">
 						<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
-						<s:if test="#session.userInfo!=null && #session.˙">
+						<s:if test="#session.userStatStatus==true">
 						<li><a class="shop_header" id="top_stat" href="shop/getCharts"><i class="fa fa-bar-chart"></i> 统计图表</a></li>
 						</s:if>
 						<li><a class="shop_header" id="top_quick_shopping"><i class="fa fa-heart"></i> <s:text name="shop.header.top.quick.shopping" /></a></li>

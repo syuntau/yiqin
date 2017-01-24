@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.User;
+import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
@@ -67,6 +68,14 @@ public class LoginAction extends ActionSupport {
 
 			// 储存登录信息
 			request.getSession().setAttribute("userInfo", userInfo);
+//			储存统计图显示状态
+			UserConf uf = userManager.findUserConfInfo(userInfo.getId(), "userStatChartStatus");
+			if(uf != null && uf.getValue().equals("true")){
+				request.getSession().setAttribute("userStatStatus", true);
+			}else{
+				request.getSession().setAttribute("userStatStatus", false);
+			}
+			
 			request.setAttribute(UtilKeys.REQ_SHOP_NAV, request.getSession().getAttribute(UtilKeys.SE_SHOP_ORIGNAL_NAV));
 			return SUCCESS;
 		} catch (Exception e) {

@@ -54,8 +54,10 @@ public class EditUserChartAction extends ActionSupport {
 				out.print(result);
 				return;
 			}
-			
-			UserConf uf = new UserConf();
+			UserConf uf = userManager.findUserConfInfo(userId, "userStatChartStatus");
+			if(uf == null){
+				uf = new UserConf();
+			}
 			uf.setUserId(userId);
 			uf.setAttribute("userStatChartStatus");
 			uf.setValue(status);

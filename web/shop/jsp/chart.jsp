@@ -24,7 +24,7 @@
       
       
       
-      <ul class="nav navbar-nav navbar-right">
+      <%-- <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类选择 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -35,7 +35,7 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-      </ul>
+      </ul> --%>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
