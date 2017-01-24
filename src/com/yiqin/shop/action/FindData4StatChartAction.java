@@ -14,7 +14,6 @@ import com.yiqin.pojo.Category;
 import com.yiqin.service.ProductManager;
 import com.yiqin.service.ShoppingManager;
 import com.yiqin.util.Util;
-import com.yiqin.util.UtilKeys;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

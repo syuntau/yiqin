@@ -148,6 +148,7 @@ var customer_manage = {
 			customer_manage.loadZheKou();
 			customer_manage.loadYouHui();
 			customer_manage.loadPwd();
+			getStatStatus();
 		});
 	},
 	loadPwd : function() {
@@ -176,6 +177,90 @@ var customer_manage = {
 		});
 	}
 };
+
+getStatStatus = function(){
+	
+	var userId = $('.user-list select').find('option:selected').val();
+	$.ajax({
+    	type: "get",
+		url: "sa/getUserChartStatus?userId="+userId,
+		dataType: "json",
+		success: function(data) {
+			if(data == "true" || data == true){
+				/* $('.user-stat-status-select').find('option').removeAttr('selected'); */
+				$('.user-stat-status-select option:nth-child(1)').attr("selected",true);
+			}else{
+				/* $('.user-stat-status-select').find('option').removeAttr('selected'); */
+				$('.user-stat-status-select option:nth-child(2)').attr("selected",true);
+			}
+        },
+        beforeSend: function() {
+            var $loadingTextIcon = $(com_conf.loading_text_icon);
+            $('.stat-form').append($loadingTextIcon);
+    	},
+        complete: function() {
+        	$('.stat-form').find('span').remove();
+        }
+	});
+	
+	
+	
+}
+
+saveStatStatus = function(){
+	
+	var userId = $('.user-list select').find('option:selected').val();
+	var status = $('.user-stat-status-select').find('option:selected').val();
+	$.ajax({
+    	type: "get",
+		url: "sa/saveUserChartStatus?userId="+userId+"&status="+status,
+		dataType: "json",
+		success: function(data) {
+			if(data=='true'|| data==true){
+				alert('保存成功！');
+			}else{
+				alert('保存失败！');
+			}
+        },
+        beforeSend: function() {
+            var $loadingTextIcon = $(com_conf.loading_text_icon);
+            $('.stat-form').append($loadingTextIcon);
+    	},
+        complete: function() {
+        	$('.stat-form').find('span').remove();
+        }
+	});
+}
+
+statStatData = function(){
+	var userId = $('.user-list select').find('option:selected').val();
+	$.ajax({
+    	type: "get",
+		url: "sa/startStat?userId="+userId,
+		dataType: "json",
+		success: function(data) {
+			if (data=='true' || data == true) {
+				alert("统计完成！");
+			} else if (data=='false' || data == false) {
+				alert("统计发生错误！");
+			} else {
+				alert("<s:text name='msg.err.param'></s:text>");
+			}
+        },
+        beforeSend: function() {
+            var $loadingTextIcon = $(com_conf.loading_text_icon);
+            $('.stat-form').append($loadingTextIcon);
+    	},
+        complete: function() {
+        	$('.stat-form').find('span').remove();
+        }
+	});
+	
+	
+	
+	
+}
+
 
 $(document).ready(function() {
 	customer_manage.load_user();
@@ -231,6 +316,22 @@ $(document).ready(function() {
 	                        <div class="form-group customer-pwd-div">
                                 <s:text name="sa.customer.pwd" /> <span style="color:#A94442;"></span>
 	                        </div>
+		                </div>
+		                </s:if>
+		                <s:if test="%{#roles.indexOf('12303')>-1}">
+		                <div class="col-lg-12" style="margin: 10px 0px;">
+		                    <form role="form" class="form-inline stat-form" >
+		                        <div class="form-group">
+	                                <label>用户统计</label>
+	                                <!-- <input type="text" class="form-control customer-zhekou" maxlength="5" width="100px" name="zhekou"> -->
+			                        <select class="form-control user-stat-status-select">
+			                        	<option value="true" >开启</option>
+			                        	<option value="false" selected="selected">关闭</option>
+			                        </select>
+		                        </div>
+		                        <button type="button" class="btn btn-info btn-save-stat-status" onclick="saveStatStatus();">保存</button>
+		                        <button type="button" class="btn btn-info btn-customer-zhekou" onclick="statStatData();">生成统计数据</button>
+		                    </form>
 		                </div>
 		                </s:if>
 		                <!-- /.col-lg-12 -->
