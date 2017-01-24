@@ -324,13 +324,13 @@ $(document).ready(function() {
 		                        <div class="form-group">
 	                                <label>用户统计</label>
 	                                <!-- <input type="text" class="form-control customer-zhekou" maxlength="5" width="100px" name="zhekou"> -->
+			                        <button type="button" class="btn btn-info btn-customer-zhekou" onclick="statStatData();">生成统计数据</button>
 			                        <select class="form-control user-stat-status-select">
 			                        	<option value="true" >开启</option>
 			                        	<option value="false" selected="selected">关闭</option>
 			                        </select>
+			                        <button type="button" class="btn btn-info btn-save-stat-status" onclick="saveStatStatus();">保存</button>
 		                        </div>
-		                        <button type="button" class="btn btn-info btn-save-stat-status" onclick="saveStatStatus();">保存</button>
-		                        <button type="button" class="btn btn-info btn-customer-zhekou" onclick="statStatData();">生成统计数据</button>
 		                    </form>
 		                </div>
 		                </s:if>
