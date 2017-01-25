@@ -229,4 +229,8 @@ public class EditCustomerAction extends ActionSupport {
 			return null;
 		}
 	}
+
+	public String removeUser() {
+		return null;
+	}
 }

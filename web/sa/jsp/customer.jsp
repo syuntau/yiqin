@@ -175,6 +175,59 @@ var customer_manage = {
             beforeSend: function() { },
             complete: function() { }
 		});
+	},
+	removeUser : function() {
+		if ($('.btn-clear-user').length == 0) {
+			return ;
+		}
+		$('.btn-clear-user').on('click', function() {
+			var userId = $('.user-list select').find('option:selected').val();
+			var alertMsg = "<s:text name='msg.alert.remove.user' />";
+			alertMsg = alertMsg.replace(/UserId/, userId);
+			
+			bootbox.confirm({
+	       	    size: 'small',
+	       	    message: alertMsg, 
+	       	 	locale: 'zh_CN',
+	       	    callback: function(result){
+	       	    	if (result) {
+	       				$.ajax({
+	       		            type: "post",
+	       		            url: "editCustomer_removeUser",
+	       		            data: 'userId='+userId,
+	       		            dataType: "json",
+	       		            success: function(data) {
+// 								if (data=='1') {
+// 									alert("<s:text name='msg.err.param'></s:text>");
+// 								} else if (data=='3') {
+// 									alert("<s:text name='msg.err.db'></s:text>");
+// 								} else {
+// 								   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
+// 					           		var $tbody = $itemDiv.find('tbody');
+// 					           		$tbody.find('.tr_'+itemId).remove();
+// 					           		var trCnt = $tbody.children().length;
+// 					           		if (trCnt == 0) {
+// 						           		$itemHR.addClass('display-off');
+// 								  		$itemDiv.find('.item-panel').addClass('display-off');
+// 					           		}
+// 								}
+alert("test");
+	       		            },
+	       		            beforeSend: function() {
+	       		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
+	       		            	$itemDiv.find('.panel-heading').append($loadingTextIcon);
+	       		        	},
+	       		        	error: function() {
+	       		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
+	       		        	},
+	       		        	complete: function() {
+	        		        	$itemDiv.find('span').remove();
+	       		        	}
+	       				});
+	       	    	}
+	       	    }
+	       	})
+		});
 	}
 };
 
@@ -264,6 +317,7 @@ statStatData = function(){
 
 $(document).ready(function() {
 	customer_manage.load_user();
+	customer_manage.removeUser();
 	customer_manage.check_customer();
 });
 </script>
@@ -284,6 +338,9 @@ $(document).ready(function() {
                         </div>
                         
                         <button type="button" class="btn btn-info btn-user-submit user-select display-off"><s:text name="sa.btn.query" /></button>
+                        <s:if test="%{#roles.indexOf('12305')>-1}">
+                        <button type="button" class="btn btn-danger btn-clear-user user-select display-off"><s:text name="sa.btn.clear" /></button>
+                        </s:if>
                     </form>
 		            <hr class="customer-hr display-off">
 		            <div class="row customer-section display-off">
@@ -314,17 +371,18 @@ $(document).ready(function() {
 		                <s:if test="%{#roles.indexOf('12303')>-1}">
 		                <div class="col-lg-12" style="margin: 10px 0px;">
 	                        <div class="form-group customer-pwd-div">
-                                <s:text name="sa.customer.pwd" /> <span style="color:#A94442;"></span>
+                                <label><s:text name="sa.customer.pwd" /></label> <span style="color:#A94442;"></span>
 	                        </div>
 		                </div>
 		                </s:if>
-		                <s:if test="%{#roles.indexOf('12303')>-1}">
+		                <s:if test="%{#roles.indexOf('12304')>-1}">
 		                <div class="col-lg-12" style="margin: 10px 0px;">
 		                    <form role="form" class="form-inline stat-form" >
 		                        <div class="form-group">
 	                                <label>用户统计</label>
 	                                <!-- <input type="text" class="form-control customer-zhekou" maxlength="5" width="100px" name="zhekou"> -->
 			                        <button type="button" class="btn btn-info btn-customer-zhekou" onclick="statStatData();">生成统计数据</button>
+			                        &nbsp;&nbsp;&nbsp;&nbsp;统计数据前台显示：
 			                        <select class="form-control user-stat-status-select">
 			                        	<option value="true" >开启</option>
 			                        	<option value="false" selected="selected">关闭</option>
