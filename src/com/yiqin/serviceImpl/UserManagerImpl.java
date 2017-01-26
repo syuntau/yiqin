@@ -8,6 +8,7 @@ import com.yiqin.dao.IUserDao;
 import com.yiqin.pojo.Cart;
 import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.SAUser;
+import com.yiqin.pojo.Stat;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
@@ -90,6 +91,10 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public UserConf findUserConfInfo(String userId, String attribute) {
 		return userDao.findUserConfInfo(userId, attribute);
+	}
+	@Override
+	public List<Stat> findUserStat(String userId) {
+		return shoppingDao.findChartData(userId);
 	}
 
 	@Override

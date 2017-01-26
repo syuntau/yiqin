@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yiqin.pojo.RegisterCode;
 import com.yiqin.pojo.SAUser;
+import com.yiqin.pojo.Stat;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
 
@@ -151,4 +152,11 @@ public interface UserManager {
 
 	public SAUser findAdminById(String id);
 
+	/**
+	 * 查询用户统计
+	 * @param userId
+	 * @return
+	 */
+	public List<Stat> findUserStat(String userId);
+	
 }

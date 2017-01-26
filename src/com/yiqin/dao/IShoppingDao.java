@@ -165,6 +165,7 @@ public interface IShoppingDao {
 	public boolean saveOrUpdateStat(Stat stat);
 	
 	public List<Stat> findChartData(String userId,String begin,String end);
+	public List<Stat> findChartData(String userId);
 	public Map<String, String> findCategory(String parentId);
 	
 	

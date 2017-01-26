@@ -271,6 +271,13 @@ saveStatStatus = function(){
 		success: function(data) {
 			if(data=='true'|| data==true){
 				alert('保存成功！');
+			}else if(data == 701 || data == "701" ){
+				
+				$('.user-stat-status-select').find('option').removeAttr('selected');
+				
+				$('.user-stat-status-select > option:nth-child(2)').attr("selected",true);
+				
+				alert('用户暂无统计数据，无法保存！');
 			}else{
 				alert('保存失败！');
 			}

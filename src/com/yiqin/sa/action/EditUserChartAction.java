@@ -1,12 +1,14 @@
 package com.yiqin.sa.action;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yiqin.pojo.Stat;
 import com.yiqin.pojo.UserConf;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
@@ -54,6 +56,14 @@ public class EditUserChartAction extends ActionSupport {
 				out.print(result);
 				return;
 			}
+			
+			List<Stat> statList = userManager.findUserStat(userId);
+			if(statList == null || statList.size()==0){
+				result = "701";//用户无统计数据
+				out.print(result);
+				return;
+			}
+			
 			UserConf uf = userManager.findUserConfInfo(userId, "userStatChartStatus");
 			if(uf == null){
 				uf = new UserConf();

@@ -248,8 +248,13 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		List<?> list = getHibernateTemplate().find(queryString);
 		return (List<Stat>)list;
 	}
-
 	@SuppressWarnings("unchecked")
+	public List<Stat> findChartData(String userId) {
+		String queryString = "from Stat where statId.userId = '"+userId+"'";
+		List<?> list = getHibernateTemplate().find(queryString);
+		return (List<Stat>)list;
+	}
+
 	@Override
 	public Map<String, String> findCategory(String parentId) {
 		String categoryQueryString = "from Category where parentId = "+parentId;
