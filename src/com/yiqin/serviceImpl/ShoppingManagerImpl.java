@@ -377,7 +377,7 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		DecimalFormat df=new java.text.DecimalFormat("#.##");   
 		
 		
-		if(list!=null && list.size()==1){
+		if(list!=null && begin.equals(end)){
 			Stat stat = list.get(0);
 			JSONArray mingxi = JSONArray.fromObject(stat.getMingxi());
 			for (Object object : mingxi) {
