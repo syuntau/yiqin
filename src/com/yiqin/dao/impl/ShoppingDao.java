@@ -3,7 +3,9 @@ package com.yiqin.dao.impl;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,6 +14,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Order;
 import com.yiqin.pojo.Stat;
 import com.yiqin.shop.bean.OrderTempObj;
@@ -244,6 +247,22 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 		String queryString = "from Stat where statId.userId = '"+userId+"' and statId.month >= '"+begin+"' and statId.month <= '"+end+"'";
 		List<?> list = getHibernateTemplate().find(queryString);
 		return (List<Stat>)list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, String> findCategory(String parentId) {
+		String categoryQueryString = "from Category where parentId = "+parentId;
+		List<?> categotyList = getHibernateTemplate().find(categoryQueryString);
+		Map<String, String>map = new HashMap<>();
+		for (Object object : categotyList) {
+			try {
+				Category category = (Category)object;
+				map.put(category.getId()+"", category.getId()+"");
+			} catch (Exception e) {
+			}
+		}
+		return map;
 	}
 	
 	

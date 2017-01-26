@@ -25,16 +25,14 @@
       
       
       <ul class="nav navbar-nav navbar-right">
+      	<li><a>分类选择：</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类选择 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          	<li><a href="#">办公用品</a></li>
-            <li><a href="#">办公设备</a></li>
+          <a href="#" class="dropdown-toggle categoryNameA" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" idx ="1">办公用品<span class="caret"></span></a>
+          <ul class="dropdown-menu categoryUl">
+          	<li><a href="javascript:void(0)">办公用品</a></li>
+            <li><a href="javascript:void(0)">办公设备</a></li>
           </ul>
         </li>
-        
-        
-        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -48,8 +46,6 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
 <script type="text/javascript">
 
- 
-
 
 
 var loadCharts = function (){
@@ -58,7 +54,15 @@ var loadCharts = function (){
 	}else{
 		var titleText = "月份统计";
 	}
-	var titleSubtext = "";
+	if($('.categoryNameA').attr('idx') == "1"){
+		titleSubtext = "办公用品";
+	}else if($('.categoryNameA').attr('idx') == "2"){
+		titleSubtext = "办公设备";
+		
+	}else{
+		titleSubtext = "";
+		
+	}
 	$.ajax({
 		type : "post",
 		dataType : "json",
@@ -66,6 +70,7 @@ var loadCharts = function (){
 		data : {
 			beginMonth : $('.statMonth').val(),
 			endMonth : $('.endMonth').val(),
+			category : $('.categoryNameA').attr('idx')
 		},
 		success : function(data) {
 			if(data == null || data == ""){
@@ -179,5 +184,15 @@ $(document).ready(function(){
 			loadCharts();
 		}
 	});
+	$('.categoryUl li').off().on({
+		'click' : function(){
+			var index = $(".categoryUl li").index(this);
+		    $('.categoryNameA').html($(this).find('a').html()+'<span class="caret"></span>').attr('idx',index+1);
+		}
+	});
+	
+	
+	
+	
 });
 </script>

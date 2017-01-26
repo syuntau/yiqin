@@ -1,8 +1,10 @@
 package com.yiqin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Order;
 import com.yiqin.pojo.Stat;
 import com.yiqin.shop.bean.OrderTempObj;
@@ -163,6 +165,7 @@ public interface IShoppingDao {
 	public boolean saveOrUpdateStat(Stat stat);
 	
 	public List<Stat> findChartData(String userId,String begin,String end);
+	public Map<String, String> findCategory(String parentId);
 	
 	
 }

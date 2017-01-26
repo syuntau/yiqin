@@ -2993,10 +2993,10 @@ div.product-image-wrapper:hover {
     border-radius: 6px 0 6px 6px;
 }
 
-.dropdown:hover>.dropdown-menu {
-    display: block;
-    margin-top: 0;
- }
+/* .dropdown:hover>.dropdown-menu { */
+/*     display: block; */
+/*     margin-top: 0; */
+/*  } */
  
  .mainmenu div.dropdown ul li {
     padding-right: 0px;

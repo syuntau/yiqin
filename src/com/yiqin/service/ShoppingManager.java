@@ -180,5 +180,5 @@ public interface ShoppingManager {
 
 	public boolean startStat(String userId);
 	
-	public JSONArray getChartData(String userId,String begin,String end);
+	public JSONArray getChartData(String userId,String begin,String end,String category);
 }

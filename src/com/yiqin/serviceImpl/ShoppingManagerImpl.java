@@ -11,6 +11,7 @@ import org.apache.commons.lang.time.DateFormatUtils;
 
 import com.yiqin.dao.IShoppingDao;
 import com.yiqin.pojo.Cart;
+import com.yiqin.pojo.Category;
 import com.yiqin.pojo.Order;
 import com.yiqin.pojo.Stat;
 import com.yiqin.pojo.StatId;
@@ -370,11 +371,16 @@ public class ShoppingManagerImpl implements ShoppingManager {
 		return price;
 	}
 	
-	public JSONArray getChartData(String userId,String begin,String end){
+	public JSONArray getChartData(String userId,String begin,String end,String category){
 		
 		JSONArray ja = new JSONArray();
 		List<Stat> list = shoppingDao.findChartData(userId, begin, end);
 		DecimalFormat df=new java.text.DecimalFormat("#.##");   
+		Map<String, String> categoryMap = shoppingDao.findCategory(category);
+		
+		if(category.equals("1")){
+			categoryMap.put("-1000", "-1000");//备注分类
+		}
 		
 		
 		if(list!=null && begin.equals(end)){
@@ -384,10 +390,12 @@ public class ShoppingManagerImpl implements ShoppingManager {
 				JSONObject mingxiJo = JSONObject.fromObject(object);
 				String cid = mingxiJo.getString("cid");
 				Double price = mingxiJo.getDouble("price");
-				JSONObject jo = new JSONObject();
-				jo.accumulate("id", cid);
-				jo.accumulate("value", df.format(price));
-				ja.add(jo);
+				if(categoryMap.get(cid)!=null){
+					JSONObject jo = new JSONObject();
+					jo.accumulate("id", cid);
+					jo.accumulate("value", df.format(price));
+					ja.add(jo);
+				}
 			}
 		}else{
 			for (Stat stat : list) {

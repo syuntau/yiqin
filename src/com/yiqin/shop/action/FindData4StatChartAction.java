@@ -32,9 +32,22 @@ public class FindData4StatChartAction extends ActionSupport {
 	
 	private String beginMonth;
 	private String endMonth;
+	private String category;
 	private ShoppingManager shoppingManager;
 	private ProductManager productManager;
 	
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+
 	public ProductManager getProductManager() {
 		return productManager;
 	}
@@ -121,9 +134,13 @@ public class FindData4StatChartAction extends ActionSupport {
 				out.print(result);
 				return;
 			}
+			if(Util.isEmpty(category)){
+				result = "604";//分类id为空
+				out.print(result);
+				return;
+			}
 			
-			
-			JSONArray ja = shoppingManager.getChartData(userId, beginMonth ,endMonth);
+			JSONArray ja = shoppingManager.getChartData(userId, beginMonth ,endMonth,category);
 			
 			if(beginMonth.equals(endMonth)){
 				JSONArray req = new JSONArray();
