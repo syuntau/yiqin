@@ -74,23 +74,23 @@ var loadCharts = function (){
 			}
 			
 			if(data == 601 || data == "601" ){
-				alert("日期格式错误！");
 				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				alert("日期格式错误！");
 				return;
 			}
 			if(data == 602 || data == "602" ){
-				alert("开始时间不能大于结束时间！");
 				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				alert("开始时间不能大于结束时间！");
 				return;
 			}
 			if(data == 603 || data == "603" ){
-				alert("查询时间不能超过了一年！");
 				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				alert("查询时间不能超过了一年！");
 				return;
 			}
 			if(data == 108 || data == "108" ){
-				alert("日期为空！");
 				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				alert("日期为空！");
 				return;
 			}
 			var chartdata = [];

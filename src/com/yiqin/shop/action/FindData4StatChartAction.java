@@ -117,7 +117,7 @@ public class FindData4StatChartAction extends ActionSupport {
 			beginC.add(Calendar.YEAR, +1);
 			
 			if(beginC.getTime().before(end)){
-				result = "603";//查询时间不能超过了一年里
+				result = "603";//查询时间不能超过了一年
 				out.print(result);
 				return;
 			}
