@@ -1,6 +1,8 @@
 package com.yiqin.shop.action;
 
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,14 +96,32 @@ public class FindData4StatChartAction extends ActionSupport {
 				out.print(result);
 				return;
 			}
+			Date begin = null;
+			Date end = null;
 			try {
-				DateUtils.parseDate(beginMonth, "yyyyMM");
-				DateUtils.parseDate(endMonth, "yyyyMM");
+				begin = DateUtils.parseDate(beginMonth, "yyyyMM");
+				end = DateUtils.parseDate(endMonth, "yyyyMM");
 			} catch (Exception e) {
-				result = "109";//日期格式错误
+				result = "601";//日期格式错误
 				out.print(result);
 				return;
 			}
+			
+			if(end.before(begin)){
+				result = "602";//开始时间不能大于结束时间
+				out.print(result);
+				return;
+			}
+			Calendar beginC = Calendar.getInstance();
+			beginC.setTime(begin);
+			beginC.add(Calendar.YEAR, +1);
+			
+			if(beginC.getTime().before(end)){
+				result = "603";//查询时间不能超过了一年里
+				out.print(result);
+				return;
+			}
+			
 			
 			JSONArray ja = shoppingManager.getChartData(userId, beginMonth ,endMonth);
 			

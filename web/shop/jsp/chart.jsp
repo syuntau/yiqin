@@ -68,8 +68,23 @@ var loadCharts = function (){
 			endMonth : $('.endMonth').val(),
 		},
 		success : function(data) {
-			if(data == 109 || data == "109" ){
+			if(data == null || data == ""){
+				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				return;
+			}
+			
+			if(data == 601 || data == "601" ){
 				alert("日期格式错误！");
+				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				return;
+			}
+			if(data == 602 || data == "602" ){
+				alert("开始时间不能大于结束时间！");
+				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
+				return;
+			}
+			if(data == 603 || data == "603" ){
+				alert("查询时间不能超过了一年！");
 				$('#container').html('<div class="jumbotron"><p align="center">暂无数据！</p></div>');
 				return;
 			}
