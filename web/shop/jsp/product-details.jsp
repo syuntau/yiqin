@@ -141,7 +141,8 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="col-sm-9 padding-right" style="width: 921px">
+<!-- <div class="col-sm-9 padding-right" style="width: 921px"> -->
+<div class="padding-right">
 	<div class="product-details">
 		<!--product-details-->
 		<div class="col-sm-5">
@@ -217,8 +218,10 @@ $(document).ready(function(){
 		<!--category-tab-->
 		<div class="col-sm-12">
 			<ul class="category-tab-ul nav nav-tabs">
-				<li class="active">
-					<a href="#details" data-toggle="tab"><s:text name="shop.product.details.details"></s:text></a>
+<!-- 				<li class="active"> -->
+				<li>
+<%-- 					<a href="#details" data-toggle="tab"><s:text name="shop.product.details.details"></s:text></a> --%>
+					<span><s:text name="shop.product.details.details"></s:text></span>
 				</li>
 <!-- 				<li> -->
 <%-- 					<a href="#speparam" data-toggle="tab"><s:text name="shop.product.details.spe.parameters"></s:text></a> --%>

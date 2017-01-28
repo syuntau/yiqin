@@ -319,7 +319,7 @@ $(document).ready(function(){
 	yiqin_my_address.findUserAddress();
 });
 </script>
-<div class="center-right-yiqin">
+<div class="center-right-yiqin" style="margin-top: 20px">
 	<section id="address_list">
 		<div style="margin-bottom:10px" id="add_list_btn">
 			<a class="btn btn-default check_out" data-toggle="modal" data-target="#address_list_alert" style="vertical-align: middle;">新增收货地址</a>

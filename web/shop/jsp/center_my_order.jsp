@@ -103,7 +103,7 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="search-01" style="padding-right:10px;">
+<div class="search-01" style="padding-right:10px;margin-top: 20px;margin-bottom: -10px;">
 	<input id="ip_keyword" name="searchName" type="text" class="s-itxt" value="商品名称、商品编号、订单编号" onfocus="if (this.value==this.defaultValue) this.value=''" onblur="if (this.value=='') this.value=this.defaultValue" onkeydown="javascript:if(event.keyCode==13) yiqin_order_center.orderSearch('ip_keyword');">
     <a href="javascript:;" class="btn-13" onclick="yiqin_order_center.orderSearch('ip_keyword')">查 询</a>
 </div>
@@ -111,7 +111,7 @@ $(document).ready(function(){
 	<section id="cart_items">
 		<div>
 			<div class="table-responsive cart_info" style="margin-bottom:10px;">
-				<table class="table table-condensed">
+				<table class="table table-condensed" <s:if test="page.results==null">style="height:200px;"</s:if>>
 					<thead>
 						<tr class="cart_menu">
 							<td class="image" width="40%">订单信息</td>
@@ -133,7 +133,7 @@ $(document).ready(function(){
 						</tr>
 					</thead>
 					<s:if test="page.results==null">
-						<tbody>
+						<tbody style="text-align:center;line-height:200px;">
 							<tr>
 								<td colspan="6">
 									没有符合条件的订单信息

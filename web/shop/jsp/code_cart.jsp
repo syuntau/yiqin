@@ -29,7 +29,7 @@ var yiqin_cart_action = function(){
 	            	 $cart_info_list.empty();
 	            	 if(data=='1'){
 	            		 $("#to_check_btn").css("display", "none");
-	            		 $cart_info_list.append("赶快搜索商品编码，添加商品吧。");
+	            		 $cart_info_list.append("赶快搜索商品编码，添加商品吧。").attr('style','text-align:center;line-height:300px');;
 	            	 }else if(data=='2'){
 	            		 $("#to_check_btn").css("display", "none");
 	            		 $cart_info_list.append("购物车坏了，正在抢修哦，稍后再来");
@@ -439,10 +439,10 @@ $(document).ready(function() {
 
 <section id="cart_items">
 	<div class="container">
-		<div class="search-01" style="float:left;padding-bottom:10px;padding-left:10px;padding-top:10px;font-size:20px;line-height:22px;">
+		<div class="search-01" style="float:left;padding-bottom:10px;padding-left:10px;padding-top:10px;font-size:16px;line-height:22px;">
 			 编码下单：
-			<input style="line-height:30px;height:30px;" id="ip_keyword" name="searchName" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
-		    <a href="javascript:;" class="btn-13" style="height:30px;" onclick="yiqin_cart_action.orderSearch('ip_keyword')">搜 索</a>
+			<input id="ip_keyword" name="searchName" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
+		    <a href="javascript:;" class="btn-13" onclick="yiqin_cart_action.orderSearch('ip_keyword')">搜 索</a>
 		</div>
 		<div class="table-responsive cart_info">
 			<table class="table table-condensed">

@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div id="contact-page" class="container">
+<div id="contact-page" class="container"  style="margin-top: 20px">
 	<div class="bg">
 		<div class="row">
 			<div class="col-sm-12">

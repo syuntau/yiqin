@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div id="yiqin-qa" class="container">
+<div id="yiqin-qa" class="container"  style="margin-top: 20px">
 	<div class="bg">
 		<div class="row">
 			<div class="col-sm-12">

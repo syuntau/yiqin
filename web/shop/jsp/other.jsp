@@ -5,7 +5,7 @@
 	<section  style="margin-top:50px">
 		<div class="container">
 			<div class="row">
-				<tiles:insertAttribute name="left" />
+<%-- 				<tiles:insertAttribute name="left" /> --%>
 				<tiles:insertAttribute name="right" />
 			</div>
 		</div>

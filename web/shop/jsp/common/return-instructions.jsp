@@ -2,16 +2,20 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div id="contact-page" class="container">
+<div id="contact-page" class="container" style="margin-top: 20px">
 	<div class="bg">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="title text-center">
+				<h2 class="title">
 					<s:text name="shop.footer.widget.policies.refund.policy"/>
 				</h2>
-				<div class="row">
-					<div class="col-sm-4" style="width: 100%;">
-						<div class="contact-info" style="margin-left:100px;">
+					<div class="col-sm-5" >
+						<div class="contact-form" style="text-align: left;">
+							<img src="/shop/images/home/qa.jpg" height="282px" width="400px">
+						</div>
+					</div>
+					<div class="col-sm-7" >
+						<div class="contact-info">
 							<address>
 								<p>服务时间：</p>
 								<p>周一至周五（不含国家法定节假日），上午8：30 — 下午17：00.</p>
