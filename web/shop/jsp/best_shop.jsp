@@ -9,19 +9,21 @@ var toIndexPage = function(pageIndex){
 };
 </script>
 
-<div class="col-sm-9 padding-right" style="width: 921px">
+<div class="padding-right" style="margin-top: -30px;">
 	<div class="features_items" id="fenlei_product_items">
 		<!--features_items-->
-		<h2 class="title text-center">
+		<h2 class="title">
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
-        快速下单列表
+        常用商品列表
 		</h2>
 		<s:if test="page.results==null">
-			还没有生成您经常购买的商品哦！
+		<h5 class="text-center" style="line-height: 200px;">
+          还没有生成您经常购买的商品哦！
+		</h5>
 		</s:if>
 		<s:else>
 			<s:iterator value="page.results" var="product">
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">

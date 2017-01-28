@@ -181,7 +181,7 @@ $(document).ready(function(){
 									 <tr style="display:none;">
 										<td class="cart_product" style="margin-left:10px;margin-right:-10px;">
 											<a href="javaScript:;"><img onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');" src="<s:property value="#product.imgUrl"/>" width="110px" style="vertical-align:middle;float: left;margin-bottom:5px"/></a>
-											<h4><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h4>
+											<h5><a href="javaScript:;" onclick="yiqin_public_js.toTilesAction(<s:property value='#product.productId'/>, 'toProductDetails');"><s:property value="#product.productName"/></a></h5>
 											<p><s:text name="shop.product.details.productId"/><s:property value="#product.productId"/></p>
 											<p><s:text name="cart.item.product.color"/><s:property value="#product.productInfo"/></p>
 										</td>

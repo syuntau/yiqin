@@ -6,7 +6,7 @@
 var cart_template = {
 	cart_tr : '<tr></tr>',
 	cart_td : '<td></td>',
-	cart_h4 : '<h4></h4>',
+	cart_h4 : '<h5></h5>',
 	cart_a : '<a href="javaScript:void(0);"></a>',
 	cart_i : '<i class="fa fa-times"></i>',
 	cart_p : '<p></p>',
@@ -428,7 +428,8 @@ $(document).ready(function() {
 		if(this.value==this.defaultValue || this.value==""){
 			$(this).css({'font-size':'','font-weight':'normal'});
 		}else{
-			$(this).css({'font-size':'24px','font-weight':'bold'});
+// 			$(this).css({'font-size':'24px','font-weight':'bold'});
+			$(this).css({'font-size':'16px','font-weight':'bold'});
 		}
 	});
 	yiqin_cart_action.initCodeCartInfo();
@@ -441,7 +442,7 @@ $(document).ready(function() {
 	<div class="container">
 		<div class="search-01" style="float:left;padding-bottom:10px;padding-left:10px;padding-top:10px;font-size:16px;line-height:22px;">
 			 编码下单：
-			<input id="ip_keyword" name="searchName" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
+			<input id="ip_keyword" name="searchName" style="height:24px" type="text" class="s-itxt" value="输入商品ID，按回车键" onfocus="if(this.value==this.defaultValue){this.value='';$(this).css({'font-size':'','font-weight':'normal'});}" onblur="if (this.value==''){this.value=this.defaultValue;$(this).css({'font-size':'','font-weight':'normal'});}" onkeydown="javascript:if(event.keyCode==13) yiqin_cart_action.orderSearch('ip_keyword');">
 		    <a href="javascript:;" class="btn-13" onclick="yiqin_cart_action.orderSearch('ip_keyword')">搜 索</a>
 		</div>
 		<div class="table-responsive cart_info">

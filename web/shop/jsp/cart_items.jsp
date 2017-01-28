@@ -6,7 +6,7 @@
 var cart_template = {
 	cart_tr : '<tr></tr>',
 	cart_td : '<td></td>',
-	cart_h4 : '<h4></h4>',
+	cart_h4 : '<h5></h5>',
 	cart_a : '<a href="javaScript:void(0);"></a>',
 	cart_i : '<i class="fa fa-times"></i>',
 	cart_p : '<p></p>',
