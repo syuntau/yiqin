@@ -189,8 +189,8 @@ $(document).ready(function(){
 				</span>
 				<div id="select_product_info">
 					<p>
-						<b><s:text name="shop.product.details.color"/></b>
-<%-- 						<b><s:text name="shop.product.details.param"/></b> --%>
+<%-- 						<b><s:text name="shop.product.details.color"/></b> --%>
+						<b><s:text name="shop.product.details.param"/></b>
 					</p>
 					<div class="none-sel-div" style="margin-top:2px;margin-right:8px;margin-bottom:2px;">
 						<b></b>
