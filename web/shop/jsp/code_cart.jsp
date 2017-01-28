@@ -29,7 +29,7 @@ var yiqin_cart_action = function(){
 	            	 $cart_info_list.empty();
 	            	 if(data=='1'){
 	            		 $("#to_check_btn").css("display", "none");
-	            		 $cart_info_list.append("赶快搜索商品编码，添加商品吧。").attr('style','text-align:center;line-height:300px');;
+	            		 $cart_info_list.append("赶快搜索商品编码，添加商品吧。").attr('style','text-align:center;line-height:300px');
 	            	 }else if(data=='2'){
 	            		 $("#to_check_btn").css("display", "none");
 	            		 $cart_info_list.append("购物车坏了，正在抢修哦，稍后再来");
@@ -64,7 +64,7 @@ var yiqin_cart_action = function(){
 		     				var $cart_info_list = $('#cart_info_list');
 		     				if($cart_info_list.find("tr").length<=0){
 		     					$("#to_check_btn").css("display", "none");
-		     		       		$cart_info_list.append("赶快搜索商品编码，添加商品吧。");
+		     		       		$cart_info_list.append("赶快搜索商品编码，添加商品吧。").attr('style','text-align:center;line-height:300px');;
 		     				}
 		            	}
 	                },
@@ -404,7 +404,7 @@ var yiqin_cart_action = function(){
 			$cart_tr.data(val.productId+"_productNum",1);
 			$cart_tr.data("_productId",val.productId);
 			$cart_tr.attr('id',val.productId+'_product');
-			$cart_info_list.prepend($cart_tr);
+			$cart_info_list.prepend($cart_tr).removeAttr('style');
 			tid = setInterval(function(){
 				if(count>=20){
 					clearInterval(tid);

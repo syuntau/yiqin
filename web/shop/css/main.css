@@ -1040,8 +1040,10 @@ div.product-image-wrapper:hover {
 }
 
 .productinfo img{
-  width: 255px;
-  height: 255px;
+/*   width: 255px; */
+/*   height: 255px; */
+  width: 240px;
+  height: 240px;
 }
 
 .productinfo{
