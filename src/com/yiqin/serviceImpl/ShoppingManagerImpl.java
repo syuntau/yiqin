@@ -103,6 +103,11 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	}
 
 	@Override
+	public boolean deleteCartByUserId(String userId) {
+		return shoppingDao.deleteCart(userId);
+	}
+
+	@Override
 	public List<OrderView> findOrderList(String userId, Date startTime,
 			Date endTime, int status, long orderId, String productName,
 			String productId, int offset, int pageSize) {
@@ -213,6 +218,11 @@ public class ShoppingManagerImpl implements ShoppingManager {
 	@Override
 	public boolean deleteOrder(long orderId) {
 		return shoppingDao.deleteOrder(orderId);
+	}
+
+	@Override
+	public boolean deleteOrdersByUserId(String userId) {
+		return shoppingDao.deleteOrdersByUserId(userId);
 	}
 
 	@Override

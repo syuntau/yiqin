@@ -117,6 +117,29 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 			return false;
 		}
 	}
+
+	private List<UserConf> findUserConfInfo(String userId) {
+		String queryString = "from UserConf where userId=?";
+		List<?> list = getHibernateTemplate().find(queryString, userId);
+		if (Util.isNotEmpty(list)) {
+			return (List<UserConf>) list;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteUserConf(String userId) {
+		try {
+			List<UserConf> userConfList = findUserConfInfo(userId);
+			if (userConfList != null) {
+				getHibernateTemplate().deleteAll(userConfList);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	@Override
 	public boolean insertRegisterCode(RegisterCode regCodeBean) {

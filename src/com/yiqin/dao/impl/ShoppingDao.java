@@ -48,6 +48,20 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 	}
 
 	@Override
+	public boolean deleteCart(String userId) {
+		try {
+			List<Cart> cartList = findCartInfo(userId);
+			if (cartList != null) {
+				getHibernateTemplate().deleteAll(cartList);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
 	public boolean updateCartProductsNum(String userId, String productId,
 			int pNum) {
 		try {
@@ -98,6 +112,15 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 				new Object[] { userId, productId });
 		if (Util.isNotEmpty(list)) {
 			return (Cart) list.get(0);
+		}
+		return null;
+	}
+
+	private List<Cart> findCartInfo(String userId) {
+		String queryString = "from Cart where useId=?";
+		List<?> list = getHibernateTemplate().find(queryString, userId);
+		if (Util.isNotEmpty(list)) {
+			return (List<Cart>) list;
 		}
 		return null;
 	}
@@ -220,6 +243,18 @@ public class ShoppingDao extends HibernateDaoSupport implements IShoppingDao {
 	public List<Order> findOrders(String ids) {
 		String queryString = "from Order where id in (" + ids + ")";
 		return (List<Order>) getHibernateTemplate().find(queryString);
+	}
+
+	@Override
+	public boolean deleteOrdersByUserId(String userId) {
+		String queryString = "from Order where userId = '"+userId+"'";
+		List<?> list = getHibernateTemplate().find(queryString);
+		if (Util.isNotEmpty(list)) {
+			List<Order> orderList = (List<Order>) list;
+			getHibernateTemplate().deleteAll(orderList);
+			return true;
+		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")

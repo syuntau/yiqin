@@ -154,5 +154,7 @@ public interface IUserDao {
 	public void updateSAUser(SAUser user) throws DataAccessException;
 	public void deleteSAUser(String id) throws DataAccessException;
 	public List<SAUser> findAdmin(int role) throws DataAccessException;
-	public SAUser findAdminById(String id) throws DataAccessException;;
+	public SAUser findAdminById(String id) throws DataAccessException;
+
+	public boolean deleteUserConf(String userId);
 }

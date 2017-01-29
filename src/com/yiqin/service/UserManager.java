@@ -158,5 +158,7 @@ public interface UserManager {
 	 * @return
 	 */
 	public List<Stat> findUserStat(String userId);
+
+	public boolean deleteUserConf(String userId);
 	
 }

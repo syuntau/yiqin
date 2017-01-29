@@ -181,4 +181,8 @@ public interface ShoppingManager {
 	public boolean startStat(String userId);
 	
 	public JSONArray getChartData(String userId,String begin,String end,String category);
+
+	public boolean deleteCartByUserId(String userId);
+
+	public boolean deleteOrdersByUserId(String userId);
 }

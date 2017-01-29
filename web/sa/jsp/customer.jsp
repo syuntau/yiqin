@@ -181,6 +181,7 @@ var customer_manage = {
 			return ;
 		}
 		$('.btn-clear-user').on('click', function() {
+			var $userList = $('.user-list');
 			var userId = $('.user-list select').find('option:selected').val();
 			var alertMsg = "<s:text name='msg.alert.remove.user' />";
 			alertMsg = alertMsg.replace(/UserId/, userId);
@@ -197,31 +198,23 @@ var customer_manage = {
 	       		            data: 'userId='+userId,
 	       		            dataType: "json",
 	       		            success: function(data) {
-// 								if (data=='1') {
-// 									alert("<s:text name='msg.err.param'></s:text>");
-// 								} else if (data=='3') {
-// 									alert("<s:text name='msg.err.db'></s:text>");
-// 								} else {
-// 								   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
-// 					           		var $tbody = $itemDiv.find('tbody');
-// 					           		$tbody.find('.tr_'+itemId).remove();
-// 					           		var trCnt = $tbody.children().length;
-// 					           		if (trCnt == 0) {
-// 						           		$itemHR.addClass('display-off');
-// 								  		$itemDiv.find('.item-panel').addClass('display-off');
-// 					           		}
-// 								}
-alert("test");
+								if (data=='1') {
+									alert("<s:text name='msg.err.param'></s:text>");
+								} else if (data=='4') {
+									alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
+								} else {
+								   	alert("<s:text name='msg.suc.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
+								   	window.location.href = "sa/dispatcher?para_nav=customer-manage";
+								}
 	       		            },
 	       		            beforeSend: function() {
-	       		            	var $loadingTextIcon = $(com_conf.loading_text_icon);
-	       		            	$itemDiv.find('.panel-heading').append($loadingTextIcon);
+	       		            	$userList.prepend($(com_conf.loading_icon));
 	       		        	},
 	       		        	error: function() {
 	       		        		alert("<s:text name='msg.fail.do'><s:param><s:text name='msg.param.delete' /></s:param></s:text>");
 	       		        	},
 	       		        	complete: function() {
-	        		        	$itemDiv.find('span').remove();
+	       		        		$userList.find('span').remove();
 	       		        	}
 	       				});
 	       	    	}

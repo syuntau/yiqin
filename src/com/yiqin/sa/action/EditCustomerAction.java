@@ -13,6 +13,8 @@ import org.springframework.dao.DataAccessException;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.User;
 import com.yiqin.pojo.UserConf;
+import com.yiqin.service.ProductManager;
+import com.yiqin.service.ShoppingManager;
 import com.yiqin.service.UserManager;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
@@ -24,7 +26,21 @@ public class EditCustomerAction extends ActionSupport {
 	private String userId;
 	private String zheKou;
 	private String youHuiZhengCe;
+	private ProductManager productManager;
+	private ShoppingManager shoppingManager;
 
+	public ShoppingManager getShoppingManager() {
+		return shoppingManager;
+	}
+	public void setShoppingManager(ShoppingManager shoppingManager) {
+		this.shoppingManager = shoppingManager;
+	}
+	public ProductManager getProductManager() {
+		return productManager;
+	}
+	public void setProductManager(ProductManager productManager) {
+		this.productManager = productManager;
+	}
 	public UserManager getUserManager() {
 		return userManager;
 	}
@@ -230,7 +246,41 @@ public class EditCustomerAction extends ActionSupport {
 		}
 	}
 
-	public String removeUser() {
-		return null;
+	public String removeUser() throws IOException {
+
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = "";
+			if (Util.isEmpty(userId)) {
+				result = UtilKeys.CODE_ERR_PARAM;
+				out.print(result);
+				return null;
+			}
+
+			shoppingManager.deleteCartByUserId(userId);
+			System.out.println("### removeUser deleteCartByUserId over");
+			shoppingManager.deleteOrdersByUserId(userId);
+			System.out.println("### removeUser deleteOrdersByUserId over");
+			productManager.deleteAllCommonProduct(userId);
+			System.out.println("### removeUser deleteAllCommonProduct over");
+			userManager.deleteUserConf(userId);
+			System.out.println("### removeUser deleteUserConf over");
+			userManager.deleteUser(userId);
+			System.out.println("### removeUser deleteUser over");
+
+			result = UtilKeys.CODE_SUCCESS;
+			out.print(result);
+			return null;
+		} catch (Exception e) {
+			System.out.println("### removeUser error cause by : " + e.getMessage());
+			e.printStackTrace();
+
+			PrintWriter out = response.getWriter();
+			String result = UtilKeys.CODE_ERR_EXCEPTION;
+			out.print(result);
+			return null;
+		}
 	}
 }
