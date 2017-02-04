@@ -56,26 +56,26 @@ var yiqin_category_action = function(){
 	         });
 		},
 		
-		findTopCategorys : function(){
-			$.ajax({
-	             type: "POST",
-	             async: true,
-	             url: "findTopCategory",
-	             dataType: "json",
-	             success: function(data){
-	            	 if(data=='1'){
-	            		 alert("暂无顶级分类信息！");
-	            	 }else if(data=='2'){
-	            		 alert("加载失败，稍后再试！");
-	            	 }else{
-	            		 appendRightCategory(data);
-	            	 }
-               },
-               beforeSend: function(){},
-               complete: function(){},
-               error: function(){}
-	         });
-		},
+// 		findTopCategorys : function(){
+// 			$.ajax({
+// 	             type: "POST",
+// 	             async: true,
+// 	             url: "findTopCategory",
+// 	             dataType: "json",
+// 	             success: function(data){
+// 	            	 if(data=='1'){
+// 	            		 alert("暂无顶级分类信息！");
+// 	            	 }else if(data=='2'){
+// 	            		 alert("加载失败，稍后再试！");
+// 	            	 }else{
+// 	            		 appendRightCategory(data);
+// 	            	 }
+//                },
+//                beforeSend: function(){},
+//                complete: function(){},
+//                error: function(){}
+// 	         });
+// 		},
 	};
 	
 	var appendToCategory = function(data){
@@ -169,40 +169,40 @@ var yiqin_category_action = function(){
 		 }
 	};
 	
-	var appendRightCategory = function(data){
-		$("#right_category_tab").empty();
-		$.each(data, function(i, val){
-			var $cate_li = $(category_temp.cate_li),
-			$cate_right_a = $(category_temp.cate_right_a);
-			if(i==0){
-				$cate_li.attr('class', "active");
-			}
-			$cate_li.append($cate_right_a);
-			$cate_right_a.attr('href',"#right_"+val.id).append(val.name);
-			$("#right_category_tab").append($cate_li);
+// 	var appendRightCategory = function(data){
+// 		$("#right_category_tab").empty();
+// 		$.each(data, function(i, val){
+// 			var $cate_li = $(category_temp.cate_li),
+// 			$cate_right_a = $(category_temp.cate_right_a);
+// 			if(i==0){
+// 				$cate_li.attr('class', "active");
+// 			}
+// 			$cate_li.append($cate_right_a);
+// 			$cate_right_a.attr('href',"#right_"+val.id).append(val.name);
+// 			$("#right_category_tab").append($cate_li);
 			
-			var $cate_li = $(category_temp.cate_li),
-			$cate_panel_a = $(category_temp.cate_panel_a);
-			$cate_li.append($cate_panel_a);
-			$cate_panel_a.click(function(){
-				if(category_temp.best_currentNav=="best_product_nav"){
-					yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
-				}else{
-					yiqin_public_js.toTilesAction(val.id, "/productFilter");
-				}
-			});
-			$cate_panel_a.attr('class',"shop_header").append(val.name);
-			$cate_panel_a.attr('id',"top_"+val.id);
-			$("#top_header_mainmenu").append($cate_li);
-		});
-		shop_header.setCurrentNav();
-	};
+// 			var $cate_li = $(category_temp.cate_li),
+// 			$cate_panel_a = $(category_temp.cate_panel_a);
+// 			$cate_li.append($cate_panel_a);
+// 			$cate_panel_a.click(function(){
+// 				if(category_temp.best_currentNav=="best_product_nav"){
+// 					yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
+// 				}else{
+// 					yiqin_public_js.toTilesAction(val.id, "/productFilter");
+// 				}
+// 			});
+// 			$cate_panel_a.attr('class',"shop_header").append(val.name);
+// 			$cate_panel_a.attr('id',"top_"+val.id);
+// 			$("#top_header_mainmenu").append($cate_li);
+// 		});
+// 		shop_header.setCurrentNav();
+// 	};
 	
 	return action;
 }();
 
 $(document).ready(function() {
-	yiqin_category_action.findTopCategorys();
+// 	yiqin_category_action.findTopCategorys();
 	var currentNav = "<s:property value='#session.se_shop_nav' />";
 	if (currentNav != '' && currentNav != null) {
 		var topcid =  currentNav.split("_")[1];

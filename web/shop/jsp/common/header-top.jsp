@@ -34,7 +34,7 @@ $(document).ready(function(){
 <div class="header_top"><!--header_top-->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 				<div class="contactinfo">
 					<ul class="nav nav-pills">
 						<li><a><i class="fa fa-phone"></i> <s:text name="yiqin.phone" /></a></li>
@@ -42,7 +42,7 @@ $(document).ready(function(){
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-7">
 				<div class="shop-menu pull-right">
 					<ul class="nav navbar-nav" id="shop_header_ul">
 						<li><a class="shop_header" id="top_account"><i class="fa fa-user"></i> <s:text name="shop.header.top.accout" /></a></li>
