@@ -37,6 +37,10 @@ public class CategoryUtil {
 		return categoryItemMap.get(categoryId);
 	}
 
+	public static List<Category> getCategoryTree() {
+		return categoryList;
+	}
+
 	private static void setCategoryMap(List<Category> list) {
 		if (Util.isEmpty(list)) {
 			return ;

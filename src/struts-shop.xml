@@ -84,6 +84,8 @@
 		<action name="saveOrUpdateInvoice" class="com.yiqin.shop.action.ModifyUserInvoiceAction"></action>
 		
 		<action name="updateCartProductsNum" class="com.yiqin.shop.action.UpdateCartProductsNumAction"></action>
+
+		<action name="findCategoryTree" class="com.yiqin.shop.action.FindCategoryTreeAction"></action>
 		
 		<action name="toSettlementOrder" class="com.yiqin.shop.action.ToSettlementOrderAction">
 			<result name="success" type="tiles">shop.order</result>
