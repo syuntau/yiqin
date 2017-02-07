@@ -3,13 +3,6 @@
 
 <script type="text/javascript">
 var	category_conf = {
-	cate_div : '<div></div>',
-	cate_h4 : '<h4 class="panel-title"></h4>',
-	cate_coll_a : '<a data-toggle="collapse" data-parent="#accordian" />',
-	cate_span_i : '<span class="badge pull-right"><i class="fa fa-plus"></i></span>',
-	cate_ul : '<ul></ul>',
-	
-
 	cate_li : '<li></li>',
 	cate_right_a : '<a data-toggle="tab"></a>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
@@ -19,10 +12,13 @@ var	category_conf = {
 var yiqin_category = function(){
 	var action = {
 		findTopCategorys : function(){
+			var url = "findCategoryTree";
+			var cateId = "<s:property value='paramVal'/>";
 			$.ajax({
 		         type: "POST",
 		         async: true,
-		         url: "findCategoryTree",
+		         url: url,
+	             data: "topCateId="+cateId,
 		         dataType: "json",
 		         success: function(data){
 		        	 if(data=='1'){
@@ -42,53 +38,67 @@ var yiqin_category = function(){
 
 	
 	var appendCategoryTree = function(data) {
-		$.each(data, function(i, val) {
-			String cateDiv = '<div class="dropdown" style="padding-top: 4px;">' +
-								'<a role="button" href="javaScript:void(0)" class="shop_header top"></a>' +
-							'</div>';
-			String cateUl = '<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu"></ul>';
-			String cateLi = '<li><a class="shop_header">{cat-name}</a></li>';
-			String cateLiDi = '<li class="divider"></li>';
-			String cateLiSub = '<li class="dropdown-submenu">' +
-									'<a tabindex="-1" href="#">Hover me for more options</a>' +
-									'<ul class="dropdown-menu"></ul>' +
-								'</li>';
 
+		var cateDiv = '<div class="dropdown" style="padding-top: 4px;">' +
+							'<a role="button" href="javaScript:void(0)" class="shop_header first-level"></a>' +
+						'</div>';
+		var cateUl = '<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu"></ul>';
+		var cateLi = '<li><a class="shop_header"></a></li>';
+		var cateLiDi = '<li class="divider"></li>';
+		var cateLiSub = '<li class="dropdown-submenu">' +
+							'<a class="shop_header second-level" href="javaScript:void(0)"></a>' +
+							'<ul class="dropdown-menu"></ul>' +
+						'</li>';
+
+		$.each(data, function(i, val) {
 			var $catDiv = $(cateDiv);
-			$catDiv.find('a.shop_header.top').attr('id', 'top_' + val.id).click(function() {
+			$catDiv.find('a.first-level').attr('id', 'top_' + val.id).click(function() {
 				if(category_conf.best_currentNav=="best_product_nav"){
 					yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
 				}else{
 					yiqin_public_js.toTilesAction(val.id, "/productFilter");
 				}
 			});
-			cateDiv = cateDiv.replace(/#cat-id#/, val.id);
-			if (val.subCategoryList && val.subCategoryList != null && val.subCategoryList.length > 0) {
+			var subCategoryList1 = val.subCategoryList;
+			if (subCategoryList1 && subCategoryList1 != null && subCategoryList1.length > 0) {
 				$catDiv.find('#top_' + val.id).html(val.name + ' <span class="caret"></span>');
 				
-				String $cateUl = $(cateUl);
+				var $cateUl = $(cateUl);
 				$catDiv.append($cateUl);
 				
-				$.each(val.subCategoryList, function(i, val) {
-					var $
+				$.each(subCategoryList1, function(i, val) {
+					var $cateLi = $(cateLi);
+					
+					var subCategoryList2 = val.subCategoryList;
+					if (subCategoryList2 && subCategoryList2 != null && subCategoryList2.length > 0) {
+						$cateLi = $(cateLiSub);
+						$.each(subCategoryList2, function(i, val) {
+							var $subCateLi = $(cateLi);
+
+							$subCateLi.find('a').attr('id', 'top_' + val.id).html(val.name).click(function() {
+								if(category_conf.best_currentNav=="best_product_nav"){
+									yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
+								}else{
+									yiqin_public_js.toTilesAction(val.id, "/productFilter");
+								}
+							});
+							$cateLi.find('ul').append($subCateLi);
+						});
+					}
+
+					$cateLi.find('a.second-level').attr('id', 'top_' + val.id).html(val.name).click(function() {
+						if(category_conf.best_currentNav=="best_product_nav"){
+							yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
+						}else{
+							yiqin_public_js.toTilesAction(val.id, "/productFilter");
+						}
+					});
+					
+					$cateUl.append($cateLi);
 				});
 			}
+			$('#top_header_mainmenu').append($('<li />').append($catDiv));
 			
-			
-			
-			var $cate_li = $(category_conf.cate_li),
-			$cate_panel_a = $(category_conf.cate_panel_a);
-			$cate_li.append($cate_panel_a);
-			$cate_panel_a.click(function(){
-				if(category_conf.best_currentNav=="best_product_nav"){
-					yiqin_public_js.toTilesAction(val.id, "/findBestProduct");
-				}else{
-					yiqin_public_js.toTilesAction(val.id, "/productFilter");
-				}
-			});
-			$cate_panel_a.attr('class',"shop_header").append(val.name);
-			$cate_panel_a.attr('id',"top_"+val.id);
-			$("#top_header_mainmenu").append($cate_li);
 		});
 		shop_header.setCurrentNav();
 	};
@@ -109,26 +119,6 @@ $(document).ready(function() {
 					<ul class="nav navbar-nav collapse navbar-collapse" id="top_header_mainmenu">
 						<li>
 							<a class="shop_header active" id="top_home"><s:text name="shop.header.nav.home" /></a>
-						</li>
-						<li>
-						<div class="dropdown" style="padding-top: 4px;">
-							<a role="button" href="" class="shop_header active">
-					            <s:text name="shop.header.nav.home" /> <span class="caret"></span>
-					        </a>
-							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-							  <li><a href="#">Some action</a></li>
-							  <li><a href="#">Some other action</a></li>
-							  <li class="divider"></li>
-							  <li class="dropdown-submenu">
-							    <a href="#" class="active">Hover me for more options</a>
-							    <ul class="dropdown-menu">
-							      <li><a href="#">Second level</a></li>
-							      <li><a href="#" class="active">Second level</a></li>
-							      <li><a href="#">Second level</a></li>
-							    </ul>
-							  </li>
-							</ul>
-						</div>
 						</li>
 					</ul>
 				</div>

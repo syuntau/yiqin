@@ -6,6 +6,7 @@
 		<div class="container">
 			<div class="row">
 <%-- 				<tiles:insertAttribute name="left" /> --%>
+				<tiles:insertAttribute name="nav" />
 				<tiles:insertAttribute name="right" />
 			</div>
 		</div>

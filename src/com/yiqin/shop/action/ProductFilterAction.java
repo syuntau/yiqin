@@ -15,6 +15,7 @@ import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductFilter;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.CategoryUtil;
 import com.yiqin.util.Configuration;
 import com.yiqin.util.Page;
 import com.yiqin.util.Util;
@@ -89,6 +90,23 @@ public class ProductFilterAction extends ActionSupport {
 			
 			String shop_nav = "top_" + paramVal.substring(0, 1);
 			session.setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
+
+			StringBuilder nav = new StringBuilder();
+			if (paramVal.length() == 4) {
+				String firstName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal.substring(0, 1)));
+				String secondName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal.substring(0, 2)));
+				String thirdName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal));
+				nav.append(firstName).append(",").append(secondName).append(":").append(thirdName);
+			} else if (paramVal.length() == 2) {
+				String firstName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal.substring(0, 1)));
+				String secondName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal.substring(0, 2)));
+				nav.append(firstName).append(":").append(secondName);
+			} else if (paramVal.length() == 1) {
+				String firstName = CategoryUtil.getCategoryName(Integer.parseInt(paramVal.substring(0, 1)));
+				nav.append(firstName);
+			}
+
+			session.setAttribute(UtilKeys.SE_PRODUCT_NAV, nav.toString());
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package com.yiqin.util;
 public class UtilKeys {
 
 	public final static String SE_SHOP_NAV = "se_shop_nav";
+	public final static String SE_PRODUCT_NAV = "se_product_nav";
 	public final static String SE_SHOP_ORIGNAL_NAV = "se_shop_orignal_nav";
 	public final static String SE_SHOP_NAV_BEST_PRODUCT = "se_shop_nav_best_product";
 

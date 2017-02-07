@@ -973,6 +973,9 @@ h2.title:before{
 .features_items{
 	overflow:hidden;
 	padding-top: 2px;
+	padding-left: 15px;
+    margin-bottom: 50px;
+    margin-top: 30px;
 }
 
 
@@ -3025,6 +3028,7 @@ div.product-image-wrapper:hover {
 }
 .mainmenu .dropdown-menu a {
 	font-size: 14px;
+	text-decoration: none;
 }
  
 .mainmenu div.dropdown ul li {

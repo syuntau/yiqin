@@ -6,7 +6,7 @@
 <script type="text/javascript">
 var shop_temp = {
 	filter_li : '<li style="padding: 10px 5px;border-bottom: 1px solid #DDD;"></li>',
-	filter_label : '<label></label>',
+	filter_label : '<label style="font-weight:900"></label>',
 	filter_span : '<span></span>',
 	filter_a : '<a></a>',
 	filter_row : '<div class="row" />',
@@ -157,17 +157,17 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="col-sm-9 padding-right" style="width: 921px">
-	<div id="shop_filter_div">
+
+<!-- <div class="col-sm-9 padding-right" style="width: 921px"> -->
+<div class="col-sm-12 padding-right">
+	<div id="shop_filter_div" style="margin-top: -30px;">
 		<div class="s-title">
-			<h4>
-				<b></b><em>&nbsp;商品筛选</em>
-			</h4>
+			<h4></h4>
 		</div>
 		<div class="row">
 			<div class="col-sm-6" style="width: 100%">
 				<div class="chose_area">
-					<ul class="user_option" style="padding-left:0px;" id="shop_filter_ul"></ul>
+					<ul class="user_option" style="padding-left:15px;margin-top: 10px;" id="shop_filter_ul"></ul>
 				</div>
 			</div>
 		</div>
@@ -182,7 +182,7 @@ $(document).ready(function(){
 		</s:if>
 		<s:else>
 			<s:iterator value="page.results" var="product">
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
