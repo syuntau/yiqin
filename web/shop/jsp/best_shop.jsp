@@ -46,7 +46,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="padding-right" style="margin-top: -30px;">
+<div class="padding-right">
 	<div class="features_items" id="fenlei_product_items">
 		<!--features_items-->
 		<h2 class="title">

@@ -160,7 +160,7 @@ $(document).ready(function(){
 
 <!-- <div class="col-sm-9 padding-right" style="width: 921px"> -->
 <div class="col-sm-12 padding-right">
-	<div id="shop_filter_div" style="margin-top: -30px;">
+	<div id="shop_filter_div">
 		<div class="s-title">
 			<h4></h4>
 		</div>
@@ -178,7 +178,7 @@ $(document).ready(function(){
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
 <!-- 		</h2> -->
 		<s:if test="page.results==null">
-			没有找到任何商品
+			<span style="line-height: 60px;">没有找到任何商品</span>
 		</s:if>
 		<s:else>
 			<s:iterator value="page.results" var="product">

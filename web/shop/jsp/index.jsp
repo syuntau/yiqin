@@ -4,7 +4,7 @@
 
 	<tiles:insertAttribute name="ad" ></tiles:insertAttribute>
 
-	<section style="margin-top:50px">
+	<section style="margin-top:20px">
 		<div class="container">
 			<div class="row">
 				<tiles:insertAttribute name="left" />
