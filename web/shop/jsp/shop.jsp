@@ -172,7 +172,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-	<div class="features_items" id="fenlei_product_items" style="margin-top: 20px;">
+	<div class="features_items" id="fenlei_product_items" style="margin-top: 20px;padding-left:0px;">
 		<!--features_items-->
 <!-- 		<h2 class="title text-center"> -->
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
