@@ -145,7 +145,7 @@ $(document).ready(function(){
 <div class="padding-right">
 	<div class="product-details">
 		<!--product-details-->
-		<div class="col-sm-5">
+		<div class="col-sm-4">
 			<div class="view-product">
 				<img />
 				<input type="hidden" id="<s:property value='#productId'/>" value="<s:property value='#productId'/>">
@@ -159,7 +159,7 @@ $(document).ready(function(){
 				<a class="right item-control" href="#similar-product" data-slide="next"> <i class="fa fa-angle-right"></i></a>
 			</div>
 		</div>
-		<div class="col-sm-7">
+		<div class="col-sm-8">
 			<div class="product-information">
 				<!--/product-information-->
 				<h2><s:property value='#productInfo.productName'/></h2>
@@ -214,7 +214,7 @@ $(document).ready(function(){
 	</div>
 	<!--/product-details-->
 
-	<div class="category-tab shop-details-tab">
+	<div class="category-tab shop-details-tab" style="float: left;margin-top: 20px;">
 		<!--category-tab-->
 		<div class="col-sm-12">
 			<ul class="category-tab-ul nav nav-tabs">
