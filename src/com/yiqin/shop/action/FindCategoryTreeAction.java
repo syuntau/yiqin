@@ -29,16 +29,6 @@ import com.yiqin.util.UtilKeys;
 public class FindCategoryTreeAction extends ActionSupport {
 
 	private static final long serialVersionUID = 8944656464537016876L;
-	// 顶级分类ID
-	private String topCateId;
-	
-	public String getTopCateId() {
-		return topCateId;
-	}
-
-	public void setTopCateId(String topCateId) {
-		this.topCateId = topCateId;
-	}
 
 	private ProductManager productManager;
 	public ProductManager getProductManager() {
@@ -65,12 +55,7 @@ public class FindCategoryTreeAction extends ActionSupport {
 			}
 
 			if (commonProFlag) {
-				List<Category> comCateTmpList = null;
-				if (Util.isEmpty(topCateId)) {
-					comCateTmpList = productManager.findCategoryInfoForCommon(Util.getLoginUser(session).getId());
-				} else {
-					comCateTmpList = productManager.findCategoryInfoForCommon(Integer.valueOf(topCateId), Util.getLoginUser(session).getId());
-				}
+				List<Category> comCateTmpList = productManager.findCategoryInfoForCommon(Util.getLoginUser(session).getId());
 				if (Util.isNotEmpty(comCateTmpList)) {
 					category = new ArrayList<Category>();
 					Map<Integer, Category> map = new HashMap<Integer, Category>();
@@ -82,6 +67,7 @@ public class FindCategoryTreeAction extends ActionSupport {
 							topCate.setName(CategoryUtil.getCategoryName(cate.getParentId()));
 							topCate.setSubCategoryList(new ArrayList<Category>());
 							category.add(topCate);
+							map.put(cate.getParentId(), topCate);
 						}
 						
 						List<Category> subList = topCate.getSubCategoryList();

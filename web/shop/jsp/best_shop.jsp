@@ -7,6 +7,43 @@ var toIndexPage = function(pageIndex){
 	var paramVal = "<s:property value='paramVal'/>";
 	window.location.href = "findBestProduct?pageIndex="+pageIndex+"&paramVal="+paramVal;
 };
+
+
+var common_product_nav = function() {
+	var action = {
+		showNav : function() {
+			var $h4Title = $('#fenlei_product_items h2.title span');
+			var nav = "";
+			var navs = "<s:property value='#session.se_product_nav' />";
+			if (!navs || navs == null || navs == '') {
+				$h4Title.html('');
+				return ;
+			}
+			var navArr = navs.split(":");
+			if (navArr.length == 2) {
+				nav += navArr[1];
+				var navArr1 = navArr[0].split(",");
+				if (navArr1.length == 2) {
+					var productDetailFlag = '<s:property value="#request.req_shop_pro_detail"/>';
+						nav = "( 当前 : " + navArr1[0] + " > " + navArr1[1] + " > <span style='color:#FE980F;'>" + nav + "</span> )";
+						$h4Title.html(nav);
+				} else {
+					nav = "( 当前 : " + navArr1[0] + " > <span style='color:#FE980F;'>" + nav + "</span> )";
+					$h4Title.html(nav);
+				}
+			} else {
+				nav = "( 当前 : <span style='color:#FE980F'>" + navArr[0] + "</span> )";
+				$h4Title.html(nav);
+			}
+		},
+	};
+
+	return action;
+}();
+
+$(document).ready(function() {
+	common_product_nav.showNav();
+});
 </script>
 
 <div class="padding-right" style="margin-top: -30px;">
@@ -14,7 +51,7 @@ var toIndexPage = function(pageIndex){
 		<!--features_items-->
 		<h2 class="title">
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
-        常用商品列表
+        常用商品列表<span style="font-size:14px;color:#696763;font-weight:900;margin-left:15px;"></span>
 		</h2>
 		<s:if test="page.results==null">
 		<h5 class="text-center" style="line-height: 200px;">

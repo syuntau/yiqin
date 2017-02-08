@@ -104,6 +104,7 @@ public class FindBestProductAction extends ActionSupport {
 
 				request.getSession().setAttribute(UtilKeys.SE_PRODUCT_NAV, nav.toString());
 			}
+
 			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();

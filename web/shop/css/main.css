@@ -1316,7 +1316,7 @@ div.product-image-wrapper:hover {
 **************************/
 
 .product-details{
-	overflow:hidden;
+/* 	overflow:hidden; */
 }
 
 
@@ -1332,7 +1332,7 @@ div.product-image-wrapper:hover {
 
 .product-details {
   margin-bottom: 40px;
-  overflow: hidden;
+/*   overflow: hidden; */
   margin-top: 10px;
 }
 

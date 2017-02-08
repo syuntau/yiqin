@@ -97,7 +97,7 @@
 	
 	<definition name="shop.quick.body" template="/shop/jsp/other.jsp">
 		<put-attribute name="left" value="shop.index.body.left" />
-		<put-attribute name="nav" value="product.nav" />
+		<put-attribute name="nav" value="" />
 		<put-attribute name="right" value="/shop/jsp/best_shop.jsp" />
 	</definition>
 	

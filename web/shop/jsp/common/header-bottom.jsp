@@ -13,12 +13,10 @@ var yiqin_category = function(){
 	var action = {
 		findTopCategorys : function(){
 			var url = "findCategoryTree";
-			var cateId = "<s:property value='paramVal'/>";
 			$.ajax({
 		         type: "POST",
 		         async: true,
 		         url: url,
-	             data: "topCateId="+cateId,
 		         dataType: "json",
 		         success: function(data){
 		        	 if(data=='1'){

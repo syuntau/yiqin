@@ -12,6 +12,7 @@ public class UtilKeys {
 	public final static String PARA_NAV = "para_nav";
 
 	public final static String REQ_SHOP_NAV = "req_shop_nav";
+	public final static String REQ_SHOP_PRO_DETAIL = "req_shop_pro_detail";
 	
 	public final static String BLANK = "";
 	public final static String BLANK_ZERO = "0";

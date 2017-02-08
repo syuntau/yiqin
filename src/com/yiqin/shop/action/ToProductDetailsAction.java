@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yiqin.pojo.User;
 import com.yiqin.service.ProductManager;
 import com.yiqin.shop.bean.ProductView;
+import com.yiqin.util.CategoryUtil;
 import com.yiqin.util.Util;
 import com.yiqin.util.UtilKeys;
 
@@ -59,6 +60,18 @@ public class ToProductDetailsAction extends ActionSupport {
 			request.setAttribute("product_detail", product);
 			String shop_nav = "top_" + paramVal.substring(0, 1);
 			request.getSession().setAttribute(UtilKeys.SE_SHOP_NAV, shop_nav);
+			
+
+
+			StringBuilder nav = new StringBuilder();
+			String cateId = paramVal.substring(0, 4);
+			String firstName = CategoryUtil.getCategoryName(Integer.parseInt(cateId.substring(0, 1)));
+			String secondName = CategoryUtil.getCategoryName(Integer.parseInt(cateId.substring(0, 2)));
+			String thirdName = CategoryUtil.getCategoryName(Integer.parseInt(cateId));
+			nav.append(firstName).append(",").append(secondName).append(":").append(thirdName);
+
+			request.getSession().setAttribute(UtilKeys.SE_PRODUCT_NAV, nav.toString());
+			request.setAttribute(UtilKeys.REQ_SHOP_PRO_DETAIL, "detail");
 			return SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
