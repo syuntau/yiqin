@@ -178,7 +178,7 @@ $(document).ready(function(){
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
 <!-- 		</h2> -->
 		<s:if test="page.results==null">
-			没有找到任何商品
+			<span style="padding-left:15px">没有找到任何商品</span>
 		</s:if>
 		<s:else>
 			<s:iterator value="page.results" var="product">
