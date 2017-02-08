@@ -172,13 +172,13 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-	<div class="features_items" id="fenlei_product_items">
+	<div class="features_items" id="fenlei_product_items" style="margin-top: 20px;">
 		<!--features_items-->
 <!-- 		<h2 class="title text-center"> -->
 <%-- 			<s:text name="shop.index.right.features.items" /> --%>
 <!-- 		</h2> -->
 		<s:if test="page.results==null">
-			<span style="line-height: 60px;">没有找到任何商品</span>
+			没有找到任何商品
 		</s:if>
 		<s:else>
 			<s:iterator value="page.results" var="product">
