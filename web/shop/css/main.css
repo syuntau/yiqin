@@ -767,9 +767,11 @@ ul.sub-menu {
 }
 
 .category-products {
-  border: 1px solid #F7F7F0;
-  margin-bottom: 35px;
-  padding-bottom: 20px;
+/*   border: 1px solid #F7F7F0; */
+/*   margin-bottom: 35px; */
+/*   padding-bottom: 20px; */
+  border-top: 1px solid #F7F7F0;
+  padding-bottom: 15px;
   padding-top: 15px;
 }
 .left-sidebar h2, .brands_products h2 {
@@ -873,7 +875,8 @@ h2.title:before{
   font-weight: bold;
   line-height: 1;
   min-width: 10px;
-  padding: 3px 7px;
+/*   padding: 3px 7px; */
+  padding: 0px;
   text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
@@ -975,7 +978,7 @@ h2.title:before{
 	padding-top: 2px;
 	padding-left: 15px;
     margin-bottom: 50px;
-    margin-top: 30px;
+/*     margin-top: 30px; */
 }
 
 
