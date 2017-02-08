@@ -103,6 +103,8 @@ public class FindBestProductAction extends ActionSupport {
 				}
 
 				request.getSession().setAttribute(UtilKeys.SE_PRODUCT_NAV, nav.toString());
+			} else {
+				request.getSession().setAttribute(UtilKeys.SE_PRODUCT_NAV, "");
 			}
 
 			return SUCCESS;
