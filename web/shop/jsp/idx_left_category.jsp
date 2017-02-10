@@ -9,7 +9,8 @@ var	category_temp = {
 	cate_coll_a : '<a data-toggle="collapse" data-parent="#accordian" />',
 	cate_span_i : '<span class="badge pull-right"><i class="fa fa-plus"></i></span>',
 	cate_ul : '<ul></ul>',
-	cate_li : '<li></li>',
+	//cate_li : '<li></li>',
+	cate_li : '<a style="padding-right: 15px"></a>',
 	cate_panel_a : '<a href="javaScript:void(0)"></a>',
 	cate_right_a : '<a data-toggle="tab"></a>',
 	
@@ -106,7 +107,8 @@ var yiqin_category_action = function(){
 			 	 $cate_li = $(category_temp.cate_li),
 			 	 $cate_panel_a = $(category_temp.cate_panel_a);
 			 
-				 $cate_div.attr('class','panel panel-default').css('background-color','#FE980F');
+// 				 $cate_div.attr('class','panel panel-default').css('background-color','#FE980F');
+				 $cate_div.attr('class','panel panel-default');
 				 $cate_div_heading.attr('class','panel-heading').css('background-color','#FE980F');
 				 $cate_div_heading.append($cate_h4);
 				 $cate_div.append($cate_div_heading);
@@ -135,12 +137,12 @@ var yiqin_category_action = function(){
 					 $cate_h4.append($cate_coll_a.attr('href','#first_'+sub.id));
 					 $cate_coll_a.append($cate_span_i);
 					 $cate_div_coll.attr('class',"panel-collapse collapse").attr('id',"first_"+sub.id);
-					 $cate_div_body.attr('class',"panel-body").append($cate_ul);
+					 $cate_div_body.attr('class',"panel-body").attr('style', 'padding-top:5px;padding-bottom:0px;padding-left:5px').append($cate_ul);
 					 $cate_div_coll.append($cate_div_body);
 					 
 					$.each(sub.subCategoryList, function(k,nextSub){
 	 					$cate_li = $(category_temp.cate_li).attr('id',"two_"+nextSub.id).append(nextSub.name);
-	 					$cate_li.css('width','160px').css('text-align','left').css('cursor','pointer').css('color','#FFFFFF');
+// 	 					$cate_li.css('width','160px').css('text-align','left').css('cursor','pointer').css('color','#FFFFFF');
 	 					$cate_panel_a = $(category_temp.cate_panel_a);
 	 					//$cate_panel_a.attr('id',"two_"+nextSub.id);
 	 					$cate_ul.append($cate_li);
