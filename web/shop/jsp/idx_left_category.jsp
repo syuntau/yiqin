@@ -218,5 +218,5 @@ $(document).ready(function() {
 	}
 });
 </script>
-<h2 style="position: static;color: #FFFFFF;margin-top: 10px;margin-bottom: 10px;text-align: left;padding-left: 10px;font-size: 16px;"><s:text name="shop.index.left.category"/></h2>
+<h2 style="position: static;color: #FFFFFF;margin-top: 15px;margin-bottom: 15px;text-align: left;padding-left: 10px;"><s:text name="shop.index.left.category"/></h2>
 <div class="panel-group category-products" id="accordian"><!--category-productsr--></div><!--/category-products-->

@@ -10,7 +10,7 @@
 		feature_info_div : '<div class="productinfo text-center"></div>',
 		feature_over_div : '<div class="product-overlay"></div>',
 		feature_cont_div : '<div class="overlay-content"></div>',
-		feature_h2_tile : '<h2 class="title text-center" style="background-color: #cccccc;line-height: 40px;font-size: 16px;text-align: left;padding-left: 15px;margin-bottom: 10px;color: #101263;"><s:text name="shop.index.right.features.items" /></h2>',
+		feature_h2_tile : '<h2 class="title text-center" style="background-color: #cccccc;line-height: 45px;font-size: 16px;text-align: left;padding-left: 15px;margin-bottom: 10px;color: #101263;"><s:text name="shop.index.right.features.items" /></h2>',
 		feature_img : '<img alt=""/>',
 		feature_h2 : '<h2></h2>',
 		feature_del : '<del></del>',
