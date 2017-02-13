@@ -68,6 +68,7 @@ public class CategoryUtil {
 	public static void init(ProductManager productManager) {
 		if (isInit) return ;
 		categoryList = productManager.findCategoryInfo();
+		firstCategorySimpleList = new ArrayList<CategorySimple>();
 		for (Category category : categoryList) {
 			firstCategorySimpleList.add(new CategorySimple(category));
 		}
