@@ -640,7 +640,7 @@ $(document).ready(function(){
 					<ul class="user_option">
 						<li>
 							<label>备注内容：</label>
-							<textarea style="width:300px;height:83px;" name="ordernote"></textarea>
+							<textarea style="width:300px;height:83px;" name="ordernote" placeholder="如有多个商品需求，建议您换行输入，每行输入一个商品"></textarea>
 						</li>
 					</ul>
 				</div>

@@ -145,7 +145,7 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
-				cell.setCellValue(cart.getProductName());
+				cell.setCellValue(cart.getProductName().replaceAll("<br>", "\n"));
 				cell.setCellStyle(styleArr[j]);
 
 				String zhekouPrice = Util.isEmpty(cart.getZhekouPrice()) ? "0" : cart.getZhekouPrice();
@@ -260,7 +260,7 @@ public class ExportOrderByTemplateAction extends ActionSupport {
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
-				cell.setCellValue(cart.getProductName());
+				cell.setCellValue(cart.getProductName().replaceAll("<br>", "\n"));
 				cell.setCellStyle(styleArr[j]);
 
 				cell = row.getCell(++j);
