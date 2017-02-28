@@ -126,37 +126,40 @@ public class ImageManageAction extends ActionSupport {
 				out.print(jb.toString());
 				return null;
 			} else {
-				OutputStream output = null;
-		        InputStream input = null;
-		        
-		        String fileName = request.getSession().getServletContext()
-		                .getRealPath("/")
-		                + "img/"+imageFileFileName;
-		        
-		        File filee = new File(fileName);
-		        if(filee.exists()){
-		        	filee.delete();
-		        }
-		        
-				System.out.println("###################### fileName : " + fileName);
-		        try{
-		            output = new FileOutputStream(fileName);  
-		            //建立一个1k大小的缓冲区
-		            byte[] bs = new byte[1024];
+				for (String fileFileName : imageFileFileName.split(",")) {
+					OutputStream output = null;
+			        InputStream input = null;
+			        
+			        String fileName = request.getSession().getServletContext()
+			                .getRealPath("/")
+			                + "img/"+fileFileName;
+			        
+			        File filee = new File(fileName);
+			        if(filee.exists()){
+			        	filee.delete();
+			        }
+			        
+					System.out.println("###################### fileName : " + fileName);
+			        try{
+			            output = new FileOutputStream(fileName);  
+			            //建立一个1k大小的缓冲区
+			            byte[] bs = new byte[1024];
 
-		            //将上传过来的文件输出到output中
-		            input = new FileInputStream(imageFile);
-		            int length = 0;
-		            //length=input.read(bs)这句话中，length=-1代表了读到文件结尾
-		            while ((length=input.read(bs))>0){
-		                output.write(bs, 0, length);
-		            }
-		        }catch(Exception e) {
-		        	e.printStackTrace();
-		        }finally{
-		            input.close();
-		            output.close();
-		        }
+			            //将上传过来的文件输出到output中
+			            input = new FileInputStream(imageFile);
+			            int length = 0;
+			            //length=input.read(bs)这句话中，length=-1代表了读到文件结尾
+			            while ((length=input.read(bs))>0){
+			                output.write(bs, 0, length);
+			            }
+			        }catch(Exception e) {
+			        	e.printStackTrace();
+			        }finally{
+			            input.close();
+			            output.close();
+			        }
+				}
+				
 
 				
 		        result = UtilKeys.CODE_SUCCESS;

@@ -93,6 +93,11 @@
 				
 			},
 			uploadImage : function (){
+			   var fileCount = document.getElementById('imageFile').files.length;
+			   if(fileCount > 10){
+			     window.alert('文件数不能超过10个，你选择了' + fileCount + '个');
+			     return;
+			   }
 				$.ajaxFileUpload({
 		            url: "uploadImage",
 		            dataType : 'json',
@@ -168,7 +173,7 @@
 			<form role="form" class="form-inline category-form"
 				enctype="multipart/form-data">
 				<div class="form-group" style="padding-left: 20px">
-					<input type="file" id="imageFile" name="imageFile" accept="image/*"
+					<input type="file" id="imageFile" name="imageFile" multiple="multiple"  accept="image/*"
 						class="upload-item-file upload-image ">
 				</div>
 				<button type="button" class="btn btn-info btn-upload upload-image ">
