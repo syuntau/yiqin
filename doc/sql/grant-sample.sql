@@ -1,0 +1,1 @@
+grant all on yiqin.* to 'yiqin'@'%' identified by 'mysql123';
