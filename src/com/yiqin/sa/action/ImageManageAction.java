@@ -130,9 +130,12 @@ public class ImageManageAction extends ActionSupport {
 					OutputStream output = null;
 			        InputStream input = null;
 			        
+			        if (Util.isEmpty(fileFileName)) {
+			        	continue;
+			        }
 			        String fileName = request.getSession().getServletContext()
 			                .getRealPath("/")
-			                + "img/"+fileFileName;
+			                + "img/"+fileFileName.trim();
 			        
 			        File filee = new File(fileName);
 			        if(filee.exists()){
