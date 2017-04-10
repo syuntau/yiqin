@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
 public class ImageManageAction extends ActionSupport {
 	private static final long serialVersionUID = 1074040371036374358L;
 	private String productId;
-	private File imageFile;
+	private List<File> imageFile;
 	private String imageFileFileName;
 	private String deleteImageFileName;
 	
@@ -39,11 +39,13 @@ public class ImageManageAction extends ActionSupport {
 		this.deleteImageFileName = deleteImageFileName;
 	}
 
-	public File getImageFile() {
+	
+
+	public List<File> getImageFile() {
 		return imageFile;
 	}
 
-	public void setImageFile(File imageFile) {
+	public void setImageFile(List<File> imageFile) {
 		this.imageFile = imageFile;
 	}
 
@@ -126,7 +128,9 @@ public class ImageManageAction extends ActionSupport {
 				out.print(jb.toString());
 				return null;
 			} else {
-				for (String fileFileName : imageFileFileName.split(",")) {
+				String[] ss=imageFileFileName.split(",");
+				for (int i = 0; i < ss.length; i++) {
+					String fileFileName=ss[i].trim();
 					OutputStream output = null;
 			        InputStream input = null;
 			        
@@ -149,7 +153,7 @@ public class ImageManageAction extends ActionSupport {
 			            byte[] bs = new byte[1024];
 
 			            //将上传过来的文件输出到output中
-			            input = new FileInputStream(imageFile);
+			            input = new FileInputStream(imageFile.get(i));
 			            int length = 0;
 			            //length=input.read(bs)这句话中，length=-1代表了读到文件结尾
 			            while ((length=input.read(bs))>0){
