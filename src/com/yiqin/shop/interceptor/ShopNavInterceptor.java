@@ -9,6 +9,7 @@ import org.apache.struts2.StrutsStatics;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.yiqin.util.UtilKeys;
+import org.apache.struts2.dispatcher.Parameter;
 
 public class ShopNavInterceptor extends AbstractInterceptor {
 
@@ -21,8 +22,10 @@ public class ShopNavInterceptor extends AbstractInterceptor {
 		System.out.println("@@@@@@@@@@ Struts2 中配置的Action："+ai.getProxy().getActionName());
 		System.out.println("@@@@@@@@@@ 调用的方法："+ai.getProxy().getMethod());
 		Map<String, Object> session = ai.getInvocationContext().getSession();
-		Map<String, Object> paras = ai.getInvocationContext().getParameters();
-		Object navigation = paras.get(UtilKeys.PARA_NAV);
+//		Map<String, Object> paras = ai.getInvocationContext().getParameters();
+		Parameter paras = ai.getInvocationContext().getParameters().get(UtilKeys.PARA_NAV);
+//		Object navigation = paras.get(UtilKeys.PARA_NAV);
+		Object navigation = paras.getValue();
 		if (navigation == null) {
 			HttpServletRequest request = (HttpServletRequest) ai.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
 			navigation = request.getAttribute(UtilKeys.REQ_SHOP_NAV);
