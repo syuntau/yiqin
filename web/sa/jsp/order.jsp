@@ -71,7 +71,7 @@ var sa_order = function(){
 
 		modifyOrder : function(id) {
 			var orderId = id+'';
-			var orderTmpList = '<s:property value="#request.orderTmpList" escape="false"/>';
+			var orderTmpList = '<s:property value="#request.orderTmpList" escapeHtml="false"/>';
 			var orderArrray = JSON.parse(orderTmpList);
 			var order = orderArrray[orderId];
 			var productList = order.productList;

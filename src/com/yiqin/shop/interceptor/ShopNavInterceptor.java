@@ -26,6 +26,7 @@ public class ShopNavInterceptor extends AbstractInterceptor {
 		Parameter paras = ai.getInvocationContext().getParameters().get(UtilKeys.PARA_NAV);
 //		Object navigation = paras.get(UtilKeys.PARA_NAV);
 		Object navigation = paras.getValue();
+		System.out.println("@@@@@@@@@@ paras："+paras.toString() +"  navigation:"+navigation);
 		if (navigation == null) {
 			HttpServletRequest request = (HttpServletRequest) ai.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
 			navigation = request.getAttribute(UtilKeys.REQ_SHOP_NAV);
@@ -39,7 +40,13 @@ public class ShopNavInterceptor extends AbstractInterceptor {
 				session.put(UtilKeys.SE_SHOP_ORIGNAL_NAV, session.get(UtilKeys.SE_SHOP_NAV));
 				session.put(UtilKeys.SE_SHOP_NAV, nav);
 			}
+			if (navigation instanceof String) {
+				String nav = navigation.toString();
+				session.put(UtilKeys.SE_SHOP_ORIGNAL_NAV, session.get(UtilKeys.SE_SHOP_NAV));
+				session.put(UtilKeys.SE_SHOP_NAV, nav);
+			}
 		}
+
 		return ai.invoke();
 	}
 

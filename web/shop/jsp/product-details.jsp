@@ -3,8 +3,8 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
 <s:iterator value="#request.product_detail" var="product">
-	<s:set name="productInfo" value="#product"></s:set>
-	<s:set name="productId" value="#product.productId"></s:set>
+	<s:set var="productInfo" value="#product"></s:set>
+	<s:set var="productId" value="#product.productId"></s:set>
 </s:iterator>
 
 <script type="text/javascript">
