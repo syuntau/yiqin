@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
@@ -23,9 +24,9 @@ public class EditCustomerAction extends ActionSupport {
 
 	private static final long serialVersionUID = -6427876840127942287L;
 	private UserManager userManager;
-	private String userId;
-	private String zheKou;
-	private String youHuiZhengCe;
+//	private String userId;
+//	private String zheKou;
+//	private String youHuiZhengCe;
 	private ProductManager productManager;
 	private ShoppingManager shoppingManager;
 
@@ -47,24 +48,6 @@ public class EditCustomerAction extends ActionSupport {
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getZheKou() {
-		return this.zheKou;
-	}
-	public void setZheKou(String zheKou) {
-		this.zheKou = zheKou;
-	}
-	public String getYouHuiZhengCe() {
-		return youHuiZhengCe;
-	}
-	public void setYouHuiZhengCe(String youHuiZhengCe) {
-		this.youHuiZhengCe = youHuiZhengCe;
-	}
 
 	public String addZheKou() {
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -72,6 +55,9 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
+			String zheKou = request.getParameter("zheKou");
 			if (Util.isEmpty(userId) || Util.isEmpty(zheKou)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -121,6 +107,8 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -149,6 +137,9 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
+			String youHuiZhengCe = request.getParameter("youHuiZhengCe");
 			if (Util.isEmpty(userId) || Util.isEmpty(youHuiZhengCe)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -195,6 +186,8 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -223,6 +216,8 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -253,6 +248,8 @@ public class EditCustomerAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

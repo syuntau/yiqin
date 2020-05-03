@@ -2,6 +2,7 @@ package com.yiqin.sa.action;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -23,10 +24,10 @@ public class GenerateRegCodeAction extends ActionSupport {
 	private static final long serialVersionUID = 2183716821575185095L;
 
 	// 别名
-	private String name;
+//	private String name;
 
 	// 折扣
-	private String zhekou;
+//	private String zhekou;
 
 	private UserManager userManager;
 
@@ -35,6 +36,9 @@ public class GenerateRegCodeAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String name = request.getParameter("name");
+			String zhekou = request.getParameter("zhekou");
 			if (GenericValidator.isBlankOrNull(name)
 					|| GenericValidator.isBlankOrNull(zhekou)) {
 				result = "2";
@@ -64,22 +68,6 @@ public class GenerateRegCodeAction extends ActionSupport {
 			response.getWriter().print(result);
 			return null;
 		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getZhekou() {
-		return zhekou;
-	}
-
-	public void setZhekou(String zhekou) {
-		this.zhekou = zhekou;
 	}
 
 	public UserManager getUserManager() {

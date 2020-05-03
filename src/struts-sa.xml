@@ -2,11 +2,10 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
-
 <struts>
 
 	<include file="struts-default.xml" />
-	<package name="sa" extends="struts-default" namespace="/sa">
+	<package name="sa" extends="struts-default" namespace="/sa" strict-method-invocation="false">
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
@@ -23,7 +22,7 @@
 		<global-results>
 			<result name="login">/sa/jsp/common/jump.jsp</result>
 		</global-results>
-		
+		<global-allowed-methods>regex:.*</global-allowed-methods>
 		<action name="toLogin" >
 			<result type="tiles">sa.login</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>

@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -20,29 +21,11 @@ import com.yiqin.util.UtilKeys;
 public class EditUserAction extends ActionSupport {
 
 	private static final long serialVersionUID = -8673099200921975147L;
-	private String id;
-	private String oldPass;
-	private String newPass;
+//	private String id;
+//	private String oldPass;
+//	private String newPass;
 	private SAUser admin;
 	private UserManager userManager;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getOldPass() {
-		return oldPass;
-	}
-	public void setOldPass(String oldPass) {
-		this.oldPass = oldPass;
-	}
-	public String getNewPass() {
-		return newPass;
-	}
-	public void setNewPass(String newPass) {
-		this.newPass = newPass;
-	}
 	public SAUser getAdmin() {
 		return admin;
 	}
@@ -62,6 +45,10 @@ public class EditUserAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String id = request.getParameter("id");
+			String oldPass = request.getParameter("oldPass");
+			String newPass = request.getParameter("newPass");
 			if (Util.isEmpty(id) || Util.isEmpty(oldPass) || Util.isEmpty(newPass)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -160,6 +147,8 @@ public class EditUserAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String id = request.getParameter("id");
 			if (Util.isEmpty(id)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

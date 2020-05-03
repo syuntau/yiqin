@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -21,22 +22,10 @@ import com.yiqin.util.UtilKeys;
 public class EditUserChartAction extends ActionSupport {
 
 	private static final long serialVersionUID = -4687474259363469414L;
-	private String userId;
-	private String status;
+//	private String userId;
+//	private String status;
 	private UserManager userManager;
-	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public UserManager getUserManager() {
 		return userManager;
 	}
@@ -48,9 +37,12 @@ public class EditUserChartAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
-			
+
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
+			String status = request.getParameter("status");
 			if(Util.isEmpty(userId) || Util.isEmpty(status)){
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -88,6 +80,8 @@ public class EditUserChartAction extends ActionSupport {
 			
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			if(Util.isEmpty(userId)){
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

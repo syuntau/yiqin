@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -70,11 +71,16 @@ public class GetCategoryListAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
+
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				return null;
 			}
 			List<CategorySimple> list = CategoryUtil.getCategoryListById(cId);
+			System.out.println("getList cId list："+list.size());
 			if (Util.isEmpty(list)) {
 				result = UtilKeys.CODE_NO_RESULT;
 				out.print(result);
@@ -84,6 +90,7 @@ public class GetCategoryListAction extends ActionSupport {
 			JSONArray jsArray = JSONArray.fromObject(list);
 			result = jsArray.toString();
 			out.print(result);
+			System.out.println("result："+result);
 			return null;
 		} catch (IOException e1) {
 			System.out.println("error in GetCategoryListAction.getList for make printwriter");

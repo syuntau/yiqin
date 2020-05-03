@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -27,7 +28,7 @@ public class ExportProductExcelAction extends ActionSupport {
 	private static final long serialVersionUID = 424035033536530973L;
 	
 	private ProductManager productManager;
-	private String categoryId;
+//	private String categoryId;
 
 	public ProductManager getProductManager() {
 		return productManager;
@@ -37,18 +38,13 @@ public class ExportProductExcelAction extends ActionSupport {
 		this.productManager = productManager;
 	}
 
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 
 	@Override
 	public String execute() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String categoryId = request.getParameter("categoryId");
 			if (Util.isEmpty(categoryId)) {
 				return null;
 			}

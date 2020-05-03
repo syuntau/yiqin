@@ -27,35 +27,12 @@ public class ExportOrderExcelAction extends ActionSupport {
 	private static final long serialVersionUID = 424035033536530973L;
 	
 	// 用户Id
-	private String userId;
+//	private String userId;
 	// 开始时间
-	private String startTime;
+//	private String startTime;
 	// 结束时间
-	private String endTime;
+//	private String endTime;
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -63,6 +40,9 @@ public class ExportOrderExcelAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		try {
+			String userId = request.getParameter("userId");
+			String startTime = request.getParameter("startTime");
+			String endTime = request.getParameter("endTime");
 			Object obj = request.getSession().getAttribute("export_order");
 			List<OrderView> orderList = new ArrayList<OrderView>();
 			if(obj != null){

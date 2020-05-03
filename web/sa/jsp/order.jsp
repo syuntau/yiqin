@@ -478,6 +478,7 @@ $(document).ready(function(){
 						  <ul class="dropdown-menu">
 						    <li><a class="export_order_by_template" style="cursor: pointer;" type="21">汇总-依勤</a></li>
 						    <li><a class="export_order_by_template" style="cursor: pointer;" type="31">汇总-博大</a></li>
+						    <li><a class="export_order_by_template" style="cursor: pointer;" type="41">汇总-税控</a></li>
 						  </ul>
 						</div>
                     </form>
@@ -532,7 +533,7 @@ $(document).ready(function(){
 											    <li><a><span style="font-weight:bold;">发票类型：</span><s:property value="#order.fapiaolx"/></a></li>
 											    <li><a><span style="font-weight:bold;">发票抬头：</span><s:property value="#order.fapiaotaitou"/></a></li>
 											    <li><a><span style="font-weight:bold;">发票明细：</span><s:property value="#order.fapiaomingxi"/></a></li>
-											    <li><a><span style="font-weight:bold;">订单备注：</span><s:property value="#order.orderNote" escape="false"/></a></li>
+											    <li><a><span style="font-weight:bold;">订单备注：</span><s:property value="#order.orderNote" escapeHtml="false"/></a></li>
 											</ul>
 										 </span>
 									</div>

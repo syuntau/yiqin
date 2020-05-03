@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -24,26 +25,10 @@ import com.yiqin.util.UtilKeys;
 public class EditProductAction extends ActionSupport {
 
 	private static final long serialVersionUID = -9120713921648008287L;
-	private String cId;
-	private String pId;
+//	private String cId;
+//	private String pId;
 	private List<Product> products;
 	private ProductManager productManager;
-
-	public String getCId() {
-		return cId;
-	}
-
-	public void setCId(String cId) {
-		this.cId = cId;
-	}
-
-	public String getPId() {
-		return pId;
-	}
-
-	public void setPId(String pId) {
-		this.pId = pId;
-	}
 
 	public List<Product> getProducts() {
 		return products;
@@ -66,6 +51,8 @@ public class EditProductAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 			} else {
@@ -95,6 +82,8 @@ public class EditProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -125,6 +114,8 @@ public class EditProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String pId = request.getParameter("pId");
 			if (Util.isEmpty(pId) || !Util.isNumeric(pId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -154,6 +145,8 @@ public class EditProductAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String pId = request.getParameter("pId");
 			if (Util.isEmpty(pId) || !Util.isNumeric(pId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 			} else {
@@ -183,6 +176,8 @@ public class EditProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String pId = request.getParameter("pId");
 			if (Util.isEmpty(products)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

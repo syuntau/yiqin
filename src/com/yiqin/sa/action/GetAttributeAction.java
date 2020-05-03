@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import org.apache.struts2.ServletActionContext;
@@ -15,25 +16,9 @@ import com.yiqin.util.UtilKeys;
 public class GetAttributeAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1287552853932187171L;
-	private String cId;
-	private String aId;
+//	private String cId;
+//	private String aId;
 	private ProductManager productManager;
-
-	public String getCId() {
-		return cId;
-	}
-
-	public void setCId(String cId) {
-		this.cId = cId;
-	}
-
-	public String getAId() {
-		return aId;
-	}
-
-	public void setAId(String aId) {
-		this.aId = aId;
-	}
 
 	public ProductManager getProductManager() {
 		return productManager;
@@ -49,6 +34,8 @@ public class GetAttributeAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -80,6 +67,8 @@ public class GetAttributeAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String aId = request.getParameter("aId");
 			if (Util.isEmpty(aId) || !Util.isNumeric(aId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

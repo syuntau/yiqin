@@ -3,6 +3,7 @@ package com.yiqin.sa.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
@@ -20,8 +21,8 @@ public class EditAttributeAction extends ActionSupport {
 
 	private static final long serialVersionUID = 6703674908055877022L;
 	private ProductManager productManager;
-	private String attrId;
-	private String categoryId;
+//	private String attrId;
+//	private String categoryId;
 	private Attribute attr;
 
 	public Attribute getAttr() {
@@ -30,29 +31,19 @@ public class EditAttributeAction extends ActionSupport {
 	public void setAttr(Attribute attr) {
 		this.attr = attr;
 	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 	public ProductManager getProductManager() {
 		return productManager;
 	}
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
 	}
-	public String getAttrId() {
-		return attrId;
-	}
-	public void setAttrId(String attrId) {
-		this.attrId = attrId;
-	}
 
 	public String removeAll() {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String categoryId = request.getParameter("categoryId");
 			PrintWriter out = response.getWriter();
 			String result = "";
 			if (Util.isEmpty(categoryId) || !Util.isNumeric(categoryId)) {
@@ -86,6 +77,8 @@ public class EditAttributeAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String attrId = request.getParameter("attrId");
 			if (Util.isEmpty(attrId) || !Util.isNumeric(attrId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

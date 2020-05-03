@@ -27,19 +27,8 @@ public class ImageManageAction extends ActionSupport {
 	private static final long serialVersionUID = 1074040371036374358L;
 	private String productId;
 	private List<File> imageFile;
-	private String imageFileFileName;
-	private String deleteImageFileName;
-	
-	
-	public String getDeleteImageFileName() {
-		return deleteImageFileName;
-	}
-
-	public void setDeleteImageFileName(String deleteImageFileName) {
-		this.deleteImageFileName = deleteImageFileName;
-	}
-
-	
+//	private String imageFileFileName;
+//	private String deleteImageFileName;
 
 	public List<File> getImageFile() {
 		return imageFile;
@@ -49,22 +38,6 @@ public class ImageManageAction extends ActionSupport {
 		this.imageFile = imageFile;
 	}
 
-	public String getImageFileFileName() {
-		return imageFileFileName;
-	}
-
-	public void setImageFileFileName(String imageFileFileName) {
-		this.imageFileFileName = imageFileFileName;
-	}
-
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
 	public String searchImage() {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -72,6 +45,8 @@ public class ImageManageAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			this.productId = request.getParameter("productId");
+			String aId = request.getParameter("aId");
 			if (Util.isEmpty(productId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -119,6 +94,7 @@ public class ImageManageAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			String imageFileFileName = request.getParameter("imageFileFileName");
 			System.out.println("###################### imageFileFileName : " + imageFileFileName);
 			
 			if (Util.isEmpty(imageFileFileName) || !(imageFileFileName.endsWith("jpg") || imageFileFileName.endsWith("png"))) {
@@ -188,6 +164,8 @@ public class ImageManageAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			String imageFileFileName = request.getParameter("imageFileFileName");
+			String deleteImageFileName = request.getParameter("deleteImageFileName");
 			System.out.println("###################### imageFileFileName : " + imageFileFileName);
 			
 			if (Util.isEmpty(deleteImageFileName)) {

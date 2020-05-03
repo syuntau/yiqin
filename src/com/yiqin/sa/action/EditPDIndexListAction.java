@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -25,14 +26,7 @@ public class EditPDIndexListAction extends ActionSupport {
 	private static final long serialVersionUID = -2511091008112752769L;
 	private ProductManager productManager;
 	private ISystemDao systemDao;
-	private String productId;
-
-	public String getProductId() {
-		return productId;
-	}
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
+//	private String productId;
 
 	public ProductManager getProductManager() {
 		return productManager;
@@ -92,6 +86,8 @@ public class EditPDIndexListAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String productId = request.getParameter("productId");
 			if (Util.isEmpty(productId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -148,6 +144,8 @@ public class EditPDIndexListAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String productId = request.getParameter("productId");
 			if (Util.isEmpty(productId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

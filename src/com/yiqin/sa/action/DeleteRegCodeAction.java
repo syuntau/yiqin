@@ -1,5 +1,6 @@
 package com.yiqin.sa.action;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -19,7 +20,7 @@ public class DeleteRegCodeAction extends ActionSupport {
 	private static final long serialVersionUID = 7507605789567573350L;
 
 	// 邀请码
-	private String regCode;
+//	private String regCode;
 
 	private UserManager userManager;
 
@@ -28,6 +29,8 @@ public class DeleteRegCodeAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String regCode = request.getParameter("regCode");
 			if (GenericValidator.isBlankOrNull(regCode)) {
 				result = "2";
 				response.getWriter().print(result);
@@ -49,14 +52,6 @@ public class DeleteRegCodeAction extends ActionSupport {
 			response.getWriter().print(result);
 			return null;
 		}
-	}
-
-	public String getRegCode() {
-		return regCode;
-	}
-
-	public void setRegCode(String regCode) {
-		this.regCode = regCode;
 	}
 
 	public UserManager getUserManager() {

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -30,9 +31,9 @@ public class EditBestProductAction extends ActionSupport {
 	private static final long serialVersionUID = 7163225413110248267L;
 	private UserManager userManager;
 	private ProductManager productManager;
-	private String cId;
-	private String pIds;
-	private String userId;
+//	private String cId;
+//	private String pIds;
+//	private String userId;
 
 	public UserManager getUserManager() {
 		return userManager;
@@ -45,24 +46,6 @@ public class EditBestProductAction extends ActionSupport {
 	}
 	public void setProductManager(ProductManager productManager) {
 		this.productManager = productManager;
-	}
-	public String getCId() {
-		return cId;
-	}
-	public void setCId(String cId) {
-		this.cId = cId;
-	}
-	public String getPIds() {
-		return pIds;
-	}
-	public void setPIds(String pIds) {
-		this.pIds = pIds;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getUserList() {
@@ -99,6 +82,10 @@ public class EditBestProductAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
+			String pIds = request.getParameter("pIds");
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(cId) || Util.isEmpty(pIds)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -194,6 +181,10 @@ public class EditBestProductAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
+			String pIds = request.getParameter("pIds");
+			String userId = request.getParameter("userId");
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId) || Util.isEmpty(userId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 			} else {
@@ -265,6 +256,8 @@ public class EditBestProductAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			PrintWriter out = response.getWriter();
 			String result = "";
 			Map<String, List<String>> map = productManager.findCommonProductMapByUserId(userId);
@@ -289,6 +282,8 @@ public class EditBestProductAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			PrintWriter out = response.getWriter();
 			String result = "";
 			if (Util.isEmpty(userId)) {
@@ -323,6 +318,9 @@ public class EditBestProductAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String cId = request.getParameter("cId");
+			String userId = request.getParameter("userId");
 			PrintWriter out = response.getWriter();
 			String result = "";
 			if (Util.isEmpty(cId) || !Util.isNumeric(cId) || Util.isEmpty(userId)) {
@@ -358,6 +356,8 @@ public class EditBestProductAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String userId = request.getParameter("userId");
 			PrintWriter out = response.getWriter();
 			String result = "";
 			if (Util.isEmpty(userId)) {

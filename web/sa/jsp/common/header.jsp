@@ -2,7 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<s:set name="roles" value="#session.yiqin_sa_user_roles"/>
+<s:set var="roles" value="#session.yiqin_sa_user_roles"/>
 <script type="text/javascript">
 var template = {
 	dispatcher : '/sa/dispatcher',

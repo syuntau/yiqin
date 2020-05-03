@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -25,21 +26,8 @@ public class EditCategoryAction extends ActionSupport {
 	private static final long serialVersionUID = 6362182987833824021L;
 	private ProductManager productManager;
 	private IProductDao productDao;
-	private String id;
-	private String name;
-
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+//	private String id;
+//	private String name;
 
 	public ProductManager getProductManager() {
 		return productManager;
@@ -118,6 +106,9 @@ public class EditCategoryAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
 			if (Util.isEmpty(id) || Util.isEmpty(name)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
@@ -158,6 +149,9 @@ public class EditCategoryAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
 			if (Util.isEmpty(id) || Util.isEmpty(name)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);

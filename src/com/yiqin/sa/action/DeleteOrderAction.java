@@ -1,5 +1,6 @@
 package com.yiqin.sa.action;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.validator.GenericValidator;
@@ -19,7 +20,7 @@ public class DeleteOrderAction extends ActionSupport {
 	private static final long serialVersionUID = 42159396569834548L;
 
 	// 订单Id
-	private String orderId;
+//	private String orderId;
 
 	private ShoppingManager shoppingManager;
 
@@ -28,6 +29,8 @@ public class DeleteOrderAction extends ActionSupport {
 		response.setContentType("application/json;charset=UTF-8");
 		String result = "";
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String orderId = request.getParameter("orderId");
 			if (GenericValidator.isBlankOrNull(orderId)) {
 				result = "2";
 				response.getWriter().print(result);
@@ -49,14 +52,6 @@ public class DeleteOrderAction extends ActionSupport {
 			response.getWriter().print(result);
 			return null;
 		}
-	}
-
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
 	}
 
 	public ShoppingManager getShoppingManager() {

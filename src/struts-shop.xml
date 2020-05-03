@@ -6,7 +6,7 @@
 <struts>
 
 	<include file="struts-default.xml" />
-	<package name="shop" extends="struts-default">
+	<package name="shop" extends="struts-default" strict-method-invocation="false">
 		<result-types>
 			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
@@ -26,6 +26,7 @@
 		<global-results>
 			<result name="login">/shop/jsp/common/cenJump.jsp</result>
 		</global-results>
+		<global-allowed-methods>regex:.*</global-allowed-methods>
 
 		<action name="index" class="com.yiqin.shop.action.IndexAction">
 			<interceptor-ref name="defaultStack"></interceptor-ref>

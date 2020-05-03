@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -22,15 +23,9 @@ public class EditBrandAction extends ActionSupport {
 
 	private static final long serialVersionUID = 4873815139082418329L;
 	private ProductManager productManager;
-	private String brandId;
+//	private String brandId;
 	private Brand brand;
 
-	public String getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(String brandId) {
-		this.brandId = brandId;
-	}
 	public Brand getBrand() {
 		return brand;
 	}
@@ -74,6 +69,8 @@ public class EditBrandAction extends ActionSupport {
 		try {
 			PrintWriter out = response.getWriter();
 			String result = "";
+			HttpServletRequest request = ServletActionContext.getRequest();
+			String brandId = request.getParameter("brandId");
 			if (Util.isEmpty(brandId) || !Util.isNumeric(brandId)) {
 				result = UtilKeys.CODE_ERR_PARAM;
 				out.print(result);
