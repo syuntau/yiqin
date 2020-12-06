@@ -419,7 +419,7 @@ public class ExportOrderByTemplateAction extends ActionSupport {
             }
 
             cell = row.getCell(12);
-            cell.setCellValue(cart.getPrice());
+            cell.setCellValue(cart.getZhekouPrice());
             cell.setCellStyle(styleArr[12]);
 
             cell = row.getCell(13);
