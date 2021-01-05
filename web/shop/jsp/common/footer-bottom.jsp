@@ -6,7 +6,7 @@
 			<div class="row">
 				<p class="pull-left">
 					<s:text name="shop.footer.bottom.copyright" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href='http://www.miibeian.gov.cn' target='_blank'><s:text name="yiqin.record" /></a>
+					<a href='https://beian.miit.gov.cn' target='_blank'><s:text name="yiqin.record" /></a>
 				</p>
 				<p class="pull-right footer-bottom-right-side">
 				</p>
